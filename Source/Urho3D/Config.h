@@ -43,3 +43,43 @@
 #else
 #   error Unknown architecture
 #endif
+
+/// Detect current platform
+#if defined(_XBOX_ONE) && defined(_TITLE)
+#   define CW_PLATFORM_STR "Xbox One"
+#   define CW_PLATFORM_DURANGO 1
+#elif defined(__ORBIS__) || defined(__PS4__)
+#   define CW_PLATFORM_STR "PlayStation 4"
+#   define CW_PLATFORM_ORBIS 1
+#elif defined(__ANDROID__)
+#   define CW_PLATFORM_STR "Android"
+#   define CW_PLATFORM_ANDROID 1
+#elif defined(__APPLE__) && defined(__MACH__)
+#   if defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) || defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
+#       define CW_PLATFORM_STR "iOS"
+#       define CW_PLATFORM_IOS 1
+#   else
+#       define CW_PLATFORM_STR "Mac OS X"
+#       define CW_PLATFORM_MACOSX 1
+#   endif
+#elif defined(_WIN32) && !defined(_XBOX) && !defined(_XBOX_VER) && !defined(__ANDROID__)
+#   include <sdkddkver.h>
+#   if defined(WINAPI_FAMILY)
+#       include <winapifamily.h>
+#       if WINAPI_FAMILY == WINAPI_PARTITION_APP || WINAPI_FAMILY == WINAPI_FAMILY_PC_APP || WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
+#           define CW_PLATFORM_STR "WinRT"
+#           define CW_PLATFORM_WINRT 1
+#       else
+#           define CW_PLATFORM_STR "Win32"
+#           define CW_PLATFORM_WIN32 1
+#       endif
+#   else
+#       define CW_PLATFORM_STR "Win32"
+#       define CW_PLATFORM_WIN32 1
+#   endif
+#elif defined(__linux__)
+#   define CW_PLATFORM_STR "Linux"
+#   define CW_PLATFORM_LINUX 1
+#else
+#   error Unknown platform
+#endif
