@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "../Core/Mutex.h"
+#include "../Core/Thread.h"
 #include "../Core/Object.h"
 
 class asIObjectType;
