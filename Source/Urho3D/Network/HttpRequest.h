@@ -23,7 +23,7 @@
 #pragma once
 
 #include "../Container/ArrayPtr.h"
-#include "../Core/Mutex.h"
+#include "../Core/Thread.h"
 #include "../Container/RefCounted.h"
 #include "../Core/Thread.h"
 #include "../IO/Deserializer.h"

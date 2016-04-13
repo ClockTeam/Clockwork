@@ -62,7 +62,7 @@
 #       define CW_PLATFORM_STR "Mac OS X"
 #       define CW_PLATFORM_MACOSX 1
 #   endif
-#elif defined(_WIN32) && !defined(_XBOX) && !defined(_XBOX_VER) && !defined(__ANDROID__)
+#elif defined(_WIN32) && !defined(_XBOX) && !defined(_XBOX_VER)
 #   include <sdkddkver.h>
 #   if defined(WINAPI_FAMILY)
 #       include <winapifamily.h>

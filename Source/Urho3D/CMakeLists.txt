@@ -67,6 +67,13 @@ if (WIN32)
 endif ()
 
 # Define source files
+if (WIN32)
+    list (APPEND EXCLUDED_SOURCE_DIRS Core/POSIX)
+endif ()
+if (ANDROID OR IOS OR MACOSX OR LINUX)
+    list (APPEND EXCLUDED_SOURCE_DIRS Core/Win32) 
+endif ()
+
 foreach (DIR Navigation Network Physics Urho2D)
     string (TOUPPER URHO3D_${DIR} OPT)
     if (NOT ${OPT})

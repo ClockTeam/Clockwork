@@ -23,7 +23,7 @@
 #pragma once
 
 #include "../Container/HashSet.h"
-#include "../Core/Mutex.h"
+#include "../Core/Thread.h"
 #include "../Graphics/Batch.h"
 #include "../Graphics/Drawable.h"
 #include "../Graphics/Viewport.h"

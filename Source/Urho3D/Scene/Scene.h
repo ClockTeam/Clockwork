@@ -23,7 +23,7 @@
 #pragma once
 
 #include "../Container/HashSet.h"
-#include "../Core/Mutex.h"
+#include "../Core/Thread.h"
 #include "../Resource/XMLElement.h"
 #include "../Resource/JSONFile.h"
 #include "../Scene/Node.h"
