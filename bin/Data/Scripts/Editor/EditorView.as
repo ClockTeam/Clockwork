@@ -124,15 +124,15 @@ class ViewportContext
         camera.fillMode = fillMode;
         soundListener = cameraNode.CreateComponent("SoundListener");
         
-		viewport = Viewport(editorScene, camera, viewRect, renderPath);
-		RenderPath@ effectRenderPath = viewport.renderPath.Clone();
-		effectRenderPath.Append(cache.GetResource("XMLFile", "PostProcess/BloomHDR.xml"));
-		effectRenderPath.Append(cache.GetResource("XMLFile", "PostProcess/FXAA2.xml"));
-		effectRenderPath.Append(cache.GetResource("XMLFile", "PostProcess/GammaCorrection.xml"));
+        viewport = Viewport(editorScene, camera, viewRect, renderPath);
+        RenderPath@ effectRenderPath = viewport.renderPath.Clone();
+        effectRenderPath.Append(cache.GetResource("XMLFile", "PostProcess/BloomHDR.xml"));
+        effectRenderPath.Append(cache.GetResource("XMLFile", "PostProcess/FXAA2.xml"));
+        effectRenderPath.Append(cache.GetResource("XMLFile", "PostProcess/GammaCorrection.xml"));
  
-		viewport.renderPath = effectRenderPath;
+        viewport.renderPath = effectRenderPath;
         
-		index = index_;
+        index = index_;
         viewportId = viewportId_;
         camera.viewMask = 0xffffffff; // It's easier to only have 1 gizmo active this viewport is shared with the gizmo
     }
