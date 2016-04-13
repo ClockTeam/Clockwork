@@ -24,7 +24,7 @@
 
 #include "../Container/HashMap.h"
 #include "../Container/HashSet.h"
-#include "../Core/Mutex.h"
+#include "../Core/Thread.h"
 #include "../Container/Ptr.h"
 #include "../Container/RefCounted.h"
 #include "../Core/Thread.h"

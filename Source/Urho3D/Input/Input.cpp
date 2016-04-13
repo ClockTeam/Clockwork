@@ -24,7 +24,7 @@
 
 #include "../Core/Context.h"
 #include "../Core/CoreEvents.h"
-#include "../Core/Mutex.h"
+#include "../Core/Thread.h"
 #include "../Core/ProcessUtils.h"
 #include "../Core/Profiler.h"
 #include "../Core/StringUtils.h"

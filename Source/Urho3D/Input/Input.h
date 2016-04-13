@@ -23,7 +23,7 @@
 #pragma once
 
 #include "../Container/HashSet.h"
-#include "../Core/Mutex.h"
+#include "../Core/Thread.h"
 #include "../Core/Object.h"
 #include "../Container/List.h"
 #include "../Input/InputEvents.h"
