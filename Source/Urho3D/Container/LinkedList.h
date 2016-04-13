@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "../Urho3D.h"
+#include "../Config.h"
 
 #if URHO3D_CXX11
 #include <initializer_list>

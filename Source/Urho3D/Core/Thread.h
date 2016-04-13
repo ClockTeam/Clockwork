@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "../Urho3D.h"
+#include "../Config.h"
 
 #ifndef _WIN32
 #include <pthread.h>

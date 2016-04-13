@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include "../Urho3D.h"
+#include "../Config.h"
 
 #include <stddef.h>
 
