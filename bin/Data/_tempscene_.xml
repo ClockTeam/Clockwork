@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<scene id="1">
+	<attribute name="Name" value="" />
+	<attribute name="Time Scale" value="1" />
+	<attribute name="Smoothing Constant" value="50" />
+	<attribute name="Snap Threshold" value="5" />
+	<attribute name="Elapsed Time" value="0" />
+	<attribute name="Next Replicated Node ID" value="33" />
+	<attribute name="Next Replicated Component ID" value="35" />
+	<attribute name="Next Local Node ID" value="16777217" />
+	<attribute name="Next Local Component ID" value="16777228" />
+	<attribute name="Variables" />
+	<attribute name="Variable Names" value="" />
+	<component type="PhysicsWorld" id="1" />
+	<component type="Octree" id="2" />
+	<component type="DebugRenderer" id="3" />
+	<node id="20">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="0.843054 0.289296 0.433062 -0.134251" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="Light" id="22">
+			<attribute name="Light Type" value="Directional" />
+			<attribute name="Cast Shadows" value="true" />
+			<attribute name="CSM Splits" value="10 20 30 40" />
+		</component>
+	</node>
+	<node id="23">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="Zone" id="25">
+			<attribute name="Bounding Box Min" value="-100 -100 -100" />
+			<attribute name="Bounding Box Max" value="100 100 100" />
+			<attribute name="Zone Texture" value="TextureCube;Textures/Skybox2.xml" />
+		</component>
+	</node>
+	<node id="24">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="MaterialTest" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="-4.25804 0.0369492 -25.1092" />
+		<attribute name="Rotation" value="-0.393959 0 0.919129 0" />
+		<attribute name="Scale" value="0.5 0.5 0.5" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="26">
+			<attribute name="Model" value="Model;Models/MaterialTest.mdl" />
+			<attribute name="Material" value="Material;Materials/Door.xml;Materials/Door.xml;Materials/Door.xml" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+	</node>
+	<node id="26">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="MaterialTest" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="-20.6165 0 -25.1985" />
+		<attribute name="Rotation" value="-0.393959 0 0.919129 0" />
+		<attribute name="Scale" value="0.5 0.5 0.5" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="28">
+			<attribute name="Model" value="Model;Models/MaterialTest.mdl" />
+			<attribute name="Material" value="Material;Materials/X-Gray191.001.xml;Materials/X-Gray191.001.xml;Materials/X-Gray191.001.xml" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+	</node>
+	<node id="27">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="MaterialTest" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="-12.427 0.0981007 -25.1325" />
+		<attribute name="Rotation" value="-0.393959 0 0.919129 0" />
+		<attribute name="Scale" value="0.5 0.5 0.5" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="29">
+			<attribute name="Model" value="Model;Models/MaterialTest.mdl" />
+			<attribute name="Material" value="Material;Materials/X-Gray160.xml;Materials/X-Gray160.xml;Materials/X-Gray160.xml" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+	</node>
+	<node id="28">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="MaterialTest" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="-16.6346 0 0" />
+		<attribute name="Rotation" value="0.919128 0 0.393959 0" />
+		<attribute name="Scale" value="0.5 0.5 0.5" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="30">
+			<attribute name="Model" value="Model;Models/MaterialTest.mdl" />
+			<attribute name="Material" value="Material;Materials/Floor.xml;Materials/Floor.xml;Materials/Floor.xml" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+	</node>
+	<node id="29">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="MaterialTest" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="-0.20685 0 0" />
+		<attribute name="Rotation" value="0.919128 0 0.393959 0" />
+		<attribute name="Scale" value="0.5 0.5 0.5" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="31">
+			<attribute name="Model" value="Model;Models/MaterialTest.mdl" />
+			<attribute name="Material" value="Material;Materials/grass.xml;Materials/grass.xml;Materials/grass.xml" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+	</node>
+	<node id="30">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="MaterialTest" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="-8.43409 0 0" />
+		<attribute name="Rotation" value="0.919128 0 0.393959 0" />
+		<attribute name="Scale" value="0.5 0.5 0.5" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="32">
+			<attribute name="Model" value="Model;Models/MaterialTest.mdl" />
+			<attribute name="Material" value="Material;Materials/Frame.xml;Materials/Floor.xml;Materials/Floor.xml" />
+			<attribute name="Cast Shadows" value="true" />
+		</component>
+	</node>
+	<node id="31">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="Box" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="-14.9863 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="200 1 200" />
+		<attribute name="Variables" />
+		<component type="StaticModel" id="33">
+			<attribute name="Model" value="Model;Models/Box.mdl" />
+			<attribute name="Material" value="Material;Materials/Black_shiny.xml" />
+		</component>
+	</node>
+	<node id="32">
+		<attribute name="Is Enabled" value="true" />
+		<attribute name="Name" value="" />
+		<attribute name="Tags" />
+		<attribute name="Position" value="0 0 0" />
+		<attribute name="Rotation" value="1 0 0 0" />
+		<attribute name="Scale" value="1 1 1" />
+		<attribute name="Variables" />
+		<component type="Skybox" id="34">
+			<attribute name="Model" value="Model;Models/Sphere.mdl" />
+			<attribute name="Material" value="Material;Materials/Skybox.xml" />
+		</component>
+	</node>
+</scene>

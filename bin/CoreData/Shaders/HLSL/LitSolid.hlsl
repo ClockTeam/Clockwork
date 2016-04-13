@@ -4,6 +4,10 @@
 #include "ScreenPos.hlsl"
 #include "Lighting.hlsl"
 #include "Fog.hlsl"
+#include "Constants.hlsl"
+#include "ColorSpace.hlsl"
+#include "BRDF.hlsl"
+#include "IBL.hlsl"
 
 void VS(float4 iPos : POSITION,
     #ifndef BILLBOARD
@@ -18,9 +22,7 @@ void VS(float4 iPos : POSITION,
     #if defined(LIGHTMAP) || defined(AO)
         float2 iTexCoord2 : TEXCOORD1,
     #endif
-    #if defined(NORMALMAP) || defined(DIRBILLBOARD)
-        float4 iTangent : TANGENT,
-    #endif
+    float4 iTangent : TANGENT,
     #ifdef SKINNED
         float4 iBlendWeights : BLENDWEIGHT,
         int4 iBlendIndices : BLENDINDICES,
@@ -31,12 +33,8 @@ void VS(float4 iPos : POSITION,
     #if defined(BILLBOARD) || defined(DIRBILLBOARD)
         float2 iSize : TEXCOORD1,
     #endif
-    #ifndef NORMALMAP
-        out float2 oTexCoord : TEXCOORD0,
-    #else
-        out float4 oTexCoord : TEXCOORD0,
-        out float4 oTangent : TEXCOORD3,
-    #endif
+    out float4 oTexCoord : TEXCOORD0,
+    out float4 oTangent : TEXCOORD3,
     out float3 oNormal : TEXCOORD1,
     out float4 oWorldPos : TEXCOORD2,
     #ifdef PERPIXEL
@@ -86,14 +84,10 @@ void VS(float4 iPos : POSITION,
         oColor = iColor;
     #endif
 
-    #ifdef NORMALMAP
-        float3 tangent = GetWorldTangent(modelMatrix);
-        float3 bitangent = cross(tangent, oNormal) * iTangent.w;
-        oTexCoord = float4(GetTexCoord(iTexCoord), bitangent.xy);
-        oTangent = float4(tangent, bitangent.z);
-    #else
-        oTexCoord = GetTexCoord(iTexCoord);
-    #endif
+    const float3 tangent = GetWorldTangent(modelMatrix);
+    const float3 bitangent = cross(tangent, oNormal) * iTangent.w;
+    oTexCoord = float4(GetTexCoord(iTexCoord), bitangent.xy);
+    oTangent = float4(tangent, bitangent.z);
 
     #ifdef PERPIXEL
         // Per-pixel forward lighting
@@ -137,12 +131,8 @@ void VS(float4 iPos : POSITION,
 }
 
 void PS(
-    #ifndef NORMALMAP
-        float2 iTexCoord : TEXCOORD0,
-    #else
-        float4 iTexCoord : TEXCOORD0,
-        float4 iTangent : TEXCOORD3,
-    #endif
+    float4 iTexCoord : TEXCOORD0,
+    float4 iTangent : TEXCOORD3,
     float3 iNormal : TEXCOORD1,
     float4 iWorldPos : TEXCOORD2,
     #ifdef PERPIXEL
@@ -199,17 +189,29 @@ void PS(
 
     // Get material specular albedo
     #ifdef SPECMAP
-        float3 specColor = cMatSpecColor.rgb * Sample2D(SpecMap, iTexCoord.xy).rgb;
+        const float4 roughMetalSrc = Sample2D(RoughMetalFresnel, iTexCoord.xy);
+
+        const float roughness = clamp(pow(roughMetalSrc.r + cRoughnessPS, 2.0), ROUGHNESS_FLOOR, 1.0);
+        const float metalness = clamp(roughMetalSrc.g + cMetallicPS, METALNESS_FLOOR, 1.0);
     #else
-        float3 specColor = cMatSpecColor.rgb;
+        const float roughness = clamp(pow(cRoughnessPS, 2.0), ROUGHNESS_FLOOR, 1.0);
+        const float metalness = clamp(cMetallicPS, METALNESS_FLOOR, 1.0);
     #endif
 
-    // Get normal
+    float3 specColor = lerp(0.08 * cMatSpecColor.rgb, diffColor.rgb, metalness);
+    specColor *= cMatSpecColor.rgb;
+    diffColor.rgb = diffColor.rgb - diffColor.rgb * metalness; // Modulate down the diffuse
+
+    const float3 tangent = normalize(iTangent.xyz);
+    const float3 bitangent = normalize(float3(iTexCoord.zw, iTangent.w));
+    const float3x3 tbn = float3x3(tangent, bitangent, iNormal);
+
     #ifdef NORMALMAP
-        float3x3 tbn = float3x3(iTangent.xyz, float3(iTexCoord.zw, iTangent.w), iNormal);
-        float3 normal = normalize(mul(DecodeNormal(Sample2D(NormalMap, iTexCoord.xy)), tbn));
+        const float3 nn = DecodeNormal(Sample2D(NormalMap, iTexCoord.xy));
+        //nn.rg *= 2.0;
+        const float3 normal = normalize(mul(nn, tbn));
     #else
-        float3 normal = normalize(iNormal);
+        const float3 normal = normalize(iNormal);
     #endif
 
     // Get fog factor
@@ -239,12 +241,26 @@ void PS(
             lightColor = cLightColor.rgb;
         #endif
     
+            const float3 toCamera = normalize(cCameraPosPS - iWorldPos.xyz);
+
+            const float3 Hn = normalize(toCamera + lightDir);
+            const float vdh = max(M_EPSILON, dot(toCamera, Hn));
+            const float ndh = max(M_EPSILON, dot(normal, Hn));
+            const float ndl = max(M_EPSILON, dot(normal, lightDir));
+            const float ndv = max(M_EPSILON, dot(normal, toCamera));
+
+            const float3 diffuseFactor = BurleyDiffuse(diffColor.rgb, roughness, ndv, ndl, vdh);
+            float3 specularFactor = 0;
+
         #ifdef SPECULAR
-            float spec = GetSpecular(normal, cCameraPosPS - iWorldPos.xyz, lightDir, cMatSpecColor.a);
-            finalColor = diff * lightColor * (diffColor.rgb + spec * specColor * cLightColor.a);
-        #else
-            finalColor = diff * lightColor * diffColor.rgb;
+            const float3 fresnelTerm = Fresnel(specColor, vdh);
+            const float distTerm = Distribution(ndh, roughness);
+            const float visTerm = Visibility(ndl, ndv, roughness);
+
+            specularFactor = SpecularBRDF(distTerm, fresnelTerm, visTerm, ndl, ndv);
         #endif
+
+            finalColor.rgb = (diffuseFactor + specularFactor) * lightColor * diff;
 
         #ifdef AMBIENT
             finalColor += cAmbientColor * diffColor.rgb;
@@ -269,6 +285,16 @@ void PS(
             // If using AO, the vertex light ambient is black, calculate occluded ambient here
             finalColor += Sample2D(EmissiveMap, iTexCoord2).rgb * cAmbientColor * diffColor.rgb;
         #endif
+
+            const float3 toCamera = normalize(iWorldPos.xyz - cCameraPosPS);
+            const float3 reflection = normalize(reflect(toCamera, normal));
+            float3 cubeColor = iVertexLight.rgb;
+
+            const float3 iblColor = ImageBasedLighting(reflection, tangent, bitangent, normal, toCamera, diffColor, specColor, roughness, cubeColor);
+            const float gamma = 0;
+            finalColor += iblColor * (cubeColor + gamma);
+
+
         #ifdef ENVCUBEMAP
             finalColor += cMatEnvMapColor * SampleCube(EnvCubeMap, reflect(iReflectionVec, normal)).rgb;
         #endif
@@ -301,6 +327,14 @@ void PS(
 
             finalColor += lightInput.rgb * diffColor.rgb + lightSpecColor * specColor;
         #endif
+
+        const float3 toCamera = normalize(iWorldPos.xyz - cCameraPosPS);
+        const float3 reflection = normalize(reflect(toCamera, normal));
+        float3 cubeColor = iVertexLight.rgb;
+
+        const float3 iblColor = ImageBasedLighting(reflection, tangent, bitangent, normal, toCamera, diffColor, specColor, roughness, cubeColor);
+        const float gamma = 0;
+        finalColor += iblColor * (cubeColor + gamma);
 
         #ifdef ENVCUBEMAP
             finalColor += cMatEnvMapColor * SampleCube(EnvCubeMap, reflect(iReflectionVec, normal)).rgb;

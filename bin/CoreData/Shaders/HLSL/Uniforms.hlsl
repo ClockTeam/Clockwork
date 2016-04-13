@@ -56,6 +56,8 @@ uniform float4 cMatDiffColor;
 uniform float3 cMatEmissiveColor;
 uniform float3 cMatEnvMapColor;
 uniform float4 cMatSpecColor;
+uniform float cRoughnessPS;
+uniform float cMetallicPS;
 uniform float cNearClipPS;
 uniform float cFarClipPS;
 uniform float4 cShadowCubeAdjust;
@@ -181,6 +183,8 @@ cbuffer MaterialPS : register(b4)
     float3 cMatEmissiveColor;
     float3 cMatEnvMapColor;
     float4 cMatSpecColor;
+    float cRoughnessPS;
+    float cMetallicPS;
 }
 #endif
 

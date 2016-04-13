@@ -331,6 +331,8 @@ extern URHO3D_API const StringHash PSP_MATDIFFCOLOR;
 extern URHO3D_API const StringHash PSP_MATEMISSIVECOLOR;
 extern URHO3D_API const StringHash PSP_MATENVMAPCOLOR;
 extern URHO3D_API const StringHash PSP_MATSPECCOLOR;
+extern URHO3D_API const StringHash PSP_ROUGHNESS;
+extern URHO3D_API const StringHash PSP_METALLIC;
 extern URHO3D_API const StringHash PSP_NEARCLIP;
 extern URHO3D_API const StringHash PSP_FARCLIP;
 extern URHO3D_API const StringHash PSP_SHADOWCUBEADJUST;
