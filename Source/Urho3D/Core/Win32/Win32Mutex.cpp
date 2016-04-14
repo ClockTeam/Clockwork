@@ -1,8 +1,7 @@
 // Copyright (c) 2016 Clockwork Engine. All Rights Reserved.
 // See License.txt in the project root for license information.
 
-#include "../../Precompiled.h"
-#include "Win32Mutex.h"
+#include "../Thread.h"
 
 #include <Windows.h>
 

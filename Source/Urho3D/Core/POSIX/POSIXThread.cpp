@@ -1,8 +1,7 @@
 // Copyright (c) 2016 Clockwork Engine. All Rights Reserved.
 // See License.txt in the project root for license information.
 
-#include "../../Precompiled.h"
-#include "POSIXThread.h"
+#include "../Thread.h"
 
 #include <pthread.h>
 
