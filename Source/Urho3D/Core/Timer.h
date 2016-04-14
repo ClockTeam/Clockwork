@@ -1,28 +1,9 @@
-//
-// Copyright (c) 2008-2016 the Urho3D project.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
-//
+// Copyright (c) 2016 Clockwork Engine. All Rights Reserved.
+// See License.txt in the project root for license information.
 
 #pragma once
 
-#include "../Core/Object.h"
+#include "Object.h"
 
 namespace Urho3D
 {
@@ -74,7 +55,7 @@ private:
     static long long frequency;
 };
 
-/// %Time and frame counter subsystem.
+/// Time and frame counter subsystem.
 class URHO3D_API Time : public Object
 {
     URHO3D_OBJECT(Time, Object);
@@ -89,17 +70,12 @@ public:
     void BeginFrame(float timeStep);
     /// End frame. Increment total time and send frame end event.
     void EndFrame();
-    /// Set the low-resolution timer period in milliseconds. 0 resets to the default period.
-    void SetTimerPeriod(unsigned mSec);
 
     /// Return frame number, starting from 1 once BeginFrame() is called for the first time.
     unsigned GetFrameNumber() const { return frameNumber_; }
 
     /// Return current frame timestep as seconds.
     float GetTimeStep() const { return timeStep_; }
-
-    /// Return current low-resolution timer period in milliseconds.
-    unsigned GetTimerPeriod() const { return timerPeriod_; }
 
     /// Return elapsed time from program start as seconds.
     float GetElapsedTime();
@@ -120,8 +96,6 @@ private:
     unsigned frameNumber_;
     /// Timestep in seconds.
     float timeStep_;
-    /// Low-resolution timer period.
-    unsigned timerPeriod_;
 };
 
 }
