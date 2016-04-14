@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include <cstddef>
+
 /// Clockwork Engine version
 #define CW_VERSION_MAJOR 0
 #define CW_VERSION_MINOR 1

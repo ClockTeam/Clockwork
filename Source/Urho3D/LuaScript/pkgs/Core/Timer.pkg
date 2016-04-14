@@ -5,7 +5,6 @@ class Time : public Object
 {
     unsigned GetFrameNumber() const;
     float GetTimeStep() const;
-    unsigned GetTimerPeriod() const;
     float GetElapsedTime();
 
     static unsigned GetSystemTime();
@@ -15,7 +14,6 @@ class Time : public Object
     
     tolua_readonly tolua_property__get_set unsigned frameNumber;
     tolua_readonly tolua_property__get_set float timeStep;
-    tolua_readonly tolua_property__get_set unsigned timerPeriod;
     tolua_readonly tolua_property__get_set float elapsedTime;
 };
 
