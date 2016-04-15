@@ -20,42 +20,59 @@
 // THE SOFTWARE.
 //
 
-#include "Precompiled.h"
+#ifndef URHO3D_API_H
+#define URHO3D_API_H
 
-#include "LibraryInfo.h"
-#include "librevision.h"
+#pragma warning(disable: 4251)
+#pragma warning(disable: 4275)
 
-namespace Urho3D
-{
+#define URHO3D_STATIC_DEFINE
+/* #undef URHO3D_OPENGL */
+/* #undef URHO3D_D3D11 */
+#define URHO3D_SSE
+/* #undef URHO3D_DATABASE_ODBC */
+/* #undef URHO3D_DATABASE_SQLITE */
+/* #undef URHO3D_LUAJIT */
+/* #undef URHO3D_TESTING */
 
-const char* GetRevision()
-{
-    return revision;
-}
+#define URHO3D_D3D11
 
-const char* GetCompilerDefines()
-{
-    return ""
-#ifdef URHO3D_OPENGL
-    "#define URHO3D_OPENGL\n"
-#elif defined(URHO3D_D3D11)
-    "#define URHO3D_D3D11\n"
-#endif
-#ifdef URHO3D_SSE
-    "#define URHO3D_SSE\n"
-#endif
-#ifdef URHO3D_DATABASE_ODBC
-    "#define URHO3D_DATABASE_ODBC\n"
-#elif defined(URHO3D_DATABASE_SQLITE)
-    "#define URHO3D_DATABASE_SQLITE\n"
-#endif
-#ifdef URHO3D_LUAJIT
-    "#define URHO3D_LUAJIT\n"
-#endif
-#ifdef URHO3D_TESTING
-    "#define URHO3D_TESTING\n"
-#endif
-    ;
-}
+#ifdef URHO3D_STATIC_DEFINE
+#  define URHO3D_API
+#  define URHO3D_NO_EXPORT
+#else
+#  ifndef URHO3D_API
+#    ifdef Urho3D_EXPORTS
+        /* We are building this library */
+#      define URHO3D_API __declspec(dllexport)
+#    else
+        /* We are using this library */
+#      define URHO3D_API __declspec(dllimport)
+#    endif
+#  endif
 
-}
+#  ifndef URHO3D_NO_EXPORT
+#    define URHO3D_NO_EXPORT 
+#  endif
+#endif
+
+#ifndef URHO3D_DEPRECATED
+#  define URHO3D_DEPRECATED __declspec(deprecated)
+#endif
+
+#ifndef URHO3D_DEPRECATED_EXPORT
+#  define URHO3D_DEPRECATED_EXPORT URHO3D_API URHO3D_DEPRECATED
+#endif
+
+#ifndef URHO3D_DEPRECATED_NO_EXPORT
+#  define URHO3D_DEPRECATED_NO_EXPORT URHO3D_NO_EXPORT URHO3D_DEPRECATED
+#endif
+
+#define DEFINE_NO_DEPRECATED 0
+#if DEFINE_NO_DEPRECATED
+# define URHO3D_NO_DEPRECATED
+#endif
+
+#define NONSCRIPTABLE 
+
+#endif
