@@ -3,6 +3,8 @@
 -- License: https://github.com/bkaradzic/bx#license-bsd-2-clause
 --
 
+-- Edited by cosmy1 for Clockwork Engine
+
 local bxDir = path.getabsolute("..")
 local naclToolchain = ""
 
@@ -436,9 +438,11 @@ function toolchain(_buildDir, _libDir)
 	}
 
 	configuration { "Debug" }
+		defines { "_DEBUG" }
 		targetsuffix "Debug"
 
 	configuration { "Release" }
+		defines { "NDEBUG" }
 		flags {
 			"OptimizeSpeed",
 		}
