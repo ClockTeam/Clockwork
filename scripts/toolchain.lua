@@ -358,20 +358,19 @@ function prepareEntry(_projectName, _buildDir)
             "/ignore:4221", -- LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
         }
 
+    objdir (path.join(solution().location, "obj", _projectName))
+
     configuration { "x32", "vs*" }
         targetdir (path.join(_buildDir, "win32_" .. _ACTION, "bin"))
-        objdir (path.join(_buildDir, "win32_" .. _ACTION, "obj"))
         libdirs { path.join(bxDir, "lib/win32_" .. _ACTION) }
 
     configuration { "x64", "vs*" }
         defines { "_WIN64" }
         targetdir (path.join(_buildDir, "win64_" .. _ACTION, "bin"))
-        objdir (path.join(_buildDir, "win64_" .. _ACTION, "obj"))
         libdirs { path.join(bxDir, "lib/win64_" .. _ACTION) }
 
     configuration { "ARM", "vs*" }
         targetdir (path.join(_buildDir, "arm_" .. _ACTION, "bin"))
-        objdir (path.join(_buildDir, "arm_" .. _ACTION, "obj"))
         libdirs { path.join(bxDir, "lib/arm_" .. _ACTION) }
 
     configuration { "winphone8* or winstore8*" }
@@ -424,7 +423,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "linux-gcc*", "x32" }
         targetdir (path.join(_buildDir, "linux32_gcc/bin"))
-        objdir (path.join(_buildDir, "linux32_gcc/obj"))
         libdirs { path.join(bxDir, "lib/linux32_gcc") }
         buildoptions {
             "-m32",
@@ -432,7 +430,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "linux-gcc*", "x64" }
         targetdir (path.join(_buildDir, "linux64_gcc/bin"))
-        objdir (path.join(_buildDir, "linux64_gcc/obj"))
         libdirs { path.join(bxDir, "lib/linux64_gcc") }
         buildoptions {
             "-m64",
@@ -440,7 +437,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "linux-clang", "x32" }
         targetdir (path.join(_buildDir, "linux32_clang/bin"))
-        objdir (path.join(_buildDir, "linux32_clang/obj"))
         libdirs { path.join(bxDir, "lib/linux32_clang") }
         buildoptions {
             "-m32",
@@ -448,7 +444,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "linux-clang", "x64" }
         targetdir (path.join(_buildDir, "linux64_clang/bin"))
-        objdir (path.join(_buildDir, "linux64_clang/obj"))
         libdirs { path.join(bxDir, "lib/linux64_clang") }
         buildoptions {
             "-m64",
@@ -456,7 +451,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "linux-mips-gcc" }
         targetdir (path.join(_buildDir, "linux32_mips_gcc/bin"))
-        objdir (path.join(_buildDir, "linux32_mips_gcc/obj"))
         libdirs { path.join(bxDir, "lib/linux32_mips_gcc") }
         buildoptions {
             "-Wunused-value",
@@ -475,7 +469,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "linux-arm-gcc" }
         targetdir (path.join(_buildDir, "linux32_arm_gcc/bin"))
-        objdir (path.join(_buildDir, "linux32_arm_gcc/obj"))
         libdirs { path.join(bxDir, "lib/linux32_arm_gcc") }
         buildoptions {
             "-Wunused-value",
@@ -537,7 +530,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "android-arm" }
         targetdir (path.join(_buildDir, "android-arm/bin"))
-        objdir (path.join(_buildDir, "android-arm/obj"))
         libdirs {
             path.join(bxDir, "lib/android-arm"),
             "$(ANDROID_NDK_ROOT)/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a",
@@ -565,7 +557,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "android-mips" }
         targetdir (path.join(_buildDir, "android-mips/bin"))
-        objdir (path.join(_buildDir, "android-mips/obj"))
         libdirs {
             path.join(bxDir, "lib/android-mips"),
             "$(ANDROID_NDK_ROOT)/sources/cxx-stl/gnu-libstdc++/4.8/libs/mips",
@@ -586,7 +577,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "android-x86" }
         targetdir (path.join(_buildDir, "android-x86/bin"))
-        objdir (path.join(_buildDir, "android-x86/obj"))
         libdirs {
             path.join(bxDir, "lib/android-x86"),
             "$(ANDROID_NDK_ROOT)/sources/cxx-stl/gnu-libstdc++/4.8/libs/x86",
@@ -612,7 +602,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "durango" }
         targetdir (path.join(_buildDir, "durango/bin"))
-        objdir (path.join(_buildDir, "durango/obj"))
         includedirs { path.join(bxDir, "Source/ThirdParty/compat/msvc") }
         libdirs { path.join(bxDir, "lib/durango") }
         removeflags { "StaticRuntime" }
@@ -622,7 +611,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "osx", "x32" }
         targetdir (path.join(_buildDir, "osx32_clang/bin"))
-        objdir (path.join(_buildDir, "osx32_clang/obj"))
         --libdirs { path.join(bxDir, "lib/osx32_clang") }
         buildoptions {
             "-m32",
@@ -630,7 +618,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "osx", "x64" }
         targetdir (path.join(_buildDir, "osx64_clang/bin"))
-        objdir (path.join(_buildDir, "osx64_clang/obj"))
         --libdirs { path.join(bxDir, "lib/osx64_clang") }
         buildoptions {
             "-m64",
@@ -638,7 +625,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "osx", "Universal" }
         targetdir (path.join(_buildDir, "osx_universal/bin"))
-        objdir (path.join(_buildDir, "osx_universal/bin"))
 
     configuration { "osx" }
         buildoptions {
@@ -662,11 +648,9 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "xcode4", "ios*" }
         targetdir (path.join(_buildDir, "ios-arm/bin"))
-        objdir (path.join(_buildDir, "ios-arm/obj"))
 
     configuration { "ios-arm" }
         targetdir (path.join(_buildDir, "ios-arm/bin"))
-        objdir (path.join(_buildDir, "ios-arm/obj"))
         libdirs { path.join(bxDir, "lib/ios-arm") }
         linkoptions {
             "-miphoneos-version-min=7.0",
@@ -684,7 +668,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "ios-simulator" }
         targetdir (path.join(_buildDir, "ios-simulator/bin"))
-        objdir (path.join(_buildDir, "ios-simulator/obj"))
         libdirs { path.join(bxDir, "lib/ios-simulator") }
         linkoptions {
             "-mios-simulator-version-min=7.0",
@@ -713,11 +696,9 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "xcode4", "tvos*" }
         targetdir (path.join(_buildDir, "tvos-arm64/bin"))
-        objdir (path.join(_buildDir, "tvos-arm64/obj"))
 
     configuration { "tvos-arm64" }
         targetdir (path.join(_buildDir, "tvos-arm64/bin"))
-        objdir (path.join(_buildDir, "tvos-arm64/obj"))
         libdirs { path.join(bxDir, "lib/tvos-arm64") }
         linkoptions {
             "-mtvos-version-min=9.0",
@@ -735,7 +716,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "tvos-simulator" }
         targetdir (path.join(_buildDir, "tvos-simulator/bin"))
-        objdir (path.join(_buildDir, "tvos-simulator/obj"))
         libdirs { path.join(bxDir, "lib/tvos-simulator") }
         linkoptions {
             "-mtvos-simulator-version-min=9.0",
@@ -753,7 +733,6 @@ function prepareEntry(_projectName, _buildDir)
 
     configuration { "ps4" }
         targetdir (path.join(_buildDir, "ps4/bin"))
-        objdir (path.join(_buildDir, "ps4/obj"))
         libdirs { path.join(bxDir, "lib/ps4") }
         includedirs {
             path.join(bxDir, "Source/ThirdParty/compat/freebsd"),
