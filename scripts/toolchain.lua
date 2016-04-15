@@ -338,7 +338,7 @@ function prepareEntry(_projectName, _buildDir)
         }
 
     configuration { "vs*" }
-        includedirs { path.join(bxDir, "include/compat/msvc") }
+        includedirs { path.join(bxDir, "Source/ThirdParty/compat/msvc") }
         defines {
             "WIN32",
             "_WIN32",
@@ -613,7 +613,7 @@ function prepareEntry(_projectName, _buildDir)
     configuration { "durango" }
         targetdir (path.join(_buildDir, "durango/bin"))
         objdir (path.join(_buildDir, "durango/obj"))
-        includedirs { path.join(bxDir, "include/compat/msvc") }
+        includedirs { path.join(bxDir, "Source/ThirdParty/compat/msvc") }
         libdirs { path.join("../", "lib/durango") }
         removeflags { "StaticRuntime" }
         defines {
@@ -647,7 +647,7 @@ function prepareEntry(_projectName, _buildDir)
             "-Wunused-value",
             "-Wundef",
         }
-        includedirs { path.join(bxDir, "include/compat/osx") }
+        includedirs { path.join(bxDir, "Source/ThirdParty/compat/osx") }
 
     configuration { "ios*" }
         linkoptions {
@@ -658,7 +658,7 @@ function prepareEntry(_projectName, _buildDir)
             "-Wunused-value",
             "-Wundef",
         }
-        includedirs { path.join(bxDir, "include/compat/ios") }
+        includedirs { path.join(bxDir, "Source/ThirdParty/compat/ios") }
 
     configuration { "xcode4", "ios*" }
         targetdir (path.join(_buildDir, "ios-arm/bin"))
@@ -709,7 +709,7 @@ function prepareEntry(_projectName, _buildDir)
             "-Wunused-value",
             "-Wundef",
         }
-        includedirs { path.join(bxDir, "include/compat/ios") }
+        includedirs { path.join(bxDir, "Source/ThirdParty/compat/ios") }
 
     configuration { "xcode4", "tvos*" }
         targetdir (path.join(_buildDir, "tvos-arm64/bin"))
@@ -756,7 +756,7 @@ function prepareEntry(_projectName, _buildDir)
         objdir (path.join(_buildDir, "ps4/obj"))
         libdirs { path.join("../", "lib/ps4") }
         includedirs {
-            path.join(bxDir, "include/compat/freebsd"),
+            path.join(bxDir, "Source/ThirdParty/compat/freebsd"),
             "$(PS4_SDK_ROOT)/target/include",
             "$(PS4_SDK_ROOT)/target/include_common",
         }
