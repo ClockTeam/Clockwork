@@ -26,8 +26,6 @@ function toolchain(_buildDir, _libDir)
             { "linux-arm-gcc",   "Linux (ARM, GCC compiler)"  },
             { "tvos-arm64",      "tvOS - ARM64"               },
             { "tvos-simulator",  "tvOS - Simulator"           },
-            { "mingw-gcc",       "MinGW"                      },
-            { "mingw-clang",     "MinGW (clang compiler)"     },
             { "osx",             "OSX"                        },
             { "ps4",             "PS4"                        },
         },
@@ -192,20 +190,6 @@ function toolchain(_buildDir, _libDir)
 
         elseif "linux-arm-gcc" == _OPTIONS["gcc"] then
             location (path.join(_buildDir, "Projects", _ACTION .. "-linux-arm-gcc"))
-
-        elseif "mingw-gcc" == _OPTIONS["gcc"] then
-            premake.gcc.cc  = "$(MINGW)/bin/x86_64-w64-mingw32-gcc"
-            premake.gcc.cxx = "$(MINGW)/bin/x86_64-w64-mingw32-g++"
-            premake.gcc.ar  = "$(MINGW)/bin/ar"
-            location (path.join(_buildDir, "Projects", _ACTION .. "-mingw-gcc"))
-
-        elseif "mingw-clang" == _OPTIONS["gcc"] then
-            premake.gcc.cc   = "$(CLANG)/bin/clang"
-            premake.gcc.cxx  = "$(CLANG)/bin/clang++"
-            premake.gcc.ar   = "$(MINGW)/bin/ar"
---          premake.gcc.ar   = "$(CLANG)/bin/llvm-ar"
---          premake.gcc.llvm = true
-            location (path.join(_buildDir, "Projects", _ACTION .. "-mingw-clang"))
 
         elseif "osx" == _OPTIONS["gcc"] then
 
@@ -393,70 +377,6 @@ function toolchain(_buildDir, _libDir)
         buildoptions {
             "-Wshadow",
         }
-
-    configuration { "mingw-*" }
-        defines { "WIN32" }
-        includedirs { path.join(bxDir, "include/compat/mingw") }
-        buildoptions {
-            "-Wunused-value",
-            "-fdata-sections",
-            "-ffunction-sections",
-            "-msse2",
-            "-Wunused-value",
-            "-Wundef",
-        }
-        buildoptions_cpp {
-            "-std=c++0x",
-        }
-        linkoptions {
-            "-Wl,--gc-sections",
-            "-static",
-            "-static-libgcc",
-            "-static-libstdc++",
-        }
-
-    configuration { "x32", "mingw-gcc" }
-        targetdir (path.join(_buildDir, "win32_mingw-gcc/bin"))
-        objdir (path.join(_buildDir, "win32_mingw-gcc/obj"))
-        libdirs {
-            path.join(_libDir, "lib/win32_mingw-gcc"),
-        }
-        buildoptions { "-m32" }
-
-    configuration { "x64", "mingw-gcc" }
-        targetdir (path.join(_buildDir, "win64_mingw-gcc/bin"))
-        objdir (path.join(_buildDir, "win64_mingw-gcc/obj"))
-        libdirs {
-            path.join(_libDir, "lib/win64_mingw-gcc"),
-        }
-        buildoptions { "-m64" }
-
-    configuration { "mingw-clang" }
-        buildoptions {
-            "-isystem$(MINGW)/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++",
-            "-isystem$(MINGW)/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++/x86_64-w64-mingw32",
-            "-isystem$(MINGW)/x86_64-w64-mingw32/include",
-        }
-        linkoptions {
-            "-Qunused-arguments",
-            "-Wno-error=unused-command-line-argument-hard-error-in-future",
-        }
-
-    configuration { "x32", "mingw-clang" }
-        targetdir (path.join(_buildDir, "win32_mingw-clang/bin"))
-        objdir (path.join(_buildDir, "win32_mingw-clang/obj"))
-        libdirs {
-            path.join(_libDir, "lib/win32_mingw-clang"),
-        }
-        buildoptions { "-m32" }
-
-    configuration { "x64", "mingw-clang" }
-        targetdir (path.join(_buildDir, "win64_mingw-clang/bin"))
-        objdir (path.join(_buildDir, "win64_mingw-clang/obj"))
-        libdirs {
-            path.join(_libDir, "lib/win64_mingw-clang"),
-        }
-        buildoptions { "-m64" }
 
     configuration { "linux-clang" }
 
@@ -870,12 +790,6 @@ function strip()
         postbuildcommands {
             "$(SILENT) echo Stripping symbols.",
             "$(SILENT) strip -s \"$(TARGET)\""
-        }
-
-    configuration { "mingw*", "Release" }
-        postbuildcommands {
-            "$(SILENT) echo Stripping symbols.",
-            "$(SILENT) $(MINGW)/bin/strip -s \"$(TARGET)\""
         }
 
     configuration {} -- reset configuration
