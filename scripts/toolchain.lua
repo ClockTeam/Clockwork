@@ -17,7 +17,6 @@ function toolchain(_buildDir, _libDir)
             { "android-arm",     "Android - ARM"              },
             { "android-mips",    "Android - MIPS"             },
             { "android-x86",     "Android - x86"              },
-            { "freebsd",         "FreeBSD"                    },
             { "ios-arm",         "iOS - ARM"                  },
             { "ios-simulator",   "iOS - Simulator"            },
             { "linux-gcc",       "Linux (GCC compiler)"       },
@@ -148,9 +147,6 @@ function toolchain(_buildDir, _libDir)
             premake.gcc.cxx = "$(ANDROID_NDK_X86)/bin/i686-linux-android-g++"
             premake.gcc.ar  = "$(ANDROID_NDK_X86)/bin/i686-linux-android-ar"
             location (path.join(_buildDir, "Projects", _ACTION .. "-android-x86"))
-
-        elseif "freebsd" == _OPTIONS["gcc"] then
-            location (path.join(_buildDir, "Projects", _ACTION .. "-freebsd"))
 
         elseif "ios-arm" == _OPTIONS["gcc"] then
             premake.gcc.cc  = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
@@ -685,14 +681,6 @@ function toolchain(_buildDir, _libDir)
             "--sysroot=" .. path.join("$(ANDROID_NDK_ROOT)/platforms", androidPlatform, "arch-x86"),
             path.join("$(ANDROID_NDK_ROOT)/platforms", androidPlatform, "arch-x86/usr/lib/crtbegin_so.o"),
             path.join("$(ANDROID_NDK_ROOT)/platforms", androidPlatform, "arch-x86/usr/lib/crtend_so.o"),
-        }
-
-    configuration { "freebsd" }
-        targetdir (path.join(_buildDir, "freebsd/bin"))
-        objdir (path.join(_buildDir, "freebsd/obj"))
-        libdirs { path.join(_libDir, "lib/freebsd") }
-        includedirs {
-            path.join(bxDir, "include/compat/freebsd"),
         }
 
     configuration { "durango" }
