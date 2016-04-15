@@ -361,21 +361,18 @@ function prepareEntry(_projectName, _buildDir)
     configuration { "x32", "vs*" }
         targetdir (path.join(_buildDir, "win32_" .. _ACTION, "bin"))
         objdir (path.join(_buildDir, "win32_" .. _ACTION, "obj"))
-        libdirs {
-            path.join("../", "lib/win32_" .. _ACTION),
-        }
+        libdirs { path.join("../", "lib/win32_" .. _ACTION) }
 
     configuration { "x64", "vs*" }
         defines { "_WIN64" }
         targetdir (path.join(_buildDir, "win64_" .. _ACTION, "bin"))
         objdir (path.join(_buildDir, "win64_" .. _ACTION, "obj"))
-        libdirs {
-            path.join("../", "lib/win64_" .. _ACTION),
-        }
+        libdirs { path.join("../", "lib/win64_" .. _ACTION) }
 
     configuration { "ARM", "vs*" }
         targetdir (path.join(_buildDir, "arm_" .. _ACTION, "bin"))
         objdir (path.join(_buildDir, "arm_" .. _ACTION, "obj"))
+        libdirs { path.join("../", "lib/arm_" .. _ACTION) }
 
     configuration { "winphone8* or winstore8*" }
         removeflags {
