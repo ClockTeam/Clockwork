@@ -6,7 +6,6 @@
 -- Edited by cosmy1 for Clockwork Engine
 
 local bxDir = path.getabsolute("..")
-local naclToolchain = ""
 
 function toolchain(_buildDir, _libDir)
 
@@ -18,7 +17,6 @@ function toolchain(_buildDir, _libDir)
             { "android-arm",     "Android - ARM"              },
             { "android-mips",    "Android - MIPS"             },
             { "android-x86",     "Android - x86"              },
-            { "asmjs",           "Emscripten/asm.js"          },
             { "freebsd",         "FreeBSD"                    },
             { "ios-arm",         "iOS - ARM"                  },
             { "ios-simulator",   "iOS - Simulator"            },
@@ -27,19 +25,12 @@ function toolchain(_buildDir, _libDir)
             { "linux-clang",     "Linux (Clang compiler)"     },
             { "linux-mips-gcc",  "Linux (MIPS, GCC compiler)" },
             { "linux-arm-gcc",   "Linux (ARM, GCC compiler)"  },
-            { "linux-steamlink", "Steam Link"                 },
             { "tvos-arm64",      "tvOS - ARM64"               },
             { "tvos-simulator",  "tvOS - Simulator"           },
             { "mingw-gcc",       "MinGW"                      },
             { "mingw-clang",     "MinGW (clang compiler)"     },
-            { "nacl",            "Native Client"              },
-            { "nacl-arm",        "Native Client - ARM"        },
             { "osx",             "OSX"                        },
-            { "pnacl",           "Native Client - PNaCl"      },
             { "ps4",             "PS4"                        },
-            { "qnx-arm",         "QNX/Blackberry - ARM"       },
-            { "rpi",             "RaspberryPi"                },
-            { "riscv",           "RISC-V"                     },
         },
     }
 
@@ -51,9 +42,7 @@ function toolchain(_buildDir, _libDir)
             { "vs2012-clang",  "Clang 3.6"                       },
             { "vs2013-clang",  "Clang 3.6"                       },
             { "vs2015-clang",  "Clang 3.9"                       },
-            { "vs2012-xp",     "Visual Studio 2012 targeting XP" },
-            { "vs2013-xp",     "Visual Studio 2013 targeting XP" },
-            { "vs2015-xp",     "Visual Studio 2015 targeting XP" },
+            { "win32",         "Windows Desktop"                 },
             { "winphone8",     "Windows Phone 8.0"               },
             { "winphone81",    "Windows Phone 8.1"               },
             { "winstore81",    "Windows Store 8.1"               },
@@ -61,7 +50,6 @@ function toolchain(_buildDir, _libDir)
             { "durango",       "Durango"                         },
         },
     }
-
 
     newoption {
         trigger = "xcode",
@@ -165,18 +153,6 @@ function toolchain(_buildDir, _libDir)
             premake.gcc.ar  = "$(ANDROID_NDK_X86)/bin/i686-linux-android-ar"
             location (path.join(_buildDir, "Projects", _ACTION .. "-android-x86"))
 
-        elseif "asmjs" == _OPTIONS["gcc"] then
-
-            if not os.getenv("EMSCRIPTEN") then
-                print("Set EMSCRIPTEN enviroment variable.")
-            end
-
-            premake.gcc.cc   = "$(EMSCRIPTEN)/emcc"
-            premake.gcc.cxx  = "$(EMSCRIPTEN)/em++"
-            premake.gcc.ar   = "$(EMSCRIPTEN)/emar"
-            premake.gcc.llvm = true
-            location (path.join(_buildDir, "Projects", _ACTION .. "-asmjs"))
-
         elseif "freebsd" == _OPTIONS["gcc"] then
             location (path.join(_buildDir, "Projects", _ACTION .. "-freebsd"))
 
@@ -225,16 +201,6 @@ function toolchain(_buildDir, _libDir)
         elseif "linux-arm-gcc" == _OPTIONS["gcc"] then
             location (path.join(_buildDir, "Projects", _ACTION .. "-linux-arm-gcc"))
 
-        elseif "linux-steamlink" == _OPTIONS["gcc"] then
-            if not os.getenv("MARVELL_SDK_PATH") then
-                print("Set MARVELL_SDK_PATH enviroment variable.")
-            end
-
-            premake.gcc.cc  = "$(MARVELL_SDK_PATH)/toolchain/bin/armv7a-cros-linux-gnueabi-gcc"
-            premake.gcc.cxx = "$(MARVELL_SDK_PATH)/toolchain/bin/armv7a-cros-linux-gnueabi-g++"
-            premake.gcc.ar  = "$(MARVELL_SDK_PATH)/toolchain/bin/armv7a-cros-linux-gnueabi-ar"
-            location (path.join(_buildDir, "Projects", _ACTION .. "-linux-steamlink"))
-
         elseif "mingw-gcc" == _OPTIONS["gcc"] then
             premake.gcc.cc  = "$(MINGW)/bin/x86_64-w64-mingw32-gcc"
             premake.gcc.cxx = "$(MINGW)/bin/x86_64-w64-mingw32-g++"
@@ -249,42 +215,6 @@ function toolchain(_buildDir, _libDir)
 --          premake.gcc.llvm = true
             location (path.join(_buildDir, "Projects", _ACTION .. "-mingw-clang"))
 
-        elseif "nacl" == _OPTIONS["gcc"] then
-
-            if not os.getenv("NACL_SDK_ROOT") then
-                print("Set NACL_SDK_ROOT enviroment variable.")
-            end
-
-            naclToolchain = "$(NACL_SDK_ROOT)/toolchain/win_x86_newlib/bin/x86_64-nacl-"
-            if os.is("macosx") then
-                naclToolchain = "$(NACL_SDK_ROOT)/toolchain/mac_x86_newlib/bin/x86_64-nacl-"
-            elseif os.is("linux") then
-                naclToolchain = "$(NACL_SDK_ROOT)/toolchain/linux_x86_newlib/bin/x86_64-nacl-"
-            end
-
-            premake.gcc.cc  = naclToolchain .. "gcc"
-            premake.gcc.cxx = naclToolchain .. "g++"
-            premake.gcc.ar  = naclToolchain .. "ar"
-            location (path.join(_buildDir, "Projects", _ACTION .. "-nacl"))
-
-        elseif "nacl-arm" == _OPTIONS["gcc"] then
-
-            if not os.getenv("NACL_SDK_ROOT") then
-                print("Set NACL_SDK_ROOT enviroment variable.")
-            end
-
-            naclToolchain = "$(NACL_SDK_ROOT)/toolchain/win_arm_newlib/bin/arm-nacl-"
-            if os.is("macosx") then
-                naclToolchain = "$(NACL_SDK_ROOT)/toolchain/mac_arm_newlib/bin/arm-nacl-"
-            elseif os.is("linux") then
-                naclToolchain = "$(NACL_SDK_ROOT)/toolchain/linux_arm_newlib/bin/arm-nacl-"
-            end
-
-            premake.gcc.cc  = naclToolchain .. "gcc"
-            premake.gcc.cxx = naclToolchain .. "g++"
-            premake.gcc.ar  = naclToolchain .. "ar"
-            location (path.join(_buildDir, "Projects", _ACTION .. "-nacl-arm"))
-
         elseif "osx" == _OPTIONS["gcc"] then
 
             if os.is("linux") then
@@ -294,24 +224,6 @@ function toolchain(_buildDir, _libDir)
                 premake.gcc.ar  = osxToolchain .. "ar"
             end
             location (path.join(_buildDir, "Projects", _ACTION .. "-osx"))
-
-        elseif "pnacl" == _OPTIONS["gcc"] then
-
-            if not os.getenv("NACL_SDK_ROOT") then
-                print("Set NACL_SDK_ROOT enviroment variable.")
-            end
-
-            naclToolchain = "$(NACL_SDK_ROOT)/toolchain/win_pnacl/bin/pnacl-"
-            if os.is("macosx") then
-                naclToolchain = "$(NACL_SDK_ROOT)/toolchain/mac_pnacl/bin/pnacl-"
-            elseif os.is("linux") then
-                naclToolchain = "$(NACL_SDK_ROOT)/toolchain/linux_pnacl/bin/pnacl-"
-            end
-
-            premake.gcc.cc  = naclToolchain .. "clang"
-            premake.gcc.cxx = naclToolchain .. "clang++"
-            premake.gcc.ar  = naclToolchain .. "ar"
-            location (path.join(_buildDir, "Projects", _ACTION .. "-pnacl"))
 
         elseif "ps4" == _OPTIONS["gcc"] then
 
@@ -325,26 +237,6 @@ function toolchain(_buildDir, _libDir)
             premake.gcc.cxx = ps4Toolchain .. "clang++"
             premake.gcc.ar  = ps4Toolchain .. "ar"
             location (path.join(_buildDir, "Projects", _ACTION .. "-ps4"))
-
-        elseif "qnx-arm" == _OPTIONS["gcc"] then
-
-            if not os.getenv("QNX_HOST") then
-                print("Set QNX_HOST enviroment variable.")
-            end
-
-            premake.gcc.cc  = "$(QNX_HOST)/usr/bin/arm-unknown-nto-qnx8.0.0eabi-gcc"
-            premake.gcc.cxx = "$(QNX_HOST)/usr/bin/arm-unknown-nto-qnx8.0.0eabi-g++"
-            premake.gcc.ar  = "$(QNX_HOST)/usr/bin/arm-unknown-nto-qnx8.0.0eabi-ar"
-            location (path.join(_buildDir, "Projects", _ACTION .. "-qnx-arm"))
-
-        elseif "rpi" == _OPTIONS["gcc"] then
-            location (path.join(_buildDir, "Projects", _ACTION .. "-rpi"))
-
-        elseif "riscv" == _OPTIONS["gcc"] then
-            premake.gcc.cc  = "/opt/riscv/bin/riscv64-unknown-elf-gcc"
-            premake.gcc.cxx = "/opt/riscv/bin/riscv64-unknown-elf-g++"
-            premake.gcc.ar  = "/opt/riscv/bin/riscv64-unknown-elf-ar"
-            location (path.join(_buildDir, "Projects", _ACTION .. "-riscv"))
 
         end
     elseif _ACTION == "vs2012" or _ACTION == "vs2013" or _ACTION == "vs2015" then
@@ -388,20 +280,12 @@ function toolchain(_buildDir, _libDir)
             premake.vstudio.storeapp = "durango"
             platforms { "Durango" }
             location (path.join(_buildDir, "Projects", _ACTION .. "-durango"))
+
+        elseif "win32" == _OPTIONS["vs"] then
+            premake.vstudio.toolset = ("v140")
+            location (path.join(_buildDir, "Projects", _ACTION .. "-win32"))    
+
         end
-
-        elseif ("vs2012-xp") == _OPTIONS["vs"] then
-            premake.vstudio.toolset = ("v110_xp")
-            location (path.join(_buildDir, "Projects", _ACTION .. "-xp"))
-
-        elseif "vs2013-xp" == _OPTIONS["vs"] then
-            premake.vstudio.toolset = ("v120_xp")
-            location (path.join(_buildDir, "Projects", _ACTION .. "-xp"))
-
-        elseif "vs2015-xp" == _OPTIONS["vs"] then
-            premake.vstudio.toolset = ("v140_xp")
-            location (path.join(_buildDir, "Projects", _ACTION .. "-xp"))
-
     elseif _ACTION == "xcode4" then
 
         if "osx" == _OPTIONS["xcode"] then
@@ -429,6 +313,7 @@ function toolchain(_buildDir, _libDir)
         "NoExceptions",
         "NoEditAndContinue",
         "Symbols",
+        "WinMain"
     }
 
     defines {
@@ -473,9 +358,6 @@ function toolchain(_buildDir, _libDir)
         linkoptions {
             "/ignore:4221", -- LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
         }
-
-    configuration { "vs2008" }
-        includedirs { path.join(bxDir, "include/compat/msvc/pre1600") }
 
     configuration { "x32", "vs*" }
         targetdir (path.join(_buildDir, "win32_" .. _ACTION, "bin"))
@@ -734,30 +616,6 @@ function toolchain(_buildDir, _libDir)
             "-Wl,-z,now",
         }
 
-    configuration { "linux-steamlink" }
-        targetdir (path.join(_buildDir, "steamlink/bin"))
-        objdir (path.join(_buildDir, "steamlink/obj"))
-        libdirs { path.join(_libDir, "lib/steamlink") }
-        includedirs { path.join(bxDir, "include/compat/linux") }
-        defines {
-            "__STEAMLINK__=1", -- There is no special prefedined compiler symbol to detect SteamLink, faking it.
-        }
-        buildoptions {
-            "-std=c++0x",
-            "-Wfatal-errors",
-            "-Wunused-value",
-            "-Wundef",
-            "-pthread",
-            "-marm",
-            "-mfloat-abi=hard",
-            "--sysroot=$(MARVELL_SDK_PATH)/rootfs",
-        }
-        linkoptions {
-            "-static-libgcc",
-            "-static-libstdc++",
-            "--sysroot=$(MARVELL_SDK_PATH)/rootfs",
-        }
-
     configuration { "android-arm" }
         targetdir (path.join(_buildDir, "android-arm/bin"))
         objdir (path.join(_buildDir, "android-arm/obj"))
@@ -833,109 +691,12 @@ function toolchain(_buildDir, _libDir)
             path.join("$(ANDROID_NDK_ROOT)/platforms", androidPlatform, "arch-x86/usr/lib/crtend_so.o"),
         }
 
-    configuration { "asmjs" }
-        targetdir (path.join(_buildDir, "asmjs/bin"))
-        objdir (path.join(_buildDir, "asmjs/obj"))
-        libdirs { path.join(_libDir, "lib/asmjs") }
-        buildoptions {
-            "-isystem$(EMSCRIPTEN)/system/include",
-            "-isystem$(EMSCRIPTEN)/system/include/libc",
-            "-Wunused-value",
-            "-Wundef",
-        }
-
     configuration { "freebsd" }
         targetdir (path.join(_buildDir, "freebsd/bin"))
         objdir (path.join(_buildDir, "freebsd/obj"))
         libdirs { path.join(_libDir, "lib/freebsd") }
         includedirs {
             path.join(bxDir, "include/compat/freebsd"),
-        }
-
-    configuration { "nacl or nacl-arm or pnacl" }
-        buildoptions {
-            "-U__STRICT_ANSI__", -- strcasecmp, setenv, unsetenv,...
-            "-fno-stack-protector",
-            "-fdiagnostics-show-option",
-            "-fdata-sections",
-            "-ffunction-sections",
-            "-Wunused-value",
-            "-Wundef",
-        }
-        buildoptions_cpp {
-            "-std=c++0x",
-        }
-        includedirs {
-            "$(NACL_SDK_ROOT)/include",
-            path.join(bxDir, "include/compat/nacl"),
-        }
-
-    configuration { "nacl" }
-        buildoptions {
-            "-pthread",
-            "-mfpmath=sse", -- force SSE to get 32-bit and 64-bit builds deterministic.
-            "-msse2",
-        }
-        linkoptions {
-            "-Wl,--gc-sections",
-        }
-
-    configuration { "x32", "nacl" }
-        targetdir (path.join(_buildDir, "nacl-x86/bin"))
-        objdir (path.join(_buildDir, "nacl-x86/obj"))
-        libdirs { path.join(_libDir, "lib/nacl-x86") }
-        linkoptions { "-melf32_nacl" }
-
-    configuration { "x32", "nacl", "Debug" }
-        libdirs { "$(NACL_SDK_ROOT)/lib/newlib_x86_32/Debug" }
-
-    configuration { "x32", "nacl", "Release" }
-        libdirs { "$(NACL_SDK_ROOT)/lib/newlib_x86_32/Release" }
-
-    configuration { "x64", "nacl" }
-        targetdir (path.join(_buildDir, "nacl-x64/bin"))
-        objdir (path.join(_buildDir, "nacl-x64/obj"))
-        libdirs { path.join(_libDir, "lib/nacl-x64") }
-        linkoptions { "-melf64_nacl" }
-
-    configuration { "x64", "nacl", "Debug" }
-        libdirs { "$(NACL_SDK_ROOT)/lib/newlib_x86_64/Debug" }
-
-    configuration { "x64", "nacl", "Release" }
-        libdirs { "$(NACL_SDK_ROOT)/lib/newlib_x86_64/Release" }
-
-    configuration { "nacl-arm" }
-        buildoptions {
-            "-Wno-psabi", -- note: the mangling of 'va_list' has changed in GCC 4.4.0
-        }
-        targetdir (path.join(_buildDir, "nacl-arm/bin"))
-        objdir (path.join(_buildDir, "nacl-arm/obj"))
-        libdirs { path.join(_libDir, "lib/nacl-arm") }
-
-    configuration { "nacl-arm", "Debug" }
-        libdirs { "$(NACL_SDK_ROOT)/lib/newlib_arm/Debug" }
-
-    configuration { "nacl-arm", "Release" }
-        libdirs { "$(NACL_SDK_ROOT)/lib/newlib_arm/Release" }
-
-    configuration { "pnacl" }
-        targetdir (path.join(_buildDir, "pnacl/bin"))
-        objdir (path.join(_buildDir, "pnacl/obj"))
-        libdirs { path.join(_libDir, "lib/pnacl") }
-
-    configuration { "pnacl", "Debug" }
-        libdirs { "$(NACL_SDK_ROOT)/lib/pnacl/Debug" }
-
-    configuration { "pnacl", "Release" }
-        libdirs { "$(NACL_SDK_ROOT)/lib/pnacl/Release" }
-
-    configuration { "xbox360" }
-        targetdir (path.join(_buildDir, "xbox360/bin"))
-        objdir (path.join(_buildDir, "xbox360/obj"))
-        includedirs { path.join(bxDir, "include/compat/msvc") }
-        libdirs { path.join(_libDir, "lib/xbox360") }
-        defines {
-            "NOMINMAX",
         }
 
     configuration { "durango" }
@@ -1096,61 +857,6 @@ function toolchain(_buildDir, _libDir)
         linkoptions {
         }
 
-    configuration { "qnx-arm" }
-        targetdir (path.join(_buildDir, "qnx-arm/bin"))
-        objdir (path.join(_buildDir, "qnx-arm/obj"))
-        libdirs { path.join(_libDir, "lib/qnx-arm") }
---      includedirs { path.join(bxDir, "include/compat/qnx") }
-        buildoptions {
-            "-Wno-psabi", -- note: the mangling of 'va_list' has changed in GCC 4.4.0
-            "-Wunused-value",
-            "-Wundef",
-        }
-        buildoptions_cpp {
-            "-std=c++0x",
-        }
-
-    configuration { "rpi" }
-        targetdir (path.join(_buildDir, "rpi/bin"))
-        objdir (path.join(_buildDir, "rpi/obj"))
-        libdirs {
-            path.join(_libDir, "lib/rpi"),
-            "/opt/vc/lib",
-        }
-        defines {
-            "__VCCOREVER__=0x04000000", -- There is no special prefedined compiler symbol to detect RaspberryPi, faking it.
-            "__STDC_VERSION__=199901L",
-        }
-        buildoptions {
-            "-Wunused-value",
-            "-Wundef",
-        }
-        buildoptions_cpp {
-            "-std=c++0x",
-        }
-        includedirs {
-            "/opt/vc/include",
-            "/opt/vc/include/interface/vcos/pthreads",
-            "/opt/vc/include/interface/vmcs_host/linux",
-        }
-        links {
-            "rt",
-        }
-        linkoptions {
-            "-Wl,--gc-sections",
-        }
-
-    configuration { "riscv" }
-        targetdir (path.join(_buildDir, "riscv/bin"))
-        objdir (path.join(_buildDir, "riscv/obj"))
-        buildoptions {
-            "-Wunused-value",
-            "-Wundef",
-        }
-        buildoptions_cpp {
-            "-std=c++0x",
-        }
-
     configuration {} -- reset configuration
 
     return true
@@ -1176,13 +882,7 @@ function strip()
             "$(SILENT) $(ANDROID_NDK_X86)/bin/i686-linux-android-strip -s \"$(TARGET)\""
         }
 
-    configuration { "linux-steamlink", "Release" }
-        postbuildcommands {
-            "$(SILENT) echo Stripping symbols.",
-            "$(SILENT) $(MARVELL_SDK_PATH)/toolchain/bin/armv7a-cros-linux-gnueabi-strip -s \"$(TARGET)\""
-        }
-
-    configuration { "linux-* or rpi", "not linux-steamlink", "Release" }
+    configuration { "linux-*", "Release" }
         postbuildcommands {
             "$(SILENT) echo Stripping symbols.",
             "$(SILENT) strip -s \"$(TARGET)\""
@@ -1192,32 +892,6 @@ function strip()
         postbuildcommands {
             "$(SILENT) echo Stripping symbols.",
             "$(SILENT) $(MINGW)/bin/strip -s \"$(TARGET)\""
-        }
-
-    configuration { "pnacl" }
-        postbuildcommands {
-            "$(SILENT) echo Running pnacl-finalize.",
-            "$(SILENT) " .. naclToolchain .. "finalize \"$(TARGET)\""
-        }
-
-    configuration { "*nacl*", "Release" }
-        postbuildcommands {
-            "$(SILENT) echo Stripping symbols.",
-            "$(SILENT) " .. naclToolchain .. "strip -s \"$(TARGET)\""
-        }
-
-    configuration { "asmjs" }
-        postbuildcommands {
-            "$(SILENT) echo Running asmjs finalize.",
-            "$(SILENT) $(EMSCRIPTEN)/emcc -O2 "
---              .. "-s EMTERPRETIFY=1 "
---              .. "-s EMTERPRETIFY_ASYNC=1 "
-                .. "-s TOTAL_MEMORY=268435456 "
---              .. "-s ALLOW_MEMORY_GROWTH=1 "
---              .. "-s USE_WEBGL2=1 "
-                .. "--memory-init-file 1 "
-                .. "\"$(TARGET)\" -o \"$(TARGET)\".html "
---              .. "--preload-file ../../../examples/runtime@/"
         }
 
     configuration {} -- reset configuration
