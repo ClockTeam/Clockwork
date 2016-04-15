@@ -85,7 +85,7 @@ function toolchain()
     -- Avoid error when invoking genie --help.
     if (_ACTION == nil) then return false end
 
-    location (path.join(bxDir, "Projects", _ACTION))
+    location (path.join(bxDir, "projects", _ACTION))
 
     if _OPTIONS["with-android"] then
         androidPlatform = "android-" .. _OPTIONS["with-android"]
@@ -119,7 +119,7 @@ function toolchain()
             premake.gcc.cc  = "$(ANDROID_NDK_ARM)/bin/arm-linux-androideabi-gcc"
             premake.gcc.cxx = "$(ANDROID_NDK_ARM)/bin/arm-linux-androideabi-g++"
             premake.gcc.ar  = "$(ANDROID_NDK_ARM)/bin/arm-linux-androideabi-ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-android-arm"))
+            location (path.join(bxDir, "projects", _ACTION .. "-android-arm"))
 
         elseif "android-mips" == _OPTIONS["gcc"] then
 
@@ -130,7 +130,7 @@ function toolchain()
             premake.gcc.cc  = "$(ANDROID_NDK_MIPS)/bin/mipsel-linux-android-gcc"
             premake.gcc.cxx = "$(ANDROID_NDK_MIPS)/bin/mipsel-linux-android-g++"
             premake.gcc.ar  = "$(ANDROID_NDK_MIPS)/bin/mipsel-linux-android-ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-android-mips"))
+            location (path.join(bxDir, "projects", _ACTION .. "-android-mips"))
 
         elseif "android-x86" == _OPTIONS["gcc"] then
 
@@ -141,52 +141,52 @@ function toolchain()
             premake.gcc.cc  = "$(ANDROID_NDK_X86)/bin/i686-linux-android-gcc"
             premake.gcc.cxx = "$(ANDROID_NDK_X86)/bin/i686-linux-android-g++"
             premake.gcc.ar  = "$(ANDROID_NDK_X86)/bin/i686-linux-android-ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-android-x86"))
+            location (path.join(bxDir, "projects", _ACTION .. "-android-x86"))
 
         elseif "ios-arm" == _OPTIONS["gcc"] then
             premake.gcc.cc  = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
             premake.gcc.cxx = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++"
             premake.gcc.ar  = "ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-ios-arm"))
+            location (path.join(bxDir, "projects", _ACTION .. "-ios-arm"))
 
         elseif "ios-simulator" == _OPTIONS["gcc"] then
             premake.gcc.cc  = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
             premake.gcc.cxx = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++"
             premake.gcc.ar  = "ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-ios-simulator"))
+            location (path.join(bxDir, "projects", _ACTION .. "-ios-simulator"))
 
         elseif "tvos-arm64" == _OPTIONS["gcc"] then
             premake.gcc.cc  = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
             premake.gcc.cxx = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++"
             premake.gcc.ar  = "ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-tvos-arm64"))
+            location (path.join(bxDir, "projects", _ACTION .. "-tvos-arm64"))
 
         elseif "tvos-simulator" == _OPTIONS["gcc"] then
             premake.gcc.cc  = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
             premake.gcc.cxx = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++"
             premake.gcc.ar  = "ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-tvos-simulator"))
+            location (path.join(bxDir, "projects", _ACTION .. "-tvos-simulator"))
 
         elseif "linux-gcc" == _OPTIONS["gcc"] then
-            location (path.join(bxDir, "Projects", _ACTION .. "-linux"))
+            location (path.join(bxDir, "projects", _ACTION .. "-linux"))
 
         elseif "linux-gcc-5" == _OPTIONS["gcc"] then
             premake.gcc.cc  = "gcc-5"
             premake.gcc.cxx = "g++-5"
             premake.gcc.ar  = "ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-linux"))
+            location (path.join(bxDir, "projects", _ACTION .. "-linux"))
 
         elseif "linux-clang" == _OPTIONS["gcc"] then
             premake.gcc.cc  = "clang"
             premake.gcc.cxx = "clang++"
             premake.gcc.ar  = "ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-linux-clang"))
+            location (path.join(bxDir, "projects", _ACTION .. "-linux-clang"))
 
         elseif "linux-mips-gcc" == _OPTIONS["gcc"] then
-            location (path.join(bxDir, "Projects", _ACTION .. "-linux-mips-gcc"))
+            location (path.join(bxDir, "projects", _ACTION .. "-linux-mips-gcc"))
 
         elseif "linux-arm-gcc" == _OPTIONS["gcc"] then
-            location (path.join(bxDir, "Projects", _ACTION .. "-linux-arm-gcc"))
+            location (path.join(bxDir, "projects", _ACTION .. "-linux-arm-gcc"))
 
         elseif "osx" == _OPTIONS["gcc"] then
 
@@ -196,7 +196,7 @@ function toolchain()
                 premake.gcc.cxx = osxToolchain .. "clang++"
                 premake.gcc.ar  = osxToolchain .. "ar"
             end
-            location (path.join(bxDir, "Projects", _ACTION .. "-osx"))
+            location (path.join(bxDir, "projects", _ACTION .. "-osx"))
 
         elseif "ps4" == _OPTIONS["gcc"] then
 
@@ -209,32 +209,32 @@ function toolchain()
             premake.gcc.cc  = ps4Toolchain .. "clang"
             premake.gcc.cxx = ps4Toolchain .. "clang++"
             premake.gcc.ar  = ps4Toolchain .. "ar"
-            location (path.join(bxDir, "Projects", _ACTION .. "-ps4"))
+            location (path.join(bxDir, "projects", _ACTION .. "-ps4"))
 
         end
     elseif _ACTION == "vs2012" or _ACTION == "vs2013" or _ACTION == "vs2015" then
 
         if "winphone8" == _OPTIONS["vs"] then
             premake.vstudio.toolset = "v110_wp80"
-            location (path.join(_buildDir, "Projects", _ACTION .. "-winphone8"))
+            location (path.join(_buildDir, "projects", _ACTION .. "-winphone8"))
 
         elseif "winphone81" == _OPTIONS["vs"] then
             premake.vstudio.toolset = "v120_wp81"
             premake.vstudio.storeapp = "8.1"
             platforms { "ARM" }
-            location (path.join(bxDir, "Projects", _ACTION .. "-winphone81"))
+            location (path.join(bxDir, "projects", _ACTION .. "-winphone81"))
 
         elseif "winstore81" == _OPTIONS["vs"] then
             premake.vstudio.toolset = "v120"
             premake.vstudio.storeapp = "8.1"
             platforms { "ARM" }
-            location (path.join(bxDir, "Projects", _ACTION .. "-winstore81"))
+            location (path.join(bxDir, "projects", _ACTION .. "-winstore81"))
 
         elseif "winstore82" == _OPTIONS["vs"] then
             premake.vstudio.toolset = "v140"
             premake.vstudio.storeapp = "8.2"
             platforms { "ARM" }
-            location (path.join(bxDir, "Projects", _ACTION .. "-winstore82"))
+            location (path.join(bxDir, "projects", _ACTION .. "-winstore82"))
 
         elseif "durango" == _OPTIONS["vs"] then
             if not os.getenv("DurangoXDK") then
@@ -244,25 +244,25 @@ function toolchain()
             premake.vstudio.toolset = "v140"
             premake.vstudio.storeapp = "durango"
             platforms { "Durango" }
-            location (path.join(bxDir, "Projects", _ACTION .. "-durango"))
+            location (path.join(bxDir, "projects", _ACTION .. "-durango"))
 
         elseif "win32" == _OPTIONS["vs"] then
-            location (path.join(bxDir, "Projects", _ACTION .. "-win32"))    
+            location (path.join(bxDir, "projects", _ACTION .. "-win32"))    
 
         end
     elseif _ACTION == "xcode4" then
 
         if "osx" == _OPTIONS["xcode"] then
             premake.xcode.toolset = "macosx"
-            location (path.join(bxDir, "Projects", _ACTION .. "-osx"))
+            location (path.join(bxDir, "projects", _ACTION .. "-osx"))
 
         elseif "ios" == _OPTIONS["xcode"] then
             premake.xcode.toolset = "iphoneos"
-            location (path.join(bxDir, "Projects", _ACTION .. "-ios"))
+            location (path.join(bxDir, "projects", _ACTION .. "-ios"))
 
         elseif "tvos" == _OPTIONS["xcode"] then
             premake.xcode.toolset = "appletvos"
-            location (path.join(bxDir, "Projects", _ACTION .. "-tvos"))
+            location (path.join(bxDir, "projects", _ACTION .. "-tvos"))
         end
     end
 
@@ -303,7 +303,7 @@ function strip()
 end
 
 
-function prepareEntry(_projectName, _buildDir)
+function prepareProject(_projectName, _buildDir)
 
     flags {
         "NoPCH",
