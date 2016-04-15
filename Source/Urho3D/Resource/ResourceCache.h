@@ -24,7 +24,7 @@
 
 #include "../Container/HashSet.h"
 #include "../Container/List.h"
-#include "../Core/Mutex.h"
+#include "../Core/Thread.h"
 #include "../IO/File.h"
 #include "../Resource/Resource.h"
 
