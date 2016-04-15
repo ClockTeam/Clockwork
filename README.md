@@ -1,7 +1,5 @@
-#Clockwork Engine
+# Clockwork Engine
 
-**Clockwork Engine** is a free lightweight, cross-platform 2D and 3D game engine implemented in C++ and released under the MIT license.
+**Clockwork Engine** is a free lightweight, cross-platform 2D and 3D game engine implemented in C++.
 
-
-##License
-Licensed under the MIT license, see [License.txt](https://github.com/ClockworkEngine/Clockwork/blob/master/License.txt) for details.
+[![License](https://img.shields.io/badge/license-BSD-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
