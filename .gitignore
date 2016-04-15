@@ -8,42 +8,11 @@
 /bin/jit/
 /bin/Screenshots/
 /bin/tool/
-/lib*/
-generated/
 
-# Compiled shaders
+/lib*/
+/projects*/
+
 *.vs?
 *.ps?
-
-# Compiled AngelScript
 *.asc
-
-# Compiled Lua script
 *.luc
-
-# Generated documentation
-/Docs/html/
-/Docs/qch/
-
-# Android project settings
-/Android/local.properties
-
-# Android output directories
-/Android/Urho3D/
-/Android/ThirdParty/
-/Android/libs/
-
-# Precompiled header files
-*.gch/
-*.pch/
-*.pch.*
-
-# Misc.
-configure*
-*~
-*.swp
-.DS_Store
-*.log
-*.bak
-Thumbs.db
-.directory
