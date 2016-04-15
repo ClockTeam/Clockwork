@@ -81,18 +81,14 @@ function toolchain(_buildDir, _libDir)
     }
 
     newoption {
-        trigger = "with-dynamic-runtime",
-        description = "Dynamically link with the runtime rather than statically",
+        trigger = "with-static-runtime",
+        description = "Statically link with the runtime rather than dynamically",
     }
 
     -- Avoid error when invoking genie --help.
     if (_ACTION == nil) then return false end
 
     location (path.join(_buildDir, "Projects", _ACTION))
-
-    if _ACTION == "clean" then
-        os.rmdir(BUILD_DIR)
-    end
 
     local androidPlatform = "android-14"
     if _OPTIONS["with-android"] then
@@ -302,7 +298,7 @@ function toolchain(_buildDir, _libDir)
         end
     end
 
-    if not _OPTIONS["with-dynamic-runtime"] then
+    if  _OPTIONS["with-static-runtime"] then
         flags { "StaticRuntime" }
     end
 
