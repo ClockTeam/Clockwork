@@ -8,18 +8,8 @@
 /bin/jit/
 /bin/Screenshots/
 /bin/tool/
-/include/
 /lib*/
 generated/
-
-# Output files
-/Source/**/*.a
-/Source/ThirdParty/LuaJIT/src/host/buildvm_arch.h
-/Source/Urho3D/Urho3D.h
-/Source/Urho3D/Urho3D.pc
-/Source/Urho3D/Urho3D.pc.msvc
-/Source/Urho3D/librevision.h
-/Source/Urho3D/Precompiled.cpp
 
 # Compiled shaders
 *.vs?
@@ -35,26 +25,6 @@ generated/
 /Docs/html/
 /Docs/qch/
 
-# Eclipse project settings
-/.*project
-/.settings
-
-# KDevelop project settings
-/*.kdev?
-
-# Qt Creator project settings
-/CMakeLists.txt.user
-
-# JetBrains IDE project settings
-/.idea/
-
-# Code::Blocks project settings
-/*.cbp
-
-# Codelite project settings
-/*.project
-/*.workspace
-
 # Android project settings
 /Android/local.properties
 
@@ -63,28 +33,10 @@ generated/
 /Android/ThirdParty/
 /Android/libs/
 
-# CMake generated build files
-CMakeCache.txt
-CMakeFiles/
-CMakeScripts/
-Makefile
-cmake_install.cmake
-install_manifest.txt
-CPackConfig.cmake
-CPackSourceConfig.cmake
-CTestTestfile.cmake
-/Source/**/*.cmake
-!/Source/ThirdParty/SDL/cmake/*.cmake
-/Docs/**/*.cmake
-
 # Precompiled header files
 *.gch/
 *.pch/
 *.pch.*
-
-# Custom rake tasks
-/.rake/
-.rake_t_cache
 
 # Misc.
 configure*
