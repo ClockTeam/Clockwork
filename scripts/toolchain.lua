@@ -361,16 +361,16 @@ function prepareProject(_projectName, _buildDir)
     objdir (path.join(solution().location, "obj", _projectName))
 
     configuration { "x32", "vs*" }
-        targetdir (path.join(_buildDir, "win32_" .. _ACTION, "bin"))
+        targetdir (path.join(_buildDir, "win32_" .. _ACTION))
         libdirs { path.join(bxDir, "lib/win32_" .. _ACTION) }
 
     configuration { "x64", "vs*" }
         defines { "_WIN64" }
-        targetdir (path.join(_buildDir, "win64_" .. _ACTION, "bin"))
+        targetdir (path.join(_buildDir, "win64_" .. _ACTION))
         libdirs { path.join(bxDir, "lib/win64_" .. _ACTION) }
 
     configuration { "ARM", "vs*" }
-        targetdir (path.join(_buildDir, "arm_" .. _ACTION, "bin"))
+        targetdir (path.join(_buildDir, "arm_" .. _ACTION))
         libdirs { path.join(bxDir, "lib/arm_" .. _ACTION) }
 
     configuration { "winphone8* or winstore8*" }
@@ -422,35 +422,35 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "linux-gcc*", "x32" }
-        targetdir (path.join(_buildDir, "linux32_gcc/bin"))
+        targetdir (path.join(_buildDir, "linux32_gcc"))
         libdirs { path.join(bxDir, "lib/linux32_gcc") }
         buildoptions {
             "-m32",
         }
 
     configuration { "linux-gcc*", "x64" }
-        targetdir (path.join(_buildDir, "linux64_gcc/bin"))
+        targetdir (path.join(_buildDir, "linux64_gcc"))
         libdirs { path.join(bxDir, "lib/linux64_gcc") }
         buildoptions {
             "-m64",
         }
 
     configuration { "linux-clang", "x32" }
-        targetdir (path.join(_buildDir, "linux32_clang/bin"))
+        targetdir (path.join(_buildDir, "linux32_clang"))
         libdirs { path.join(bxDir, "lib/linux32_clang") }
         buildoptions {
             "-m32",
         }
 
     configuration { "linux-clang", "x64" }
-        targetdir (path.join(_buildDir, "linux64_clang/bin"))
+        targetdir (path.join(_buildDir, "linux64_clang"))
         libdirs { path.join(bxDir, "lib/linux64_clang") }
         buildoptions {
             "-m64",
         }
 
     configuration { "linux-mips-gcc" }
-        targetdir (path.join(_buildDir, "linux32_mips_gcc/bin"))
+        targetdir (path.join(_buildDir, "linux32_mips_gcc"))
         libdirs { path.join(bxDir, "lib/linux32_mips_gcc") }
         buildoptions {
             "-Wunused-value",
@@ -468,7 +468,7 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "linux-arm-gcc" }
-        targetdir (path.join(_buildDir, "linux32_arm_gcc/bin"))
+        targetdir (path.join(_buildDir, "linux32_arm_gcc"))
         libdirs { path.join(bxDir, "lib/linux32_arm_gcc") }
         buildoptions {
             "-Wunused-value",
@@ -529,7 +529,7 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "android-arm" }
-        targetdir (path.join(_buildDir, "android-arm/bin"))
+        targetdir (path.join(_buildDir, "android-arm"))
         libdirs {
             path.join(bxDir, "lib/android-arm"),
             "$(ANDROID_NDK_ROOT)/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a",
@@ -556,7 +556,7 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "android-mips" }
-        targetdir (path.join(_buildDir, "android-mips/bin"))
+        targetdir (path.join(_buildDir, "android-mips"))
         libdirs {
             path.join(bxDir, "lib/android-mips"),
             "$(ANDROID_NDK_ROOT)/sources/cxx-stl/gnu-libstdc++/4.8/libs/mips",
@@ -576,7 +576,7 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "android-x86" }
-        targetdir (path.join(_buildDir, "android-x86/bin"))
+        targetdir (path.join(_buildDir, "android-x86"))
         libdirs {
             path.join(bxDir, "lib/android-x86"),
             "$(ANDROID_NDK_ROOT)/sources/cxx-stl/gnu-libstdc++/4.8/libs/x86",
@@ -601,7 +601,7 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "durango" }
-        targetdir (path.join(_buildDir, "durango/bin"))
+        targetdir (path.join(_buildDir, "durango"))
         includedirs { path.join(bxDir, "Source/ThirdParty/compat/msvc") }
         libdirs { path.join(bxDir, "lib/durango") }
         removeflags { "StaticRuntime" }
@@ -610,21 +610,21 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "osx", "x32" }
-        targetdir (path.join(_buildDir, "osx32_clang/bin"))
+        targetdir (path.join(_buildDir, "osx32_clang"))
         --libdirs { path.join(bxDir, "lib/osx32_clang") }
         buildoptions {
             "-m32",
         }
 
     configuration { "osx", "x64" }
-        targetdir (path.join(_buildDir, "osx64_clang/bin"))
+        targetdir (path.join(_buildDir, "osx64_clang"))
         --libdirs { path.join(bxDir, "lib/osx64_clang") }
         buildoptions {
             "-m64",
         }
 
     configuration { "osx", "Universal" }
-        targetdir (path.join(_buildDir, "osx_universal/bin"))
+        targetdir (path.join(_buildDir, "osx_universal"))
 
     configuration { "osx" }
         buildoptions {
@@ -647,10 +647,10 @@ function prepareProject(_projectName, _buildDir)
         includedirs { path.join(bxDir, "Source/ThirdParty/compat/ios") }
 
     configuration { "xcode4", "ios*" }
-        targetdir (path.join(_buildDir, "ios-arm/bin"))
+        targetdir (path.join(_buildDir, "ios-arm"))
 
     configuration { "ios-arm" }
-        targetdir (path.join(_buildDir, "ios-arm/bin"))
+        targetdir (path.join(_buildDir, "ios-arm"))
         libdirs { path.join(bxDir, "lib/ios-arm") }
         linkoptions {
             "-miphoneos-version-min=7.0",
@@ -667,7 +667,7 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "ios-simulator" }
-        targetdir (path.join(_buildDir, "ios-simulator/bin"))
+        targetdir (path.join(_buildDir, "ios-simulator"))
         libdirs { path.join(bxDir, "lib/ios-simulator") }
         linkoptions {
             "-mios-simulator-version-min=7.0",
@@ -695,10 +695,10 @@ function prepareProject(_projectName, _buildDir)
         includedirs { path.join(bxDir, "Source/ThirdParty/compat/ios") }
 
     configuration { "xcode4", "tvos*" }
-        targetdir (path.join(_buildDir, "tvos-arm64/bin"))
+        targetdir (path.join(_buildDir, "tvos-arm64"))
 
     configuration { "tvos-arm64" }
-        targetdir (path.join(_buildDir, "tvos-arm64/bin"))
+        targetdir (path.join(_buildDir, "tvos-arm64"))
         libdirs { path.join(bxDir, "lib/tvos-arm64") }
         linkoptions {
             "-mtvos-version-min=9.0",
@@ -715,7 +715,7 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "tvos-simulator" }
-        targetdir (path.join(_buildDir, "tvos-simulator/bin"))
+        targetdir (path.join(_buildDir, "tvos-simulator"))
         libdirs { path.join(bxDir, "lib/tvos-simulator") }
         linkoptions {
             "-mtvos-simulator-version-min=9.0",
@@ -732,7 +732,7 @@ function prepareProject(_projectName, _buildDir)
         }
 
     configuration { "ps4" }
-        targetdir (path.join(_buildDir, "ps4/bin"))
+        targetdir (path.join(_buildDir, "ps4"))
         libdirs { path.join(bxDir, "lib/ps4") }
         includedirs {
             path.join(bxDir, "Source/ThirdParty/compat/freebsd"),
