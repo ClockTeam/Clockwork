@@ -9,7 +9,7 @@ function LZ4_Project()
         language "C++"
         prepareProject("LZ4", "../lib")
 
-        files { "../ThirdParty/LZ4/*.c", "../ThirdParty/LZ4/*.h" }
+        files { "../Source/ThirdParty/LZ4/*.c", "../Source/ThirdParty/LZ4/*.h" }
 
         vpaths { ["*"] = "../Source/ThirdParty/LZ4/" }
 end
