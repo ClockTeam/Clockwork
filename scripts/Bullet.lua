@@ -26,7 +26,7 @@ function Bullet_Project()
             "../Source/ThirdParty/Bullet/src/LinearMath/*.*"
         }
         
-        includedirs {"../Source/ThirdParty/Bullet/src/"}
+        includedirs { "../Source/ThirdParty/Bullet/src/" }
 
         vpaths { ["*"] = "../Source/ThirdParty/Bullet/src/" }
 end
