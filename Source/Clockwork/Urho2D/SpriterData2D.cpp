@@ -25,7 +25,7 @@
 #include "../Math/MathDefs.h"
 #include "../Urho2D/SpriterData2D.h"
 
-#include <PugiXml/pugixml.hpp>
+#include <pugixml.hpp>
 
 #include <cstring>
 
