@@ -30,7 +30,7 @@
 #include "../IO/PackageFile.h"
 
 #include <cstdio>
-#include <LZ4/lz4.h>
+#include <lz4.h>
 
 #include "../DebugNew.h"
 

@@ -26,7 +26,7 @@
 #include "../IO/Log.h"
 #include "../Network/HttpRequest.h"
 
-#include <Civetweb/civetweb.h>
+#include <civetweb.h>
 
 #include "../DebugNew.h"
 

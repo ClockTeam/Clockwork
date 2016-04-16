@@ -32,11 +32,11 @@
 #include "../Physics/RigidBody.h"
 #include "../Scene/Scene.h"
 
-#include <Bullet/BulletDynamics/ConstraintSolver/btConeTwistConstraint.h>
-#include <Bullet/BulletDynamics/ConstraintSolver/btHingeConstraint.h>
-#include <Bullet/BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
-#include <Bullet/BulletDynamics/ConstraintSolver/btSliderConstraint.h>
-#include <Bullet/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
+#include <BulletDynamics/ConstraintSolver/btConeTwistConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btHingeConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btPoint2PointConstraint.h>
+#include <BulletDynamics/ConstraintSolver/btSliderConstraint.h>
+#include <BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
 
 namespace Urho3D
 {

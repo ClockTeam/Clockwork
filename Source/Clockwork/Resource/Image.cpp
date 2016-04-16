@@ -29,12 +29,12 @@
 #include "../IO/Log.h"
 #include "../Resource/Decompress.h"
 
-#include <JO/jo_jpeg.h>
-#include <SDL/SDL_surface.h>
+#include <jo_jpeg.h>
+#include <SDL_surface.h>
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include <STB/stb_image.h>
-#include <STB/stb_image_write.h>
+#include <stb_image.h>
+#include <stb_image_write.h>
 #include "../DebugNew.h"
 
 #ifndef MAKEFOURCC

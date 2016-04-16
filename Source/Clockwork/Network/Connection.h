@@ -29,7 +29,7 @@
 #include "../IO/VectorBuffer.h"
 #include "../Scene/ReplicationState.h"
 
-#include <kNet/kNetFwd.h>
+#include <kNetFwd.h>
 #include <kNet/SharedPtr.h>
 
 #ifdef SendMessage

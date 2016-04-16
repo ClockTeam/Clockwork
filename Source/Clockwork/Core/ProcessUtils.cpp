@@ -36,7 +36,7 @@
 #include "../Math/MathDefs.h"
 #include <mach/mach_host.h>
 #elif !defined(ANDROID) && !defined(RPI) && !defined(__EMSCRIPTEN__)
-#include <LibCpuId/libcpuid.h>
+#include <libcpuid.h>
 #endif
 
 #ifdef _WIN32
@@ -80,7 +80,7 @@ inline void SetFPUState(unsigned control)
 #endif
 
 #ifndef MINI_URHO
-#include <SDL/SDL.h>
+#include <SDL.h>
 #endif
 
 #include "../DebugNew.h"

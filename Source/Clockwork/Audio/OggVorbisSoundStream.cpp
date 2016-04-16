@@ -25,7 +25,7 @@
 #include "../Audio/OggVorbisSoundStream.h"
 #include "../Audio/Sound.h"
 
-#include <STB/stb_vorbis.h>
+#include <stb_vorbis.h>
 
 #include "../DebugNew.h"
 

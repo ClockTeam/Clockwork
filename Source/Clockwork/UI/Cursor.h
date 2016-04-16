@@ -26,7 +26,7 @@
 #include "../Resource/Image.h"
 #include "../UI/BorderImage.h"
 
-#include <SDL/SDL_mouse.h>
+#include <SDL_mouse.h>
 
 namespace Urho3D
 {

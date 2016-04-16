@@ -37,9 +37,9 @@
 #include "../Scene/SceneEvents.h"
 #include "../Scene/SmoothedTransform.h"
 
-#include <Bullet/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
-#include <Bullet/BulletDynamics/Dynamics/btRigidBody.h>
-#include <Bullet/BulletCollision/CollisionShapes/btCompoundShape.h>
+#include <BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h>
+#include <BulletDynamics/Dynamics/btRigidBody.h>
+#include <BulletCollision/CollisionShapes/btCompoundShape.h>
 
 namespace Urho3D
 {

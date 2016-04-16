@@ -33,7 +33,7 @@
 #include "../IO/Log.h"
 
 #ifndef MINI_URHO
-#include <SDL/SDL_filesystem.h>
+#include <SDL_filesystem.h>
 #endif
 
 #include <sys/stat.h>

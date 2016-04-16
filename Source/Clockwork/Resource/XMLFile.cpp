@@ -32,7 +32,7 @@
 #include "../Resource/ResourceCache.h"
 #include "../Resource/XMLFile.h"
 
-#include <PugiXml/pugixml.hpp>
+#include <pugixml.hpp>
 
 #include "../DebugNew.h"
 
