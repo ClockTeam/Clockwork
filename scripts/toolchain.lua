@@ -39,7 +39,7 @@ function toolchain()
         value = "toolset",
         description = "Choose VS toolset",
         allowed = {
-            { "win32",         "Windows Desktop"                 },
+            { "win32desktop",  "Windows Desktop"                 },
             { "winphone8",     "Windows Phone 8.0"               },
             { "winphone81",    "Windows Phone 8.1"               },
             { "winstore81",    "Windows Store 8.1"               },
@@ -246,8 +246,8 @@ function toolchain()
             platforms { "Durango" }
             location (path.join(bxDir, "projects", _ACTION .. "-durango"))
 
-        elseif "win32" == _OPTIONS["vs"] then
-            location (path.join(bxDir, "projects", _ACTION .. "-win32"))    
+        elseif "win32desktop" == _OPTIONS["vs"] then
+            location (path.join(bxDir, "projects", _ACTION .. "-win32desktop"))    
 
         end
     elseif _ACTION == "xcode4" then

@@ -18,7 +18,7 @@ if "%C%"=="xx" goto orbis
 goto quit
 
 :windows
-Scripts\genie_win.exe --vs=win32 vs2015
+Scripts\genie_win.exe --vs=win32desktop vs2015
 goto quit
 
 :windows_universal
