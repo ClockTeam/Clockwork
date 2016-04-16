@@ -39,12 +39,12 @@
 #include "../Scene/Scene.h"
 #include "../Scene/SceneEvents.h"
 
-#include <LZ4/lz4.h>
-#include <Detour/DetourNavMesh.h>
-#include <Detour/DetourNavMeshBuilder.h>
-#include <DetourTileCache/DetourTileCache.h>
-#include <DetourTileCache/DetourTileCacheBuilder.h>
-#include <Recast/Recast.h>
+#include <lz4.h>
+#include <DetourNavMesh.h>
+#include <DetourNavMeshBuilder.h>
+#include <DetourTileCache.h>
+#include <DetourTileCacheBuilder.h>
+#include <Recast.h>
 
 // DebugNew is deliberately not used because the macro 'free' conflicts with DetourTileCache's LinearAllocator interface
 //#include "../DebugNew.h"

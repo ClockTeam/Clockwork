@@ -21,22 +21,22 @@
 //
 
 #ifdef URHO3D_ANGELSCRIPT
-#include <Urho3D/AngelScript/ScriptFile.h>
-#include <Urho3D/AngelScript/Script.h>
+#include <Clockwork/AngelScript/ScriptFile.h>
+#include <Clockwork/AngelScript/Script.h>
 #endif
-#include <Urho3D/Core/Main.h>
-#include <Urho3D/Engine/Engine.h>
-#include <Urho3D/IO/FileSystem.h>
-#include <Urho3D/IO/Log.h>
+#include <Clockwork/Core/Main.h>
+#include <Clockwork/Engine/Engine.h>
+#include <Clockwork/IO/FileSystem.h>
+#include <Clockwork/IO/Log.h>
 #ifdef URHO3D_LUA
-#include <Urho3D/LuaScript/LuaScript.h>
+#include <Clockwork/LuaScript/LuaScript.h>
 #endif
-#include <Urho3D/Resource/ResourceCache.h>
-#include <Urho3D/Resource/ResourceEvents.h>
+#include <Clockwork/Resource/ResourceCache.h>
+#include <Clockwork/Resource/ResourceEvents.h>
 
 #include "Urho3DPlayer.h"
 
-#include <Urho3D/DebugNew.h>
+#include <Clockwork/DebugNew.h>
 
 URHO3D_DEFINE_APPLICATION_MAIN(Urho3DPlayer);
 

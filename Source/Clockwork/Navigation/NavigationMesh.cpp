@@ -47,10 +47,10 @@
 #include "../Scene/Scene.h"
 
 #include <cfloat>
-#include <Detour/DetourNavMesh.h>
-#include <Detour/DetourNavMeshBuilder.h>
-#include <Detour/DetourNavMeshQuery.h>
-#include <Recast/Recast.h>
+#include <DetourNavMesh.h>
+#include <DetourNavMeshBuilder.h>
+#include <DetourNavMeshQuery.h>
+#include <Recast.h>
 
 #include "../DebugNew.h"
 

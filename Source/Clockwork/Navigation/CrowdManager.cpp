@@ -34,7 +34,7 @@
 #include "../Scene/Scene.h"
 #include "../Scene/SceneEvents.h"
 
-#include <DetourCrowd/DetourCrowd.h>
+#include <DetourCrowd.h>
 
 #include "../DebugNew.h"
 

@@ -32,8 +32,8 @@
 #include "../Scene/Node.h"
 #include "../Scene/Scene.h"
 
-#include <Detour/DetourCommon.h>
-#include <DetourCrowd/DetourCrowd.h>
+#include <DetourCommon.h>
+#include <DetourCrowd.h>
 
 #include "../DebugNew.h"
 
