@@ -60,5 +60,8 @@ function bgfx_Project()
         configuration {}
         strip()
 
-        dofile "shaderc.lua"
+        -- Disable on CI builds.
+        if not _OPTIONS["ci-jobs"] then
+            dofile "shaderc.lua"
+        end
 end

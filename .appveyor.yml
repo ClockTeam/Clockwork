@@ -10,7 +10,7 @@ environment:
     CW_PLATFORM: win32desktop
 
 install:
-  - .\Scripts\genie_win --vs=%CW_PLATFORM% %CW_TOOLSET%
+  - .\Scripts\genie_win --ci-jobs --vs=%CW_PLATFORM% %CW_TOOLSET%
 
 build:
   parallel: true

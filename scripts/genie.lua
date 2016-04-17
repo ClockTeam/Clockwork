@@ -1,6 +1,11 @@
 -- Copyright (c) 2016 Clockwork Engine. All Rights Reserved.
 -- See License.txt in the project root for license information.
 
+newoption {
+    trigger     = "ci-jobs",
+    description = "Compile just necessary libraries.",
+}
+
 -- Useful functions
 function isWindows()
     if "winphone8" == _OPTIONS["vs"] or
@@ -113,8 +118,11 @@ solution "Clockwork"
     dofile "JO.lua"
     JO_Project()
 
-    dofile "Assimp.lua"
-    Assimp_Project()
+    -- Disable on CI builds.
+    if not _OPTIONS["ci-jobs"] then
+        dofile "Assimp.lua"
+        Assimp_Project()
+    end
 
     dofile "Civetweb.lua"
     Civetweb_Project()
