@@ -40,7 +40,7 @@
 #include "../Scene/Node.h"
 #include "../UI/BorderImage.h"
 
-#include <AngelScript/angelscript.h>
+#include <angelscript.h>
 #include <cstring>
 
 #ifdef _MSC_VER

@@ -29,7 +29,7 @@
 #include "../Container/HashMap.h"
 #include "../Container/Str.h"
 
-#include <AngelScript/angelscript.h>
+#include <angelscript.h>
 
 // Adapted from Angelscript's scriptarray, scriptdictionary & scriptstdstring add-ons, but with garbage collection disabled
 

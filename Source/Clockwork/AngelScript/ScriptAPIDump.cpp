@@ -28,7 +28,7 @@
 #include "../IO/FileSystem.h"
 #include "../IO/Log.h"
 
-#include <AngelScript/angelscript.h>
+#include <angelscript.h>
 
 #include "../DebugNew.h"
 

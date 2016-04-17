@@ -37,7 +37,7 @@
 #include "../Scene/Scene.h"
 #include "../Scene/SceneEvents.h"
 
-#include <AngelScript/angelscript.h>
+#include <angelscript.h>
 
 #include "../DebugNew.h"
 
