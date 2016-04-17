@@ -10,7 +10,7 @@ function Clockwork_Project()
 
         files {
             "../Source/Clockwork/*.*",
-            --"../Source/Clockwork/AngelScript/*.*",
+            "../Source/Clockwork/AngelScript/*.*",
             "../Source/Clockwork/Audio/*.*",
             "../Source/Clockwork/Container/*.*",
             "../Source/Clockwork/Core/*.*",
@@ -63,7 +63,7 @@ function Clockwork_Project()
             "../Source/ThirdParty/STB/"
         }
 
-        links { "Bullet", "FreeType", "JO", "LZ4", "PugiXml", "RecastNavigation", "StanHull", "SDL" }
+        links { "AngelScript", "Bullet", "FreeType", "JO", "LibCpuid", "LZ4", "PugiXml", "RecastNavigation", "StanHull", "SDL" }
 
         vpaths { ["*"] = "../Source/Clockwork/" }       
 end

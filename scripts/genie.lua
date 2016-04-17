@@ -27,6 +27,23 @@ function isOSX()
     return false
 end
 
+function isIOS()
+    if "ios" == _OPTIONS["xcode"] or
+        "tvos" == _OPTIONS["xcode"] then
+        return true
+    end
+    return false    
+end
+
+function isAndroid()
+    if "android-arm" == _OPTIONS["gcc"] or
+        "android-mips" == _OPTIONS["gcc"] or
+        "android-x86" == _OPTIONS["gcc"] then
+        return true
+    end
+    return false    
+end
+
 function isDurango()
     if "durango" == _OPTIONS["vs"] then
         return true
@@ -107,3 +124,9 @@ solution "Clockwork"
 
     dofile "SDL.lua"
     SDL_Project()
+
+    dofile "AngelScript.lua"
+    AngelScript_Project()
+
+    dofile "LibCpuid.lua"
+    LibCpuid_Project()
