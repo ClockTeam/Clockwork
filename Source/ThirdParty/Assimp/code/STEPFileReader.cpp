@@ -43,6 +43,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *     STEP::DB with data read from a file.
  */
 
+ // Edited by cosmy1 for Clockwork Engine
+
 #include "STEPFileReader.h"
 #include "STEPFileEncoding.h"
 #include "TinyFormatter.h"
@@ -126,7 +128,7 @@ STEP::DB* STEP::ReadFileHeader(boost::shared_ptr<IOStream> stream)
                 if (list->GetSize() > 1)    {
                     DefaultLogger::get()->warn(AddLineNumber("multiple schemas currently not supported",line));
                 }
-                const EXPRESS::STRING* string;
+                const EXPRESS::STRING* string = NULL; // cosmy1
                 if (!list->GetSize() || !(string=dynamic_cast<const EXPRESS::STRING*>( (*list)[0].get() ))) {
                     throw STEP::SyntaxError("expected FILE_SCHEMA to contain a single string literal",line);
                 }

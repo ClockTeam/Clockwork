@@ -18,6 +18,7 @@
 /*                                                                         */
 /***************************************************************************/
 
+// Edited by cosmy1 for Clockwork Engine
 
 #include <ft2build.h>
 #include FT_INTERNAL_DEBUG_H
@@ -956,7 +957,7 @@
       goto Fail;
 
     {
-      TT_SBitDecoder_LoadFunc  loader;
+      TT_SBitDecoder_LoadFunc  loader = NULL; // cosmy1
 
 
       switch ( glyph_format )
