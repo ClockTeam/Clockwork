@@ -8,7 +8,7 @@
 group "Tools"
 project "shaderc"
     targetname "shaderc"
-    kind "StaticLib"
+    kind "ConsoleApp"
     language "C++"
     prepareProject("shaderc", "../bin")
 
