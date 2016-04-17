@@ -308,8 +308,8 @@ function prepareProject(_projectName, _buildDir)
     flags {
         "NoPCH",
         "NativeWChar",
-        "NoRTTI",
-        "NoExceptions",
+        --"NoRTTI",
+        --"NoExceptions",
         "NoEditAndContinue",
         "Symbols",
         "WinMain"
@@ -356,6 +356,7 @@ function prepareProject(_projectName, _buildDir)
         }
         linkoptions {
             "/ignore:4221", -- LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+            "/ignore:4264", -- LNK4264: Archiving object file compiled with /ZW into a static library; note that when authoring Windows Runtime types it is not recommended to link with a static library that contains Windows Runtime metadata
         }
 
     objdir (path.join(solution().location, "obj", _projectName))
@@ -376,7 +377,7 @@ function prepareProject(_projectName, _buildDir)
     configuration { "winphone8* or winstore8*" }
         removeflags {
             "StaticRuntime",
-            "NoExceptions",
+            --"NoExceptions",
         }
 
     configuration { "*-gcc* or osx" }
