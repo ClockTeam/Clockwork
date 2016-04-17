@@ -35,7 +35,7 @@
 /* #undef URHO3D_LUAJIT */
 /* #undef URHO3D_TESTING */
 
-#define URHO3D_D3D11
+//#define URHO3D_D3D11
 
 #ifdef URHO3D_STATIC_DEFINE
 #  define URHO3D_API

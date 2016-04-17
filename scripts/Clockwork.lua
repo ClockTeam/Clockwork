@@ -8,6 +8,19 @@ function Clockwork_Project()
         language "C++"
         prepareProject("Clockwork", "../lib")
 
+        defines {
+            "URHO3D_ANGELSCRIPT",            
+            "URHO3D_NAVIGATION",
+            "URHO3D_NETWORK",
+            "URHO3D_PHYSICS",
+            "URHO3D_URHO2D",
+            "URHO3D_FILEWATCHER",
+            "URHO3D_PROFILING",
+            "URHO3D_LOGGING",
+            "URHO3D_THREADING",
+            "URHO3D_D3D11"
+        }
+
         files {
             "../Source/Clockwork/*.*",
             "../Source/Clockwork/AngelScript/*.*",
@@ -63,7 +76,7 @@ function Clockwork_Project()
             "../Source/ThirdParty/STB/"
         }
 
-        links { "AngelScript", "Bullet", "FreeType", "JO", "LibCpuid", "LZ4", "PugiXml", "RecastNavigation", "StanHull", "SDL" }
+        links { "AngelScript", "Bullet", "Box2D", "FreeType", "JO", "LibCpuid", "LZ4", "Civetweb", "kNet", "PugiXml", "RecastNavigation", "StanHull", "SDL" }
 
         vpaths { ["*"] = "../Source/Clockwork/" }       
 end
