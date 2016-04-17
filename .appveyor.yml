@@ -6,12 +6,12 @@ configuration:
 
 environment:
   matrix:
-  - TOOLSET: vs2015
-    PLATFORM: win32desktop
+  - CW_TOOLSET: vs2015
+    CW_PLATFORM: win32desktop
 
 install:
-  - .\Scripts\genie_win --vs=%PLATFORM% %TOOLSET%
+  - .\Scripts\genie_win --vs=%CW_PLATFORM% %CW_TOOLSET%
 
 build:
   parallel: true
-  project: .\projects\$(TOOLSET)-$(PLATFORM)\Clockwork.sln
+  project: .\projects\$(CW_TOOLSET)-$(CW_PLATFORM)\Clockwork.sln
