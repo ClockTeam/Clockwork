@@ -8,6 +8,7 @@
 /bin/jit/
 /bin/Screenshots/
 /bin/tool/
+/bin/*/*
 
 /lib*/
 /projects*/
