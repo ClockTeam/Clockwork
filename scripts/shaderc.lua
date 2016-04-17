@@ -7,7 +7,7 @@
 
 group "Tools"
 project "shaderc"
-    targetname "bgfx"
+    targetname "shaderc"
     kind "StaticLib"
     language "C++"
     prepareProject("shaderc", "../bin")
