@@ -29,6 +29,17 @@ function bgfx_Project()
             "../Source/ThirdParty/bgfx/include/",
         }
 
+        configuration { "Debug" }
+            defines {
+                "BGFX_CONFIG_DEBUG=1",
+            }
+            
+        configuration { "android*" }
+            links {
+                "EGL",
+                "GLESv2",
+            }
+
         configuration { "osx" }
             linkoptions {
                 "-framework Cocoa",
