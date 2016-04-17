@@ -1,0 +1,17 @@
+shallow_clone: true
+
+configuration:
+  - Debug
+  - Release
+
+environment:
+  matrix:
+  - TOOLSET: vs2015
+    PLATFORM: win32desktop
+
+install:
+  - .\Scripts\genie_win --vs=%PLATFORM% %TOOLSET%
+
+build:
+  parallel: true
+  project: .\projects\$(TOOLSET)-$(PLATFORM)\Clockwork.sln
