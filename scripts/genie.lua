@@ -130,3 +130,12 @@ solution "Clockwork"
 
     dofile "LibCpuid.lua"
     LibCpuid_Project()
+
+    dofile "nanodbc.lua"
+    nanodbc_Project()
+
+    dofile "SQLite.lua"
+    SQLite_Project()
+
+    dofile "GLEW.lua"
+    GLEW_Project()
