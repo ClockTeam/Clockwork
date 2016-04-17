@@ -139,3 +139,6 @@ solution "Clockwork"
 
     dofile "GLEW.lua"
     GLEW_Project()
+
+    dofile "bgfx.lua"
+    bgfx_Project()

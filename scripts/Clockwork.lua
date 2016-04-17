@@ -56,6 +56,7 @@ function Clockwork_Project()
             "../Source/Clockwork/",
             "../Source/ThirdParty/AngelScript/include/",
             "../Source/ThirdParty/Box2D/",
+            "../Source/ThirdParty/bgfx/include/",
             "../Source/ThirdParty/Bullet/src/",
             "../Source/ThirdParty/Detour/include/",
             "../Source/ThirdParty/Civetweb/include/",
@@ -76,7 +77,7 @@ function Clockwork_Project()
             "../Source/ThirdParty/STB/"
         }
 
-        links { "AngelScript", "Bullet", "Box2D", "FreeType", "JO", "LibCpuid", "LZ4", "Civetweb", "kNet", "PugiXml", "RecastNavigation", "StanHull", "SDL" }
+        links { "AngelScript", "bgfx", "Bullet", "Box2D", "FreeType", "JO", "LibCpuid", "LZ4", "Civetweb", "kNet", "PugiXml", "RecastNavigation", "StanHull", "SDL" }
 
         vpaths { ["*"] = "../Source/Clockwork/" }       
 end
