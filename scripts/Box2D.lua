@@ -23,4 +23,7 @@ function Box2D_Project()
         includedirs { "../Source/ThirdParty/Box2D/" }
 
         vpaths { ["*"] = "../Source/ThirdParty/Box2D/Box2D/" }
+
+        configuration {}
+        strip()
 end

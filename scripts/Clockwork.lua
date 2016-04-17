@@ -79,5 +79,8 @@ function Clockwork_Project()
 
         links { "AngelScript", "bgfx", "Bullet", "Box2D", "FreeType", "JO", "LibCpuid", "LZ4", "Civetweb", "kNet", "PugiXml", "RecastNavigation", "StanHull", "SDL" }
 
-        vpaths { ["*"] = "../Source/Clockwork/" }       
+        vpaths { ["*"] = "../Source/Clockwork/" }
+
+        configuration {}
+        strip()        
 end

@@ -70,4 +70,7 @@ function SDL_Project()
         includedirs { SDL_INC_PATH }
 
         vpaths { ["*"] = SDL_SRC_PATH }
+
+        configuration {}
+        strip()        
 end

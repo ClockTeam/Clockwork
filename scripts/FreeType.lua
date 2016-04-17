@@ -57,4 +57,7 @@ function FreeType_Project()
         includedirs { "../Source/ThirdParty/FreeType/include/" }
 
         vpaths { ["*"] = "../Source/ThirdParty/FreeType/src/" }
+
+        configuration {}
+        strip()        
 end

@@ -32,4 +32,7 @@ function ClockworkPlayer_Project()
         end        
 
         vpaths { ["*"] = "../Source/Tools/ClockworkPlayer" }
+
+        configuration {}
+        strip()        
 end

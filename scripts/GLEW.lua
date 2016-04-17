@@ -16,4 +16,7 @@ function GLEW_Project()
         includedirs { "../Source/ThirdParty/GLEW/" }
 
         vpaths { ["*"] = "../Source/ThirdParty/GLEW/" }
+        
+        configuration {}
+        strip()        
 end

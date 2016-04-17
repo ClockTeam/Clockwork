@@ -29,4 +29,7 @@ function Bullet_Project()
         includedirs { "../Source/ThirdParty/Bullet/src/" }
 
         vpaths { ["*"] = "../Source/ThirdParty/Bullet/src/" }
+
+        configuration {}
+        strip()        
 end

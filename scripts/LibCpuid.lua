@@ -12,4 +12,7 @@ function LibCpuid_Project()
         files { "../Source/ThirdParty/LibCpuid/src/*.c", "../Source/ThirdParty/LibCpuid/src/*.h" }
 
         vpaths { ["*"] = "../Source/ThirdParty/LibCpuid/src/" }
+
+        configuration {}
+        strip()        
 end

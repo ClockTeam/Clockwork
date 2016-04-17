@@ -125,5 +125,6 @@ project "shaderc"
             "../Source/ThirdParty/bgfx-deps/"
         }
     }
-
+    
+    configuration {}
     strip()

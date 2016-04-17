@@ -12,4 +12,7 @@ function PugiXml_Project()
         files { "../Source/ThirdParty/PugiXml/src/*.*" }
 
         vpaths { ["*"] = "../Source/ThirdParty/PugiXml/src/" }
+
+        configuration {}
+        strip()        
 end

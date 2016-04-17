@@ -57,5 +57,8 @@ function bgfx_Project()
 
         vpaths { ["*"] = { "../Source/ThirdParty/bgfx/src", "../Source/ThirdParty/bgfx/include" } }
 
+        configuration {}
+        strip()
+
         dofile "shaderc.lua"
 end

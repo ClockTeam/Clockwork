@@ -36,5 +36,8 @@ function Assimp_Project()
             "../Source/ThirdParty/Assimp/contrib/openddlparser/include/"
         }
 
-        vpaths { ["*"] = "../Source/ThirdParty/Assimp/" }       
+        vpaths { ["*"] = "../Source/ThirdParty/Assimp/" }
+        
+        configuration {}
+        strip()
 end

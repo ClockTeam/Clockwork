@@ -12,4 +12,7 @@ function JO_Project()
         files { "../Source/ThirdParty/JO/*.*" }
 
         vpaths { ["*"] = "../Source/ThirdParty/JO/" }
+
+        configuration {}
+        strip()    
 end

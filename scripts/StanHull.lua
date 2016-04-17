@@ -12,4 +12,7 @@ function StanHull_Project()
         files { "../Source/ThirdParty/StanHull/Hull.cpp", "../Source/ThirdParty/StanHull/Hull.h" }
 
         vpaths { ["*"] = "../Source/ThirdParty/StanHull/" }
+
+        configuration {}
+        strip()        
 end

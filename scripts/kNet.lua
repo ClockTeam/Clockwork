@@ -32,4 +32,7 @@ function kNet_Project()
         includedirs { "../Source/ThirdParty/kNet/include/" }
 
         vpaths { ["*"] = "../Source/ThirdParty/kNet" }
+
+        configuration {}
+        strip()        
 end

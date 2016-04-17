@@ -34,5 +34,8 @@ function SQLite_Project()
 
         files { "../Source/ThirdParty/SQLite/src/*.*" }
 
-        vpaths { ["*"] = "../Source/ThirdParty/SQLite/src/" }   
+        vpaths { ["*"] = "../Source/ThirdParty/SQLite/src/" }
+
+        configuration {}
+        strip()       
 end

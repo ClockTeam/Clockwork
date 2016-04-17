@@ -17,4 +17,7 @@ function Civetweb_Project()
         includedirs { "../Source/ThirdParty/Civetweb/include" }
 
         vpaths { ["*"] = { "../Source/ThirdParty/Civetweb/src", "../Source/ThirdParty/Civetweb/include" } }
+
+        configuration {}
+        strip()        
 end

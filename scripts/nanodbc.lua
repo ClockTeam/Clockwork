@@ -12,4 +12,7 @@ function nanodbc_Project()
         files { "../Source/ThirdParty/nanodbc/src/*.*" }
 
         vpaths { ["*"] = "../Source/ThirdParty/nanodbc/src/" }
+
+        configuration {}
+        strip()        
 end

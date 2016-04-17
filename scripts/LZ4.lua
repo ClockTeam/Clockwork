@@ -12,4 +12,7 @@ function LZ4_Project()
         files { "../Source/ThirdParty/LZ4/*.c", "../Source/ThirdParty/LZ4/*.h" }
 
         vpaths { ["*"] = "../Source/ThirdParty/LZ4/" }
+
+        configuration {}
+        strip()        
 end

@@ -29,4 +29,7 @@ function RecastNavigation_Project()
             ["DetourTileCache"] = { "../Source/ThirdParty/DetourTileCache/source/**.cpp", "../Source/ThirdParty/DetourTileCache/include/**.h" },
             ["Recast"] = { "../Source/ThirdParty/Recast/source/**.cpp", "../Source/ThirdParty/Recast/include/**.h" }
         }
+
+        configuration {}
+        strip()        
 end

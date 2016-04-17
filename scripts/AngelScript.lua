@@ -43,4 +43,7 @@ function AngelScript_Project()
         end--]]
 
         vpaths { ["*"] = "../Source/ThirdParty/AngelScript/source/" }
+
+        configuration {}
+        strip()
 end
