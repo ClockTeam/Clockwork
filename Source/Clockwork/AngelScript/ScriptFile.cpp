@@ -33,7 +33,7 @@
 #include "../IO/MemoryBuffer.h"
 #include "../Resource/ResourceCache.h"
 
-#include <AngelScript/angelscript.h>
+#include <angelscript.h>
 
 #include "../DebugNew.h"
 
