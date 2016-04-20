@@ -33,7 +33,7 @@
 #include "../IO/MemoryBuffer.h"
 #include "../Resource/ResourceCache.h"
 
-#include <angelscript.h>
+#include <AngelScript/angelscript.h>
 
 #include "../DebugNew.h"
 
@@ -767,6 +767,42 @@ void ScriptFile::SetParameters(asIScriptContext* context, asIScriptFunction* fun
 
                 case VAR_STRING:
                     context->SetArgObject(i, (void*)&parameters[i].GetString());
+                    break;
+
+                case VAR_VARIANTMAP:
+                    context->SetArgObject(i, (void*)&parameters[i].GetVariantMap());
+                    break;
+
+                case VAR_INTRECT:
+                    context->SetArgObject(i, (void*)&parameters[i].GetIntRect());
+                    break;
+
+                case VAR_INTVECTOR2:
+                    context->SetArgObject(i, (void*)&parameters[i].GetIntVector2());
+                    break;
+
+                case VAR_COLOR:
+                    context->SetArgObject(i, (void*)&parameters[i].GetColor());
+                    break;
+
+                case VAR_MATRIX3:
+                    context->SetArgObject(i, (void*)&parameters[i].GetMatrix3());
+                    break;
+
+                case VAR_MATRIX3X4:
+                    context->SetArgObject(i, (void*)&parameters[i].GetMatrix3x4());
+                    break;
+
+                case VAR_MATRIX4:
+                    context->SetArgObject(i, (void*)&parameters[i].GetMatrix4());
+                    break;
+
+                case VAR_RESOURCEREF:
+                    context->SetArgObject(i, (void*)&parameters[i].GetResourceRef());
+                    break;
+
+                case VAR_RESOURCEREFLIST:
+                    context->SetArgObject(i, (void*)&parameters[i].GetResourceRefList());
                     break;
 
                 case VAR_VOIDPTR:
