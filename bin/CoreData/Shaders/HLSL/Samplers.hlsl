@@ -19,6 +19,7 @@ sampler2D sAlbedoBuffer : register(s0);
 sampler2D sNormalMap : register(s1);
 sampler2D sNormalBuffer : register(s1);
 sampler2D sSpecMap : register(s2);
+sampler2D sRoughMetalFresnel : register(s2); //R: Roughness, G: Metal
 sampler2D sEmissiveMap : register(s3);
 sampler2D sEnvMap : register(s4);
 sampler3D sVolumeMap : register(s5);
@@ -51,6 +52,7 @@ Texture2D tAlbedoBuffer : register(t0);
 Texture2D tNormalMap : register(t1);
 Texture2D tNormalBuffer : register(t1);
 Texture2D tSpecMap : register(t2);
+Texture2D tRoughMetalFresnel : register(t2); //R: Roughness, G: Metal
 Texture2D tEmissiveMap : register(t3);
 Texture2D tEnvMap : register(t4);
 Texture3D tVolumeMap : register(t5);
@@ -72,6 +74,7 @@ SamplerState sAlbedoBuffer : register(s0);
 SamplerState sNormalMap : register(s1);
 SamplerState sNormalBuffer : register(s1);
 SamplerState sSpecMap : register(s2);
+SamplerState sRoughMetalFresnel : register(s2); //R: Roughness, G: Metal 
 SamplerState sEmissiveMap : register(s3);
 SamplerState sEnvMap : register(s4);
 SamplerState sVolumeMap : register(s5);

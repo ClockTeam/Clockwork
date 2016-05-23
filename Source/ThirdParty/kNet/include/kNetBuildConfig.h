@@ -4,7 +4,7 @@
 #pragma once
 
 #ifndef KNET_ENABLE_WINXP_SUPPORT
-//#define KNET_ENABLE_WINXP_SUPPORT
+#define KNET_ENABLE_WINXP_SUPPORT
 #endif
 
 #ifndef KNET_NO_MAXHEAP
