@@ -1214,7 +1214,7 @@ macro (find_Urho3D_file VAR NAME)
 endmacro ()
 
 # Macro for finding tool in Urho3D build tree or Urho3D SDK
-macro (find_Urho3D_tool VAR NAME)
+macro (find_Clockwork_tool VAR NAME)
     # Pass the arguments to the actual find command
     cmake_parse_arguments (ARG "" "DOC;MSG_MODE" "HINTS;PATHS;PATH_SUFFIXES" ${ARGN})
     find_program (${VAR} ${NAME} HINTS ${ARG_HINTS} PATHS ${ARG_PATHS} PATH_SUFFIXES ${ARG_PATH_SUFFIXES} DOC ${ARG_DOC} NO_DEFAULT_PATH)
@@ -1269,7 +1269,7 @@ macro (setup_main_executable)
             endif ()
         endforeach ()
         # Urho3D project builds the PackageTool as required; downstream project uses PackageTool found in the Urho3D build tree or Urho3D SDK
-        find_Urho3d_tool (PACKAGE_TOOL PackageTool
+        find_Clockwork_tool (PACKAGE_TOOL PackageTool
             HINTS ${CMAKE_BINARY_DIR}/bin/tool ${URHO3D_HOME}/bin/tool
             DOC "Path to PackageTool" MSG_MODE WARNING)
         if (CMAKE_PROJECT_NAME STREQUAL Urho3D)
