@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2008-2016 the Urho3D project.
+# Copyright (c) 2008-2016 the Clockwork project.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 # THE SOFTWARE.
 #
 
-# Get Urho3D library revision number
+# Get Clockwork library revision number
 
 if (DEFINED ENV{TRAVIS_COMMIT})
     # Use the same commit-ish used by CI server to describe the repository

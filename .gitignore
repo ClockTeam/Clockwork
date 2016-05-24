@@ -15,11 +15,11 @@ generated/
 # Output files
 /Source/**/*.a
 /Source/ThirdParty/LuaJIT/src/host/buildvm_arch.h
-/Source/Urho3D/Urho3D.h
-/Source/Urho3D/Urho3D.pc
-/Source/Urho3D/Urho3D.pc.msvc
-/Source/Urho3D/librevision.h
-/Source/Urho3D/Precompiled.cpp
+/Source/Clockwork/Clockwork.h
+/Source/Clockwork/Clockwork.pc
+/Source/Clockwork/Clockwork.pc.msvc
+/Source/Clockwork/librevision.h
+/Source/Clockwork/Precompiled.cpp
 
 # Compiled shaders
 *.vs?
@@ -59,7 +59,7 @@ generated/
 /Android/local.properties
 
 # Android output directories
-/Android/Urho3D/
+/Android/Clockwork/
 /Android/ThirdParty/
 /Android/libs/
 

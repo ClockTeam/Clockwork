@@ -20,7 +20,7 @@ public class ScriptPicker extends ExpandableListActivity {
 
         // Prepare an expandable list view for picking the sample script names
         @SuppressWarnings("unchecked")
-        final HashMap<String, ArrayList<String>> scripts = (HashMap<String, ArrayList<String>>) getIntent().getSerializableExtra(Urho3D.SCRIPTS);
+        final HashMap<String, ArrayList<String>> scripts = (HashMap<String, ArrayList<String>>) getIntent().getSerializableExtra(Clockwork.SCRIPTS);
         setListAdapter(new SimpleExpandableListAdapter(this,
                 new ArrayList<Map<String, String>>() {{
                     for (final String lang : scripts.keySet()) {
@@ -63,7 +63,7 @@ public class ScriptPicker extends ExpandableListActivity {
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         @SuppressWarnings("unchecked")
         Map<String, String> map = (Map<String, String>) getExpandableListAdapter().getChild(groupPosition, childPosition);
-        setResult(RESULT_OK, getIntent().putExtra(Urho3D.PICKED_SCRIPT, map.get(SCRIPT)));
+        setResult(RESULT_OK, getIntent().putExtra(Clockwork.PICKED_SCRIPT, map.get(SCRIPT)));
         finish();
         return true;
     }

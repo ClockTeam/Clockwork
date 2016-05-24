@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2008-2016 the Urho3D project.
+# Copyright (c) 2008-2016 the Clockwork project.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 #  XKB
 #
 
-if (URHO3D_64BIT)
+if (CLOCKWORK_64BIT)
     set (MIR_LIB_SEARCH_PATH /usr/lib/x86_64-linux-gnu)
 else ()
     set (MIR_LIB_SEARCH_PATH /usr/lib/i386-linux-gnu)

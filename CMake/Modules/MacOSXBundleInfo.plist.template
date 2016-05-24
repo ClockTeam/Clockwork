@@ -36,7 +36,7 @@
     <string>${MACOSX_BUNDLE_COPYRIGHT}</string>
     <key>LSEnvironment</key>
     <dict>
-        <key>URHO3D_PREFIX_PATH</key>
+        <key>CLOCKWORK_PREFIX_PATH</key>
         <string>../Resources</string>
     </dict>
 </dict>

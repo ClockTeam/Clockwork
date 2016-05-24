@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,8 +41,8 @@ public class SampleLauncher extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Start Urho3D activity with the intention for obtaining the library name(s), except when a library is already being picked externally
-        startActivityForResult(new Intent(this, Urho3D.class).putExtra(PICKED_LIBRARY, getIntent().getStringExtra(PICKED_LIBRARY)), OBTAINING_LIBNAMES);
+        // Start Clockwork activity with the intention for obtaining the library name(s), except when a library is already being picked externally
+        startActivityForResult(new Intent(this, Clockwork.class).putExtra(PICKED_LIBRARY, getIntent().getStringExtra(PICKED_LIBRARY)), OBTAINING_LIBNAMES);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -69,10 +69,10 @@ public class SampleLauncher extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        // Start Urho3D activity with the intention to load the picked library name
+        // Start Clockwork activity with the intention to load the picked library name
         @SuppressWarnings("unchecked")
         ArrayAdapter<String> adapter = (ArrayAdapter<String>) getListAdapter();
-        startActivity(new Intent(this, Urho3D.class).putExtra(PICKED_LIBRARY, adapter.getItem(position)));
+        startActivity(new Intent(this, Clockwork.class).putExtra(PICKED_LIBRARY, adapter.getItem(position)));
     }
 
 }

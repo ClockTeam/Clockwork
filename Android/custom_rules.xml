@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Copyright (c) 2008-2016 the Urho3D project.
+Copyright (c) 2008-2016 the Clockwork project.
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
@@ -20,7 +20,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 -->
-<project name="Urho3D_custom_rules" default="help">
+<project name="Clockwork_custom_rules" default="help">
 
     <!--
         Optionally patch assets directories to have a trailing indicator character(s) in their names for easy identification

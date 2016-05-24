@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,10 @@
 // THE SOFTWARE.
 //
 
-#include <Urho3D/LibraryInfo.h>
+#include <Clockwork/LibraryInfo.h>
 #include <iostream>
 
-using namespace Urho3D;
+using namespace Clockwork;
 
 int main(int argc, char* argv[])
 {

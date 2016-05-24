@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2008-2016 the Urho3D project.
+# Copyright (c) 2008-2016 the Clockwork project.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -76,13 +76,13 @@ post_cmake() {
                 #
                 # Replace [Source directory] linked resource to [Build] instead
                 # Modify build argument to first change directory to Build folder
-                # Remove [Subprojects]/Urho3D linked resource
+                # Remove [Subprojects]/Clockwork linked resource
                 #
                 xmlstarlet ed -P -L \
                     -u "/projectDescription/linkedResources/link/name/text()[. = '[Source directory]']" -v "[Build]" \
                     -u "/projectDescription/linkedResources/link/location[../name/text() = '[Build]']" -v "`cd $BUILD; pwd`" \
                     -u "/projectDescription/buildSpec/buildCommand/arguments/dictionary/value[../key/text() = 'org.eclipse.cdt.make.core.build.arguments']" -x "concat('-C $BUILD ', .)" \
-                    -d "/projectDescription/linkedResources/link[./name = '[Subprojects]/Urho3D']" \
+                    -d "/projectDescription/linkedResources/link[./name = '[Subprojects]/Clockwork']" \
                     "$SOURCE"/.project
                 #
                 # Fix source path entry to Source folder and modify its filter condition

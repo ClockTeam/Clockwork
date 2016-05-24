@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,11 +30,11 @@ import org.libsdl.app.SDLActivity;
 import java.io.IOException;
 import java.util.*;
 
-public class Urho3D extends SDLActivity {
+public class Clockwork extends SDLActivity {
 
     public static final String SCRIPTS = "scripts";
     public static final String PICKED_SCRIPT = "pickedScript";
-    private static final String TAG = "Urho3D";
+    private static final String TAG = "Clockwork";
     private static final int OBTAINING_SCRIPT = 1;
     private static String[] mArguments = new String[0];
 
@@ -45,10 +45,10 @@ public class Urho3D extends SDLActivity {
 
     @Override
     protected boolean onLoadLibrary(ArrayList<String> libraryNames) {
-        // Ensure "Urho3D" (in case of Urho3D shared lib type is used) and "Urho3DPlayer" are being sorted to the top of the list 
+        // Ensure "Clockwork" (in case of Clockwork shared lib type is used) and "ClockworkPlayer" are being sorted to the top of the list 
         Collections.sort(libraryNames, new Comparator<String>() {
             private String sortName(String name) {
-                return name.startsWith("Urho3D") ? "00_" + name : name;
+                return name.startsWith("Clockwork") ? "00_" + name : name;
             }
 
             @Override
@@ -57,8 +57,8 @@ public class Urho3D extends SDLActivity {
             }
         });
 
-        // Urho3D shared library must always be loaded if available, so exclude it from return result and all list operations below 
-        int startIndex = "Urho3D".equals(libraryNames.get(0)) ? 1 : 0;
+        // Clockwork shared library must always be loaded if available, so exclude it from return result and all list operations below 
+        int startIndex = "Clockwork".equals(libraryNames.get(0)) ? 1 : 0;
 
         // Determine the intention
         Intent intent = getIntent();
@@ -69,14 +69,14 @@ public class Urho3D extends SDLActivity {
             if (array.length > 1) {
                 setResult(RESULT_OK, intent.putExtra(SampleLauncher.LIBRARY_NAMES, array));
 
-                // End Urho3D activity lifecycle
+                // End Clockwork activity lifecycle
                 finish();
 
                 // Return false to indicate no library is being loaded yet
                 return false;
             } else {
                 // There is only one library available, so cancel the intention for obtaining the library name and by not returning any result
-                // However, since we have already started Urho3D activity, let's the activity runs its whole lifecycle by falling through to call the super implementation 
+                // However, since we have already started Clockwork activity, let's the activity runs its whole lifecycle by falling through to call the super implementation 
                 setResult(RESULT_CANCELED);
             }
         } else {
@@ -84,8 +84,8 @@ public class Urho3D extends SDLActivity {
             libraryNames.subList(startIndex, libraryNames.size()).clear();
             mArguments = pickedLibrary.split(":");
             libraryNames.add(mArguments[0]);
-            if ("Urho3DPlayer".equals(mArguments[0]) && mArguments.length == 1) {
-                // Urho3DPlayer needs a script name to play
+            if ("ClockworkPlayer".equals(mArguments[0]) && mArguments.length == 1) {
+                // ClockworkPlayer needs a script name to play
                 try {
                     final AssetManager assetManager = getContext().getAssets();
                     HashMap<String, ArrayList<String>> scripts = new HashMap<String, ArrayList<String>>(2) {{
