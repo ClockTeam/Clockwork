@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@
 #include "../Math/Frustum.h"
 #include "../Graphics/Texture.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Camera;
@@ -51,7 +51,7 @@ static const unsigned MAX_CASCADE_SPLITS = 1;
 #endif
 
 /// Shadow depth bias parameters.
-struct URHO3D_API BiasParameters
+struct CLOCKWORK_API BiasParameters
 {
     /// Construct undefined.
     BiasParameters()
@@ -78,7 +78,7 @@ struct URHO3D_API BiasParameters
 };
 
 /// Cascaded shadow map parameters.
-struct URHO3D_API CascadeParameters
+struct CLOCKWORK_API CascadeParameters
 {
     /// Construct undefined.
     CascadeParameters()
@@ -118,7 +118,7 @@ struct URHO3D_API CascadeParameters
 };
 
 /// Shadow map focusing parameters.
-struct URHO3D_API FocusParameters
+struct CLOCKWORK_API FocusParameters
 {
     /// Construct undefined.
     FocusParameters()
@@ -151,9 +151,9 @@ struct URHO3D_API FocusParameters
 };
 
 /// %Light component.
-class URHO3D_API Light : public Drawable
+class CLOCKWORK_API Light : public Drawable
 {
-    URHO3D_OBJECT(Light, Drawable);
+    CLOCKWORK_OBJECT(Light, Drawable);
 
 public:
     /// Construct.

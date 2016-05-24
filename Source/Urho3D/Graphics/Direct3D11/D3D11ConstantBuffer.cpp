@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 ConstantBuffer::ConstantBuffer(Context* context) :
@@ -45,7 +45,7 @@ ConstantBuffer::~ConstantBuffer()
 
 void ConstantBuffer::Release()
 {
-    URHO3D_SAFE_RELEASE(object_);
+    CLOCKWORK_SAFE_RELEASE(object_);
 
     shadowData_.Reset();
     size_ = 0;
@@ -57,7 +57,7 @@ bool ConstantBuffer::SetSize(unsigned size)
 
     if (!size)
     {
-        URHO3D_LOGERROR("Can not create zero-sized constant buffer");
+        CLOCKWORK_LOGERROR("Can not create zero-sized constant buffer");
         return false;
     }
 
@@ -83,8 +83,8 @@ bool ConstantBuffer::SetSize(unsigned size)
         HRESULT hr = graphics_->GetImpl()->GetDevice()->CreateBuffer(&bufferDesc, 0, (ID3D11Buffer**)&object_);
         if (FAILED(hr))
         {
-            URHO3D_SAFE_RELEASE(object_);
-            URHO3D_LOGD3DERROR("Failed to create constant buffer", hr);
+            CLOCKWORK_SAFE_RELEASE(object_);
+            CLOCKWORK_LOGD3DERROR("Failed to create constant buffer", hr);
             return false;
         }
     }

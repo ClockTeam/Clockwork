@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 #include "../Math/Color.h"
 #include "../Math/Vector4.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class XMLElement;
@@ -62,7 +62,7 @@ enum RenderTargetSizeMode
 };
 
 /// Rendertarget definition.
-struct URHO3D_API RenderTargetInfo
+struct CLOCKWORK_API RenderTargetInfo
 {
     /// Construct.
     RenderTargetInfo() :
@@ -102,7 +102,7 @@ struct URHO3D_API RenderTargetInfo
 };
 
 /// Rendering path command.
-struct URHO3D_API RenderPathCommand
+struct CLOCKWORK_API RenderPathCommand
 {
     /// Construct.
     RenderPathCommand() :
@@ -202,7 +202,7 @@ struct URHO3D_API RenderPathCommand
 };
 
 /// Rendering path definition.
-class URHO3D_API RenderPath : public RefCounted
+class CLOCKWORK_API RenderPath : public RefCounted
 {
 public:
     /// Construct.

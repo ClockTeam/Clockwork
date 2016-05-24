@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 #include "../Graphics/Viewport.h"
 #include "../Math/Color.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Geometry;
@@ -168,9 +168,9 @@ enum DeferredLightPSVariation
 };
 
 /// High-level rendering subsystem. Manages drawing of 3D views.
-class URHO3D_API Renderer : public Object
+class CLOCKWORK_API Renderer : public Object
 {
-    URHO3D_OBJECT(Renderer, Object);
+    CLOCKWORK_OBJECT(Renderer, Object);
 
 public:
     typedef void(Object::*ShadowMapFilter)(View* view, Texture2D* shadowMap, float blurScale);

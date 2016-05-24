@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const char* shaderParameterGroups[] = {
@@ -194,7 +194,7 @@ bool ShaderProgram::Link()
 
         if (semantic == MAX_VERTEX_ELEMENT_SEMANTICS)
         {
-            URHO3D_LOGWARNING("Found vertex attribute " + name + " with no known semantic in shader program " + 
+            CLOCKWORK_LOGWARNING("Found vertex attribute " + name + " with no known semantic in shader program " + 
                 vertexShader_->GetFullName() + " " + pixelShader_->GetFullName());
             continue;
         }
@@ -238,7 +238,7 @@ bool ShaderProgram::Link()
 
             if (group >= MAX_SHADER_PARAMETER_GROUPS)
             {
-                URHO3D_LOGWARNING("Skipping unrecognized uniform block " + name + " in shader program " + vertexShader_->GetFullName() +
+                CLOCKWORK_LOGWARNING("Skipping unrecognized uniform block " + name + " in shader program " + vertexShader_->GetFullName() +
                            " " + pixelShader_->GetFullName());
                 continue;
             }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@
 #pragma warning(disable:4355)
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 Texture2DArray::Texture2DArray(Context* context) :
@@ -75,7 +75,7 @@ bool Texture2DArray::BeginLoad(Deserializer& source)
     // If device is lost, retry later
     if (graphics_->IsDeviceLost())
     {
-        URHO3D_LOGWARNING("Texture load while device is lost");
+        CLOCKWORK_LOGWARNING("Texture load while device is lost");
         dataPending_ = true;
         return true;
     }
@@ -207,12 +207,12 @@ bool Texture2DArray::SetSize(unsigned layers, int width, int height, unsigned fo
 {
     if (width <= 0 || height <= 0)
     {
-        URHO3D_LOGERROR("Zero or negative texture array size");
+        CLOCKWORK_LOGERROR("Zero or negative texture array size");
         return false;
     }
     if (usage == TEXTURE_DEPTHSTENCIL)
     {
-        URHO3D_LOGERROR("Depth-stencil usage not supported for texture arrays");
+        CLOCKWORK_LOGERROR("Depth-stencil usage not supported for texture arrays");
         return false;
     }
 
@@ -231,7 +231,7 @@ bool Texture2DArray::SetSize(unsigned layers, int width, int height, unsigned fo
     }
 
     if (usage == TEXTURE_RENDERTARGET)
-        SubscribeToEvent(E_RENDERSURFACEUPDATE, URHO3D_HANDLER(Texture2DArray, HandleRenderSurfaceUpdate));
+        SubscribeToEvent(E_RENDERSURFACEUPDATE, CLOCKWORK_HANDLER(Texture2DArray, HandleRenderSurfaceUpdate));
     else
         UnsubscribeFromEvent(E_RENDERSURFACEUPDATE);
 
@@ -250,35 +250,35 @@ bool Texture2DArray::SetSize(unsigned layers, int width, int height, unsigned fo
 
 bool Texture2DArray::SetData(unsigned layer, unsigned level, int x, int y, int width, int height, const void* data)
 {
-    URHO3D_PROFILE(SetTextureData);
+    CLOCKWORK_PROFILE(SetTextureData);
 
     if (!object_ || !graphics_)
     {
-        URHO3D_LOGERROR("Texture array not created, can not set data");
+        CLOCKWORK_LOGERROR("Texture array not created, can not set data");
         return false;
     }
 
     if (!data)
     {
-        URHO3D_LOGERROR("Null source for setting data");
+        CLOCKWORK_LOGERROR("Null source for setting data");
         return false;
     }
 
     if (layer >= layers_)
     {
-        URHO3D_LOGERROR("Illegal layer for setting data");
+        CLOCKWORK_LOGERROR("Illegal layer for setting data");
         return false;
     }
 
     if (level >= levels_)
     {
-        URHO3D_LOGERROR("Illegal mip level for setting data");
+        CLOCKWORK_LOGERROR("Illegal mip level for setting data");
         return false;
     }
 
     if (graphics_->IsDeviceLost())
     {
-        URHO3D_LOGWARNING("Texture array data assignment while device is lost");
+        CLOCKWORK_LOGWARNING("Texture array data assignment while device is lost");
         dataPending_ = true;
         return true;
     }
@@ -293,7 +293,7 @@ bool Texture2DArray::SetData(unsigned layer, unsigned level, int x, int y, int w
     int levelHeight = GetLevelHeight(level);
     if (x < 0 || x + width > levelWidth || y < 0 || y + height > levelHeight || width <= 0 || height <= 0)
     {
-        URHO3D_LOGERROR("Illegal dimensions for setting data");
+        CLOCKWORK_LOGERROR("Illegal dimensions for setting data");
         return false;
     }
 
@@ -338,17 +338,17 @@ bool Texture2DArray::SetData(unsigned layer, Image* image, bool useAlpha)
 {
     if (!image)
     {
-        URHO3D_LOGERROR("Null image, can not set data");
+        CLOCKWORK_LOGERROR("Null image, can not set data");
         return false;
     }
     if (!layers_)
     {
-        URHO3D_LOGERROR("Number of layers in the array must be set first");
+        CLOCKWORK_LOGERROR("Number of layers in the array must be set first");
         return false;
     }
     if (layer >= layers_)
     {
-        URHO3D_LOGERROR("Illegal layer for setting data");
+        CLOCKWORK_LOGERROR("Illegal layer for setting data");
         return false;
     }
 
@@ -422,12 +422,12 @@ bool Texture2DArray::SetData(unsigned layer, Image* image, bool useAlpha)
         {
             if (!object_)
             {
-                URHO3D_LOGERROR("Texture array layer 0 must be loaded first");
+                CLOCKWORK_LOGERROR("Texture array layer 0 must be loaded first");
                 return false;
             }
             if (levelWidth != width_ || levelHeight != height_ || format != format_)
             {
-                URHO3D_LOGERROR("Texture array layer does not match size or format of layer 0");
+                CLOCKWORK_LOGERROR("Texture array layer does not match size or format of layer 0");
                 return false;
             }
         }
@@ -478,12 +478,12 @@ bool Texture2DArray::SetData(unsigned layer, Image* image, bool useAlpha)
         {
             if (!object_)
             {
-                URHO3D_LOGERROR("Texture array layer 0 must be loaded first");
+                CLOCKWORK_LOGERROR("Texture array layer 0 must be loaded first");
                 return false;
             }
             if (width != width_ || height != height_ || format != format_)
             {
-                URHO3D_LOGERROR("Texture array layer does not match size or format of layer 0");
+                CLOCKWORK_LOGERROR("Texture array layer does not match size or format of layer 0");
                 return false;
             }
         }
@@ -521,31 +521,31 @@ bool Texture2DArray::GetData(unsigned layer, unsigned level, void* dest) const
 #ifndef GL_ES_VERSION_2_0
     if (!object_ || !graphics_)
     {
-        URHO3D_LOGERROR("Texture array not created, can not get data");
+        CLOCKWORK_LOGERROR("Texture array not created, can not get data");
         return false;
     }
 
     if (!dest)
     {
-        URHO3D_LOGERROR("Null destination for getting data");
+        CLOCKWORK_LOGERROR("Null destination for getting data");
         return false;
     }
 
     if (layer != 0)
     {
-        URHO3D_LOGERROR("Only the full download of the array is supported, set layer=0");
+        CLOCKWORK_LOGERROR("Only the full download of the array is supported, set layer=0");
         return false;
     }
 
     if (level >= levels_)
     {
-        URHO3D_LOGERROR("Illegal mip level for getting data");
+        CLOCKWORK_LOGERROR("Illegal mip level for getting data");
         return false;
     }
 
     if (graphics_->IsDeviceLost())
     {
-        URHO3D_LOGWARNING("Getting texture data while device is lost");
+        CLOCKWORK_LOGWARNING("Getting texture data while device is lost");
         return false;
     }
 
@@ -559,7 +559,7 @@ bool Texture2DArray::GetData(unsigned layer, unsigned level, void* dest) const
     graphics_->SetTexture(0, 0);
     return true;
 #else
-    URHO3D_LOGERROR("Getting texture data not supported");
+    CLOCKWORK_LOGERROR("Getting texture data not supported");
     return false;
 #endif
 }
@@ -569,7 +569,7 @@ bool Texture2DArray::Create()
     Release();
 
 #ifdef GL_ES_VERSION_2_0
-    URHO3D_LOGERROR("Failed to create 2D array texture, currently unsupported on OpenGL ES 2");
+    CLOCKWORK_LOGERROR("Failed to create 2D array texture, currently unsupported on OpenGL ES 2");
     return false;
 #else
 
@@ -578,7 +578,7 @@ bool Texture2DArray::Create()
 
     if (graphics_->IsDeviceLost())
     {
-        URHO3D_LOGWARNING("Texture array creation while device is lost");
+        CLOCKWORK_LOGWARNING("Texture array creation while device is lost");
         return true;
     }
 
@@ -601,7 +601,7 @@ bool Texture2DArray::Create()
             success = false;
     }
     if (!success)
-        URHO3D_LOGERROR("Failed to create texture array");
+        CLOCKWORK_LOGERROR("Failed to create texture array");
 
     // Set mipmapping
     levels_ = requestedLevels_;

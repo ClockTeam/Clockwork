@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@
 #include "../Math/Vector3.h"
 #include "../Resource/Resource.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Skeletal animation keyframe.
@@ -51,7 +51,7 @@ struct AnimationKeyFrame
 };
 
 /// Skeletal animation track, stores keyframes of a single bone.
-struct URHO3D_API AnimationTrack
+struct CLOCKWORK_API AnimationTrack
 {
     /// Construct.
     AnimationTrack() :
@@ -107,9 +107,9 @@ static const unsigned char CHANNEL_ROTATION = 0x2;
 static const unsigned char CHANNEL_SCALE = 0x4;
 
 /// Skeletal animation resource.
-class URHO3D_API Animation : public Resource
+class CLOCKWORK_API Animation : public Resource
 {
-    URHO3D_OBJECT(Animation, Resource);
+    CLOCKWORK_OBJECT(Animation, Resource);
 
 public:
     /// Construct.

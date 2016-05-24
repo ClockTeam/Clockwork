@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 ShaderPrecache::ShaderPrecache(Context* context, const String& fileName) :
@@ -61,12 +61,12 @@ ShaderPrecache::ShaderPrecache(Context* context, const String& fileName) :
     if (!xmlFile_.GetRoot())
         xmlFile_.CreateRoot("shaders");
 
-    URHO3D_LOGINFO("Begin dumping shaders to " + fileName_);
+    CLOCKWORK_LOGINFO("Begin dumping shaders to " + fileName_);
 }
 
 ShaderPrecache::~ShaderPrecache()
 {
-    URHO3D_LOGINFO("End dumping shaders");
+    CLOCKWORK_LOGINFO("End dumping shaders");
 
     if (usedCombinations_.Empty())
         return;
@@ -106,7 +106,7 @@ void ShaderPrecache::StoreShaders(ShaderVariation* vs, ShaderVariation* ps)
 
 void ShaderPrecache::LoadShaders(Graphics* graphics, Deserializer& source)
 {
-    URHO3D_LOGDEBUG("Begin precaching shaders");
+    CLOCKWORK_LOGDEBUG("Begin precaching shaders");
 
     XMLFile xmlFile(graphics->GetContext());
     xmlFile.Load(source);
@@ -138,7 +138,7 @@ void ShaderPrecache::LoadShaders(Graphics* graphics, Deserializer& source)
         shader = shader.GetNext("shader");
     }
 
-    URHO3D_LOGDEBUG("End precaching shaders");
+    CLOCKWORK_LOGDEBUG("End precaching shaders");
 }
 
 }

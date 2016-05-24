@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 Texture3D::Texture3D(Context* context) :
@@ -120,7 +120,7 @@ bool Texture3D::BeginLoad(Deserializer& source)
         return true;
     }
 
-    URHO3D_LOGERROR("Texture3D XML data for " + GetName() + " did not contain either volume or colorlut element");
+    CLOCKWORK_LOGERROR("Texture3D XML data for " + GetName() + " did not contain either volume or colorlut element");
     return false;
 }
 
@@ -153,21 +153,21 @@ void Texture3D::Release()
         }
     }
 
-    URHO3D_SAFE_RELEASE(object_);
-    URHO3D_SAFE_RELEASE(shaderResourceView_);
-    URHO3D_SAFE_RELEASE(sampler_);
+    CLOCKWORK_SAFE_RELEASE(object_);
+    CLOCKWORK_SAFE_RELEASE(shaderResourceView_);
+    CLOCKWORK_SAFE_RELEASE(sampler_);
 }
 
 bool Texture3D::SetSize(int width, int height, int depth, unsigned format, TextureUsage usage)
 {
     if (width <= 0 || height <= 0 || depth <= 0)
     {
-        URHO3D_LOGERROR("Zero or negative 3D texture dimensions");
+        CLOCKWORK_LOGERROR("Zero or negative 3D texture dimensions");
         return false;
     }
     if (usage >= TEXTURE_RENDERTARGET)
     {
-        URHO3D_LOGERROR("Rendertarget or depth-stencil usage not supported for 3D textures");
+        CLOCKWORK_LOGERROR("Rendertarget or depth-stencil usage not supported for 3D textures");
         return false;
     }
     if (usage_ == TEXTURE_DYNAMIC)
@@ -185,23 +185,23 @@ bool Texture3D::SetSize(int width, int height, int depth, unsigned format, Textu
 
 bool Texture3D::SetData(unsigned level, int x, int y, int z, int width, int height, int depth, const void* data)
 {
-    URHO3D_PROFILE(SetTextureData);
+    CLOCKWORK_PROFILE(SetTextureData);
 
     if (!object_)
     {
-        URHO3D_LOGERROR("No texture created, can not set data");
+        CLOCKWORK_LOGERROR("No texture created, can not set data");
         return false;
     }
 
     if (!data)
     {
-        URHO3D_LOGERROR("Null source for setting data");
+        CLOCKWORK_LOGERROR("Null source for setting data");
         return false;
     }
 
     if (level >= levels_)
     {
-        URHO3D_LOGERROR("Illegal mip level for setting data");
+        CLOCKWORK_LOGERROR("Illegal mip level for setting data");
         return false;
     }
 
@@ -211,7 +211,7 @@ bool Texture3D::SetData(unsigned level, int x, int y, int z, int width, int heig
     if (x < 0 || x + width > levelWidth || y < 0 || y + height > levelHeight || z < 0 || z + depth > levelDepth || width <= 0 ||
         height <= 0 || depth <= 0)
     {
-        URHO3D_LOGERROR("Illegal dimensions for setting data");
+        CLOCKWORK_LOGERROR("Illegal dimensions for setting data");
         return false;
     }
 
@@ -246,7 +246,7 @@ bool Texture3D::SetData(unsigned level, int x, int y, int z, int width, int heig
             &mappedData);
         if (FAILED(hr) || !mappedData.pData)
         {
-            URHO3D_LOGD3DERROR("Failed to map texture for update", hr);
+            CLOCKWORK_LOGD3DERROR("Failed to map texture for update", hr);
             return false;
         }
         else
@@ -287,7 +287,7 @@ bool Texture3D::SetData(Image* image, bool useAlpha)
 {
     if (!image)
     {
-        URHO3D_LOGERROR("Null image, can not load texture");
+        CLOCKWORK_LOGERROR("Null image, can not load texture");
         return false;
     }
 
@@ -414,19 +414,19 @@ bool Texture3D::GetData(unsigned level, void* dest) const
 {
     if (!object_)
     {
-        URHO3D_LOGERROR("No texture created, can not get data");
+        CLOCKWORK_LOGERROR("No texture created, can not get data");
         return false;
     }
 
     if (!dest)
     {
-        URHO3D_LOGERROR("Null destination for getting data");
+        CLOCKWORK_LOGERROR("Null destination for getting data");
         return false;
     }
 
     if (level >= levels_)
     {
-        URHO3D_LOGERROR("Illegal mip level for getting data");
+        CLOCKWORK_LOGERROR("Illegal mip level for getting data");
         return false;
     }
 
@@ -448,8 +448,8 @@ bool Texture3D::GetData(unsigned level, void* dest) const
     HRESULT hr = graphics_->GetImpl()->GetDevice()->CreateTexture3D(&textureDesc, 0, &stagingTexture);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(stagingTexture);
-        URHO3D_LOGD3DERROR("Failed to create staging texture for GetData", hr);
+        CLOCKWORK_SAFE_RELEASE(stagingTexture);
+        CLOCKWORK_LOGD3DERROR("Failed to create staging texture for GetData", hr);
         return false;
     }
 
@@ -472,7 +472,7 @@ bool Texture3D::GetData(unsigned level, void* dest) const
     hr = graphics_->GetImpl()->GetDeviceContext()->Map((ID3D11Resource*)stagingTexture, 0, D3D11_MAP_READ, 0, &mappedData);
     if (FAILED(hr) || !mappedData.pData)
     {
-        URHO3D_LOGD3DERROR("Failed to map staging texture for GetData", hr);
+        CLOCKWORK_LOGD3DERROR("Failed to map staging texture for GetData", hr);
         stagingTexture->Release();
         return false;
     }
@@ -515,8 +515,8 @@ bool Texture3D::Create()
     HRESULT hr = graphics_->GetImpl()->GetDevice()->CreateTexture3D(&textureDesc, 0, (ID3D11Texture3D**)&object_);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(object_);
-        URHO3D_LOGD3DERROR("Failed to create texture", hr);
+        CLOCKWORK_SAFE_RELEASE(object_);
+        CLOCKWORK_LOGD3DERROR("Failed to create texture", hr);
         return false;
     }
 
@@ -530,8 +530,8 @@ bool Texture3D::Create()
         (ID3D11ShaderResourceView**)&shaderResourceView_);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(shaderResourceView_);
-        URHO3D_LOGD3DERROR("Failed to create shader resource view for texture", hr);
+        CLOCKWORK_SAFE_RELEASE(shaderResourceView_);
+        CLOCKWORK_LOGD3DERROR("Failed to create shader resource view for texture", hr);
         return false;
     }
 

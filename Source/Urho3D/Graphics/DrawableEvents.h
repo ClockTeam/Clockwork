@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,45 +24,45 @@
 
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// AnimatedModel bone hierarchy created.
-URHO3D_EVENT(E_BONEHIERARCHYCREATED, BoneHierarchyCreated)
+CLOCKWORK_EVENT(E_BONEHIERARCHYCREATED, BoneHierarchyCreated)
 {
-    URHO3D_PARAM(P_NODE, Node);                    // Node pointer
+    CLOCKWORK_PARAM(P_NODE, Node);                    // Node pointer
 }
 
 /// AnimatedModel animation trigger.
-URHO3D_EVENT(E_ANIMATIONTRIGGER, AnimationTrigger)
+CLOCKWORK_EVENT(E_ANIMATIONTRIGGER, AnimationTrigger)
 {
-    URHO3D_PARAM(P_NODE, Node);                    // Node pointer
-    URHO3D_PARAM(P_ANIMATION, Animation);          // Animation pointer
-    URHO3D_PARAM(P_NAME, Name);                    // String
-    URHO3D_PARAM(P_TIME, Time);                    // Float
-    URHO3D_PARAM(P_DATA, Data);                    // User-defined data type
+    CLOCKWORK_PARAM(P_NODE, Node);                    // Node pointer
+    CLOCKWORK_PARAM(P_ANIMATION, Animation);          // Animation pointer
+    CLOCKWORK_PARAM(P_NAME, Name);                    // String
+    CLOCKWORK_PARAM(P_TIME, Time);                    // Float
+    CLOCKWORK_PARAM(P_DATA, Data);                    // User-defined data type
 }
 
 /// AnimatedModel animation finished or looped.
-URHO3D_EVENT(E_ANIMATIONFINISHED, AnimationFinished)
+CLOCKWORK_EVENT(E_ANIMATIONFINISHED, AnimationFinished)
 {
-    URHO3D_PARAM(P_NODE, Node);                    // Node pointer
-    URHO3D_PARAM(P_ANIMATION, Animation);          // Animation pointer
-    URHO3D_PARAM(P_NAME, Name);                    // String
-    URHO3D_PARAM(P_LOOPED, Looped);                // Bool
+    CLOCKWORK_PARAM(P_NODE, Node);                    // Node pointer
+    CLOCKWORK_PARAM(P_ANIMATION, Animation);          // Animation pointer
+    CLOCKWORK_PARAM(P_NAME, Name);                    // String
+    CLOCKWORK_PARAM(P_LOOPED, Looped);                // Bool
 }
 
 /// Particle effect finished.
-URHO3D_EVENT(E_PARTICLEEFFECTFINISHED, ParticleEffectFinished)
+CLOCKWORK_EVENT(E_PARTICLEEFFECTFINISHED, ParticleEffectFinished)
 {
-    URHO3D_PARAM(P_NODE, Node);                    // Node pointer
-    URHO3D_PARAM(P_EFFECT, Effect);                // ParticleEffect pointer
+    CLOCKWORK_PARAM(P_NODE, Node);                    // Node pointer
+    CLOCKWORK_PARAM(P_EFFECT, Effect);                // ParticleEffect pointer
 }
 
 /// Terrain geometry created.
-URHO3D_EVENT(E_TERRAINCREATED, TerrainCreated)
+CLOCKWORK_EVENT(E_TERRAINCREATED, TerrainCreated)
 {
-    URHO3D_PARAM(P_NODE, Node);                    // Node pointer
+    CLOCKWORK_PARAM(P_NODE, Node);                    // Node pointer
 }
 
 }

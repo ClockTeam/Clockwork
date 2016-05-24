@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 VertexBuffer::VertexBuffer(Context* context, bool forceHeadless) :
@@ -69,7 +69,7 @@ void VertexBuffer::Release()
         }
     }
 
-    URHO3D_SAFE_RELEASE(object_);
+    CLOCKWORK_SAFE_RELEASE(object_);
 }
 
 void VertexBuffer::SetShadowed(bool enable)
@@ -116,13 +116,13 @@ bool VertexBuffer::SetData(const void* data)
 {
     if (!data)
     {
-        URHO3D_LOGERROR("Null pointer for vertex buffer data");
+        CLOCKWORK_LOGERROR("Null pointer for vertex buffer data");
         return false;
     }
 
     if (!vertexSize_)
     {
-        URHO3D_LOGERROR("Vertex elements not defined, can not set vertex buffer data");
+        CLOCKWORK_LOGERROR("Vertex elements not defined, can not set vertex buffer data");
         return false;
     }
 
@@ -166,19 +166,19 @@ bool VertexBuffer::SetDataRange(const void* data, unsigned start, unsigned count
 
     if (!data)
     {
-        URHO3D_LOGERROR("Null pointer for vertex buffer data");
+        CLOCKWORK_LOGERROR("Null pointer for vertex buffer data");
         return false;
     }
 
     if (!vertexSize_)
     {
-        URHO3D_LOGERROR("Vertex elements not defined, can not set vertex buffer data");
+        CLOCKWORK_LOGERROR("Vertex elements not defined, can not set vertex buffer data");
         return false;
     }
 
     if (start + count > vertexCount_)
     {
-        URHO3D_LOGERROR("Illegal range for setting new vertex buffer data");
+        CLOCKWORK_LOGERROR("Illegal range for setting new vertex buffer data");
         return false;
     }
 
@@ -222,19 +222,19 @@ void* VertexBuffer::Lock(unsigned start, unsigned count, bool discard)
 {
     if (lockState_ != LOCK_NONE)
     {
-        URHO3D_LOGERROR("Vertex buffer already locked");
+        CLOCKWORK_LOGERROR("Vertex buffer already locked");
         return 0;
     }
 
     if (!vertexSize_)
     {
-        URHO3D_LOGERROR("Vertex elements not defined, can not lock vertex buffer");
+        CLOCKWORK_LOGERROR("Vertex elements not defined, can not lock vertex buffer");
         return 0;
     }
 
     if (start + count > vertexCount_)
     {
-        URHO3D_LOGERROR("Illegal range for locking vertex buffer");
+        CLOCKWORK_LOGERROR("Illegal range for locking vertex buffer");
         return 0;
     }
 
@@ -410,8 +410,8 @@ bool VertexBuffer::Create()
         HRESULT hr = graphics_->GetImpl()->GetDevice()->CreateBuffer(&bufferDesc, 0, (ID3D11Buffer**)&object_);
         if (FAILED(hr))
         {
-            URHO3D_SAFE_RELEASE(object_);
-            URHO3D_LOGD3DERROR("Failed to create vertex buffer", hr);
+            CLOCKWORK_SAFE_RELEASE(object_);
+            CLOCKWORK_LOGD3DERROR("Failed to create vertex buffer", hr);
             return false;
         }
     }
@@ -439,7 +439,7 @@ void* VertexBuffer::MapBuffer(unsigned start, unsigned count, bool discard)
         HRESULT hr = graphics_->GetImpl()->GetDeviceContext()->Map((ID3D11Buffer*)object_, 0, discard ? D3D11_MAP_WRITE_DISCARD :
             D3D11_MAP_WRITE, 0, &mappedData);
         if (FAILED(hr) || !mappedData.pData)
-            URHO3D_LOGD3DERROR("Failed to map vertex buffer", hr);
+            CLOCKWORK_LOGD3DERROR("Failed to map vertex buffer", hr);
         else
         {
             hwData = mappedData.pData;

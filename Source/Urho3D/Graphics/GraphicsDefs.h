@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #include "../Container/HashBase.h"
 #include "../Math/StringHash.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Vector3;
@@ -174,7 +174,7 @@ enum VertexElementSemantic
 };
 
 /// Vertex element description for arbitrary vertex declarations.
-struct URHO3D_API VertexElement
+struct CLOCKWORK_API VertexElement
 {
     /// Default-construct.
     VertexElement() :
@@ -215,10 +215,10 @@ struct URHO3D_API VertexElement
 };
 
 /// Sizes of vertex element types.
-extern URHO3D_API const unsigned ELEMENT_TYPESIZES[];
+extern CLOCKWORK_API const unsigned ELEMENT_TYPESIZES[];
 
 /// Vertex element definitions for the legacy elements.
-extern URHO3D_API const VertexElement LEGACY_VERTEXELEMENTS[];
+extern CLOCKWORK_API const VertexElement LEGACY_VERTEXELEMENTS[];
 
 /// Texture filtering mode.
 enum TextureFilterMode
@@ -365,61 +365,61 @@ enum ShadowQuality
 };
 
 // Inbuilt shader parameters.
-extern URHO3D_API const StringHash VSP_AMBIENTSTARTCOLOR;
-extern URHO3D_API const StringHash VSP_AMBIENTENDCOLOR;
-extern URHO3D_API const StringHash VSP_BILLBOARDROT;
-extern URHO3D_API const StringHash VSP_CAMERAPOS;
-extern URHO3D_API const StringHash VSP_CLIPPLANE;
-extern URHO3D_API const StringHash VSP_NEARCLIP;
-extern URHO3D_API const StringHash VSP_FARCLIP;
-extern URHO3D_API const StringHash VSP_DEPTHMODE;
-extern URHO3D_API const StringHash VSP_DELTATIME;
-extern URHO3D_API const StringHash VSP_ELAPSEDTIME;
-extern URHO3D_API const StringHash VSP_FRUSTUMSIZE;
-extern URHO3D_API const StringHash VSP_GBUFFEROFFSETS;
-extern URHO3D_API const StringHash VSP_LIGHTDIR;
-extern URHO3D_API const StringHash VSP_LIGHTPOS;
-extern URHO3D_API const StringHash VSP_NORMALOFFSETSCALE;
-extern URHO3D_API const StringHash VSP_MODEL;
-extern URHO3D_API const StringHash VSP_VIEW;
-extern URHO3D_API const StringHash VSP_VIEWINV;
-extern URHO3D_API const StringHash VSP_VIEWPROJ;
-extern URHO3D_API const StringHash VSP_UOFFSET;
-extern URHO3D_API const StringHash VSP_VOFFSET;
-extern URHO3D_API const StringHash VSP_ZONE;
-extern URHO3D_API const StringHash VSP_LIGHTMATRICES;
-extern URHO3D_API const StringHash VSP_SKINMATRICES;
-extern URHO3D_API const StringHash VSP_VERTEXLIGHTS;
-extern URHO3D_API const StringHash PSP_AMBIENTCOLOR;
-extern URHO3D_API const StringHash PSP_CAMERAPOS;
-extern URHO3D_API const StringHash PSP_DELTATIME;
-extern URHO3D_API const StringHash PSP_DEPTHRECONSTRUCT;
-extern URHO3D_API const StringHash PSP_ELAPSEDTIME;
-extern URHO3D_API const StringHash PSP_FOGCOLOR;
-extern URHO3D_API const StringHash PSP_FOGPARAMS;
-extern URHO3D_API const StringHash PSP_GBUFFERINVSIZE;
-extern URHO3D_API const StringHash PSP_LIGHTCOLOR;
-extern URHO3D_API const StringHash PSP_LIGHTDIR;
-extern URHO3D_API const StringHash PSP_LIGHTPOS;
-extern URHO3D_API const StringHash PSP_NORMALOFFSETSCALE;
-extern URHO3D_API const StringHash PSP_MATDIFFCOLOR;
-extern URHO3D_API const StringHash PSP_MATEMISSIVECOLOR;
-extern URHO3D_API const StringHash PSP_MATENVMAPCOLOR;
-extern URHO3D_API const StringHash PSP_MATSPECCOLOR;
-extern URHO3D_API const StringHash PSP_NEARCLIP;
-extern URHO3D_API const StringHash PSP_FARCLIP;
-extern URHO3D_API const StringHash PSP_SHADOWCUBEADJUST;
-extern URHO3D_API const StringHash PSP_SHADOWDEPTHFADE;
-extern URHO3D_API const StringHash PSP_SHADOWINTENSITY;
-extern URHO3D_API const StringHash PSP_SHADOWMAPINVSIZE;
-extern URHO3D_API const StringHash PSP_SHADOWSPLITS;
-extern URHO3D_API const StringHash PSP_LIGHTMATRICES;
-extern URHO3D_API const StringHash PSP_VSMSHADOWPARAMS;
-extern URHO3D_API const StringHash PSP_ROUGHNESS;
-extern URHO3D_API const StringHash PSP_METALLIC;
+extern CLOCKWORK_API const StringHash VSP_AMBIENTSTARTCOLOR;
+extern CLOCKWORK_API const StringHash VSP_AMBIENTENDCOLOR;
+extern CLOCKWORK_API const StringHash VSP_BILLBOARDROT;
+extern CLOCKWORK_API const StringHash VSP_CAMERAPOS;
+extern CLOCKWORK_API const StringHash VSP_CLIPPLANE;
+extern CLOCKWORK_API const StringHash VSP_NEARCLIP;
+extern CLOCKWORK_API const StringHash VSP_FARCLIP;
+extern CLOCKWORK_API const StringHash VSP_DEPTHMODE;
+extern CLOCKWORK_API const StringHash VSP_DELTATIME;
+extern CLOCKWORK_API const StringHash VSP_ELAPSEDTIME;
+extern CLOCKWORK_API const StringHash VSP_FRUSTUMSIZE;
+extern CLOCKWORK_API const StringHash VSP_GBUFFEROFFSETS;
+extern CLOCKWORK_API const StringHash VSP_LIGHTDIR;
+extern CLOCKWORK_API const StringHash VSP_LIGHTPOS;
+extern CLOCKWORK_API const StringHash VSP_NORMALOFFSETSCALE;
+extern CLOCKWORK_API const StringHash VSP_MODEL;
+extern CLOCKWORK_API const StringHash VSP_VIEW;
+extern CLOCKWORK_API const StringHash VSP_VIEWINV;
+extern CLOCKWORK_API const StringHash VSP_VIEWPROJ;
+extern CLOCKWORK_API const StringHash VSP_UOFFSET;
+extern CLOCKWORK_API const StringHash VSP_VOFFSET;
+extern CLOCKWORK_API const StringHash VSP_ZONE;
+extern CLOCKWORK_API const StringHash VSP_LIGHTMATRICES;
+extern CLOCKWORK_API const StringHash VSP_SKINMATRICES;
+extern CLOCKWORK_API const StringHash VSP_VERTEXLIGHTS;
+extern CLOCKWORK_API const StringHash PSP_AMBIENTCOLOR;
+extern CLOCKWORK_API const StringHash PSP_CAMERAPOS;
+extern CLOCKWORK_API const StringHash PSP_DELTATIME;
+extern CLOCKWORK_API const StringHash PSP_DEPTHRECONSTRUCT;
+extern CLOCKWORK_API const StringHash PSP_ELAPSEDTIME;
+extern CLOCKWORK_API const StringHash PSP_FOGCOLOR;
+extern CLOCKWORK_API const StringHash PSP_FOGPARAMS;
+extern CLOCKWORK_API const StringHash PSP_GBUFFERINVSIZE;
+extern CLOCKWORK_API const StringHash PSP_LIGHTCOLOR;
+extern CLOCKWORK_API const StringHash PSP_LIGHTDIR;
+extern CLOCKWORK_API const StringHash PSP_LIGHTPOS;
+extern CLOCKWORK_API const StringHash PSP_NORMALOFFSETSCALE;
+extern CLOCKWORK_API const StringHash PSP_MATDIFFCOLOR;
+extern CLOCKWORK_API const StringHash PSP_MATEMISSIVECOLOR;
+extern CLOCKWORK_API const StringHash PSP_MATENVMAPCOLOR;
+extern CLOCKWORK_API const StringHash PSP_MATSPECCOLOR;
+extern CLOCKWORK_API const StringHash PSP_NEARCLIP;
+extern CLOCKWORK_API const StringHash PSP_FARCLIP;
+extern CLOCKWORK_API const StringHash PSP_SHADOWCUBEADJUST;
+extern CLOCKWORK_API const StringHash PSP_SHADOWDEPTHFADE;
+extern CLOCKWORK_API const StringHash PSP_SHADOWINTENSITY;
+extern CLOCKWORK_API const StringHash PSP_SHADOWMAPINVSIZE;
+extern CLOCKWORK_API const StringHash PSP_SHADOWSPLITS;
+extern CLOCKWORK_API const StringHash PSP_LIGHTMATRICES;
+extern CLOCKWORK_API const StringHash PSP_VSMSHADOWPARAMS;
+extern CLOCKWORK_API const StringHash PSP_ROUGHNESS;
+extern CLOCKWORK_API const StringHash PSP_METALLIC;
 
 // Scale calculation from bounding box diagonal.
-extern URHO3D_API const Vector3 DOT_SCALE;
+extern CLOCKWORK_API const Vector3 DOT_SCALE;
 
 static const int QUALITY_LOW = 0;
 static const int QUALITY_MEDIUM = 1;

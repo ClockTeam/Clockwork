@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,7 +35,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 const char* ShaderVariation::elementSemanticNames[] =
@@ -107,7 +107,7 @@ bool ShaderVariation::Create()
             HRESULT hr = device->CreateVertexShader(&byteCode_[0], byteCode_.Size(), 0, (ID3D11VertexShader**)&object_);
             if (FAILED(hr))
             {
-                URHO3D_SAFE_RELEASE(object_);
+                CLOCKWORK_SAFE_RELEASE(object_);
                 compilerOutput_ = "Could not create vertex shader (HRESULT " + ToStringHex((unsigned)hr) + ")";
             }
         }
@@ -121,7 +121,7 @@ bool ShaderVariation::Create()
             HRESULT hr = device->CreatePixelShader(&byteCode_[0], byteCode_.Size(), 0, (ID3D11PixelShader**)&object_);
             if (FAILED(hr))
             {
-                URHO3D_SAFE_RELEASE(object_);
+                CLOCKWORK_SAFE_RELEASE(object_);
                 compilerOutput_ = "Could not create pixel shader (HRESULT " + ToStringHex((unsigned)hr) + ")";
             }
         }
@@ -152,7 +152,7 @@ void ShaderVariation::Release()
                 graphics_->SetShaders(0, 0);
         }
 
-        URHO3D_SAFE_RELEASE(object_);
+        CLOCKWORK_SAFE_RELEASE(object_);
     }
 
     compilerOutput_.Clear();
@@ -202,7 +202,7 @@ bool ShaderVariation::LoadByteCode(const String& binaryShaderName)
     SharedPtr<File> file = cache->GetFile(binaryShaderName);
     if (!file || file->ReadFileID() != "USHD")
     {
-        URHO3D_LOGERROR(binaryShaderName + " is not a valid shader bytecode file");
+        CLOCKWORK_LOGERROR(binaryShaderName + " is not a valid shader bytecode file");
         return false;
     }
 
@@ -241,16 +241,16 @@ bool ShaderVariation::LoadByteCode(const String& binaryShaderName)
         file->Read(&byteCode_[0], byteCodeSize);
 
         if (type_ == VS)
-            URHO3D_LOGDEBUG("Loaded cached vertex shader " + GetFullName());
+            CLOCKWORK_LOGDEBUG("Loaded cached vertex shader " + GetFullName());
         else
-            URHO3D_LOGDEBUG("Loaded cached pixel shader " + GetFullName());
+            CLOCKWORK_LOGDEBUG("Loaded cached pixel shader " + GetFullName());
 
         CalculateConstantBufferSizes();
         return true;
     }
     else
     {
-        URHO3D_LOGERROR(binaryShaderName + " has zero length bytecode");
+        CLOCKWORK_LOGERROR(binaryShaderName + " has zero length bytecode");
         return false;
     }
 }
@@ -308,7 +308,7 @@ bool ShaderVariation::Compile()
         // In debug mode, check that all defines are referenced by the shader code
 #ifdef _DEBUG
         if (sourceCode.Find(defines[i]) == String::NPOS)
-            URHO3D_LOGWARNING("Shader " + GetFullName() + " does not use the define " + defines[i]);
+            CLOCKWORK_LOGWARNING("Shader " + GetFullName() + " does not use the define " + defines[i]);
 #endif
     }
 
@@ -331,9 +331,9 @@ bool ShaderVariation::Compile()
     else
     {
         if (type_ == VS)
-            URHO3D_LOGDEBUG("Compiled vertex shader " + GetFullName());
+            CLOCKWORK_LOGDEBUG("Compiled vertex shader " + GetFullName());
         else
-            URHO3D_LOGDEBUG("Compiled pixel shader " + GetFullName());
+            CLOCKWORK_LOGDEBUG("Compiled pixel shader " + GetFullName());
 
         unsigned char* bufData = (unsigned char*)shaderCode->GetBufferPointer();
         unsigned bufSize = (unsigned)shaderCode->GetBufferSize();
@@ -350,8 +350,8 @@ bool ShaderVariation::Compile()
         strippedCode->Release();
     }
 
-    URHO3D_SAFE_RELEASE(shaderCode);
-    URHO3D_SAFE_RELEASE(errorMsgs);
+    CLOCKWORK_SAFE_RELEASE(shaderCode);
+    CLOCKWORK_SAFE_RELEASE(errorMsgs);
     
     return !byteCode_.Empty();
 }
@@ -364,8 +364,8 @@ void ShaderVariation::ParseParameters(unsigned char* bufData, unsigned bufSize)
     HRESULT hr = D3DReflect(bufData, bufSize, IID_ID3D11ShaderReflection, (void**)&reflection);
     if (FAILED(hr) || !reflection)
     {
-        URHO3D_SAFE_RELEASE(reflection);
-        URHO3D_LOGD3DERROR("Failed to reflect vertex shader's input signature", hr);
+        CLOCKWORK_SAFE_RELEASE(reflection);
+        CLOCKWORK_LOGD3DERROR("Failed to reflect vertex shader's input signature", hr);
         return;
     }
 
@@ -415,7 +415,7 @@ void ShaderVariation::ParseParameters(unsigned char* bufData, unsigned bufSize)
             String varName(varDesc.Name);
             if (varName[0] == 'c')
             {
-                varName = varName.Substring(1); // Strip the c to follow Urho3D constant naming convention
+                varName = varName.Substring(1); // Strip the c to follow Clockwork constant naming convention
                 parameters_[varName] = ShaderParameter(type_, varName, cbRegister, varDesc.StartOffset, varDesc.Size);
             }
         }

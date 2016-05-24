@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 extern const char* faceCameraModeNames[];
@@ -103,7 +103,7 @@ bool ParticleEffect::BeginLoad(Deserializer& source)
     XMLFile file(context_);
     if (!file.Load(source))
     {
-        URHO3D_LOGERROR("Load particle effect file failed");
+        CLOCKWORK_LOGERROR("Load particle effect file failed");
         return false;
     }
 
@@ -165,7 +165,7 @@ bool ParticleEffect::Load(const XMLElement& source)
 
     if (source.IsNull())
     {
-        URHO3D_LOGERROR("Can not load particle effect from null XML element");
+        CLOCKWORK_LOGERROR("Can not load particle effect from null XML element");
         return false;
     }
 
@@ -324,7 +324,7 @@ bool ParticleEffect::Save(XMLElement& dest) const
 {
     if (dest.IsNull())
     {
-        URHO3D_LOGERROR("Can not save particle effect to null XML element");
+        CLOCKWORK_LOGERROR("Can not save particle effect to null XML element");
         return false;
     }
 

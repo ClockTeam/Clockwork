@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@
 #include "../Math/BoundingBox.h"
 #include "../Scene/Component.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const unsigned DRAWABLE_GEOMETRY = 0x1;
@@ -75,7 +75,7 @@ struct FrameInfo
 };
 
 /// Source data for a 3D geometry draw call.
-struct URHO3D_API SourceBatch
+struct CLOCKWORK_API SourceBatch
 {
     /// Construct with defaults.
     SourceBatch();
@@ -102,9 +102,9 @@ struct URHO3D_API SourceBatch
 };
 
 /// Base class for visible components.
-class URHO3D_API Drawable : public Component
+class CLOCKWORK_API Drawable : public Component
 {
-    URHO3D_OBJECT(Drawable, Component);
+    CLOCKWORK_OBJECT(Drawable, Component);
 
     friend class Octant;
     friend class Octree;
@@ -389,6 +389,6 @@ inline bool CompareDrawables(Drawable* lhs, Drawable* rhs)
     return lhs->GetSortValue() < rhs->GetSortValue();
 }
 
-URHO3D_API bool WriteDrawablesToOBJ(PODVector<Drawable*> drawables, File* outputFile, bool asZUp, bool asRightHanded, bool writeLightmapUV = false);
+CLOCKWORK_API bool WriteDrawablesToOBJ(PODVector<Drawable*> drawables, File* outputFile, bool asZUp, bool asRightHanded, bool writeLightmapUV = false);
 
 }

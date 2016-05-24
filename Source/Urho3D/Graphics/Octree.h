@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@
 #include "../Graphics/Drawable.h"
 #include "../Graphics/OctreeQuery.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Octree;
@@ -36,7 +36,7 @@ static const int NUM_OCTANTS = 8;
 static const unsigned ROOT_INDEX = M_MAX_UNSIGNED;
 
 /// %Octree octant
-class URHO3D_API Octant
+class CLOCKWORK_API Octant
 {
 public:
     /// Construct.
@@ -157,11 +157,11 @@ protected:
 };
 
 /// %Octree component. Should be added only to the root scene node
-class URHO3D_API Octree : public Component, public Octant
+class CLOCKWORK_API Octree : public Component, public Octant
 {
     friend void RaycastDrawablesWork(const WorkItem* item, unsigned threadIndex);
 
-    URHO3D_OBJECT(Octree, Component);
+    CLOCKWORK_OBJECT(Octree, Component);
 
 public:
     /// Construct.

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,14 +28,14 @@
 #include "../Math/Matrix3x4.h"
 #include "../Math/Rect.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class IndexBuffer;
 class VertexBuffer;
 
 /// One billboard in the billboard set.
-struct URHO3D_API Billboard
+struct CLOCKWORK_API Billboard
 {
     /// Position.
     Vector3 position_;
@@ -58,9 +58,9 @@ struct URHO3D_API Billboard
 static const unsigned MAX_BILLBOARDS = 65536 / 4;
 
 /// %Billboard component.
-class URHO3D_API BillboardSet : public Drawable
+class CLOCKWORK_API BillboardSet : public Drawable
 {
-    URHO3D_OBJECT(BillboardSet, Drawable);
+    CLOCKWORK_OBJECT(BillboardSet, Drawable);
 
 public:
     /// Construct.

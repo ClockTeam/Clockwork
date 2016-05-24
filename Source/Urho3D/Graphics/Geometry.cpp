@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 Geometry::Geometry(Context* context) :
@@ -56,7 +56,7 @@ bool Geometry::SetNumVertexBuffers(unsigned num)
 {
     if (num >= MAX_VERTEX_STREAMS)
     {
-        URHO3D_LOGERROR("Too many vertex streams");
+        CLOCKWORK_LOGERROR("Too many vertex streams");
         return false;
     }
 
@@ -70,7 +70,7 @@ bool Geometry::SetVertexBuffer(unsigned index, VertexBuffer* buffer)
 {
     if (index >= vertexBuffers_.Size())
     {
-        URHO3D_LOGERROR("Stream index out of bounds");
+        CLOCKWORK_LOGERROR("Stream index out of bounds");
         return false;
     }
 
@@ -87,12 +87,12 @@ bool Geometry::SetDrawRange(PrimitiveType type, unsigned indexStart, unsigned in
 {
     if (!indexBuffer_ && !rawIndexData_)
     {
-        URHO3D_LOGERROR("Null index buffer and no raw index data, can not define indexed draw range");
+        CLOCKWORK_LOGERROR("Null index buffer and no raw index data, can not define indexed draw range");
         return false;
     }
     if (indexBuffer_ && indexStart + indexCount > indexBuffer_->GetIndexCount())
     {
-        URHO3D_LOGERROR("Illegal draw range " + String(indexStart) + " to " + String(indexStart + indexCount - 1) + ", index buffer has " +
+        CLOCKWORK_LOGERROR("Illegal draw range " + String(indexStart) + " to " + String(indexStart + indexCount - 1) + ", index buffer has " +
                  String(indexBuffer_->GetIndexCount()) + " indices");
         return false;
     }
@@ -127,7 +127,7 @@ bool Geometry::SetDrawRange(PrimitiveType type, unsigned indexStart, unsigned in
         // We can allow setting an illegal draw range now if the caller guarantees to resize / fill the buffer later
         if (checkIllegal && indexStart + indexCount > indexBuffer_->GetIndexCount())
         {
-            URHO3D_LOGERROR("Illegal draw range " + String(indexStart) + " to " + String(indexStart + indexCount - 1) +
+            CLOCKWORK_LOGERROR("Illegal draw range " + String(indexStart) + " to " + String(indexStart + indexCount - 1) +
                      ", index buffer has " + String(indexBuffer_->GetIndexCount()) + " indices");
             return false;
         }
@@ -319,7 +319,7 @@ float Geometry::GetHitDistance(const Ray& ray, Vector3* outNormal, Vector2* outU
     if (outUV && uvOffset == M_MAX_UNSIGNED)
     {
         // requested UV output, but no texture data in vertex buffer
-        URHO3D_LOGWARNING("Illegal GetHitDistance call: UV return requested on vertex buffer without UV coords");
+        CLOCKWORK_LOGWARNING("Illegal GetHitDistance call: UV return requested on vertex buffer without UV coords");
         *outUV = Vector2::ZERO;
         outUV = 0;
     }

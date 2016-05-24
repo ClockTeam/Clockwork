@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 
 #include <d3d9.h>
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Graphics;
@@ -50,7 +50,7 @@ struct VertexDeclarationElement
 };
 
 /// Vertex declaration.
-class URHO3D_API VertexDeclaration : public RefCounted
+class CLOCKWORK_API VertexDeclaration : public RefCounted
 {
 public:
     /// Construct with a single buffer's vertex element list.

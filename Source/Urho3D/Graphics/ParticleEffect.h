@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #include "../Graphics/GraphicsDefs.h"
 #include "../Resource/Resource.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Particle emitter shapes.
@@ -100,9 +100,9 @@ class XMLFile;
 class XMLElement;
 
 /// %Particle effect definition.
-class URHO3D_API ParticleEffect : public Resource
+class CLOCKWORK_API ParticleEffect : public Resource
 {
-    URHO3D_OBJECT(ParticleEffect, Resource);
+    CLOCKWORK_OBJECT(ParticleEffect, Resource);
 
 public:
     /// Construct.

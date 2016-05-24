@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,13 @@
 
 #include "../Graphics/StaticModel.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Renders several object instances while culling and receiving light as one unit. Can be used as a CPU-side optimization, but note that also regular StaticModels will use instanced rendering if possible.
-class URHO3D_API StaticModelGroup : public StaticModel
+class CLOCKWORK_API StaticModelGroup : public StaticModel
 {
-    URHO3D_OBJECT(StaticModelGroup, StaticModel);
+    CLOCKWORK_OBJECT(StaticModelGroup, StaticModel);
 
 public:
     /// Construct.

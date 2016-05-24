@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -45,7 +45,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 extern const char* wrapModeNames[];
@@ -118,7 +118,7 @@ TextureUnit ParseTextureUnitName(String name)
     }
 
     if (unit == MAX_TEXTURE_UNITS)
-        URHO3D_LOGERROR("Unknown texture unit name " + name);
+        CLOCKWORK_LOGERROR("Unknown texture unit name " + name);
 
     return unit;
 }
@@ -417,7 +417,7 @@ bool Material::Load(const XMLElement& source)
 
     if (source.IsNull())
     {
-        URHO3D_LOGERROR("Can not load material from null XML element");
+        CLOCKWORK_LOGERROR("Can not load material from null XML element");
         return false;
     }
 
@@ -496,7 +496,7 @@ bool Material::Load(const XMLElement& source)
         SharedPtr<ValueAnimation> animation(new ValueAnimation(context_));
         if (!animation->LoadXML(parameterAnimationElem))
         {
-            URHO3D_LOGERROR("Could not load parameter animation");
+            CLOCKWORK_LOGERROR("Could not load parameter animation");
             return false;
         }
 
@@ -549,7 +549,7 @@ bool Material::Load(const JSONValue& source)
 
     if (source.IsNull())
     {
-        URHO3D_LOGERROR("Can not load material from null JSON element");
+        CLOCKWORK_LOGERROR("Can not load material from null JSON element");
         return false;
     }
 
@@ -640,7 +640,7 @@ bool Material::Load(const JSONValue& source)
         SharedPtr<ValueAnimation> animation(new ValueAnimation(context_));
         if (!animation->LoadJSON(paramAnimVal))
         {
-            URHO3D_LOGERROR("Could not load parameter animation");
+            CLOCKWORK_LOGERROR("Could not load parameter animation");
             return false;
         }
 
@@ -689,7 +689,7 @@ bool Material::Save(XMLElement& dest) const
 {
     if (dest.IsNull())
     {
-        URHO3D_LOGERROR("Can not save material to null XML element");
+        CLOCKWORK_LOGERROR("Can not save material to null XML element");
         return false;
     }
 
@@ -913,7 +913,7 @@ void Material::SetShaderParameterAnimation(const String& name, ValueAnimation* a
 
         if (shaderParameters_.Find(name) == shaderParameters_.End())
         {
-            URHO3D_LOGERROR(GetName() + " has no shader parameter: " + name);
+            CLOCKWORK_LOGERROR(GetName() + " has no shader parameter: " + name);
             return;
         }
 
@@ -1233,9 +1233,9 @@ void Material::UpdateEventSubscription()
     if (shaderParameterAnimationInfos_.Size() && !subscribed_)
     {
         if (scene_)
-            SubscribeToEvent(scene_, E_ATTRIBUTEANIMATIONUPDATE, URHO3D_HANDLER(Material, HandleAttributeAnimationUpdate));
+            SubscribeToEvent(scene_, E_ATTRIBUTEANIMATIONUPDATE, CLOCKWORK_HANDLER(Material, HandleAttributeAnimationUpdate));
         else
-            SubscribeToEvent(E_UPDATE, URHO3D_HANDLER(Material, HandleAttributeAnimationUpdate));
+            SubscribeToEvent(E_UPDATE, CLOCKWORK_HANDLER(Material, HandleAttributeAnimationUpdate));
         subscribed_ = true;
     }
     else if (subscribed_ && shaderParameterAnimationInfos_.Empty())

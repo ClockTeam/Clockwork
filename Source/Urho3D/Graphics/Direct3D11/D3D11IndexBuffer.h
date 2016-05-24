@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,13 +27,13 @@
 #include "../../Graphics/GPUObject.h"
 #include "../../Graphics/GraphicsDefs.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Hardware index buffer.
-class URHO3D_API IndexBuffer : public Object, public GPUObject
+class CLOCKWORK_API IndexBuffer : public Object, public GPUObject
 {
-    URHO3D_OBJECT(IndexBuffer, Object);
+    CLOCKWORK_OBJECT(IndexBuffer, Object);
 
 public:
     /// Construct.

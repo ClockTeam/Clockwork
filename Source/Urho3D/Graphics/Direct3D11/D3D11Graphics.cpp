@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -77,7 +77,7 @@ __declspec(dllexport) DWORD NvOptimusEnablement = 1;
 __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
 }
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const D3D11_COMPARISON_FUNC d3dCmpFunc[] =
@@ -272,30 +272,30 @@ Graphics::~Graphics()
 
     for (HashMap<unsigned, ID3D11BlendState*>::Iterator i = impl_->blendStates_.Begin(); i != impl_->blendStates_.End(); ++i)
     {
-        URHO3D_SAFE_RELEASE(i->second_);
+        CLOCKWORK_SAFE_RELEASE(i->second_);
     }
     impl_->blendStates_.Clear();
 
     for (HashMap<unsigned, ID3D11DepthStencilState*>::Iterator i = impl_->depthStates_.Begin(); i != impl_->depthStates_.End(); ++i)
     {
-        URHO3D_SAFE_RELEASE(i->second_);
+        CLOCKWORK_SAFE_RELEASE(i->second_);
     }
     impl_->depthStates_.Clear();
 
     for (HashMap<unsigned, ID3D11RasterizerState*>::Iterator i = impl_->rasterizerStates_.Begin();
          i != impl_->rasterizerStates_.End(); ++i)
     {
-        URHO3D_SAFE_RELEASE(i->second_);
+        CLOCKWORK_SAFE_RELEASE(i->second_);
     }
     impl_->rasterizerStates_.Clear();
 
-    URHO3D_SAFE_RELEASE(impl_->defaultRenderTargetView_);
-    URHO3D_SAFE_RELEASE(impl_->defaultDepthStencilView_);
-    URHO3D_SAFE_RELEASE(impl_->defaultDepthTexture_);
-    URHO3D_SAFE_RELEASE(impl_->resolveTexture_);
-    URHO3D_SAFE_RELEASE(impl_->swapChain_);
-    URHO3D_SAFE_RELEASE(impl_->deviceContext_);
-    URHO3D_SAFE_RELEASE(impl_->device_);
+    CLOCKWORK_SAFE_RELEASE(impl_->defaultRenderTargetView_);
+    CLOCKWORK_SAFE_RELEASE(impl_->defaultDepthStencilView_);
+    CLOCKWORK_SAFE_RELEASE(impl_->defaultDepthTexture_);
+    CLOCKWORK_SAFE_RELEASE(impl_->resolveTexture_);
+    CLOCKWORK_SAFE_RELEASE(impl_->swapChain_);
+    CLOCKWORK_SAFE_RELEASE(impl_->deviceContext_);
+    CLOCKWORK_SAFE_RELEASE(impl_->device_);
 
     if (impl_->window_)
     {
@@ -316,7 +316,7 @@ void Graphics::SetExternalWindow(void* window)
     if (!impl_->window_)
         externalWindow_ = window;
     else
-        URHO3D_LOGERROR("Window already opened, can not set external window");
+        CLOCKWORK_LOGERROR("Window already opened, can not set external window");
 }
 
 void Graphics::SetWindowTitle(const String& windowTitle)
@@ -349,7 +349,7 @@ void Graphics::SetWindowPosition(int x, int y)
 bool Graphics::SetMode(int width, int height, bool fullscreen, bool borderless, bool resizable, bool highDPI, bool vsync, bool tripleBuffer,
     int multiSample)
 {
-    URHO3D_PROFILE(SetScreenMode);
+    CLOCKWORK_PROFILE(SetScreenMode);
 
     highDPI = false;   // SDL does not support High DPI mode on Windows platform yet, so always disable it for now
 
@@ -444,7 +444,7 @@ bool Graphics::SetMode(int width, int height, bool fullscreen, bool borderless, 
     Clear(CLEAR_COLOR);
     impl_->swapChain_->Present(0, 0);
 
-#ifdef URHO3D_LOGGING
+#ifdef CLOCKWORK_LOGGING
     String msg;
     msg.AppendWithFormat("Set screen mode %dx%d %s", width_, height_, (fullscreen_ ? "fullscreen" : "windowed"));
     if (borderless_)
@@ -453,7 +453,7 @@ bool Graphics::SetMode(int width, int height, bool fullscreen, bool borderless, 
         msg.Append(" resizable");
     if (multiSample > 1)
         msg.AppendWithFormat(" multisample %d", multiSample);
-    URHO3D_LOGINFO(msg);
+    CLOCKWORK_LOGINFO(msg);
 #endif
 
     using namespace ScreenMode;
@@ -529,7 +529,7 @@ void Graphics::Close()
 
 bool Graphics::TakeScreenShot(Image& destImage)
 {
-    URHO3D_PROFILE(TakeScreenShot);
+    CLOCKWORK_PROFILE(TakeScreenShot);
 
     if (!impl_->device_)
         return false;
@@ -550,8 +550,8 @@ bool Graphics::TakeScreenShot(Image& destImage)
     HRESULT hr = impl_->device_->CreateTexture2D(&textureDesc, 0, &stagingTexture);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(stagingTexture);
-        URHO3D_LOGD3DERROR("Could not create staging texture for screenshot", hr);
+        CLOCKWORK_SAFE_RELEASE(stagingTexture);
+        CLOCKWORK_LOGD3DERROR("Could not create staging texture for screenshot", hr);
         return false;
     }
 
@@ -583,7 +583,7 @@ bool Graphics::TakeScreenShot(Image& destImage)
     hr = impl_->deviceContext_->Map(stagingTexture, 0, D3D11_MAP_READ, 0, &mappedData);
     if (FAILED(hr) || !mappedData.pData)
     {
-        URHO3D_LOGD3DERROR("Could not map staging texture for screenshot", hr);
+        CLOCKWORK_LOGD3DERROR("Could not map staging texture for screenshot", hr);
         stagingTexture->Release();
         return false;
     }
@@ -649,7 +649,7 @@ void Graphics::EndFrame()
         return;
 
     {
-        URHO3D_PROFILE(Present);
+        CLOCKWORK_PROFILE(Present);
 
         SendEvent(E_ENDRENDERING);
         impl_->swapChain_->Present(vsync_ ? 1 : 0, 0);
@@ -728,7 +728,7 @@ bool Graphics::ResolveToTexture(Texture2D* destination, const IntRect& viewport)
     if (!destination || !destination->GetRenderSurface())
         return false;
 
-    URHO3D_PROFILE(ResolveToTexture);
+    CLOCKWORK_PROFILE(ResolveToTexture);
 
     IntRect vpCopy = viewport;
     if (vpCopy.right_ <= vpCopy.left_)
@@ -918,7 +918,7 @@ bool Graphics::SetVertexBuffers(const PODVector<VertexBuffer*>& buffers, unsigne
 {
     if (buffers.Size() > MAX_VERTEX_STREAMS)
     {
-        URHO3D_LOGERROR("Too many vertex buffers");
+        CLOCKWORK_LOGERROR("Too many vertex buffers");
         return false;
     }
 
@@ -1012,12 +1012,12 @@ void Graphics::SetShaders(ShaderVariation* vs, ShaderVariation* ps)
         {
             if (vs->GetCompilerOutput().Empty())
             {
-                URHO3D_PROFILE(CompileVertexShader);
+                CLOCKWORK_PROFILE(CompileVertexShader);
 
                 bool success = vs->Create();
                 if (!success)
                 {
-                    URHO3D_LOGERROR("Failed to compile vertex shader " + vs->GetFullName() + ":\n" + vs->GetCompilerOutput());
+                    CLOCKWORK_LOGERROR("Failed to compile vertex shader " + vs->GetFullName() + ":\n" + vs->GetCompilerOutput());
                     vs = 0;
                 }
             }
@@ -1036,12 +1036,12 @@ void Graphics::SetShaders(ShaderVariation* vs, ShaderVariation* ps)
         {
             if (ps->GetCompilerOutput().Empty())
             {
-                URHO3D_PROFILE(CompilePixelShader);
+                CLOCKWORK_PROFILE(CompilePixelShader);
 
                 bool success = ps->Create();
                 if (!success)
                 {
-                    URHO3D_LOGERROR("Failed to compile pixel shader " + ps->GetFullName() + ":\n" + ps->GetCompilerOutput());
+                    CLOCKWORK_LOGERROR("Failed to compile pixel shader " + ps->GetFullName() + ":\n" + ps->GetCompilerOutput());
                     ps = 0;
                 }
             }
@@ -1705,7 +1705,7 @@ void Graphics::EndDumpShaders()
 
 void Graphics::PrecacheShaders(Deserializer& source)
 {
-    URHO3D_PROFILE(PrecacheShaders);
+    CLOCKWORK_PROFILE(PrecacheShaders);
 
     ShaderPrecache::LoadShaders(this, source);
 }
@@ -1896,7 +1896,7 @@ void Graphics::WindowResized()
     // Reset rendertargets and viewport for the new screen size
     ResetRenderTargets();
 
-    URHO3D_LOGDEBUGF("Window was resized to %dx%d", width_, height_);
+    CLOCKWORK_LOGDEBUGF("Window was resized to %dx%d", width_, height_);
 
     using namespace ScreenMode;
 
@@ -1923,7 +1923,7 @@ void Graphics::WindowMoved()
     position_.x_ = newX;
     position_.y_ = newY;
 
-    URHO3D_LOGDEBUGF("Window was moved to %d,%d", position_.x_, position_.y_);
+    CLOCKWORK_LOGDEBUGF("Window was moved to %d,%d", position_.x_, position_.y_);
 
     using namespace WindowPos;
 
@@ -1990,7 +1990,7 @@ void* Graphics::ReserveScratchBuffer(unsigned size)
             i->size_ = size;
             i->reserved_ = true;
 
-            URHO3D_LOGDEBUG("Resized scratch buffer to size " + String(size));
+            CLOCKWORK_LOGDEBUG("Resized scratch buffer to size " + String(size));
 
             return i->data_.Get();
         }
@@ -2004,7 +2004,7 @@ void* Graphics::ReserveScratchBuffer(unsigned size)
     scratchBuffers_.Push(newBuffer);
     return newBuffer.data_.Get();
 
-    URHO3D_LOGDEBUG("Allocated scratch buffer with size " + String(size));
+    CLOCKWORK_LOGDEBUG("Allocated scratch buffer with size " + String(size));
 }
 
 void Graphics::FreeScratchBuffer(void* buffer)
@@ -2021,7 +2021,7 @@ void Graphics::FreeScratchBuffer(void* buffer)
         }
     }
 
-    URHO3D_LOGWARNING("Reserved scratch buffer " + ToStringHex((unsigned)(size_t)buffer) + " not found");
+    CLOCKWORK_LOGWARNING("Reserved scratch buffer " + ToStringHex((unsigned)(size_t)buffer) + " not found");
 }
 
 void Graphics::CleanupScratchBuffers()
@@ -2033,7 +2033,7 @@ void Graphics::CleanupScratchBuffers()
             i->data_ = maxScratchBufferRequest_ > 0 ? new unsigned char[maxScratchBufferRequest_] : 0;
             i->size_ = maxScratchBufferRequest_;
 
-            URHO3D_LOGDEBUG("Resized scratch buffer to size " + String(maxScratchBufferRequest_));
+            CLOCKWORK_LOGDEBUG("Resized scratch buffer to size " + String(maxScratchBufferRequest_));
         }
     }
 
@@ -2209,7 +2209,7 @@ bool Graphics::OpenWindow(int width, int height, bool resizable, bool borderless
 
     if (!impl_->window_)
     {
-        URHO3D_LOGERRORF("Could not create window, root cause: '%s'", SDL_GetError());
+        CLOCKWORK_LOGERRORF("Could not create window, root cause: '%s'", SDL_GetError());
         return false;
     }
 
@@ -2279,9 +2279,9 @@ bool Graphics::CreateDevice(int width, int height, int multiSample)
 
         if (FAILED(hr))
         {
-            URHO3D_SAFE_RELEASE(impl_->device_);
-            URHO3D_SAFE_RELEASE(impl_->deviceContext_);
-            URHO3D_LOGD3DERROR("Failed to create D3D11 device", hr);
+            CLOCKWORK_SAFE_RELEASE(impl_->device_);
+            CLOCKWORK_SAFE_RELEASE(impl_->deviceContext_);
+            CLOCKWORK_LOGD3DERROR("Failed to create D3D11 device", hr);
             return false;
         }
 
@@ -2332,8 +2332,8 @@ bool Graphics::CreateDevice(int width, int height, int multiSample)
 
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(impl_->swapChain_);
-        URHO3D_LOGD3DERROR("Failed to create D3D11 swap chain", hr);
+        CLOCKWORK_SAFE_RELEASE(impl_->swapChain_);
+        CLOCKWORK_LOGD3DERROR("Failed to create D3D11 swap chain", hr);
         return false;
     }
 
@@ -2380,8 +2380,8 @@ bool Graphics::UpdateSwapChain(int width, int height)
     HRESULT hr = impl_->swapChain_->GetBuffer(0, IID_ID3D11Texture2D, (void**)&backbufferTexture);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(backbufferTexture);
-        URHO3D_LOGD3DERROR("Failed to get backbuffer texture", hr);
+        CLOCKWORK_SAFE_RELEASE(backbufferTexture);
+        CLOCKWORK_LOGD3DERROR("Failed to get backbuffer texture", hr);
         success = false;
     }
     else
@@ -2390,8 +2390,8 @@ bool Graphics::UpdateSwapChain(int width, int height)
         backbufferTexture->Release();
         if (FAILED(hr))
         {
-            URHO3D_SAFE_RELEASE(impl_->defaultRenderTargetView_);
-            URHO3D_LOGD3DERROR("Failed to create backbuffer rendertarget view", hr);
+            CLOCKWORK_SAFE_RELEASE(impl_->defaultRenderTargetView_);
+            CLOCKWORK_LOGD3DERROR("Failed to create backbuffer rendertarget view", hr);
             success = false;
         }
     }
@@ -2413,8 +2413,8 @@ bool Graphics::UpdateSwapChain(int width, int height)
     hr = impl_->device_->CreateTexture2D(&depthDesc, 0, &impl_->defaultDepthTexture_);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(impl_->defaultDepthTexture_);
-        URHO3D_LOGD3DERROR("Failed to create backbuffer depth-stencil texture", hr);
+        CLOCKWORK_SAFE_RELEASE(impl_->defaultDepthTexture_);
+        CLOCKWORK_LOGD3DERROR("Failed to create backbuffer depth-stencil texture", hr);
         success = false;
     }
     else
@@ -2422,8 +2422,8 @@ bool Graphics::UpdateSwapChain(int width, int height)
         hr = impl_->device_->CreateDepthStencilView(impl_->defaultDepthTexture_, 0, &impl_->defaultDepthStencilView_);
         if (FAILED(hr))
         {
-            URHO3D_SAFE_RELEASE(impl_->defaultDepthStencilView_);
-            URHO3D_LOGD3DERROR("Failed to create backbuffer depth-stencil view", hr);
+            CLOCKWORK_SAFE_RELEASE(impl_->defaultDepthStencilView_);
+            CLOCKWORK_LOGD3DERROR("Failed to create backbuffer depth-stencil view", hr);
             success = false;
         }
     }
@@ -2613,7 +2613,7 @@ void Graphics::PrepareDraw()
             HashMap<unsigned, ID3D11BlendState*>::Iterator i = impl_->blendStates_.Find(newBlendStateHash);
             if (i == impl_->blendStates_.End())
             {
-                URHO3D_PROFILE(CreateBlendState);
+                CLOCKWORK_PROFILE(CreateBlendState);
 
                 D3D11_BLEND_DESC stateDesc;
                 memset(&stateDesc, 0, sizeof stateDesc);
@@ -2632,8 +2632,8 @@ void Graphics::PrepareDraw()
                 HRESULT hr = impl_->device_->CreateBlendState(&stateDesc, &newBlendState);
                 if (FAILED(hr))
                 {
-                    URHO3D_SAFE_RELEASE(newBlendState);
-                    URHO3D_LOGD3DERROR("Failed to create blend state", hr);
+                    CLOCKWORK_SAFE_RELEASE(newBlendState);
+                    CLOCKWORK_LOGD3DERROR("Failed to create blend state", hr);
                 }
 
                 i = impl_->blendStates_.Insert(MakePair(newBlendStateHash, newBlendState));
@@ -2657,7 +2657,7 @@ void Graphics::PrepareDraw()
             HashMap<unsigned, ID3D11DepthStencilState*>::Iterator i = impl_->depthStates_.Find(newDepthStateHash);
             if (i == impl_->depthStates_.End())
             {
-                URHO3D_PROFILE(CreateDepthState);
+                CLOCKWORK_PROFILE(CreateDepthState);
 
                 D3D11_DEPTH_STENCIL_DESC stateDesc;
                 memset(&stateDesc, 0, sizeof stateDesc);
@@ -2680,8 +2680,8 @@ void Graphics::PrepareDraw()
                 HRESULT hr = impl_->device_->CreateDepthStencilState(&stateDesc, &newDepthState);
                 if (FAILED(hr))
                 {
-                    URHO3D_SAFE_RELEASE(newDepthState);
-                    URHO3D_LOGD3DERROR("Failed to create depth state", hr);
+                    CLOCKWORK_SAFE_RELEASE(newDepthState);
+                    CLOCKWORK_LOGD3DERROR("Failed to create depth state", hr);
                 }
 
                 i = impl_->depthStates_.Insert(MakePair(newDepthStateHash, newDepthState));
@@ -2710,7 +2710,7 @@ void Graphics::PrepareDraw()
             HashMap<unsigned, ID3D11RasterizerState*>::Iterator i = impl_->rasterizerStates_.Find(newRasterizerStateHash);
             if (i == impl_->rasterizerStates_.End())
             {
-                URHO3D_PROFILE(CreateRasterizerState);
+                CLOCKWORK_PROFILE(CreateRasterizerState);
 
                 D3D11_RASTERIZER_DESC stateDesc;
                 memset(&stateDesc, 0, sizeof stateDesc);
@@ -2729,8 +2729,8 @@ void Graphics::PrepareDraw()
                 HRESULT hr = impl_->device_->CreateRasterizerState(&stateDesc, &newRasterizerState);
                 if (FAILED(hr))
                 {
-                    URHO3D_SAFE_RELEASE(newRasterizerState);
-                    URHO3D_LOGD3DERROR("Failed to create rasterizer state", hr);
+                    CLOCKWORK_SAFE_RELEASE(newRasterizerState);
+                    CLOCKWORK_LOGD3DERROR("Failed to create rasterizer state", hr);
                 }
 
                 i = impl_->rasterizerStates_.Insert(MakePair(newRasterizerStateHash, newRasterizerState));
@@ -2779,8 +2779,8 @@ void Graphics::CreateResolveTexture()
     HRESULT hr = impl_->device_->CreateTexture2D(&textureDesc, 0, &impl_->resolveTexture_);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(impl_->resolveTexture_);
-        URHO3D_LOGD3DERROR("Could not create resolve texture", hr);
+        CLOCKWORK_SAFE_RELEASE(impl_->resolveTexture_);
+        CLOCKWORK_LOGD3DERROR("Could not create resolve texture", hr);
     }
 }
 

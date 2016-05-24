@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@
 #pragma warning(disable:4355)
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 Texture2DArray::Texture2DArray(Context* context) :
@@ -171,7 +171,7 @@ void Texture2DArray::Release()
     if (renderSurface_)
         renderSurface_->Release();
 
-    URHO3D_SAFE_RELEASE(object_);
+    CLOCKWORK_SAFE_RELEASE(object_);
 }
 
 void Texture2DArray::SetLayers(unsigned layers)
@@ -185,12 +185,12 @@ bool Texture2DArray::SetSize(unsigned layers, int width, int height, unsigned fo
 {
     if (width <= 0 || height <= 0)
     {
-        URHO3D_LOGERROR("Zero or negative texture array size");
+        CLOCKWORK_LOGERROR("Zero or negative texture array size");
         return false;
     }
     if (usage == TEXTURE_DEPTHSTENCIL)
     {
-        URHO3D_LOGERROR("Depth-stencil usage not supported for texture arrays");
+        CLOCKWORK_LOGERROR("Depth-stencil usage not supported for texture arrays");
         return false;
     }
 
@@ -211,7 +211,7 @@ bool Texture2DArray::SetSize(unsigned layers, int width, int height, unsigned fo
         requestedLevels_ = 1;
 
     if (usage_ == TEXTURE_RENDERTARGET)
-        SubscribeToEvent(E_RENDERSURFACEUPDATE, URHO3D_HANDLER(Texture2DArray, HandleRenderSurfaceUpdate));
+        SubscribeToEvent(E_RENDERSURFACEUPDATE, CLOCKWORK_HANDLER(Texture2DArray, HandleRenderSurfaceUpdate));
     else
         UnsubscribeFromEvent(E_RENDERSURFACEUPDATE);
 
@@ -230,7 +230,7 @@ bool Texture2DArray::SetSize(unsigned layers, int width, int height, unsigned fo
 
 bool Texture2DArray::SetData(unsigned layer, unsigned level, int x, int y, int width, int height, const void* data)
 {
-    URHO3D_LOGERROR("Texture2DArray not supported on Direct3D9, can not set data");
+    CLOCKWORK_LOGERROR("Texture2DArray not supported on Direct3D9, can not set data");
     return false;
 }
 
@@ -247,17 +247,17 @@ bool Texture2DArray::SetData(unsigned layer, Image* image, bool useAlpha)
 {
     if (!image)
     {
-        URHO3D_LOGERROR("Null image, can not set data");
+        CLOCKWORK_LOGERROR("Null image, can not set data");
         return false;
     }
     if (!layers_)
     {
-        URHO3D_LOGERROR("Number of layers in the array must be set first");
+        CLOCKWORK_LOGERROR("Number of layers in the array must be set first");
         return false;
     }
     if (layer >= layers_)
     {
-        URHO3D_LOGERROR("Illegal layer for setting data");
+        CLOCKWORK_LOGERROR("Illegal layer for setting data");
         return false;
     }
 
@@ -313,12 +313,12 @@ bool Texture2DArray::SetData(unsigned layer, Image* image, bool useAlpha)
             if (!object_)
             {
                 // Do not spam this error on D3D9
-                //URHO3D_LOGERROR("Texture array layer 0 must be loaded first");
+                //CLOCKWORK_LOGERROR("Texture array layer 0 must be loaded first");
                 return false;
             }
             if (levelWidth != width_ || levelHeight != height_ || format != format_)
             {
-                URHO3D_LOGERROR("Texture array layer does not match size or format of layer 0");
+                CLOCKWORK_LOGERROR("Texture array layer does not match size or format of layer 0");
                 return false;
             }
         }
@@ -369,12 +369,12 @@ bool Texture2DArray::SetData(unsigned layer, Image* image, bool useAlpha)
         {
             if (!object_)
             {
-                //URHO3D_LOGERROR("Texture array layer 0 must be loaded first");
+                //CLOCKWORK_LOGERROR("Texture array layer 0 must be loaded first");
                 return false;
             }
             if (width != width_ || height != height_ || format != format_)
             {
-                URHO3D_LOGERROR("Texture array layer does not match size or format of layer 0");
+                CLOCKWORK_LOGERROR("Texture array layer does not match size or format of layer 0");
                 return false;
             }
         }
@@ -409,7 +409,7 @@ bool Texture2DArray::SetData(unsigned layer, Image* image, bool useAlpha)
 
 bool Texture2DArray::GetData(unsigned layer, unsigned level, void* dest) const
 {
-    URHO3D_LOGERROR("Texture2DArray not supported on Direct3D9, can not get data");
+    CLOCKWORK_LOGERROR("Texture2DArray not supported on Direct3D9, can not get data");
     return false;
 }
 
@@ -420,7 +420,7 @@ bool Texture2DArray::Create()
     if (!graphics_ || !width_ || !height_ || !layers_)
         return false;
 
-    URHO3D_LOGERROR("Texture2DArray not supported on Direct3D9, can not create");
+    CLOCKWORK_LOGERROR("Texture2DArray not supported on Direct3D9, can not create");
     return false;
 }
 

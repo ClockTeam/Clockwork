@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,16 +26,16 @@
 #include "../../Graphics/RenderSurface.h"
 #include "../../Graphics/Texture.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Image;
 class XMLFile;
 
 /// 2D texture resource.
-class URHO3D_API Texture2D : public Texture
+class CLOCKWORK_API Texture2D : public Texture
 {
-    URHO3D_OBJECT(Texture2D, Texture);
+    CLOCKWORK_OBJECT(Texture2D, Texture);
 
 public:
     /// Construct.

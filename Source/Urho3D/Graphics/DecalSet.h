@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@
 #include "../Graphics/Skeleton.h"
 #include "../Math/Frustum.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class IndexBuffer;
@@ -102,9 +102,9 @@ struct Decal
 };
 
 /// %Decal renderer component.
-class URHO3D_API DecalSet : public Drawable
+class CLOCKWORK_API DecalSet : public Drawable
 {
-    URHO3D_OBJECT(DecalSet, Drawable);
+    CLOCKWORK_OBJECT(DecalSet, Drawable);
 
 public:
     /// Construct.

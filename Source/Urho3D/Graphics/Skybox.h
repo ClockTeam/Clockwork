@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,13 @@
 
 #include "../Graphics/StaticModel.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Static model component with fixed position in relation to the camera.
-class URHO3D_API Skybox : public StaticModel
+class CLOCKWORK_API Skybox : public StaticModel
 {
-    URHO3D_OBJECT(Skybox, StaticModel);
+    CLOCKWORK_OBJECT(Skybox, StaticModel);
 
 public:
     /// Construct.

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,16 +26,16 @@
 #include "../Graphics/Skeleton.h"
 #include "../Graphics/StaticModel.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Animation;
 class AnimationState;
 
 /// Animated model component.
-class URHO3D_API AnimatedModel : public StaticModel
+class CLOCKWORK_API AnimatedModel : public StaticModel
 {
-    URHO3D_OBJECT(AnimatedModel, StaticModel);
+    CLOCKWORK_OBJECT(AnimatedModel, StaticModel);
 
     friend class AnimationState;
 

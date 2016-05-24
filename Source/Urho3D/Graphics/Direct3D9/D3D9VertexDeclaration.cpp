@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 const BYTE d3dElementType[] =
@@ -68,7 +68,7 @@ VertexDeclaration::VertexDeclaration(Graphics* graphics, const PODVector<VertexE
 
         if (srcElement.semantic_ == SEM_OBJECTINDEX)
         {
-            URHO3D_LOGWARNING("Object index attribute is not supported on Direct3D9 and will be ignored");
+            CLOCKWORK_LOGWARNING("Object index attribute is not supported on Direct3D9 and will be ignored");
             continue;
         }
 
@@ -104,7 +104,7 @@ VertexDeclaration::VertexDeclaration(Graphics* graphics, const PODVector<VertexB
 
             if (srcElement.semantic_ == SEM_OBJECTINDEX)
             {
-                URHO3D_LOGWARNING("Object index attribute is not supported on Direct3D9 and will be ignored");
+                CLOCKWORK_LOGWARNING("Object index attribute is not supported on Direct3D9 and will be ignored");
                 continue;
             }
 
@@ -158,7 +158,7 @@ VertexDeclaration::VertexDeclaration(Graphics* graphics, const Vector<SharedPtr<
 
             if (srcElement.semantic_ == SEM_OBJECTINDEX)
             {
-                URHO3D_LOGWARNING("Object index attribute is not supported on Direct3D9 and will be ignored");
+                CLOCKWORK_LOGWARNING("Object index attribute is not supported on Direct3D9 and will be ignored");
                 continue;
             }
 
@@ -224,14 +224,14 @@ void VertexDeclaration::Create(Graphics* graphics, const PODVector<VertexDeclara
     HRESULT hr = device->CreateVertexDeclaration(elementArray, &declaration_);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(declaration_);
-        URHO3D_LOGD3DERROR("Failed to create vertex declaration", hr);
+        CLOCKWORK_SAFE_RELEASE(declaration_);
+        CLOCKWORK_LOGD3DERROR("Failed to create vertex declaration", hr);
     }
 }
 
 void VertexDeclaration::Release()
 {
-    URHO3D_SAFE_RELEASE(declaration_);
+    CLOCKWORK_SAFE_RELEASE(declaration_);
 }
 
 }

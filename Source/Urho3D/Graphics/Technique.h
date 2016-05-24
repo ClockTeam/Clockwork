@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #include "../Graphics/GraphicsDefs.h"
 #include "../Resource/Resource.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class ShaderVariation;
@@ -39,7 +39,7 @@ enum PassLightingMode
 };
 
 /// %Material rendering pass, which defines shaders and render state.
-class URHO3D_API Pass : public RefCounted
+class CLOCKWORK_API Pass : public RefCounted
 {
 public:
     /// Construct.
@@ -158,9 +158,9 @@ private:
 };
 
 /// %Material technique. Consists of several passes.
-class URHO3D_API Technique : public Resource
+class CLOCKWORK_API Technique : public Resource
 {
-    URHO3D_OBJECT(Technique, Resource);
+    CLOCKWORK_OBJECT(Technique, Resource);
 
     friend class Renderer;
 

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 AnimationStateTrack::AnimationStateTrack() :
@@ -91,7 +91,7 @@ AnimationState::AnimationState(Node* node, Animation* animation) :
                     if (targetNode)
                         stateTrack.node_ = targetNode;
                     else
-                        URHO3D_LOGWARNING("Node " + i->second_.name_ + " not found for node animation " + animation_->GetName());
+                        CLOCKWORK_LOGWARNING("Node " + i->second_.name_ + " not found for node animation " + animation_->GetName());
                 }
 
                 if (stateTrack.node_)

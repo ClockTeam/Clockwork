@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 #include "../Graphics/BillboardSet.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class ParticleEffect;
@@ -51,9 +51,9 @@ struct Particle
 };
 
 /// %Particle emitter component.
-class URHO3D_API ParticleEmitter : public BillboardSet
+class CLOCKWORK_API ParticleEmitter : public BillboardSet
 {
-    URHO3D_OBJECT(ParticleEmitter, BillboardSet);
+    CLOCKWORK_OBJECT(ParticleEmitter, BillboardSet);
 
 public:
     /// Construct.

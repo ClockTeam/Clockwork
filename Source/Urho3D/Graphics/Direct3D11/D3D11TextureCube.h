@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,16 +26,16 @@
 #include "../../Graphics/RenderSurface.h"
 #include "../../Graphics/Texture.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Deserializer;
 class Image;
 
 /// Cube texture resource.
-class URHO3D_API TextureCube : public Texture
+class CLOCKWORK_API TextureCube : public Texture
 {
-    URHO3D_OBJECT(TextureCube, Texture);
+    CLOCKWORK_OBJECT(TextureCube, Texture);
 
 public:
     /// Construct.

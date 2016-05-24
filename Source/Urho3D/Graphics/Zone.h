@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,13 +26,13 @@
 #include "../Graphics/Texture.h"
 #include "../Math/Color.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// %Component that describes global rendering properties.
-class URHO3D_API Zone : public Drawable
+class CLOCKWORK_API Zone : public Drawable
 {
-    URHO3D_OBJECT(Zone, Drawable);
+    CLOCKWORK_OBJECT(Zone, Drawable);
 
 public:
     /// Construct.

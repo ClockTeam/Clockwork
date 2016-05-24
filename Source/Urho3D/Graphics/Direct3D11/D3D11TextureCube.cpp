@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,7 @@
 #pragma warning(disable:4355)
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const char* cubeMapLayoutNames[] = {
@@ -264,21 +264,21 @@ void TextureCube::Release()
             renderSurfaces_[i]->Release();
     }
 
-    URHO3D_SAFE_RELEASE(object_);
-    URHO3D_SAFE_RELEASE(shaderResourceView_);
-    URHO3D_SAFE_RELEASE(sampler_);
+    CLOCKWORK_SAFE_RELEASE(object_);
+    CLOCKWORK_SAFE_RELEASE(shaderResourceView_);
+    CLOCKWORK_SAFE_RELEASE(sampler_);
 }
 
 bool TextureCube::SetSize(int size, unsigned format, TextureUsage usage)
 {
     if (size <= 0)
     {
-        URHO3D_LOGERROR("Zero or negative cube texture size");
+        CLOCKWORK_LOGERROR("Zero or negative cube texture size");
         return false;
     }
     if (usage == TEXTURE_DEPTHSTENCIL)
     {
-        URHO3D_LOGERROR("Depth-stencil usage not supported for cube maps");
+        CLOCKWORK_LOGERROR("Depth-stencil usage not supported for cube maps");
         return false;
     }
 
@@ -303,7 +303,7 @@ bool TextureCube::SetSize(int size, unsigned format, TextureUsage usage)
         requestedLevels_ = 1;
 
     if (usage_ == TEXTURE_RENDERTARGET)
-        SubscribeToEvent(E_RENDERSURFACEUPDATE, URHO3D_HANDLER(TextureCube, HandleRenderSurfaceUpdate));
+        SubscribeToEvent(E_RENDERSURFACEUPDATE, CLOCKWORK_HANDLER(TextureCube, HandleRenderSurfaceUpdate));
     else
         UnsubscribeFromEvent(E_RENDERSURFACEUPDATE);
 
@@ -316,23 +316,23 @@ bool TextureCube::SetSize(int size, unsigned format, TextureUsage usage)
 
 bool TextureCube::SetData(CubeMapFace face, unsigned level, int x, int y, int width, int height, const void* data)
 {
-    URHO3D_PROFILE(SetTextureData);
+    CLOCKWORK_PROFILE(SetTextureData);
 
     if (!object_)
     {
-        URHO3D_LOGERROR("No texture created, can not set data");
+        CLOCKWORK_LOGERROR("No texture created, can not set data");
         return false;
     }
 
     if (!data)
     {
-        URHO3D_LOGERROR("Null source for setting data");
+        CLOCKWORK_LOGERROR("Null source for setting data");
         return false;
     }
 
     if (level >= levels_)
     {
-        URHO3D_LOGERROR("Illegal mip level for setting data");
+        CLOCKWORK_LOGERROR("Illegal mip level for setting data");
         return false;
     }
 
@@ -340,7 +340,7 @@ bool TextureCube::SetData(CubeMapFace face, unsigned level, int x, int y, int wi
     int levelHeight = GetLevelHeight(level);
     if (x < 0 || x + width > levelWidth || y < 0 || y + height > levelHeight || width <= 0 || height <= 0)
     {
-        URHO3D_LOGERROR("Illegal dimensions for setting data");
+        CLOCKWORK_LOGERROR("Illegal dimensions for setting data");
         return false;
     }
 
@@ -375,7 +375,7 @@ bool TextureCube::SetData(CubeMapFace face, unsigned level, int x, int y, int wi
             &mappedData);
         if (FAILED(hr) || !mappedData.pData)
         {
-            URHO3D_LOGD3DERROR("Failed to map texture for update", hr);
+            CLOCKWORK_LOGD3DERROR("Failed to map texture for update", hr);
             return false;
         }
         else
@@ -415,7 +415,7 @@ bool TextureCube::SetData(CubeMapFace face, Image* image, bool useAlpha)
 {
     if (!image)
     {
-        URHO3D_LOGERROR("Null image, can not load texture");
+        CLOCKWORK_LOGERROR("Null image, can not load texture");
         return false;
     }
 
@@ -446,7 +446,7 @@ bool TextureCube::SetData(CubeMapFace face, Image* image, bool useAlpha)
 
         if (levelWidth != levelHeight)
         {
-            URHO3D_LOGERROR("Cube texture width not equal to height");
+            CLOCKWORK_LOGERROR("Cube texture width not equal to height");
             return false;
         }
 
@@ -484,12 +484,12 @@ bool TextureCube::SetData(CubeMapFace face, Image* image, bool useAlpha)
         {
             if (!object_)
             {
-                URHO3D_LOGERROR("Cube texture face 0 must be loaded first");
+                CLOCKWORK_LOGERROR("Cube texture face 0 must be loaded first");
                 return false;
             }
             if (levelWidth != width_ || format != format_)
             {
-                URHO3D_LOGERROR("Cube texture face does not match size or format of face 0");
+                CLOCKWORK_LOGERROR("Cube texture face does not match size or format of face 0");
                 return false;
             }
         }
@@ -518,7 +518,7 @@ bool TextureCube::SetData(CubeMapFace face, Image* image, bool useAlpha)
 
         if (width != height)
         {
-            URHO3D_LOGERROR("Cube texture width not equal to height");
+            CLOCKWORK_LOGERROR("Cube texture width not equal to height");
             return false;
         }
 
@@ -546,12 +546,12 @@ bool TextureCube::SetData(CubeMapFace face, Image* image, bool useAlpha)
         {
             if (!object_)
             {
-                URHO3D_LOGERROR("Cube texture face 0 must be loaded first");
+                CLOCKWORK_LOGERROR("Cube texture face 0 must be loaded first");
                 return false;
             }
             if (width != width_ || format != format_)
             {
-                URHO3D_LOGERROR("Cube texture face does not match size or format of face 0");
+                CLOCKWORK_LOGERROR("Cube texture face does not match size or format of face 0");
                 return false;
             }
         }
@@ -588,19 +588,19 @@ bool TextureCube::GetData(CubeMapFace face, unsigned level, void* dest) const
 {
     if (!object_)
     {
-        URHO3D_LOGERROR("No texture created, can not get data");
+        CLOCKWORK_LOGERROR("No texture created, can not get data");
         return false;
     }
 
     if (!dest)
     {
-        URHO3D_LOGERROR("Null destination for getting data");
+        CLOCKWORK_LOGERROR("Null destination for getting data");
         return false;
     }
 
     if (level >= levels_)
     {
-        URHO3D_LOGERROR("Illegal mip level for getting data");
+        CLOCKWORK_LOGERROR("Illegal mip level for getting data");
         return false;
     }
 
@@ -623,8 +623,8 @@ bool TextureCube::GetData(CubeMapFace face, unsigned level, void* dest) const
     HRESULT hr = graphics_->GetImpl()->GetDevice()->CreateTexture2D(&textureDesc, 0, &stagingTexture);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(stagingTexture);
-        URHO3D_LOGD3DERROR("Failed to create staging texture for GetData", hr);
+        CLOCKWORK_SAFE_RELEASE(stagingTexture);
+        CLOCKWORK_LOGD3DERROR("Failed to create staging texture for GetData", hr);
         return false;
     }
 
@@ -647,7 +647,7 @@ bool TextureCube::GetData(CubeMapFace face, unsigned level, void* dest) const
     hr = graphics_->GetImpl()->GetDeviceContext()->Map((ID3D11Resource*)stagingTexture, 0, D3D11_MAP_READ, 0, &mappedData);
     if (FAILED(hr) || !mappedData.pData)
     {
-        URHO3D_LOGD3DERROR("Failed to map staging texture for GetData", hr);
+        CLOCKWORK_LOGD3DERROR("Failed to map staging texture for GetData", hr);
         stagingTexture->Release();
         return false;
     }
@@ -691,8 +691,8 @@ bool TextureCube::Create()
     HRESULT hr = graphics_->GetImpl()->GetDevice()->CreateTexture2D(&textureDesc, 0, (ID3D11Texture2D**)&object_);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(object_);
-        URHO3D_LOGD3DERROR("Failed to create texture", hr);
+        CLOCKWORK_SAFE_RELEASE(object_);
+        CLOCKWORK_LOGD3DERROR("Failed to create texture", hr);
         return false;
     }
 
@@ -706,8 +706,8 @@ bool TextureCube::Create()
         (ID3D11ShaderResourceView**)&shaderResourceView_);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(shaderResourceView_);
-        URHO3D_LOGD3DERROR("Failed to create shader resource view for texture", hr);
+        CLOCKWORK_SAFE_RELEASE(shaderResourceView_);
+        CLOCKWORK_LOGD3DERROR("Failed to create shader resource view for texture", hr);
         return false;
     }
 
@@ -728,8 +728,8 @@ bool TextureCube::Create()
 
             if (FAILED(hr))
             {
-                URHO3D_SAFE_RELEASE(renderSurfaces_[i]->renderTargetView_);
-                URHO3D_LOGD3DERROR("Failed to create rendertarget view for texture", hr);
+                CLOCKWORK_SAFE_RELEASE(renderSurfaces_[i]->renderTargetView_);
+                CLOCKWORK_LOGD3DERROR("Failed to create rendertarget view for texture", hr);
                 return false;
             }
         }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -92,7 +92,7 @@ extern "C"
 }
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const unsigned glCmpFunc[] =
@@ -306,7 +306,7 @@ void Graphics::SetExternalWindow(void* window)
     if (!impl_->window_)
         externalWindow_ = window;
     else
-        URHO3D_LOGERROR("Window already opened, can not set external window");
+        CLOCKWORK_LOGERROR("Window already opened, can not set external window");
 }
 
 void Graphics::SetWindowTitle(const String& windowTitle)
@@ -339,7 +339,7 @@ void Graphics::SetWindowPosition(int x, int y)
 bool Graphics::SetMode(int width, int height, bool fullscreen, bool borderless, bool resizable, bool highDPI, bool vsync,
     bool tripleBuffer, int multiSample)
 {
-    URHO3D_PROFILE(SetScreenMode);
+    CLOCKWORK_PROFILE(SetScreenMode);
 
     bool maximize = false;
 
@@ -511,7 +511,7 @@ bool Graphics::SetMode(int width, int height, bool fullscreen, bool borderless, 
                 }
                 else
                 {
-                    URHO3D_LOGERRORF("Could not create window, root cause: '%s'", SDL_GetError());
+                    CLOCKWORK_LOGERRORF("Could not create window, root cause: '%s'", SDL_GetError());
                     return false;
                 }
             }
@@ -562,7 +562,7 @@ bool Graphics::SetMode(int width, int height, bool fullscreen, bool borderless, 
 
     CheckFeatureSupport();
 
-#ifdef URHO3D_LOGGING
+#ifdef CLOCKWORK_LOGGING
     String msg;
     msg.AppendWithFormat("Set screen mode %dx%d %s", width_, height_, (fullscreen_ ? "fullscreen" : "windowed"));
     if (borderless_)
@@ -571,7 +571,7 @@ bool Graphics::SetMode(int width, int height, bool fullscreen, bool borderless, 
         msg.Append(" resizable");
     if (multiSample > 1)
         msg.AppendWithFormat(" multisample %d", multiSample);
-    URHO3D_LOGINFO(msg);
+    CLOCKWORK_LOGINFO(msg);
 #endif
 
     using namespace ScreenMode;
@@ -612,7 +612,7 @@ void Graphics::SetForceGL2(bool enable)
 {
     if (IsInitialized())
     {
-        URHO3D_LOGERROR("OpenGL 2 can only be forced before setting the initial screen mode");
+        CLOCKWORK_LOGERROR("OpenGL 2 can only be forced before setting the initial screen mode");
         return;
     }
 
@@ -641,14 +641,14 @@ void Graphics::Close()
 
 bool Graphics::TakeScreenShot(Image& destImage)
 {
-    URHO3D_PROFILE(TakeScreenShot);
+    CLOCKWORK_PROFILE(TakeScreenShot);
 
     if (!IsInitialized())
         return false;
 
     if (IsDeviceLost())
     {
-        URHO3D_LOGERROR("Can not take screenshot while device is lost");
+        CLOCKWORK_LOGERROR("Can not take screenshot while device is lost");
         return false;
     }
 
@@ -705,7 +705,7 @@ void Graphics::EndFrame()
     if (!IsInitialized())
         return;
 
-    URHO3D_PROFILE(Present);
+    CLOCKWORK_PROFILE(Present);
 
     SendEvent(E_ENDRENDERING);
 
@@ -772,7 +772,7 @@ bool Graphics::ResolveToTexture(Texture2D* destination, const IntRect& viewport)
     if (!destination || !destination->GetRenderSurface())
         return false;
 
-    URHO3D_PROFILE(ResolveToTexture);
+    CLOCKWORK_PROFILE(ResolveToTexture);
 
     IntRect vpCopy = viewport;
     if (vpCopy.right_ <= vpCopy.left_)
@@ -924,7 +924,7 @@ bool Graphics::SetVertexBuffers(const PODVector<VertexBuffer*>& buffers, unsigne
 {
     if (buffers.Size() > MAX_VERTEX_STREAMS)
     {
-        URHO3D_LOGERROR("Too many vertex buffers");
+        CLOCKWORK_LOGERROR("Too many vertex buffers");
         return false;
     }
 
@@ -973,14 +973,14 @@ void Graphics::SetShaders(ShaderVariation* vs, ShaderVariation* ps)
     {
         if (vs->GetCompilerOutput().Empty())
         {
-            URHO3D_PROFILE(CompileVertexShader);
+            CLOCKWORK_PROFILE(CompileVertexShader);
 
             bool success = vs->Create();
             if (success)
-                URHO3D_LOGDEBUG("Compiled vertex shader " + vs->GetFullName());
+                CLOCKWORK_LOGDEBUG("Compiled vertex shader " + vs->GetFullName());
             else
             {
-                URHO3D_LOGERROR("Failed to compile vertex shader " + vs->GetFullName() + ":\n" + vs->GetCompilerOutput());
+                CLOCKWORK_LOGERROR("Failed to compile vertex shader " + vs->GetFullName() + ":\n" + vs->GetCompilerOutput());
                 vs = 0;
             }
         }
@@ -992,14 +992,14 @@ void Graphics::SetShaders(ShaderVariation* vs, ShaderVariation* ps)
     {
         if (ps->GetCompilerOutput().Empty())
         {
-            URHO3D_PROFILE(CompilePixelShader);
+            CLOCKWORK_PROFILE(CompilePixelShader);
 
             bool success = ps->Create();
             if (success)
-                URHO3D_LOGDEBUG("Compiled pixel shader " + ps->GetFullName());
+                CLOCKWORK_LOGDEBUG("Compiled pixel shader " + ps->GetFullName());
             else
             {
-                URHO3D_LOGERROR("Failed to compile pixel shader " + ps->GetFullName() + ":\n" + ps->GetCompilerOutput());
+                CLOCKWORK_LOGERROR("Failed to compile pixel shader " + ps->GetFullName() + ":\n" + ps->GetCompilerOutput());
                 ps = 0;
             }
         }
@@ -1039,19 +1039,19 @@ void Graphics::SetShaders(ShaderVariation* vs, ShaderVariation* ps)
         else
         {
             // Link a new combination
-            URHO3D_PROFILE(LinkShaders);
+            CLOCKWORK_PROFILE(LinkShaders);
 
             SharedPtr<ShaderProgram> newProgram(new ShaderProgram(this, vs, ps));
             if (newProgram->Link())
             {
-                URHO3D_LOGDEBUG("Linked vertex shader " + vs->GetFullName() + " and pixel shader " + ps->GetFullName());
+                CLOCKWORK_LOGDEBUG("Linked vertex shader " + vs->GetFullName() + " and pixel shader " + ps->GetFullName());
                 // Note: Link() calls glUseProgram() to set the texture sampler uniforms,
                 // so it is not necessary to call it again
                 shaderProgram_ = newProgram;
             }
             else
             {
-                URHO3D_LOGERROR("Failed to link vertex shader " + vs->GetFullName() + " and pixel shader " + ps->GetFullName() + ":\n" +
+                CLOCKWORK_LOGERROR("Failed to link vertex shader " + vs->GetFullName() + " and pixel shader " + ps->GetFullName() + ":\n" +
                          newProgram->GetLinkerOutput());
                 glUseProgram(0);
                 shaderProgram_ = 0;
@@ -1947,7 +1947,7 @@ void Graphics::EndDumpShaders()
 
 void Graphics::PrecacheShaders(Deserializer& source)
 {
-    URHO3D_PROFILE(PrecacheShaders);
+    CLOCKWORK_PROFILE(PrecacheShaders);
 
     ShaderPrecache::LoadShaders(this, source);
 }
@@ -2176,7 +2176,7 @@ void Graphics::WindowResized()
     CleanupFramebuffers();
     ResetRenderTargets();
 
-    URHO3D_LOGDEBUGF("Window was resized to %dx%d", width_, height_);
+    CLOCKWORK_LOGDEBUGF("Window was resized to %dx%d", width_, height_);
 
     using namespace ScreenMode;
 
@@ -2203,7 +2203,7 @@ void Graphics::WindowMoved()
     position_.x_ = newX;
     position_.y_ = newY;
 
-    URHO3D_LOGDEBUGF("Window was moved to %d,%d", position_.x_, position_.y_);
+    CLOCKWORK_LOGDEBUGF("Window was moved to %d,%d", position_.x_, position_.y_);
 
     using namespace WindowPos;
 
@@ -2280,7 +2280,7 @@ void Graphics::FreeScratchBuffer(void* buffer)
         }
     }
 
-    URHO3D_LOGWARNING("Reserved scratch buffer " + ToStringHex((unsigned)(size_t)buffer) + " not found");
+    CLOCKWORK_LOGWARNING("Reserved scratch buffer " + ToStringHex((unsigned)(size_t)buffer) + " not found");
 }
 
 void Graphics::CleanupScratchBuffers()
@@ -2415,7 +2415,7 @@ void Graphics::Release(bool clearGPUObjects, bool closeWindow)
     {
         // Do not log this message if we are exiting
         if (!clearGPUObjects)
-            URHO3D_LOGINFO("OpenGL context lost");
+            CLOCKWORK_LOGINFO("OpenGL context lost");
 
         SDL_GL_DeleteContext(impl_->context_);
         impl_->context_ = 0;
@@ -2473,7 +2473,7 @@ void Graphics::Restore()
 
         if (!impl_->context_)
         {
-            URHO3D_LOGERRORF("Could not create OpenGL context, root cause '%s'", SDL_GetError());
+            CLOCKWORK_LOGERRORF("Could not create OpenGL context, root cause '%s'", SDL_GetError());
             return;
         }
 
@@ -2485,7 +2485,7 @@ void Graphics::Restore()
         GLenum err = glewInit();
         if (GLEW_OK != err)
         {
-            URHO3D_LOGERRORF("Could not initialize OpenGL extensions, root cause: '%s'", glewGetErrorString(err));
+            CLOCKWORK_LOGERRORF("Could not initialize OpenGL extensions, root cause: '%s'", glewGetErrorString(err));
             return;
         }
 
@@ -2503,7 +2503,7 @@ void Graphics::Restore()
         {
             if (!GLEW_EXT_framebuffer_object || !GLEW_EXT_packed_depth_stencil)
             {
-                URHO3D_LOGERROR("EXT_framebuffer_object and EXT_packed_depth_stencil OpenGL extensions are required");
+                CLOCKWORK_LOGERROR("EXT_framebuffer_object and EXT_packed_depth_stencil OpenGL extensions are required");
                 return;
             }
 
@@ -2512,7 +2512,7 @@ void Graphics::Restore()
         }
         else
         {
-            URHO3D_LOGERROR("OpenGL 2.0 is required");
+            CLOCKWORK_LOGERROR("OpenGL 2.0 is required");
             return;
         }
 

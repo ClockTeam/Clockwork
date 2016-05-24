@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 extern const char* GEOMETRY_CATEGORY;
@@ -49,7 +49,7 @@ void Skybox::RegisterObject(Context* context)
 {
     context->RegisterFactory<Skybox>(GEOMETRY_CATEGORY);
 
-    URHO3D_COPY_BASE_ATTRIBUTES(StaticModel);
+    CLOCKWORK_COPY_BASE_ATTRIBUTES(StaticModel);
 }
 
 void Skybox::ProcessRayQuery(const RayOctreeQuery& query, PODVector<RayQueryResult>& results)

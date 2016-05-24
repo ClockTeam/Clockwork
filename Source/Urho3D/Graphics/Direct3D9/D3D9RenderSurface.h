@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,13 +25,13 @@
 #include "../../Graphics/GraphicsDefs.h"
 #include "../../Graphics/Viewport.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Texture;
 
 /// %Color or depth-stencil surface that can be rendered into.
-class URHO3D_API RenderSurface : public RefCounted
+class CLOCKWORK_API RenderSurface : public RefCounted
 {
     friend class Texture2D;
     friend class TextureCube;

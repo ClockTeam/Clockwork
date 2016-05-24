@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 #include "../Resource/Resource.h"
 #include "../Scene/ValueAnimationInfo.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Material;
@@ -101,9 +101,9 @@ template <> inline unsigned MakeHash(const TextureUnit& value)
 }
 
 /// Describes how to render 3D geometries.
-class URHO3D_API Material : public Resource
+class CLOCKWORK_API Material : public Resource
 {
-    URHO3D_OBJECT(Material, Resource);
+    CLOCKWORK_OBJECT(Material, Resource);
 
 public:
     /// Construct.

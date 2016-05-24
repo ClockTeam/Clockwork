@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const float LOD_CONSTANT = 1.0f / 150.0f;
@@ -112,7 +112,7 @@ void TerrainPatch::ProcessRayQuery(const RayOctreeQuery& query, PODVector<RayQue
         break;
 
     case RAY_TRIANGLE_UV:
-        URHO3D_LOGWARNING("RAY_TRIANGLE_UV query level is not supported for TerrainPatch component");
+        CLOCKWORK_LOGWARNING("RAY_TRIANGLE_UV query level is not supported for TerrainPatch component");
         break;
     }
 }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 IndexBuffer::IndexBuffer(Context* context, bool forceHeadless) :
@@ -62,7 +62,7 @@ void IndexBuffer::Release()
     if (graphics_ && graphics_->GetIndexBuffer() == this)
         graphics_->SetIndexBuffer(0);
 
-    URHO3D_SAFE_RELEASE(object_);
+    CLOCKWORK_SAFE_RELEASE(object_);
 }
 
 void IndexBuffer::SetShadowed(bool enable)
@@ -102,13 +102,13 @@ bool IndexBuffer::SetData(const void* data)
 {
     if (!data)
     {
-        URHO3D_LOGERROR("Null pointer for index buffer data");
+        CLOCKWORK_LOGERROR("Null pointer for index buffer data");
         return false;
     }
 
     if (!indexSize_)
     {
-        URHO3D_LOGERROR("Index size not defined, can not set index buffer data");
+        CLOCKWORK_LOGERROR("Index size not defined, can not set index buffer data");
         return false;
     }
 
@@ -152,19 +152,19 @@ bool IndexBuffer::SetDataRange(const void* data, unsigned start, unsigned count,
 
     if (!data)
     {
-        URHO3D_LOGERROR("Null pointer for index buffer data");
+        CLOCKWORK_LOGERROR("Null pointer for index buffer data");
         return false;
     }
 
     if (!indexSize_)
     {
-        URHO3D_LOGERROR("Index size not defined, can not set index buffer data");
+        CLOCKWORK_LOGERROR("Index size not defined, can not set index buffer data");
         return false;
     }
 
     if (start + count > indexCount_)
     {
-        URHO3D_LOGERROR("Illegal range for setting new index buffer data");
+        CLOCKWORK_LOGERROR("Illegal range for setting new index buffer data");
         return false;
     }
 
@@ -208,19 +208,19 @@ void* IndexBuffer::Lock(unsigned start, unsigned count, bool discard)
 {
     if (lockState_ != LOCK_NONE)
     {
-        URHO3D_LOGERROR("Index buffer already locked");
+        CLOCKWORK_LOGERROR("Index buffer already locked");
         return 0;
     }
 
     if (!indexSize_)
     {
-        URHO3D_LOGERROR("Index size not defined, can not lock index buffer");
+        CLOCKWORK_LOGERROR("Index size not defined, can not lock index buffer");
         return 0;
     }
 
     if (start + count > indexCount_)
     {
-        URHO3D_LOGERROR("Illegal range for locking index buffer");
+        CLOCKWORK_LOGERROR("Illegal range for locking index buffer");
         return 0;
     }
 
@@ -277,13 +277,13 @@ bool IndexBuffer::GetUsedVertexRange(unsigned start, unsigned count, unsigned& m
 {
     if (!shadowData_)
     {
-        URHO3D_LOGERROR("Used vertex range can only be queried from an index buffer with shadow data");
+        CLOCKWORK_LOGERROR("Used vertex range can only be queried from an index buffer with shadow data");
         return false;
     }
 
     if (start + count > indexCount_)
     {
-        URHO3D_LOGERROR("Illegal index range for querying used vertices");
+        CLOCKWORK_LOGERROR("Illegal index range for querying used vertices");
         return false;
     }
 
@@ -338,8 +338,8 @@ bool IndexBuffer::Create()
         HRESULT hr = graphics_->GetImpl()->GetDevice()->CreateBuffer(&bufferDesc, 0, (ID3D11Buffer**)&object_);
         if (FAILED(hr))
         {
-            URHO3D_SAFE_RELEASE(object_);
-            URHO3D_LOGD3DERROR("Failed to create index buffer", hr);
+            CLOCKWORK_SAFE_RELEASE(object_);
+            CLOCKWORK_LOGD3DERROR("Failed to create index buffer", hr);
             return false;
         }
     }
@@ -367,7 +367,7 @@ void* IndexBuffer::MapBuffer(unsigned start, unsigned count, bool discard)
         HRESULT hr = graphics_->GetImpl()->GetDeviceContext()->Map((ID3D11Buffer*)object_, 0, discard ? D3D11_MAP_WRITE_DISCARD :
             D3D11_MAP_WRITE, 0, &mappedData);
         if (FAILED(hr) || !mappedData.pData)
-            URHO3D_LOGD3DERROR("Failed to map index buffer", hr);
+            CLOCKWORK_LOGD3DERROR("Failed to map index buffer", hr);
         else
         {
             hwData = mappedData.pData;

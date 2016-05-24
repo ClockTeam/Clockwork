@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@
 #include "../Core/Object.h"
 #include "../Graphics/GraphicsDefs.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class IndexBuffer;
@@ -35,9 +35,9 @@ class Graphics;
 class VertexBuffer;
 
 /// Defines one or more vertex buffers, an index buffer and a draw range.
-class URHO3D_API Geometry : public Object
+class CLOCKWORK_API Geometry : public Object
 {
-    URHO3D_OBJECT(Geometry, Object);
+    CLOCKWORK_OBJECT(Geometry, Object);
 
 public:
     /// Construct with one empty vertex buffer.

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@
 #include "../../Math/Rect.h"
 #include "../../Resource/Image.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class ConstantBuffer;
@@ -75,9 +75,9 @@ struct ScratchBuffer
 };
 
 /// %Graphics subsystem. Manages the application window, rendering state and GPU resources.
-class URHO3D_API Graphics : public Object
+class CLOCKWORK_API Graphics : public Object
 {
-    URHO3D_OBJECT(Graphics, Object);
+    CLOCKWORK_OBJECT(Graphics, Object);
 
 public:
     /// Construct.
@@ -727,6 +727,6 @@ private:
 };
 
 /// Register Graphics library objects.
-void URHO3D_API RegisterGraphicsLibrary(Context* context_);
+void CLOCKWORK_API RegisterGraphicsLibrary(Context* context_);
 
 }

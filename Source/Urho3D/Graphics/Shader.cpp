@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 void CommentOutFunction(String& code, const String& signature)
@@ -100,7 +100,7 @@ bool Shader::BeginLoad(Deserializer& source)
     CommentOutFunction(psSourceCode_, "void VS(");
 
     // OpenGL: rename either VS() or PS() to main()
-#ifdef URHO3D_OPENGL
+#ifdef CLOCKWORK_OPENGL
     vsSourceCode_.Replace("void VS(", "void main(");
     psSourceCode_.Replace("void PS(", "void main(");
 #endif

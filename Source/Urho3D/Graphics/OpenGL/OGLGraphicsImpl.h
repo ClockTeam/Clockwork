@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -63,7 +63,7 @@
 
 #include <SDL/SDL.h>
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Context;
@@ -94,7 +94,7 @@ struct FrameBufferObject
 };
 
 /// %Graphics subsystem implementation. Holds API-specific objects.
-class URHO3D_API GraphicsImpl
+class CLOCKWORK_API GraphicsImpl
 {
     friend class Graphics;
 

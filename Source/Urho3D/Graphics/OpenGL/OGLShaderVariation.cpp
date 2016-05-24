@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +31,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 ShaderVariation::ShaderVariation(Shader* owner, ShaderType type) :
@@ -145,7 +145,7 @@ bool ShaderVariation::Create()
 #ifdef _DEBUG
         String defineCheck = defineString.Substring(8, defineString.Find(' ', 8) - 8);
         if (originalShaderCode.Find(defineCheck) == String::NPOS)
-            URHO3D_LOGWARNING("Shader " + GetFullName() + " does not use the define " + defineCheck);
+            CLOCKWORK_LOGWARNING("Shader " + GetFullName() + " does not use the define " + defineCheck);
 #endif
     }
 

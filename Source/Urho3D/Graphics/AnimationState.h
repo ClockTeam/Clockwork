@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #include "../Container/HashMap.h"
 #include "../Container/Ptr.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Animation;
@@ -66,7 +66,7 @@ struct AnimationStateTrack
 };
 
 /// %Animation instance.
-class URHO3D_API AnimationState : public RefCounted
+class CLOCKWORK_API AnimationState : public RefCounted
 {
 public:
     /// Construct with animated model and animation pointers.

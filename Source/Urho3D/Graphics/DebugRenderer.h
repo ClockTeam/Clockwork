@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@
 #include "../Math/Frustum.h"
 #include "../Scene/Component.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class BoundingBox;
@@ -92,9 +92,9 @@ struct DebugTriangle
 };
 
 /// Debug geometry rendering component. Should be added only to the root scene node.
-class URHO3D_API DebugRenderer : public Component
+class CLOCKWORK_API DebugRenderer : public Component
 {
-    URHO3D_OBJECT(DebugRenderer, Component);
+    CLOCKWORK_OBJECT(DebugRenderer, Component);
 
 public:
     /// Construct.

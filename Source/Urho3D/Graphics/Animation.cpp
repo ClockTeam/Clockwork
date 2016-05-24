@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 inline bool CompareTriggers(AnimationTriggerPoint& lhs, AnimationTriggerPoint& rhs)
@@ -54,7 +54,7 @@ void AnimationTrack::SetKeyFrame(unsigned index, const AnimationKeyFrame& keyFra
     if (index < keyFrames_.Size())
     {
         keyFrames_[index] = keyFrame;
-        Urho3D::Sort(keyFrames_.Begin(), keyFrames_.End(), CompareKeyFrames);
+        Clockwork::Sort(keyFrames_.Begin(), keyFrames_.End(), CompareKeyFrames);
     }
     else if (index == keyFrames_.Size())
         AddKeyFrame(keyFrame);
@@ -65,13 +65,13 @@ void AnimationTrack::AddKeyFrame(const AnimationKeyFrame& keyFrame)
     bool needSort = keyFrames_.Size() ? keyFrames_.Back().time_ > keyFrame.time_ : false;
     keyFrames_.Push(keyFrame);
     if (needSort)
-        Urho3D::Sort(keyFrames_.Begin(), keyFrames_.End(), CompareKeyFrames);
+        Clockwork::Sort(keyFrames_.Begin(), keyFrames_.End(), CompareKeyFrames);
 }
 
 void AnimationTrack::InsertKeyFrame(unsigned index, const AnimationKeyFrame& keyFrame)
 {
     keyFrames_.Insert(index, keyFrame);
-    Urho3D::Sort(keyFrames_.Begin(), keyFrames_.End(), CompareKeyFrames);
+    Clockwork::Sort(keyFrames_.Begin(), keyFrames_.End(), CompareKeyFrames);
 }
 
 void AnimationTrack::RemoveKeyFrame(unsigned index)
@@ -128,7 +128,7 @@ bool Animation::BeginLoad(Deserializer& source)
     // Check ID
     if (source.ReadFileID() != "UANI")
     {
-        URHO3D_LOGERROR(source.GetName() + " is not a valid animation file");
+        CLOCKWORK_LOGERROR(source.GetName() + " is not a valid animation file");
         return false;
     }
 
@@ -273,7 +273,7 @@ bool Animation::Save(Serializer& dest) const
             xml->Save(xmlFile);
         }
         else
-            URHO3D_LOGWARNING("Can not save animation trigger data when not saving into a file");
+            CLOCKWORK_LOGWARNING("Can not save animation trigger data when not saving into a file");
     }
 
     return true;

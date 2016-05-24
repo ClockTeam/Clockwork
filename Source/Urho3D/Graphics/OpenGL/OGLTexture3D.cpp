@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 Texture3D::Texture3D(Context* context) :
@@ -70,7 +70,7 @@ bool Texture3D::BeginLoad(Deserializer& source)
     // If device is lost, retry later
     if (graphics_->IsDeviceLost())
     {
-        URHO3D_LOGWARNING("Texture load while device is lost");
+        CLOCKWORK_LOGWARNING("Texture load while device is lost");
         dataPending_ = true;
         return true;
     }
@@ -133,7 +133,7 @@ bool Texture3D::BeginLoad(Deserializer& source)
         return true;
     }
 
-    URHO3D_LOGERROR("Texture3D XML data for " + GetName() + " did not contain either volume or colorlut element");
+    CLOCKWORK_LOGERROR("Texture3D XML data for " + GetName() + " did not contain either volume or colorlut element");
     return false;
 }
 
@@ -202,12 +202,12 @@ bool Texture3D::SetSize(int width, int height, int depth, unsigned format, Textu
 {
     if (width <= 0 || height <= 0 || depth <= 0)
     {
-        URHO3D_LOGERROR("Zero or negative 3D texture dimensions");
+        CLOCKWORK_LOGERROR("Zero or negative 3D texture dimensions");
         return false;
     }
     if (usage >= TEXTURE_RENDERTARGET)
     {
-        URHO3D_LOGERROR("Rendertarget or depth-stencil usage not supported for 3D textures");
+        CLOCKWORK_LOGERROR("Rendertarget or depth-stencil usage not supported for 3D textures");
         return false;
     }
 
@@ -223,29 +223,29 @@ bool Texture3D::SetSize(int width, int height, int depth, unsigned format, Textu
 
 bool Texture3D::SetData(unsigned level, int x, int y, int z, int width, int height, int depth, const void* data)
 {
-    URHO3D_PROFILE(SetTextureData);
+    CLOCKWORK_PROFILE(SetTextureData);
 
     if (!object_ || !graphics_)
     {
-        URHO3D_LOGERROR("No texture created, can not set data");
+        CLOCKWORK_LOGERROR("No texture created, can not set data");
         return false;
     }
 
     if (!data)
     {
-        URHO3D_LOGERROR("Null source for setting data");
+        CLOCKWORK_LOGERROR("Null source for setting data");
         return false;
     }
 
     if (level >= levels_)
     {
-        URHO3D_LOGERROR("Illegal mip level for setting data");
+        CLOCKWORK_LOGERROR("Illegal mip level for setting data");
         return false;
     }
 
     if (graphics_->IsDeviceLost())
     {
-        URHO3D_LOGWARNING("Texture data assignment while device is lost");
+        CLOCKWORK_LOGWARNING("Texture data assignment while device is lost");
         dataPending_ = true;
         return true;
     }
@@ -262,7 +262,7 @@ bool Texture3D::SetData(unsigned level, int x, int y, int z, int width, int heig
     if (x < 0 || x + width > levelWidth || y < 0 || y + height > levelHeight || z < 0 || z + depth > levelDepth || width <= 0 ||
         height <= 0 || depth <= 0)
     {
-        URHO3D_LOGERROR("Illegal dimensions for setting data");
+        CLOCKWORK_LOGERROR("Illegal dimensions for setting data");
         return false;
     }
 
@@ -297,7 +297,7 @@ bool Texture3D::SetData(Image* image, bool useAlpha)
 {
     if (!image)
     {
-        URHO3D_LOGERROR("Null image, can not set data");
+        CLOCKWORK_LOGERROR("Null image, can not set data");
         return false;
     }
 
@@ -437,25 +437,25 @@ bool Texture3D::GetData(unsigned level, void* dest) const
 #ifndef GL_ES_VERSION_2_0
     if (!object_ || !graphics_)
     {
-        URHO3D_LOGERROR("No texture created, can not get data");
+        CLOCKWORK_LOGERROR("No texture created, can not get data");
         return false;
     }
 
     if (!dest)
     {
-        URHO3D_LOGERROR("Null destination for getting data");
+        CLOCKWORK_LOGERROR("Null destination for getting data");
         return false;
     }
 
     if (level >= levels_)
     {
-        URHO3D_LOGERROR("Illegal mip level for getting data");
+        CLOCKWORK_LOGERROR("Illegal mip level for getting data");
         return false;
     }
 
     if (graphics_->IsDeviceLost())
     {
-        URHO3D_LOGWARNING("Getting texture data while device is lost");
+        CLOCKWORK_LOGWARNING("Getting texture data while device is lost");
         return false;
     }
 
@@ -469,7 +469,7 @@ bool Texture3D::GetData(unsigned level, void* dest) const
     graphics_->SetTexture(0, 0);
     return true;
 #else
-    URHO3D_LOGERROR("Getting texture data not supported");
+    CLOCKWORK_LOGERROR("Getting texture data not supported");
     return false;
 #endif
 }
@@ -479,7 +479,7 @@ bool Texture3D::Create()
     Release();
 
 #ifdef GL_ES_VERSION_2_0
-    URHO3D_LOGERROR("Failed to create 3D texture, currently unsupported on OpenGL ES 2");
+    CLOCKWORK_LOGERROR("Failed to create 3D texture, currently unsupported on OpenGL ES 2");
     return false;
 #else
     if (!graphics_ || !width_ || !height_ || !depth_)
@@ -487,7 +487,7 @@ bool Texture3D::Create()
 
     if (graphics_->IsDeviceLost())
     {
-        URHO3D_LOGWARNING("Texture creation while device is lost");
+        CLOCKWORK_LOGWARNING("Texture creation while device is lost");
         return true;
     }
 
@@ -509,7 +509,7 @@ bool Texture3D::Create()
         glTexImage3D(target_, 0, format, width_, height_, depth_, 0, externalFormat, dataType, 0);
         if (glGetError())
         {
-            URHO3D_LOGERROR("Failed to create texture");
+            CLOCKWORK_LOGERROR("Failed to create texture");
             success = false;
         }
     }

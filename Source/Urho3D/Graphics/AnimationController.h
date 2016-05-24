@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@
 #include "../Scene/Component.h"
 #include "../Graphics/AnimationState.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class AnimatedModel;
@@ -81,9 +81,9 @@ struct AnimationControl
 };
 
 /// %Component that drives an AnimatedModel's animations.
-class URHO3D_API AnimationController : public Component
+class CLOCKWORK_API AnimationController : public Component
 {
-    URHO3D_OBJECT(AnimationController, Component);
+    CLOCKWORK_OBJECT(AnimationController, Component);
 
 public:
     /// Construct.

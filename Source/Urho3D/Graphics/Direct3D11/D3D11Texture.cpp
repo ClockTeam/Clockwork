@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@
 
 #include "../../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const char* addressModeNames[] =
@@ -325,7 +325,7 @@ void Texture::UpdateParameters()
         return;
 
     // Release old sampler
-    URHO3D_SAFE_RELEASE(sampler_);
+    CLOCKWORK_SAFE_RELEASE(sampler_);
 
     D3D11_SAMPLER_DESC samplerDesc;
     memset(&samplerDesc, 0, sizeof samplerDesc);
@@ -345,8 +345,8 @@ void Texture::UpdateParameters()
     HRESULT hr = graphics_->GetImpl()->GetDevice()->CreateSamplerState(&samplerDesc, (ID3D11SamplerState**)&sampler_);
     if (FAILED(hr))
     {
-        URHO3D_SAFE_RELEASE(sampler_);
-        URHO3D_LOGD3DERROR("Failed to create sampler state", hr);
+        CLOCKWORK_SAFE_RELEASE(sampler_);
+        CLOCKWORK_LOGD3DERROR("Failed to create sampler state", hr);
     }
 
     parametersDirty_ = false;

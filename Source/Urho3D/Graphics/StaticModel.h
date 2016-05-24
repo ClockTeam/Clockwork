@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 #include "../Graphics/Drawable.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Model;
@@ -39,9 +39,9 @@ struct StaticModelGeometryData
 };
 
 /// Static model component.
-class URHO3D_API StaticModel : public Drawable
+class CLOCKWORK_API StaticModel : public Drawable
 {
-    URHO3D_OBJECT(StaticModel, Drawable);
+    CLOCKWORK_OBJECT(StaticModel, Drawable);
 
 public:
     /// Construct.

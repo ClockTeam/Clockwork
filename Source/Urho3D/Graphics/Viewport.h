@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 #include "../Math/Rect.h"
 #include "../Math/Vector2.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Camera;
@@ -38,9 +38,9 @@ class XMLFile;
 class View;
 
 /// %Viewport definition either for a render surface or the backbuffer.
-class URHO3D_API Viewport : public Object
+class CLOCKWORK_API Viewport : public Object
 {
-    URHO3D_OBJECT(Viewport, Object);
+    CLOCKWORK_OBJECT(Viewport, Object);
 
 public:
     /// Construct with defaults.

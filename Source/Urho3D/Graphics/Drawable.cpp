@@ -1,6 +1,6 @@
 //
 
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@
 #pragma warning(disable:6293)
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 const char* GEOMETRY_CATEGORY = "Geometry";
@@ -116,11 +116,11 @@ Drawable::~Drawable()
 
 void Drawable::RegisterObject(Context* context)
 {
-    URHO3D_ATTRIBUTE("Max Lights", int, maxLights_, 0, AM_DEFAULT);
-    URHO3D_ATTRIBUTE("View Mask", int, viewMask_, DEFAULT_VIEWMASK, AM_DEFAULT);
-    URHO3D_ATTRIBUTE("Light Mask", int, lightMask_, DEFAULT_LIGHTMASK, AM_DEFAULT);
-    URHO3D_ATTRIBUTE("Shadow Mask", int, shadowMask_, DEFAULT_SHADOWMASK, AM_DEFAULT);
-    URHO3D_ACCESSOR_ATTRIBUTE("Zone Mask", GetZoneMask, SetZoneMask, unsigned, DEFAULT_ZONEMASK, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("Max Lights", int, maxLights_, 0, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("View Mask", int, viewMask_, DEFAULT_VIEWMASK, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("Light Mask", int, lightMask_, DEFAULT_LIGHTMASK, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("Shadow Mask", int, shadowMask_, DEFAULT_SHADOWMASK, AM_DEFAULT);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Zone Mask", GetZoneMask, SetZoneMask, unsigned, DEFAULT_ZONEMASK, AM_DEFAULT);
 }
 
 void Drawable::OnSetEnabled()
@@ -413,12 +413,12 @@ void Drawable::AddToOctree()
         if (octree)
             octree->InsertDrawable(this);
         else
-            URHO3D_LOGERROR("No Octree component in scene, drawable will not render");
+            CLOCKWORK_LOGERROR("No Octree component in scene, drawable will not render");
     }
     else
     {
         // We have a mechanism for adding detached nodes to an octree manually, so do not log this error
-        //URHO3D_LOGERROR("Node is detached from scene, drawable will not render");
+        //CLOCKWORK_LOGERROR("Node is detached from scene, drawable will not render");
     }
 }
 
@@ -446,7 +446,7 @@ bool WriteDrawablesToOBJ(PODVector<Drawable*> drawables, File* outputFile, bool 
     bool anythingWritten = false;
 
     // Write the common "I came from X" comment
-    outputFile->WriteLine("# OBJ file exported from Urho3D");
+    outputFile->WriteLine("# OBJ file exported from Clockwork");
 
     for (unsigned i = 0; i < drawables.Size(); ++i)
     {
@@ -470,7 +470,7 @@ bool WriteDrawablesToOBJ(PODVector<Drawable*> drawables, File* outputFile, bool 
                 continue;
             if (geo->GetPrimitiveType() != TRIANGLE_LIST)
             {
-                URHO3D_LOGERRORF("%s (%u) %s (%u) Geometry %u contains an unsupported geometry type %u", node->GetName().Length() > 0 ? node->GetName().CString() : "Node", node->GetID(), drawable->GetTypeName().CString(), drawable->GetID(), geoIndex, (unsigned)geo->GetPrimitiveType());
+                CLOCKWORK_LOGERRORF("%s (%u) %s (%u) Geometry %u contains an unsupported geometry type %u", node->GetName().Length() > 0 ? node->GetName().CString() : "Node", node->GetID(), drawable->GetTypeName().CString(), drawable->GetID(), geoIndex, (unsigned)geo->GetPrimitiveType());
                 continue;
             }
 
@@ -488,7 +488,7 @@ bool WriteDrawablesToOBJ(PODVector<Drawable*> drawables, File* outputFile, bool 
             bool hasPosition = VertexBuffer::HasElement(*elements, TYPE_VECTOR3, SEM_POSITION);
             if (!hasPosition)
             {
-                URHO3D_LOGERRORF("%s (%u) %s (%u) Geometry %u contains does not have Vector3 type positions in vertex data", node->GetName().Length() > 0 ? node->GetName().CString() : "Node", node->GetID(), drawable->GetTypeName().CString(), drawable->GetID(), geoIndex);
+                CLOCKWORK_LOGERRORF("%s (%u) %s (%u) Geometry %u contains does not have Vector3 type positions in vertex data", node->GetName().Length() > 0 ? node->GetName().CString() : "Node", node->GetID(), drawable->GetTypeName().CString(), drawable->GetID(), geoIndex);
                 continue;
             }
 
@@ -563,7 +563,7 @@ bool WriteDrawablesToOBJ(PODVector<Drawable*> drawables, File* outputFile, bool 
                 // If we don't have UV but have normals then must write a double-slash to indicate the absence of UV coords, otherwise use a single slash
                 const String slashCharacter = hasNormals ? "//" : "/";
 
-                // Amount by which to offset indices in the OBJ vs their values in the Urho3D geometry, basically the lowest index value
+                // Amount by which to offset indices in the OBJ vs their values in the Clockwork geometry, basically the lowest index value
                 // Compensates for the above vertex writing which doesn't write ALL vertices, just the used ones
                 unsigned indexOffset = M_MAX_INT;
                 for (unsigned indexIdx = indexStart; indexIdx < indexStart + indexCount; indexIdx++)
