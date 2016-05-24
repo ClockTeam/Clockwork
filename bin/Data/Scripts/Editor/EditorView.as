@@ -1,4 +1,4 @@
-// Urho3D editor view & camera functions
+// Clockwork editor view & camera functions
 
 WeakHandle previewCamera;
 Node@ cameraNode;

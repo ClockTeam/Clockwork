@@ -1,4 +1,4 @@
-// Urho3D editor layer window
+// Clockwork editor layer window
 
 enum EditMaskType
 {

@@ -32,7 +32,7 @@ void CreateSprites()
     float width = graphics.width;
     float height = graphics.height;
 
-    // Get the Urho3D fish texture
+    // Get the Clockwork fish texture
     Texture2D@ decalTex = cache.GetResource("Texture2D", "Textures/UrhoDecal.dds");
 
     for (uint i = 0; i < NUM_SPRITES; ++i)

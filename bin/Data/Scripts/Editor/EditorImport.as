@@ -1,4 +1,4 @@
-// Urho3D editor import functions
+// Clockwork editor import functions
 
 String importOptions = "-t";
 

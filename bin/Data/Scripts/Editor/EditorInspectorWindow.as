@@ -1,4 +1,4 @@
-// Urho3D editor attribute inspector window handling
+// Clockwork editor attribute inspector window handling
 #include "Scripts/Editor/AttributeEditor.as"
 
 Window@ attributeInspectorWindow;

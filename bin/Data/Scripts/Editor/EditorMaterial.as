@@ -1,4 +1,4 @@
-// Urho3D material editor
+// Clockwork material editor
 
 Window@ materialWindow;
 Material@ editMaterial;

@@ -1,4 +1,4 @@
-// Urho3D UI Drag Example:
+// Clockwork UI Drag Example:
 // This sample demonstrates:
 //     - Creating GUI elements from AngelScript
 //     - Loading GUI Style from xml

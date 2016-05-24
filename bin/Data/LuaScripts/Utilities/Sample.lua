@@ -1,5 +1,5 @@
 -- Common sample initialization as a framework for all samples.
---    - Create Urho3D logo at screen
+--    - Create Clockwork logo at screen
 --    - Set custom window title and icon
 --    - Create Console and Debug HUD, and use F1 and F2 key to toggle them
 --    - Toggle rendering options from the keys 1-8
@@ -126,7 +126,7 @@ end
 function SetWindowTitleAndIcon()
     local icon = cache:GetResource("Image", "Textures/UrhoIcon.png")
     graphics:SetWindowIcon(icon)
-    graphics.windowTitle = "Urho3D Sample"
+    graphics.windowTitle = "Clockwork Sample"
 end
 
 function CreateConsoleAndDebugHud()

@@ -1,4 +1,4 @@
-// Urho3D editor user interface
+// Clockwork editor user interface
 
 XMLFile@ uiStyle;
 XMLFile@ iconStyle;
@@ -1128,7 +1128,7 @@ void UpdateWindowTitle()
         sceneName = "Untitled";
     if (sceneModified)
         sceneName += "*";
-    graphics.windowTitle = "Urho3D editor - " + sceneName;
+    graphics.windowTitle = "Clockwork editor - " + sceneName;
 }
 
 void HandlePopup(Menu@ menu)

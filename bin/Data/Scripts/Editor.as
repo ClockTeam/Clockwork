@@ -1,4 +1,4 @@
-// Urho3D editor
+// Clockwork editor
 
 #include "Scripts/Editor/EditorHierarchyWindow.as"
 #include "Scripts/Editor/EditorView.as"
@@ -33,7 +33,7 @@ void Start()
 
     if (engine.headless)
     {
-        ErrorDialog("Urho3D Editor", "Headless mode is not supported. The program will now exit.");
+        ErrorDialog("Clockwork Editor", "Headless mode is not supported. The program will now exit.");
         engine.Exit();
         return;
     }

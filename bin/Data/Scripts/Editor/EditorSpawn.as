@@ -1,4 +1,4 @@
-// Urho3D spawn editor
+// Clockwork spawn editor
 
 LineEdit@ positionOffsetX;
 LineEdit@ positionOffsetY;

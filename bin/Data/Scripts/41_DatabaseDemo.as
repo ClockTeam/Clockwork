@@ -49,14 +49,14 @@ void Start()
     // The SQLite-ODBC driver can be built from source downloaded from http://www.ch-werner.de/sqliteodbc/
     // You can try to install other ODBC driver and modify the connection string below to match your ODBC driver
     // Both DSN and DSN-less connection string should work
-    // The ODBC API, i.e. URHO3D_DATABASE_ODBC build option, is only available for native (including RPI) platforms
+    // The ODBC API, i.e. CLOCKWORK_DATABASE_ODBC build option, is only available for native (including RPI) platforms
     //   and it is designed for development of game server connecting to ODBC-compliant databases in mind
 
-    // This demo will always work when using SQLite API as the SQLite database engine is embedded inside Urho3D game engine
+    // This demo will always work when using SQLite API as the SQLite database engine is embedded inside Clockwork game engine
     //   and this is also the case when targeting Web platform
 
     // We could have used #ifdef to init the connection string during compile time, but below shows how it is done during runtime
-    // The "URHO3D_DATABASE_ODBC" compiler define is set when URHO3D_DATABASE_ODBC build option is enabled
+    // The "CLOCKWORK_DATABASE_ODBC" compiler define is set when CLOCKWORK_DATABASE_ODBC build option is enabled
     // Connect to a temporary in-memory SQLite database
     connection = database.Connect(DBAPI == DBAPI_ODBC ? "Driver=SQLite3;Database=:memory:" : "file://");
 

@@ -27,7 +27,7 @@ void CreateText()
     Text@ helloText = Text();
 
     // Set String to display
-    helloText.text = "Hello World from Urho3D!";
+    helloText.text = "Hello World from Clockwork!";
 
     // Set font and text color
     helloText.SetFont(cache.GetResource("Font", "Fonts/Anonymous Pro.ttf"), 30);
