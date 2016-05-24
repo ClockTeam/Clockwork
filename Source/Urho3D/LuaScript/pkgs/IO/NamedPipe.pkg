@@ -126,14 +126,14 @@ static int tolua_IOLuaAPI_NamedPipe_new01(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
  !tolua_isusertable(tolua_S,1,"NamedPipe",0,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,2,0,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,2,0,&tolua_err) ||
  !tolua_isboolean(tolua_S,3,0,&tolua_err) ||
  !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
  goto tolua_lerror;
  else
  {
-  const String pipeName = ((const String)  tolua_tourho3dstring(tolua_S,2,0));
+  const String pipeName = ((const String)  tolua_toclockworkstring(tolua_S,2,0));
   bool isServer = ((bool)  tolua_toboolean(tolua_S,3,0));
  {
   NamedPipe* tolua_ret = (NamedPipe*)  Mtolua_new((NamedPipe)(GetContext(tolua_S),pipeName,isServer));
@@ -151,14 +151,14 @@ static int tolua_IOLuaAPI_NamedPipe_new01_local(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
  !tolua_isusertable(tolua_S,1,"NamedPipe",0,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,2,0,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,2,0,&tolua_err) ||
  !tolua_isboolean(tolua_S,3,0,&tolua_err) ||
  !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
  goto tolua_lerror;
  else
  {
-  const String pipeName = ((const String)  tolua_tourho3dstring(tolua_S,2,0));
+  const String pipeName = ((const String)  tolua_toclockworkstring(tolua_S,2,0));
   bool isServer = ((bool)  tolua_toboolean(tolua_S,3,0));
  {
   NamedPipe* tolua_ret = (NamedPipe*)  Mtolua_new((NamedPipe)(GetContext(tolua_S),pipeName,isServer));

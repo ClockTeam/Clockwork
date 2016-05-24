@@ -28,14 +28,14 @@
 
 #include "../LuaScript/ToluaUtils.h"
 
-const char* tolua_tourho3dstring(lua_State* L, int narg, const char* str)
+const char* tolua_toclockworkstring(lua_State* L, int narg, const char* str)
 {
     return tolua_tostring(L, narg, str);
 }
 
-const char* tolua_tourho3dstring(lua_State* L, int narg, const String& str)
+const char* tolua_toclockworkstring(lua_State* L, int narg, const String& str)
 {
-    return tolua_tourho3dstring(L, narg, str.CString());
+    return tolua_toclockworkstring(L, narg, str.CString());
 }
 
 void SetContext(lua_State* L, Context* context)
@@ -74,7 +74,7 @@ template <> void* ToluaToVector<String>(lua_State* L, int narg, void* /*def*/)
     for (unsigned i = 0; i < result.Size(); ++i)
     {
         lua_rawgeti(L, narg, i + 1);
-        result[i] = tolua_tourho3dstring(L, -1, "");
+        result[i] = tolua_toclockworkstring(L, -1, "");
         lua_pop(L, 1);
     }
     return &result;
@@ -86,7 +86,7 @@ template <> int ToluaPushVector<String>(lua_State* L, void* data, const char* /*
     const Vector<String>& vector = *static_cast<const Vector<String>*>(data);
     for (unsigned i = 0; i < vector.Size(); ++i)
     {
-        tolua_pushurho3dstring(L, vector[i]);
+        tolua_pushclockworkstring(L, vector[i]);
         lua_rawseti(L, -2, i + 1);
     }
     return 1;
@@ -323,7 +323,7 @@ void ToluaPushVariant(lua_State* L, const Variant* variant, const char* type)
         break;
 
     case VAR_STRING:
-        tolua_pushurho3dstring(L, variant->GetString());
+        tolua_pushclockworkstring(L, variant->GetString());
         break;
 
     case VAR_BUFFER:

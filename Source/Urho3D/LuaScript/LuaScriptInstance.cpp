@@ -139,7 +139,7 @@ void LuaScriptInstance::OnSetAttribute(const AttributeInfo& attr, const Variant&
             lua_pushnumber(luaState_, src.GetDouble());
             break;
         case VAR_STRING:
-            tolua_pushurho3dstring(luaState_, src.GetString());
+            tolua_pushclockworkstring(luaState_, src.GetString());
             break;
         case VAR_VECTOR2:
             {
@@ -244,7 +244,7 @@ void LuaScriptInstance::OnGetAttribute(const AttributeInfo& attr, Variant& dest)
         dest = lua_tonumber(luaState_, -1);
         break;
     case VAR_STRING:
-        dest = tolua_tourho3dstring(luaState_, -1, "");
+        dest = tolua_toclockworkstring(luaState_, -1, "");
         break;
     case VAR_VECTOR2:
         dest = *((Vector2*)tolua_tousertype(luaState_, -1, 0));

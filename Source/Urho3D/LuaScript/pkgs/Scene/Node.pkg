@@ -266,7 +266,7 @@ static int tolua_SceneLuaAPI_Node_CreateScriptObject00(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
  !tolua_isusertype(tolua_S,1,"Node",0,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,2,0,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,2,0,&tolua_err) ||
  !tolua_isnoobj(tolua_S,3,&tolua_err)
  )
  goto tolua_lerror;
@@ -274,7 +274,7 @@ static int tolua_SceneLuaAPI_Node_CreateScriptObject00(lua_State* tolua_S)
 #endif
  {
   Node* self = (Node*)  tolua_tousertype(tolua_S,1,0);
-  const String scriptObjectType = ((const String)  tolua_tourho3dstring(tolua_S,2,0));
+  const String scriptObjectType = ((const String)  tolua_toclockworkstring(tolua_S,2,0));
 #ifndef TOLUA_RELEASE
  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'NodeCreateScriptObject'", NULL);
 #endif
@@ -305,16 +305,16 @@ static int tolua_SceneLuaAPI_Node_CreateScriptObject01(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
  !tolua_isusertype(tolua_S,1,"Node",0,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,2,0,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,3,0,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,2,0,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,3,0,&tolua_err) ||
  !tolua_isnoobj(tolua_S,4,&tolua_err)
  )
  goto tolua_lerror;
  else
  {
   Node* self = (Node*)  tolua_tousertype(tolua_S,1,0);
-  const String fileName = ((const String)  tolua_tourho3dstring(tolua_S,2,0));
-  const String scriptObjectType = ((const String)  tolua_tourho3dstring(tolua_S,3,0));
+  const String fileName = ((const String)  tolua_toclockworkstring(tolua_S,2,0));
+  const String scriptObjectType = ((const String)  tolua_toclockworkstring(tolua_S,3,0));
 #ifndef TOLUA_RELEASE
  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'NodeCreateScriptObject'", NULL);
 #endif
@@ -382,14 +382,14 @@ static int tolua_SceneLuaAPI_Node_GetScriptObject01(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
  !tolua_isusertype(tolua_S,1,"const Node",0,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,2,0,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,2,0,&tolua_err) ||
  !tolua_isnoobj(tolua_S,3,&tolua_err)
  )
  goto tolua_lerror;
  else
  {
   const Node* self = (const Node*)  tolua_tousertype(tolua_S,1,0);
-  const String scriptObjectType = ((const String)  tolua_tourho3dstring(tolua_S,2,0));
+  const String scriptObjectType = ((const String)  tolua_toclockworkstring(tolua_S,2,0));
 #ifndef TOLUA_RELEASE
  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'GetScriptObject'", NULL);
 #endif

@@ -57,7 +57,7 @@ void Sample::Setup()
 {
     // Modify engine startup parameters
     engineParameters_["WindowTitle"] = GetTypeName();
-    engineParameters_["LogName"]     = GetSubsystem<FileSystem>()->GetAppPreferencesDir("urho3d", "logs") + GetTypeName() + ".log";
+    engineParameters_["LogName"]     = GetSubsystem<FileSystem>()->GetAppPreferencesDir("clockwork", "logs") + GetTypeName() + ".log";
     engineParameters_["FullScreen"]  = false;
     engineParameters_["Headless"]    = false;
     engineParameters_["Sound"]       = false;

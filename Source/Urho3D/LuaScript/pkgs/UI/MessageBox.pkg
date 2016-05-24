@@ -25,8 +25,8 @@ static int tolua_UILuaAPI_MessageBox_new00(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
  !tolua_isusertable(tolua_S,1,"MessageBox",0,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,2,1,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,3,1,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,2,1,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,3,1,&tolua_err) ||
  !tolua_isusertype(tolua_S,4,"XMLFile",1,&tolua_err) ||
  !tolua_isusertype(tolua_S,5,"XMLFile",1,&tolua_err) ||
  !tolua_isnoobj(tolua_S,6,&tolua_err)
@@ -35,8 +35,8 @@ static int tolua_UILuaAPI_MessageBox_new00(lua_State* tolua_S)
  else
 #endif
  {
-  const String messageString = ((const String)  tolua_tourho3dstring(tolua_S,2,String::EMPTY));
-  const String titleString = ((const String)  tolua_tourho3dstring(tolua_S,3,String::EMPTY));
+  const String messageString = ((const String)  tolua_toclockworkstring(tolua_S,2,String::EMPTY));
+  const String titleString = ((const String)  tolua_toclockworkstring(tolua_S,3,String::EMPTY));
   XMLFile* layoutFile = ((XMLFile*)  tolua_tousertype(tolua_S,4,0));
   XMLFile* styleFile = ((XMLFile*)  tolua_tousertype(tolua_S,5,0));
  {
@@ -59,8 +59,8 @@ static int tolua_UILuaAPI_MessageBox_new00_local(lua_State* tolua_S)
  tolua_Error tolua_err;
  if (
  !tolua_isusertable(tolua_S,1,"MessageBox",0,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,2,1,&tolua_err) ||
- !tolua_isurho3dstring(tolua_S,3,1,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,2,1,&tolua_err) ||
+ !tolua_isclockworkstring(tolua_S,3,1,&tolua_err) ||
  !tolua_isusertype(tolua_S,4,"XMLFile",1,&tolua_err) ||
  !tolua_isusertype(tolua_S,5,"XMLFile",1,&tolua_err) ||
  !tolua_isnoobj(tolua_S,6,&tolua_err)
@@ -69,8 +69,8 @@ static int tolua_UILuaAPI_MessageBox_new00_local(lua_State* tolua_S)
  else
 #endif
  {
-  const String messageString = ((const String)  tolua_tourho3dstring(tolua_S,2,String::EMPTY));
-  const String titleString = ((const String)  tolua_tourho3dstring(tolua_S,3,String::EMPTY));
+  const String messageString = ((const String)  tolua_toclockworkstring(tolua_S,2,String::EMPTY));
+  const String titleString = ((const String)  tolua_toclockworkstring(tolua_S,3,String::EMPTY));
   XMLFile* layoutFile = ((XMLFile*)  tolua_tousertype(tolua_S,4,0));
   XMLFile* styleFile = ((XMLFile*)  tolua_tousertype(tolua_S,5,0));
  {

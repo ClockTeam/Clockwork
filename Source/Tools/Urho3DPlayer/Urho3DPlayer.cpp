@@ -118,7 +118,7 @@ void Urho3DPlayer::Setup()
     else
     {
         // Use the script file name as the base name for the log file
-        engineParameters_["LogName"] = filesystem->GetAppPreferencesDir("urho3d", "logs") + GetFileNameAndExtension(scriptFileName_) + ".log";
+        engineParameters_["LogName"] = filesystem->GetAppPreferencesDir("clockwork", "logs") + GetFileNameAndExtension(scriptFileName_) + ".log";
     }
 
     // Construct a search path to find the resource prefix with two entries:

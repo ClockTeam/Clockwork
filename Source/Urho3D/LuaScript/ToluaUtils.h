@@ -29,13 +29,13 @@ struct lua_State;
 using namespace Urho3D;
 
 /// Check is String.
-#define tolua_isurho3dstring tolua_isstring
+#define tolua_isclockworkstring tolua_isstring
 /// Push String.
-#define tolua_pushurho3dstring(L, s) tolua_pushstring(L, s.CString())
+#define tolua_pushclockworkstring(L, s) tolua_pushstring(L, s.CString())
 /// Convert to String.
-const char* tolua_tourho3dstring(lua_State* L, int narg, const char* str);
+const char* tolua_toclockworkstring(lua_State* L, int narg, const char* str);
 /// Convert to String.
-const char* tolua_tourho3dstring(lua_State* L, int narg, const String& str);
+const char* tolua_toclockworkstring(lua_State* L, int narg, const String& str);
 
 /// Set context.
 void SetContext(lua_State* L, Context* context);

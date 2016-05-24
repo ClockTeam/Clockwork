@@ -37,7 +37,7 @@ static void help (void)
          "  -n  name : set package name; default is input file root name.\n"
          "  -p       : parse only.\n"
          "  -P       : parse and print structure information (for debug).\n"
-         "  -S       : disable support for urho3d strings.\n"
+         "  -S       : disable support for clockwork strings.\n"
          "  -1       : substract 1 to operator[] index (for compatibility with tolua5).\n"
          "  -L  file : run lua file (with dofile()) before doing anything.\n"
          "  -D       : disable automatic exporting of destructors for classes that have\n"

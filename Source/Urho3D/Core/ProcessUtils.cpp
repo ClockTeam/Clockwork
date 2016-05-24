@@ -453,7 +453,7 @@ String GetMiniDumpDir()
 #ifndef MINI_URHO
     if (miniDumpDir.Empty())
     {
-        char* pathName = SDL_GetPrefPath("urho3d", "crashdumps");
+        char* pathName = SDL_GetPrefPath("clockwork", "crashdumps");
         if (pathName)
         {
             String ret(pathName);
