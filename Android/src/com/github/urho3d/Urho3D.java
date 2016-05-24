@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 //
 
-package com.github.urho3d;
+package com.github.clockwork;
 
 import android.content.Intent;
 import android.content.res.AssetManager;

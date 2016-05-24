@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 //
 
-package com.github.urho3d;
+package com.github.clockwork;
 
 import android.app.ListActivity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.github.urho3d;
+package com.github.clockwork;
 
 import android.app.ExpandableListActivity;
 import android.os.Bundle;
