@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,32 +20,32 @@
 // THE SOFTWARE.
 //
 
-#ifdef URHO3D_ANGELSCRIPT
-#include <Urho3D/AngelScript/ScriptFile.h>
-#include <Urho3D/AngelScript/Script.h>
+#ifdef CLOCKWORK_ANGELSCRIPT
+#include <Clockwork/AngelScript/ScriptFile.h>
+#include <Clockwork/AngelScript/Script.h>
 #endif
-#include <Urho3D/Core/Main.h>
-#include <Urho3D/Engine/Engine.h>
-#include <Urho3D/IO/FileSystem.h>
-#include <Urho3D/IO/Log.h>
-#ifdef URHO3D_LUA
-#include <Urho3D/LuaScript/LuaScript.h>
+#include <Clockwork/Core/Main.h>
+#include <Clockwork/Engine/Engine.h>
+#include <Clockwork/IO/FileSystem.h>
+#include <Clockwork/IO/Log.h>
+#ifdef CLOCKWORK_LUA
+#include <Clockwork/LuaScript/LuaScript.h>
 #endif
-#include <Urho3D/Resource/ResourceCache.h>
-#include <Urho3D/Resource/ResourceEvents.h>
+#include <Clockwork/Resource/ResourceCache.h>
+#include <Clockwork/Resource/ResourceEvents.h>
 
-#include "Urho3DPlayer.h"
+#include "ClockworkPlayer.h"
 
-#include <Urho3D/DebugNew.h>
+#include <Clockwork/DebugNew.h>
 
-URHO3D_DEFINE_APPLICATION_MAIN(Urho3DPlayer);
+CLOCKWORK_DEFINE_APPLICATION_MAIN(ClockworkPlayer);
 
-Urho3DPlayer::Urho3DPlayer(Context* context) :
+ClockworkPlayer::ClockworkPlayer(Context* context) :
     Application(context)
 {
 }
 
-void Urho3DPlayer::Setup()
+void ClockworkPlayer::Setup()
 {
     FileSystem* filesystem = GetSubsystem<FileSystem>();
 
@@ -72,7 +72,7 @@ void Urho3DPlayer::Setup()
     // Show usage if not found
     if (scriptFileName_.Empty())
     {
-        ErrorExit("Usage: Urho3DPlayer <scriptfile> [options]\n\n"
+        ErrorExit("Usage: ClockworkPlayer <scriptfile> [options]\n\n"
             "The script file should implement the function void Start() for initializing the "
             "application and subscribing to all necessary events, such as the frame update.\n"
             #ifndef WIN32
@@ -123,17 +123,17 @@ void Urho3DPlayer::Setup()
 
     // Construct a search path to find the resource prefix with two entries:
     // The first entry is an empty path which will be substituted with program/bin directory -- this entry is for binary when it is still in build tree
-    // The second and third entries are possible relative paths from the installed program/bin directory to the asset directory -- these entries are for binary when it is in the Urho3D SDK installation location
+    // The second and third entries are possible relative paths from the installed program/bin directory to the asset directory -- these entries are for binary when it is in the Clockwork SDK installation location
     if (!engineParameters_.Contains("ResourcePrefixPaths"))
-        engineParameters_["ResourcePrefixPaths"] = ";../share/Resources;../share/Urho3D/Resources";
+        engineParameters_["ResourcePrefixPaths"] = ";../share/Resources;../share/Clockwork/Resources";
 }
 
-void Urho3DPlayer::Start()
+void ClockworkPlayer::Start()
 {
     String extension = GetExtension(scriptFileName_);
     if (extension != ".lua" && extension != ".luc")
     {
-#ifdef URHO3D_ANGELSCRIPT
+#ifdef CLOCKWORK_ANGELSCRIPT
         // Instantiate and register the AngelScript subsystem
         context_->RegisterSubsystem(new Script(context_));
 
@@ -141,7 +141,7 @@ void Urho3DPlayer::Start()
         scriptFile_ = GetSubsystem<ResourceCache>()->GetResource<ScriptFile>(scriptFileName_);
 
         /// \hack If we are running the editor, also instantiate Lua subsystem to enable editing Lua ScriptInstances
-#ifdef URHO3D_LUA
+#ifdef CLOCKWORK_LUA
         if (scriptFileName_.Contains("Editor.as", false))
             context_->RegisterSubsystem(new LuaScript(context_));
 #endif
@@ -149,9 +149,9 @@ void Urho3DPlayer::Start()
         if (scriptFile_ && scriptFile_->Execute("void Start()"))
         {
             // Subscribe to script's reload event to allow live-reload of the application
-            SubscribeToEvent(scriptFile_, E_RELOADSTARTED, URHO3D_HANDLER(Urho3DPlayer, HandleScriptReloadStarted));
-            SubscribeToEvent(scriptFile_, E_RELOADFINISHED, URHO3D_HANDLER(Urho3DPlayer, HandleScriptReloadFinished));
-            SubscribeToEvent(scriptFile_, E_RELOADFAILED, URHO3D_HANDLER(Urho3DPlayer, HandleScriptReloadFailed));
+            SubscribeToEvent(scriptFile_, E_RELOADSTARTED, CLOCKWORK_HANDLER(ClockworkPlayer, HandleScriptReloadStarted));
+            SubscribeToEvent(scriptFile_, E_RELOADFINISHED, CLOCKWORK_HANDLER(ClockworkPlayer, HandleScriptReloadFinished));
+            SubscribeToEvent(scriptFile_, E_RELOADFAILED, CLOCKWORK_HANDLER(ClockworkPlayer, HandleScriptReloadFailed));
             return;
         }
 #else
@@ -161,7 +161,7 @@ void Urho3DPlayer::Start()
     }
     else
     {
-#ifdef URHO3D_LUA
+#ifdef CLOCKWORK_LUA
         // Instantiate and register the Lua script subsystem
         LuaScript* luaScript = new LuaScript(context_);
         context_->RegisterSubsystem(luaScript);
@@ -182,9 +182,9 @@ void Urho3DPlayer::Start()
     ErrorExit();
 }
 
-void Urho3DPlayer::Stop()
+void ClockworkPlayer::Stop()
 {
-#ifdef URHO3D_ANGELSCRIPT
+#ifdef CLOCKWORK_ANGELSCRIPT
     if (scriptFile_)
     {
         // Execute the optional stop function
@@ -197,7 +197,7 @@ void Urho3DPlayer::Stop()
     }
 #endif
 
-#ifdef URHO3D_LUA
+#ifdef CLOCKWORK_LUA
     else
     {
         LuaScript* luaScript = GetSubsystem<LuaScript>();
@@ -207,17 +207,17 @@ void Urho3DPlayer::Stop()
 #endif
 }
 
-void Urho3DPlayer::HandleScriptReloadStarted(StringHash eventType, VariantMap& eventData)
+void ClockworkPlayer::HandleScriptReloadStarted(StringHash eventType, VariantMap& eventData)
 {
-#ifdef URHO3D_ANGELSCRIPT
+#ifdef CLOCKWORK_ANGELSCRIPT
     if (scriptFile_->GetFunction("void Stop()"))
         scriptFile_->Execute("void Stop()");
 #endif
 }
 
-void Urho3DPlayer::HandleScriptReloadFinished(StringHash eventType, VariantMap& eventData)
+void ClockworkPlayer::HandleScriptReloadFinished(StringHash eventType, VariantMap& eventData)
 {
-#ifdef URHO3D_ANGELSCRIPT
+#ifdef CLOCKWORK_ANGELSCRIPT
     // Restart the script application after reload
     if (!scriptFile_->Execute("void Start()"))
     {
@@ -227,9 +227,9 @@ void Urho3DPlayer::HandleScriptReloadFinished(StringHash eventType, VariantMap& 
 #endif
 }
 
-void Urho3DPlayer::HandleScriptReloadFailed(StringHash eventType, VariantMap& eventData)
+void ClockworkPlayer::HandleScriptReloadFailed(StringHash eventType, VariantMap& eventData)
 {
-#ifdef URHO3D_ANGELSCRIPT
+#ifdef CLOCKWORK_ANGELSCRIPT
     scriptFile_.Reset();
     ErrorExit();
 #endif

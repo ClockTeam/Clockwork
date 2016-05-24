@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,12 +20,12 @@
 // THE SOFTWARE.
 //
 
-#include <Urho3D/Core/Context.h>
-#include <Urho3D/Container/ArrayPtr.h>
-#include <Urho3D/Core/ProcessUtils.h>
-#include <Urho3D/IO/File.h>
-#include <Urho3D/IO/FileSystem.h>
-#include <Urho3D/IO/PackageFile.h>
+#include <Clockwork/Core/Context.h>
+#include <Clockwork/Container/ArrayPtr.h>
+#include <Clockwork/Core/ProcessUtils.h>
+#include <Clockwork/IO/File.h>
+#include <Clockwork/IO/FileSystem.h>
+#include <Clockwork/IO/PackageFile.h>
 
 #ifdef WIN32
 #include <windows.h>
@@ -34,9 +34,9 @@
 #include <LZ4/lz4.h>
 #include <LZ4/lz4hc.h>
 
-#include <Urho3D/DebugNew.h>
+#include <Clockwork/DebugNew.h>
 
-using namespace Urho3D;
+using namespace Clockwork;
 
 static const unsigned COMPRESSED_BLOCK_SIZE = 32768;
 

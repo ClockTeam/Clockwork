@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,9 @@
 // THE SOFTWARE.
 //
 
-#include <Urho3D/Container/ArrayPtr.h>
-#include <Urho3D/Core/ProcessUtils.h>
-#include <Urho3D/Core/StringUtils.h>
+#include <Clockwork/Container/ArrayPtr.h>
+#include <Clockwork/Core/ProcessUtils.h>
+#include <Clockwork/Core/StringUtils.h>
 
 #ifdef WIN32
 #include <windows.h>
@@ -34,9 +34,9 @@
 #include <STB/stb_image.h>
 #include <STB/stb_image_write.h>
 
-#include <Urho3D/DebugNew.h>
+#include <Clockwork/DebugNew.h>
 
-using namespace Urho3D;
+using namespace Clockwork;
 
 int main(int argc, char** argv);
 void Run(const Vector<String>& arguments);

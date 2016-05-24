@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,27 +20,27 @@
 // THE SOFTWARE.
 //
 
-#include <Urho3D/AngelScript/Script.h>
-#include <Urho3D/AngelScript/ScriptFile.h>
-#include <Urho3D/Core/Context.h>
-#include <Urho3D/Core/ProcessUtils.h>
-#include <Urho3D/Engine/Engine.h>
-#include <Urho3D/IO/File.h>
-#include <Urho3D/IO/FileSystem.h>
-#include <Urho3D/IO/Log.h>
-#include <Urho3D/Resource/ResourceCache.h>
+#include <Clockwork/AngelScript/Script.h>
+#include <Clockwork/AngelScript/ScriptFile.h>
+#include <Clockwork/Core/Context.h>
+#include <Clockwork/Core/ProcessUtils.h>
+#include <Clockwork/Engine/Engine.h>
+#include <Clockwork/IO/File.h>
+#include <Clockwork/IO/FileSystem.h>
+#include <Clockwork/IO/Log.h>
+#include <Clockwork/Resource/ResourceCache.h>
 
-#ifdef URHO3D_LUA
-#include <Urho3D/LuaScript/LuaScript.h>
+#ifdef CLOCKWORK_LUA
+#include <Clockwork/LuaScript/LuaScript.h>
 #endif
 
 #ifdef WIN32
 #include <windows.h>
 #endif
 
-#include <Urho3D/DebugNew.h>
+#include <Clockwork/DebugNew.h>
 
-using namespace Urho3D;
+using namespace Clockwork;
 
 void CompileScript(Context* context, const String& fileName);
 
@@ -91,7 +91,7 @@ int main(int argc, char** argv)
         engineParameters["ResourcePaths"] = String::EMPTY;
         engineParameters["AutoloadPaths"] = String::EMPTY;
         engine->Initialize(engineParameters);
-    #ifdef URHO3D_LUA
+    #ifdef CLOCKWORK_LUA
         context->RegisterSubsystem(new LuaScript(context));
     #endif
     }

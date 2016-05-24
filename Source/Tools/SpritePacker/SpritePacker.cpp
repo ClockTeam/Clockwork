@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,15 @@
 // THE SOFTWARE.
 //
 
-#include <Urho3D/Core/Context.h>
-#include <Urho3D/Core/ProcessUtils.h>
-#include <Urho3D/Core/StringUtils.h>
-#include <Urho3D/IO/File.h>
-#include <Urho3D/IO/FileSystem.h>
-#include <Urho3D/IO/Log.h>
-#include <Urho3D/Resource/Image.h>
-#include <Urho3D/Resource/XMLElement.h>
-#include <Urho3D/Resource/XMLFile.h>
+#include <Clockwork/Core/Context.h>
+#include <Clockwork/Core/ProcessUtils.h>
+#include <Clockwork/Core/StringUtils.h>
+#include <Clockwork/IO/File.h>
+#include <Clockwork/IO/FileSystem.h>
+#include <Clockwork/IO/Log.h>
+#include <Clockwork/Resource/Image.h>
+#include <Clockwork/Resource/XMLElement.h>
+#include <Clockwork/Resource/XMLFile.h>
 
 #ifdef WIN32
 #include <windows.h>
@@ -38,9 +38,9 @@
 #define STB_RECT_PACK_IMPLEMENTATION
 #include <STB/stb_rect_pack.h>
 
-#include <Urho3D/DebugNew.h>
+#include <Clockwork/DebugNew.h>
 
-using namespace Urho3D;
+using namespace Clockwork;
 
 // number of nodes allocated to each packer info.  since this packer is not suited for real time purposes we can over allocate.
 const int PACKER_NUM_NODES = 4096;
@@ -174,7 +174,7 @@ void Run(Vector<String>& arguments)
     if (inputFiles.Size() > 1)
     {
         outputFile = inputFiles[inputFiles.Size() - 1];
-        URHO3D_LOGINFO("Output file set to " + outputFile + ".");
+        CLOCKWORK_LOGINFO("Output file set to " + outputFile + ".");
         inputFiles.Erase(inputFiles.Size() - 1);
     }
 
@@ -188,7 +188,7 @@ void Run(Vector<String>& arguments)
     // check all input files exist
     for (unsigned i = 0; i < inputFiles.Size(); ++i)
     {
-        URHO3D_LOGINFO("Checking " + inputFiles[i] + " to see if file exists.");
+        CLOCKWORK_LOGINFO("Checking " + inputFiles[i] + " to see if file exists.");
         if (!fileSystem->FileExists(inputFiles[i]))
             ErrorExit("File " + inputFiles[i] + " does not exist.");
     }
@@ -362,7 +362,7 @@ void Run(Vector<String>& arguments)
             subTexture.SetInt("offsetY", packerInfo->offsetY);
         }
 
-        URHO3D_LOGINFO("Transfering " + packerInfo->path + " to sprite sheet.");
+        CLOCKWORK_LOGINFO("Transfering " + packerInfo->path + " to sprite sheet.");
 
         File file(context, packerInfo->path);
         Image image(context);
@@ -386,7 +386,7 @@ void Run(Vector<String>& arguments)
         unsigned OUTER_BOUNDS_DEBUG_COLOR = Color::BLUE.ToUInt();
         unsigned INNER_BOUNDS_DEBUG_COLOR = Color::GREEN.ToUInt();
 
-        URHO3D_LOGINFO("Drawing debug information.");
+        CLOCKWORK_LOGINFO("Drawing debug information.");
         for (unsigned i = 0; i < packerInfos.Size(); ++i)
         {
             SharedPtr<PackerInfo> packerInfo = packerInfos[i];
@@ -417,10 +417,10 @@ void Run(Vector<String>& arguments)
         }
     }
 
-    URHO3D_LOGINFO("Saving output image.");
+    CLOCKWORK_LOGINFO("Saving output image.");
     spriteSheetImage.SavePNG(outputFile);
 
-    URHO3D_LOGINFO("Saving SpriteSheet xml file.");
+    CLOCKWORK_LOGINFO("Saving SpriteSheet xml file.");
     File spriteSheetFile(context);
     spriteSheetFile.Open(spriteSheetFileName, FILE_WRITE);
     xml.Save(spriteSheetFile);

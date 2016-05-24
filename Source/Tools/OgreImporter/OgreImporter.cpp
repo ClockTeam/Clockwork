@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,13 +20,13 @@
 // THE SOFTWARE.
 //
 
-#include <Urho3D/Core/Context.h>
-#include <Urho3D/Core/ProcessUtils.h>
-#include <Urho3D/Core/StringUtils.h>
-#include <Urho3D/Graphics/Tangent.h>
-#include <Urho3D/IO/File.h>
-#include <Urho3D/IO/FileSystem.h>
-#include <Urho3D/Resource/XMLFile.h>
+#include <Clockwork/Core/Context.h>
+#include <Clockwork/Core/ProcessUtils.h>
+#include <Clockwork/Core/StringUtils.h>
+#include <Clockwork/Graphics/Tangent.h>
+#include <Clockwork/IO/File.h>
+#include <Clockwork/IO/FileSystem.h>
+#include <Clockwork/Resource/XMLFile.h>
 
 #include "OgreImporterUtils.h"
 
@@ -34,7 +34,7 @@
 #include <windows.h>
 #endif
 
-#include <Urho3D/DebugNew.h>
+#include <Clockwork/DebugNew.h>
 
 static const int VERTEX_CACHE_SIZE = 32;
 

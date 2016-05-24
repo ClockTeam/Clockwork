@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,14 +22,14 @@
 
 #pragma once
 
-#include <Urho3D/Graphics/Animation.h>
-#include <Urho3D/Math/BoundingBox.h>
-#include <Urho3D/Graphics/Graphics.h>
-#include <Urho3D/Graphics/VertexBuffer.h>
-#include <Urho3D/IO/Serializer.h>
-#include <Urho3D/Math/Matrix3x4.h>
+#include <Clockwork/Graphics/Animation.h>
+#include <Clockwork/Math/BoundingBox.h>
+#include <Clockwork/Graphics/Graphics.h>
+#include <Clockwork/Graphics/VertexBuffer.h>
+#include <Clockwork/IO/Serializer.h>
+#include <Clockwork/Math/Matrix3x4.h>
 
-using namespace Urho3D;
+using namespace Clockwork;
 
 struct Triangle
 {

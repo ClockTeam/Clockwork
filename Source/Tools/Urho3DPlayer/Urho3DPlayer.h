@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,18 +22,18 @@
 
 #pragma once
 
-#include <Urho3D/Engine/Application.h>
+#include <Clockwork/Engine/Application.h>
 
-using namespace Urho3D;
+using namespace Clockwork;
 
-/// Urho3DPlayer application runs a script specified on the command line.
-class Urho3DPlayer : public Application
+/// ClockworkPlayer application runs a script specified on the command line.
+class ClockworkPlayer : public Application
 {
-    URHO3D_OBJECT(Urho3DPlayer, Application);
+    CLOCKWORK_OBJECT(ClockworkPlayer, Application);
 
 public:
     /// Construct.
-    Urho3DPlayer(Context* context);
+    ClockworkPlayer(Context* context);
 
     /// Setup before engine initialization. Verify that a script file has been specified.
     virtual void Setup();
@@ -53,7 +53,7 @@ private:
     /// Script file name.
     String scriptFileName_;
     
-#ifdef URHO3D_ANGELSCRIPT
+#ifdef CLOCKWORK_ANGELSCRIPT
     /// Script file.
     SharedPtr<ScriptFile> scriptFile_;
 #endif

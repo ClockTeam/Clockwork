@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2008-2016 the Urho3D project.
+# Copyright (c) 2008-2016 the Clockwork project.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,23 +21,23 @@
 #
 
 # Set project name
-project (Urho3D-Tools)
+project (Clockwork-Tools)
 
-# Find Urho3D library
-find_package (Urho3D REQUIRED)
-include_directories (${URHO3D_INCLUDE_DIRS})
+# Find Clockwork library
+find_package (Clockwork REQUIRED)
+include_directories (${CLOCKWORK_INCLUDE_DIRS})
 
-# Urho3DPlayer target is rather special, although it is here, it is not a tool because it is built into target platform binary as opposed to host platform
+# ClockworkPlayer target is rather special, although it is here, it is not a tool because it is built into target platform binary as opposed to host platform
 # In order to test the player on Web platform built using Emscripten, the request parameters need to be parsed into Module['argument'] (see https://github.com/kripken/emscripten/blob/master/src/emrun_prejs.js for inspiration)
-# The CTest could "run" the Urho3DPlayer.html with script name as parameter, thanks to emrun performing this parsing automatically
+# The CTest could "run" the ClockworkPlayer.html with script name as parameter, thanks to emrun performing this parsing automatically
 # In a production environment, however, the request parameters parsing has to be done by the application itself one way or another
-if (URHO3D_ANGELSCRIPT OR URHO3D_LUA${JIT})
-    # Add Urho3DPlayer as target only when one of the supported scripting subystems is enabled
-    add_subdirectory (Urho3DPlayer)
+if (CLOCKWORK_ANGELSCRIPT OR CLOCKWORK_LUA${JIT})
+    # Add ClockworkPlayer as target only when one of the supported scripting subystems is enabled
+    add_subdirectory (ClockworkPlayer)
 endif ()
 
 # Build PackageTool using host compiler toolchain
-if (CMAKE_CROSSCOMPILING AND URHO3D_PACKAGING)
+if (CMAKE_CROSSCOMPILING AND CLOCKWORK_PACKAGING)
     # When cross-compiling, build the host tool as external project
     include (ExternalProject)
     if (IOS)
@@ -47,23 +47,23 @@ if (CMAKE_CROSSCOMPILING AND URHO3D_PACKAGING)
     ExternalProject_Add (PackageTool
         SOURCE_DIR ${CMAKE_SOURCE_DIR}/Source/Tools/PackageTool
         CMAKE_ARGS -DDEST_RUNTIME_DIR=${CMAKE_BINARY_DIR}/bin/tool -DBAKED_CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR} -DBAKED_CMAKE_BINARY_DIR=${CMAKE_BINARY_DIR} ${IOS_FIX})
-    if (CMAKE_HOST_WIN32 AND NOT URHO3D_MKLINK)
-        add_dependencies (PackageTool Urho3D)   # Ensure Urho3D headers are fresh when building PackageTool externally on Windows host system without MKLINK
+    if (CMAKE_HOST_WIN32 AND NOT CLOCKWORK_MKLINK)
+        add_dependencies (PackageTool Clockwork)   # Ensure Clockwork headers are fresh when building PackageTool externally on Windows host system without MKLINK
     endif ()
     install (PROGRAMS ${CMAKE_BINARY_DIR}/bin/tool/PackageTool DESTINATION ${DEST_RUNTIME_DIR}/tool)
 endif ()
 
-if (URHO3D_TOOLS)
-    # Urho3D tools
+if (CLOCKWORK_TOOLS)
+    # Clockwork tools
     add_subdirectory (AssetImporter)
     add_subdirectory (OgreImporter)
     add_subdirectory (PackageTool)
     add_subdirectory (RampGenerator)
     add_subdirectory (SpritePacker)
-    if (URHO3D_ANGELSCRIPT)
+    if (CLOCKWORK_ANGELSCRIPT)
         add_subdirectory (ScriptCompiler)
     endif ()
-elseif (NOT CMAKE_CROSSCOMPILING AND URHO3D_PACKAGING)
+elseif (NOT CMAKE_CROSSCOMPILING AND CLOCKWORK_PACKAGING)
     # PackageTool target is required but we are not cross-compiling, so build it as per normal
     add_subdirectory (PackageTool)
 endif ()

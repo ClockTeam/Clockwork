@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,29 +20,29 @@
 // THE SOFTWARE.
 //
 
-#include <Urho3D/Core/Context.h>
-#include <Urho3D/Core/ProcessUtils.h>
-#include <Urho3D/Core/StringUtils.h>
-#include <Urho3D/Core/WorkQueue.h>
-#include <Urho3D/Graphics/AnimatedModel.h>
-#include <Urho3D/Graphics/Animation.h>
-#include <Urho3D/Graphics/DebugRenderer.h>
-#include <Urho3D/Graphics/Geometry.h>
-#include <Urho3D/Graphics/Graphics.h>
-#include <Urho3D/Graphics/IndexBuffer.h>
-#include <Urho3D/Graphics/Light.h>
-#include <Urho3D/Graphics/Material.h>
-#include <Urho3D/Graphics/Octree.h>
-#include <Urho3D/Graphics/VertexBuffer.h>
-#include <Urho3D/Graphics/Zone.h>
-#include <Urho3D/IO/File.h>
-#include <Urho3D/IO/FileSystem.h>
-#ifdef URHO3D_PHYSICS
-#include <Urho3D/Physics/PhysicsWorld.h>
+#include <Clockwork/Core/Context.h>
+#include <Clockwork/Core/ProcessUtils.h>
+#include <Clockwork/Core/StringUtils.h>
+#include <Clockwork/Core/WorkQueue.h>
+#include <Clockwork/Graphics/AnimatedModel.h>
+#include <Clockwork/Graphics/Animation.h>
+#include <Clockwork/Graphics/DebugRenderer.h>
+#include <Clockwork/Graphics/Geometry.h>
+#include <Clockwork/Graphics/Graphics.h>
+#include <Clockwork/Graphics/IndexBuffer.h>
+#include <Clockwork/Graphics/Light.h>
+#include <Clockwork/Graphics/Material.h>
+#include <Clockwork/Graphics/Octree.h>
+#include <Clockwork/Graphics/VertexBuffer.h>
+#include <Clockwork/Graphics/Zone.h>
+#include <Clockwork/IO/File.h>
+#include <Clockwork/IO/FileSystem.h>
+#ifdef CLOCKWORK_PHYSICS
+#include <Clockwork/Physics/PhysicsWorld.h>
 #endif
-#include <Urho3D/Resource/ResourceCache.h>
-#include <Urho3D/Resource/XMLFile.h>
-#include <Urho3D/Scene/Scene.h>
+#include <Clockwork/Resource/ResourceCache.h>
+#include <Clockwork/Resource/XMLFile.h>
+#include <Clockwork/Scene/Scene.h>
 
 #ifdef WIN32
 #include <windows.h>
@@ -53,9 +53,9 @@
 #include <assimp/postprocess.h>
 #include <assimp/DefaultLogger.hpp>
 
-#include <Urho3D/DebugNew.h>
+#include <Clockwork/DebugNew.h>
 
-using namespace Urho3D;
+using namespace Clockwork;
 
 struct OutModel
 {
@@ -218,7 +218,7 @@ void Run(const Vector<String>& arguments)
             "scene       Output a scene\n"
             "node        Output a node and its children (prefab)\n"
             "dump        Dump scene node structure. No output file is generated\n"
-            "lod         Combine several Urho3D models as LOD levels of the output model\n"
+            "lod         Combine several Clockwork models as LOD levels of the output model\n"
             "            Syntax: lod <dist0> <mdl0> <dist1 <mdl1> ... <output file>\n"
             "\n"
             "Options:\n"
@@ -263,7 +263,7 @@ void Run(const Vector<String>& arguments)
     context_->RegisterSubsystem(new WorkQueue(context_));
     RegisterSceneLibrary(context_);
     RegisterGraphicsLibrary(context_);
-#ifdef URHO3D_PHYSICS
+#ifdef CLOCKWORK_PHYSICS
     RegisterPhysicsLibrary(context_);
 #endif
 
@@ -1513,7 +1513,7 @@ void BuildAndSaveScene(OutScene& scene, bool asPrefab)
 
     if (!asPrefab)
     {
-        #ifdef URHO3D_PHYSICS
+        #ifdef CLOCKWORK_PHYSICS
         /// \todo Make the physics properties configurable
         outScene->CreateComponent<PhysicsWorld>();
         #endif
