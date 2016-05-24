@@ -48,9 +48,9 @@ struct FileSelectorEntry
 };
 
 /// %File selector dialog.
-class URHO3D_API FileSelector : public Object
+class CLOCKWORK_API FileSelector : public Object
 {
-    URHO3D_OBJECT(FileSelector, Object);
+    CLOCKWORK_OBJECT(FileSelector, Object);
 
 public:
     /// Construct.

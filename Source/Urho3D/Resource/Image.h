@@ -88,9 +88,9 @@ struct CompressedLevel
 };
 
 /// %Image resource.
-class URHO3D_API Image : public Resource
+class CLOCKWORK_API Image : public Resource
 {
-    URHO3D_OBJECT(Image, Resource);
+    CLOCKWORK_OBJECT(Image, Resource);
 
 public:
     /// Construct empty.

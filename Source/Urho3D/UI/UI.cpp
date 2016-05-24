@@ -117,17 +117,17 @@ UI::UI(Context* context) :
     // Register UI library object factories
     RegisterUILibrary(context_);
 
-    SubscribeToEvent(E_SCREENMODE, URHO3D_HANDLER(UI, HandleScreenMode));
-    SubscribeToEvent(E_MOUSEBUTTONDOWN, URHO3D_HANDLER(UI, HandleMouseButtonDown));
-    SubscribeToEvent(E_MOUSEBUTTONUP, URHO3D_HANDLER(UI, HandleMouseButtonUp));
-    SubscribeToEvent(E_MOUSEMOVE, URHO3D_HANDLER(UI, HandleMouseMove));
-    SubscribeToEvent(E_MOUSEWHEEL, URHO3D_HANDLER(UI, HandleMouseWheel));
-    SubscribeToEvent(E_TOUCHBEGIN, URHO3D_HANDLER(UI, HandleTouchBegin));
-    SubscribeToEvent(E_TOUCHEND, URHO3D_HANDLER(UI, HandleTouchEnd));
-    SubscribeToEvent(E_TOUCHMOVE, URHO3D_HANDLER(UI, HandleTouchMove));
-    SubscribeToEvent(E_KEYDOWN, URHO3D_HANDLER(UI, HandleKeyDown));
-    SubscribeToEvent(E_TEXTINPUT, URHO3D_HANDLER(UI, HandleTextInput));
-    SubscribeToEvent(E_DROPFILE, URHO3D_HANDLER(UI, HandleDropFile));
+    SubscribeToEvent(E_SCREENMODE, CLOCKWORK_HANDLER(UI, HandleScreenMode));
+    SubscribeToEvent(E_MOUSEBUTTONDOWN, CLOCKWORK_HANDLER(UI, HandleMouseButtonDown));
+    SubscribeToEvent(E_MOUSEBUTTONUP, CLOCKWORK_HANDLER(UI, HandleMouseButtonUp));
+    SubscribeToEvent(E_MOUSEMOVE, CLOCKWORK_HANDLER(UI, HandleMouseMove));
+    SubscribeToEvent(E_MOUSEWHEEL, CLOCKWORK_HANDLER(UI, HandleMouseWheel));
+    SubscribeToEvent(E_TOUCHBEGIN, CLOCKWORK_HANDLER(UI, HandleTouchBegin));
+    SubscribeToEvent(E_TOUCHEND, CLOCKWORK_HANDLER(UI, HandleTouchEnd));
+    SubscribeToEvent(E_TOUCHMOVE, CLOCKWORK_HANDLER(UI, HandleTouchMove));
+    SubscribeToEvent(E_KEYDOWN, CLOCKWORK_HANDLER(UI, HandleKeyDown));
+    SubscribeToEvent(E_TEXTINPUT, CLOCKWORK_HANDLER(UI, HandleTextInput));
+    SubscribeToEvent(E_DROPFILE, CLOCKWORK_HANDLER(UI, HandleDropFile));
 
     // Try to initialize right now, but skip if screen mode is not yet set
     Initialize();
@@ -300,7 +300,7 @@ void UI::Update(float timeStep)
 {
     assert(rootElement_ && rootModalElement_);
 
-    URHO3D_PROFILE(UpdateUI);
+    CLOCKWORK_PROFILE(UpdateUI);
 
     // Expire hovers
     for (HashMap<WeakPtr<UIElement>, bool>::Iterator i = hoveredElements_.Begin(); i != hoveredElements_.End(); ++i)
@@ -397,7 +397,7 @@ void UI::RenderUpdate()
 {
     assert(rootElement_ && rootModalElement_ && graphics_);
 
-    URHO3D_PROFILE(GetUIBatches);
+    CLOCKWORK_PROFILE(GetUIBatches);
 
     uiRendered_ = false;
 
@@ -434,7 +434,7 @@ void UI::Render(bool resetRenderTargets)
     if (resetRenderTargets && uiRendered_)
         return;
 
-    URHO3D_PROFILE(RenderUI);
+    CLOCKWORK_PROFILE(RenderUI);
 
     // If the OS cursor is visible, apply its shape now if changed
     bool osCursorVisible = GetSubsystem<Input>()->IsMouseVisible();
@@ -478,22 +478,22 @@ SharedPtr<UIElement> UI::LoadLayout(Deserializer& source, XMLFile* styleFile)
 
 SharedPtr<UIElement> UI::LoadLayout(XMLFile* file, XMLFile* styleFile)
 {
-    URHO3D_PROFILE(LoadUILayout);
+    CLOCKWORK_PROFILE(LoadUILayout);
 
     SharedPtr<UIElement> root;
 
     if (!file)
     {
-        URHO3D_LOGERROR("Null UI layout XML file");
+        CLOCKWORK_LOGERROR("Null UI layout XML file");
         return root;
     }
 
-    URHO3D_LOGDEBUG("Loading UI layout " + file->GetName());
+    CLOCKWORK_LOGDEBUG("Loading UI layout " + file->GetName());
 
     XMLElement rootElem = file->GetRoot("element");
     if (!rootElem)
     {
-        URHO3D_LOGERROR("No root UI element in " + file->GetName());
+        CLOCKWORK_LOGERROR("No root UI element in " + file->GetName());
         return root;
     }
 
@@ -504,7 +504,7 @@ SharedPtr<UIElement> UI::LoadLayout(XMLFile* file, XMLFile* styleFile)
     root = DynamicCast<UIElement>(context_->CreateObject(typeName));
     if (!root)
     {
-        URHO3D_LOGERROR("Could not create unknown UI element " + typeName);
+        CLOCKWORK_LOGERROR("Could not create unknown UI element " + typeName);
         return root;
     }
 
@@ -521,7 +521,7 @@ SharedPtr<UIElement> UI::LoadLayout(XMLFile* file, XMLFile* styleFile)
 
 bool UI::SaveLayout(Serializer& dest, UIElement* element)
 {
-    URHO3D_PROFILE(SaveUILayout);
+    CLOCKWORK_PROFILE(SaveUILayout);
 
     return element && element->SaveXML(dest);
 }
@@ -698,7 +698,7 @@ void UI::Initialize()
     if (!graphics || !graphics->IsInitialized())
         return;
 
-    URHO3D_PROFILE(InitUI);
+    CLOCKWORK_PROFILE(InitUI);
 
     graphics_ = graphics;
     UIBatch::posAdjust = Vector3(Graphics::GetPixelUVOffset(), 0.0f);
@@ -711,11 +711,11 @@ void UI::Initialize()
 
     initialized_ = true;
 
-    SubscribeToEvent(E_BEGINFRAME, URHO3D_HANDLER(UI, HandleBeginFrame));
-    SubscribeToEvent(E_POSTUPDATE, URHO3D_HANDLER(UI, HandlePostUpdate));
-    SubscribeToEvent(E_RENDERUPDATE, URHO3D_HANDLER(UI, HandleRenderUpdate));
+    SubscribeToEvent(E_BEGINFRAME, CLOCKWORK_HANDLER(UI, HandleBeginFrame));
+    SubscribeToEvent(E_POSTUPDATE, CLOCKWORK_HANDLER(UI, HandlePostUpdate));
+    SubscribeToEvent(E_RENDERUPDATE, CLOCKWORK_HANDLER(UI, HandleRenderUpdate));
 
-    URHO3D_LOGINFO("Initialized user interface");
+    CLOCKWORK_LOGINFO("Initialized user interface");
 }
 
 void UI::Update(float timeStep, UIElement* element)
@@ -1003,7 +1003,7 @@ void UI::SetCursorShape(CursorShape shape)
 
 void UI::ReleaseFontFaces()
 {
-    URHO3D_LOGDEBUG("Reloading font faces");
+    CLOCKWORK_LOGDEBUG("Reloading font faces");
 
     PODVector<Font*> fonts;
     GetSubsystem<ResourceCache>()->GetResources<Font>(fonts);

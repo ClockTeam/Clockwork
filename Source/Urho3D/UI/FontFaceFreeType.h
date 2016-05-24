@@ -31,7 +31,7 @@ class FreeTypeLibrary;
 class Texture2D;
 
 /// Free type font face description.
-class URHO3D_API FontFaceFreeType : public FontFace
+class CLOCKWORK_API FontFaceFreeType : public FontFace
 {
 public:
     /// Construct.

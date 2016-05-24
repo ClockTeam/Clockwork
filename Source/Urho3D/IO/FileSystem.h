@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@
 #include "../Container/List.h"
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class AsyncExecRequest;
@@ -39,9 +39,9 @@ static const unsigned SCAN_DIRS = 0x2;
 static const unsigned SCAN_HIDDEN = 0x4;
 
 /// Subsystem for file and directory operations and access control.
-class URHO3D_API FileSystem : public Object
+class CLOCKWORK_API FileSystem : public Object
 {
-    URHO3D_OBJECT(FileSystem, Object);
+    CLOCKWORK_OBJECT(FileSystem, Object);
 
 public:
     /// Construct.
@@ -71,7 +71,7 @@ public:
     bool Rename(const String& srcFileName, const String& destFileName);
     /// Delete a file. Return true if successful.
     bool Delete(const String& fileName);
-    /// Register a path as allowed to access. If no paths are registered, all are allowed. Registering allowed paths is considered securing the Urho3D execution environment: running programs and opening files externally through the system will fail afterward.
+    /// Register a path as allowed to access. If no paths are registered, all are allowed. Registering allowed paths is considered securing the Clockwork execution environment: running programs and opening files externally through the system will fail afterward.
     void RegisterPath(const String& pathName);
     /// Set a file's last modified time as seconds since 1.1.1970. Return true on success.
     bool SetLastModifiedTime(const String& fileName, unsigned newTime);
@@ -95,7 +95,7 @@ public:
     bool DirExists(const String& pathName) const;
     /// Scan a directory for specified files.
     void ScanDir(Vector<String>& result, const String& pathName, const String& filter, unsigned flags, bool recursive) const;
-    /// Return the program's directory. If it does not contain the Urho3D default CoreData and Data directories, and the current working directory does, return the working directory instead.
+    /// Return the program's directory. If it does not contain the Clockwork default CoreData and Data directories, and the current working directory does, return the working directory instead.
     String GetProgramDir() const;
     /// Return the user documents directory.
     String GetUserDocumentsDir() const;
@@ -124,31 +124,31 @@ private:
 };
 
 /// Split a full path to path, filename and extension. The extension will be converted to lowercase by default.
-URHO3D_API void
+CLOCKWORK_API void
     SplitPath(const String& fullPath, String& pathName, String& fileName, String& extension, bool lowercaseExtension = true);
 /// Return the path from a full path.
-URHO3D_API String GetPath(const String& fullPath);
+CLOCKWORK_API String GetPath(const String& fullPath);
 /// Return the filename from a full path.
-URHO3D_API String GetFileName(const String& fullPath);
+CLOCKWORK_API String GetFileName(const String& fullPath);
 /// Return the extension from a full path, converted to lowercase by default.
-URHO3D_API String GetExtension(const String& fullPath, bool lowercaseExtension = true);
+CLOCKWORK_API String GetExtension(const String& fullPath, bool lowercaseExtension = true);
 /// Return the filename and extension from a full path. The case of the extension is preserved by default, so that the file can be opened in case-sensitive operating systems.
-URHO3D_API String GetFileNameAndExtension(const String& fullPath, bool lowercaseExtension = false);
+CLOCKWORK_API String GetFileNameAndExtension(const String& fullPath, bool lowercaseExtension = false);
 /// Replace the extension of a file name with another.
-URHO3D_API String ReplaceExtension(const String& fullPath, const String& newExtension);
+CLOCKWORK_API String ReplaceExtension(const String& fullPath, const String& newExtension);
 /// Add a slash at the end of the path if missing and convert to internal format (use slashes.)
-URHO3D_API String AddTrailingSlash(const String& pathName);
+CLOCKWORK_API String AddTrailingSlash(const String& pathName);
 /// Remove the slash from the end of a path if exists and convert to internal format (use slashes.)
-URHO3D_API String RemoveTrailingSlash(const String& pathName);
+CLOCKWORK_API String RemoveTrailingSlash(const String& pathName);
 /// Return the parent path, or the path itself if not available.
-URHO3D_API String GetParentPath(const String& pathName);
+CLOCKWORK_API String GetParentPath(const String& pathName);
 /// Convert a path to internal format (use slashes.)
-URHO3D_API String GetInternalPath(const String& pathName);
+CLOCKWORK_API String GetInternalPath(const String& pathName);
 /// Convert a path to the format required by the operating system.
-URHO3D_API String GetNativePath(const String& pathName);
+CLOCKWORK_API String GetNativePath(const String& pathName);
 /// Convert a path to the format required by the operating system in wide characters.
-URHO3D_API WString GetWideNativePath(const String& pathName);
+CLOCKWORK_API WString GetWideNativePath(const String& pathName);
 /// Return whether a path is absolute.
-URHO3D_API bool IsAbsolutePath(const String& pathName);
+CLOCKWORK_API bool IsAbsolutePath(const String& pathName);
 
 }

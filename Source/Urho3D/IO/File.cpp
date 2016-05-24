@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 #ifdef _WIN32
@@ -126,23 +126,23 @@ bool File::Open(const String& fileName, FileMode mode)
     FileSystem* fileSystem = GetSubsystem<FileSystem>();
     if (fileSystem && !fileSystem->CheckAccess(GetPath(fileName)))
     {
-        URHO3D_LOGERRORF("Access denied to %s", fileName.CString());
+        CLOCKWORK_LOGERRORF("Access denied to %s", fileName.CString());
         return false;
     }
 
 #ifdef ANDROID
-    if (URHO3D_IS_ASSET(fileName))
+    if (CLOCKWORK_IS_ASSET(fileName))
     {
         if (mode != FILE_READ)
         {
-            URHO3D_LOGERROR("Only read mode is supported for asset files");
+            CLOCKWORK_LOGERROR("Only read mode is supported for asset files");
             return false;
         }
 
-        assetHandle_ = SDL_RWFromFile(URHO3D_ASSET(fileName), "rb");
+        assetHandle_ = SDL_RWFromFile(CLOCKWORK_ASSET(fileName), "rb");
         if (!assetHandle_)
         {
-            URHO3D_LOGERRORF("Could not open asset file %s", fileName.CString());
+            CLOCKWORK_LOGERRORF("Could not open asset file %s", fileName.CString());
             return false;
         }
         else
@@ -163,7 +163,7 @@ bool File::Open(const String& fileName, FileMode mode)
 
     if (fileName.Empty())
     {
-        URHO3D_LOGERROR("Could not open file with empty name");
+        CLOCKWORK_LOGERROR("Could not open file with empty name");
         return false;
     }
 
@@ -185,7 +185,7 @@ bool File::Open(const String& fileName, FileMode mode)
 
     if (!handle_)
     {
-        URHO3D_LOGERRORF("Could not open file %s", fileName.CString());
+        CLOCKWORK_LOGERRORF("Could not open file %s", fileName.CString());
         return false;
     }
 
@@ -203,7 +203,7 @@ bool File::Open(const String& fileName, FileMode mode)
     fseek((FILE*)handle_, 0, SEEK_SET);
     if (size > M_MAX_UNSIGNED)
     {
-        URHO3D_LOGERRORF("Could not open file %s which is larger than 4GB", fileName.CString());
+        CLOCKWORK_LOGERRORF("Could not open file %s which is larger than 4GB", fileName.CString());
         Close();
         size_ = 0;
         return false;
@@ -230,7 +230,7 @@ bool File::Open(PackageFile* package, const String& fileName)
 #endif
     if (!handle_)
     {
-        URHO3D_LOGERROR("Could not open package file " + fileName);
+        CLOCKWORK_LOGERROR("Could not open package file " + fileName);
         return false;
     }
 
@@ -262,7 +262,7 @@ unsigned File::Read(void* dest, unsigned size)
 
     if (mode_ == FILE_WRITE)
     {
-        URHO3D_LOGERROR("File not opened for reading");
+        CLOCKWORK_LOGERROR("File not opened for reading");
         return 0;
     }
 
@@ -350,7 +350,7 @@ unsigned File::Read(void* dest, unsigned size)
     {
         // Return to the position where the read began
         fseek((FILE*)handle_, position_ + offset_, SEEK_SET);
-        URHO3D_LOGERROR("Error while reading from file " + GetName());
+        CLOCKWORK_LOGERROR("Error while reading from file " + GetName());
         return 0;
     }
 
@@ -403,7 +403,7 @@ unsigned File::Seek(unsigned position)
                 Read(skipBuffer, Min(position - position_, SKIP_BUFFER_SIZE));
         }
         else
-            URHO3D_LOGERROR("Seeking backward in a compressed file is not supported");
+            CLOCKWORK_LOGERROR("Seeking backward in a compressed file is not supported");
 
         return position_;
     }
@@ -425,7 +425,7 @@ unsigned File::Write(const void* data, unsigned size)
 
     if (mode_ == FILE_READ)
     {
-        URHO3D_LOGERROR("File not opened for writing");
+        CLOCKWORK_LOGERROR("File not opened for writing");
         return 0;
     }
 
@@ -443,7 +443,7 @@ unsigned File::Write(const void* data, unsigned size)
     {
         // Return to the position where the write began
         fseek((FILE*)handle_, position_ + offset_, SEEK_SET);
-        URHO3D_LOGERROR("Error while writing to file " + GetName());
+        CLOCKWORK_LOGERROR("Error while writing to file " + GetName());
         return 0;
     }
 
@@ -466,7 +466,7 @@ unsigned File::GetChecksum()
 #endif
         return 0;
 
-    URHO3D_PROFILE(CalculateFileChecksum);
+    CLOCKWORK_PROFILE(CalculateFileChecksum);
 
     unsigned oldPos = position_;
     checksum_ = 0;

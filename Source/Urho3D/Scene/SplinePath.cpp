@@ -51,13 +51,13 @@ void SplinePath::RegisterObject(Context* context)
 {
     context->RegisterFactory<SplinePath>(LOGIC_CATEGORY);
 
-    URHO3D_ENUM_ACCESSOR_ATTRIBUTE("Interpolation Mode", GetInterpolationMode, SetInterpolationMode, InterpolationMode,
+    CLOCKWORK_ENUM_ACCESSOR_ATTRIBUTE("Interpolation Mode", GetInterpolationMode, SetInterpolationMode, InterpolationMode,
         interpolationModeNames, BEZIER_CURVE, AM_FILE);
-    URHO3D_ATTRIBUTE("Speed", float, speed_, 1.f, AM_FILE);
-    URHO3D_ATTRIBUTE("Traveled", float, traveled_, 0.f, AM_FILE | AM_NOEDIT);
-    URHO3D_ATTRIBUTE("Elapsed Time", float, elapsedTime_, 0.f, AM_FILE | AM_NOEDIT);
-    URHO3D_ACCESSOR_ATTRIBUTE("Controlled", GetControlledIdAttr, SetControlledIdAttr, unsigned, 0, AM_FILE | AM_NODEID);
-    URHO3D_ACCESSOR_ATTRIBUTE("Control Points", GetControlPointIdsAttr, SetControlPointIdsAttr, VariantVector, Variant::emptyVariantVector,
+    CLOCKWORK_ATTRIBUTE("Speed", float, speed_, 1.f, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Traveled", float, traveled_, 0.f, AM_FILE | AM_NOEDIT);
+    CLOCKWORK_ATTRIBUTE("Elapsed Time", float, elapsedTime_, 0.f, AM_FILE | AM_NOEDIT);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Controlled", GetControlledIdAttr, SetControlledIdAttr, unsigned, 0, AM_FILE | AM_NODEID);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Control Points", GetControlPointIdsAttr, SetControlPointIdsAttr, VariantVector, Variant::emptyVariantVector,
         AM_FILE | AM_NODEIDVECTOR);
 }
 

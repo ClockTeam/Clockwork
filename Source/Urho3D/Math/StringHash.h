@@ -28,7 +28,7 @@ namespace Urho3D
 {
 
 /// 32-bit hash value for a string.
-class URHO3D_API StringHash
+class CLOCKWORK_API StringHash
 {
 public:
     /// Construct with zero value.

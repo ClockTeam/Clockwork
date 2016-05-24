@@ -28,9 +28,9 @@ namespace Urho3D
 {
 
 /// 2D distance constraint component.
-class URHO3D_API ConstraintDistance2D : public Constraint2D
+class CLOCKWORK_API ConstraintDistance2D : public Constraint2D
 {
-    URHO3D_OBJECT(ConstraintDistance2D, Constraint2D);
+    CLOCKWORK_OBJECT(ConstraintDistance2D, Constraint2D);
 
 public:
     /// Construct.

@@ -60,8 +60,8 @@ Network::Network(Context* context) :
     // Register Network library object factories
     RegisterNetworkLibrary(context_);
 
-    SubscribeToEvent(E_BEGINFRAME, URHO3D_HANDLER(Network, HandleBeginFrame));
-    SubscribeToEvent(E_RENDERUPDATE, URHO3D_HANDLER(Network, HandleRenderUpdate));
+    SubscribeToEvent(E_BEGINFRAME, CLOCKWORK_HANDLER(Network, HandleBeginFrame));
+    SubscribeToEvent(E_RENDERUPDATE, CLOCKWORK_HANDLER(Network, HandleRenderUpdate));
 
     // Blacklist remote events which are not to be allowed to be registered in any case
     blacklistedRemoteEvents_.Insert(E_CONSOLECOMMAND);
@@ -140,7 +140,7 @@ void Network::HandleMessage(kNet::MessageConnection* source, kNet::packet_id_t p
         connection->SendEvent(E_NETWORKMESSAGE, eventData);
     }
     else
-        URHO3D_LOGWARNING("Discarding message from unknown MessageConnection " + ToString((void*)source));
+        CLOCKWORK_LOGWARNING("Discarding message from unknown MessageConnection " + ToString((void*)source));
 }
 
 u32 Network::ComputeContentID(kNet::message_id_t msgId, const char* data, size_t numBytes)
@@ -173,7 +173,7 @@ void Network::NewConnectionEstablished(kNet::MessageConnection* connection)
     SharedPtr<Connection> newConnection(new Connection(context_, true, kNet::SharedPtr<kNet::MessageConnection>(connection)));
     newConnection->ConfigureNetworkSimulator(simulatedLatency_, simulatedPacketLoss_);
     clientConnections_[connection] = newConnection;
-    URHO3D_LOGINFO("Client " + newConnection->ToString() + " connected");
+    CLOCKWORK_LOGINFO("Client " + newConnection->ToString() + " connected");
 
     using namespace ClientConnected;
 
@@ -191,7 +191,7 @@ void Network::ClientDisconnected(kNet::MessageConnection* connection)
     if (i != clientConnections_.End())
     {
         Connection* connection = i->second_;
-        URHO3D_LOGINFO("Client " + connection->ToString() + " disconnected");
+        CLOCKWORK_LOGINFO("Client " + connection->ToString() + " disconnected");
 
         using namespace ClientDisconnected;
 
@@ -205,7 +205,7 @@ void Network::ClientDisconnected(kNet::MessageConnection* connection)
 
 bool Network::Connect(const String& address, unsigned short port, Scene* scene, const VariantMap& identity)
 {
-    URHO3D_PROFILE(Connect);
+    CLOCKWORK_PROFILE(Connect);
 
     // If a previous connection already exists, disconnect it and wait for some time for the connection to terminate
     if (serverConnection_)
@@ -223,12 +223,12 @@ bool Network::Connect(const String& address, unsigned short port, Scene* scene, 
         serverConnection_->SetConnectPending(true);
         serverConnection_->ConfigureNetworkSimulator(simulatedLatency_, simulatedPacketLoss_);
 
-        URHO3D_LOGINFO("Connecting to server " + serverConnection_->ToString());
+        CLOCKWORK_LOGINFO("Connecting to server " + serverConnection_->ToString());
         return true;
     }
     else
     {
-        URHO3D_LOGERROR("Failed to connect to server " + address + ":" + String(port));
+        CLOCKWORK_LOGERROR("Failed to connect to server " + address + ":" + String(port));
         SendEvent(E_CONNECTFAILED);
         return false;
     }
@@ -239,7 +239,7 @@ void Network::Disconnect(int waitMSec)
     if (!serverConnection_)
         return;
 
-    URHO3D_PROFILE(Disconnect);
+    CLOCKWORK_PROFILE(Disconnect);
     serverConnection_->Disconnect(waitMSec);
 }
 
@@ -248,16 +248,16 @@ bool Network::StartServer(unsigned short port)
     if (IsServerRunning())
         return true;
 
-    URHO3D_PROFILE(StartServer);
+    CLOCKWORK_PROFILE(StartServer);
 
     if (network_->StartServer(port, kNet::SocketOverUDP, this, true) != 0)
     {
-        URHO3D_LOGINFO("Started server on port " + String(port));
+        CLOCKWORK_LOGINFO("Started server on port " + String(port));
         return true;
     }
     else
     {
-        URHO3D_LOGERROR("Failed to start server on port " + String(port));
+        CLOCKWORK_LOGERROR("Failed to start server on port " + String(port));
         return false;
     }
 }
@@ -267,11 +267,11 @@ void Network::StopServer()
     if (!IsServerRunning())
         return;
 
-    URHO3D_PROFILE(StopServer);
+    CLOCKWORK_PROFILE(StopServer);
 
     clientConnections_.Clear();
     network_->StopServer();
-    URHO3D_LOGINFO("Stopped server");
+    CLOCKWORK_LOGINFO("Stopped server");
 }
 
 void Network::BroadcastMessage(int msgID, bool reliable, bool inOrder, const VectorBuffer& msg, unsigned contentID)
@@ -285,7 +285,7 @@ void Network::BroadcastMessage(int msgID, bool reliable, bool inOrder, const uns
     // Make sure not to use kNet internal message ID's
     if (msgID <= 0x4 || msgID >= 0x3ffffffe)
     {
-        URHO3D_LOGERROR("Can not send message with reserved ID");
+        CLOCKWORK_LOGERROR("Can not send message with reserved ID");
         return;
     }
 
@@ -293,7 +293,7 @@ void Network::BroadcastMessage(int msgID, bool reliable, bool inOrder, const uns
     if (server)
         server->BroadcastMessage((unsigned long)msgID, reliable, inOrder, 0, contentID, (const char*)data, numBytes);
     else
-        URHO3D_LOGERROR("Server not running, can not broadcast messages");
+        CLOCKWORK_LOGERROR("Server not running, can not broadcast messages");
 }
 
 void Network::BroadcastRemoteEvent(StringHash eventType, bool inOrder, const VariantMap& eventData)
@@ -317,12 +317,12 @@ void Network::BroadcastRemoteEvent(Node* node, StringHash eventType, bool inOrde
 {
     if (!node)
     {
-        URHO3D_LOGERROR("Null sender node for remote node event");
+        CLOCKWORK_LOGERROR("Null sender node for remote node event");
         return;
     }
     if (node->GetID() >= FIRST_LOCAL_ID)
     {
-        URHO3D_LOGERROR("Sender node has a local ID, can not send remote node event");
+        CLOCKWORK_LOGERROR("Sender node has a local ID, can not send remote node event");
         return;
     }
 
@@ -358,7 +358,7 @@ void Network::RegisterRemoteEvent(StringHash eventType)
 {
     if (blacklistedRemoteEvents_.Find(eventType) != blacklistedRemoteEvents_.End())
     {
-        URHO3D_LOGERROR("Attempted to register blacklisted remote event type " + String(eventType));
+        CLOCKWORK_LOGERROR("Attempted to register blacklisted remote event type " + String(eventType));
         return;
     }
 
@@ -384,12 +384,12 @@ void Network::SendPackageToClients(Scene* scene, PackageFile* package)
 {
     if (!scene)
     {
-        URHO3D_LOGERROR("Null scene specified for SendPackageToClients");
+        CLOCKWORK_LOGERROR("Null scene specified for SendPackageToClients");
         return;
     }
     if (!package)
     {
-        URHO3D_LOGERROR("Null package specified for SendPackageToClients");
+        CLOCKWORK_LOGERROR("Null package specified for SendPackageToClients");
         return;
     }
 
@@ -404,7 +404,7 @@ void Network::SendPackageToClients(Scene* scene, PackageFile* package)
 SharedPtr<HttpRequest> Network::MakeHttpRequest(const String& url, const String& verb, const Vector<String>& headers,
     const String& postData)
 {
-    URHO3D_PROFILE(MakeHttpRequest);
+    CLOCKWORK_PROFILE(MakeHttpRequest);
 
     // The initialization of the request will take time, can not know at this point if it has an error or not
     SharedPtr<HttpRequest> request(new HttpRequest(url, verb, headers, postData));
@@ -452,7 +452,7 @@ bool Network::CheckRemoteEvent(StringHash eventType) const
 
 void Network::Update(float timeStep)
 {
-    URHO3D_PROFILE(UpdateNetwork);
+    CLOCKWORK_PROFILE(UpdateNetwork);
 
     // Process server connection if it exists
     if (serverConnection_)
@@ -483,7 +483,7 @@ void Network::Update(float timeStep)
 
 void Network::PostUpdate(float timeStep)
 {
-    URHO3D_PROFILE(PostUpdateNetwork);
+    CLOCKWORK_PROFILE(PostUpdateNetwork);
 
     // Check if periodic update should happen now
     updateAcc_ += timeStep;
@@ -499,7 +499,7 @@ void Network::PostUpdate(float timeStep)
         {
             // Collect and prepare all networked scenes
             {
-                URHO3D_PROFILE(PrepareServerUpdate);
+                CLOCKWORK_PROFILE(PrepareServerUpdate);
 
                 networkScenes_.Clear();
                 for (HashMap<kNet::MessageConnection*, SharedPtr<Connection> >::Iterator i = clientConnections_.Begin();
@@ -515,7 +515,7 @@ void Network::PostUpdate(float timeStep)
             }
 
             {
-                URHO3D_PROFILE(SendServerUpdate);
+                CLOCKWORK_PROFILE(SendServerUpdate);
 
                 // Then send server updates for each client connection
                 for (HashMap<kNet::MessageConnection*, SharedPtr<Connection> >::Iterator i = clientConnections_.Begin();
@@ -558,7 +558,7 @@ void Network::OnServerConnected()
 {
     serverConnection_->SetConnectPending(false);
 
-    URHO3D_LOGINFO("Connected to server");
+    CLOCKWORK_LOGINFO("Connected to server");
 
     // Send the identity map now
     VectorBuffer msg;
@@ -576,12 +576,12 @@ void Network::OnServerDisconnected()
 
     if (!failedConnect)
     {
-        URHO3D_LOGINFO("Disconnected from server");
+        CLOCKWORK_LOGINFO("Disconnected from server");
         SendEvent(E_SERVERDISCONNECTED);
     }
     else
     {
-        URHO3D_LOGERROR("Failed to connect to server");
+        CLOCKWORK_LOGERROR("Failed to connect to server");
         SendEvent(E_CONNECTFAILED);
     }
 }

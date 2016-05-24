@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,15 +28,15 @@
 #include "../Core/Thread.h"
 #include "../Core/Timer.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class FileSystem;
 
 /// Watches a directory and its subdirectories for files being modified.
-class URHO3D_API FileWatcher : public Object, public Thread
+class CLOCKWORK_API FileWatcher : public Object, public Thread
 {
-    URHO3D_OBJECT(FileWatcher, Object);
+    CLOCKWORK_OBJECT(FileWatcher, Object);
 
 public:
     /// Construct.

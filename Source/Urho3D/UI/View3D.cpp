@@ -49,7 +49,7 @@ View3D::View3D(Context* context) :
     depthTexture_ = new Texture2D(context_);
     viewport_ = new Viewport(context_);
 
-    SubscribeToEvent(E_RENDERSURFACEUPDATE, URHO3D_HANDLER(View3D, HandleRenderSurfaceUpdate));
+    SubscribeToEvent(E_RENDERSURFACEUPDATE, CLOCKWORK_HANDLER(View3D, HandleRenderSurfaceUpdate));
 }
 
 View3D::~View3D()
@@ -61,11 +61,11 @@ void View3D::RegisterObject(Context* context)
 {
     context->RegisterFactory<View3D>(UI_CATEGORY);
 
-    URHO3D_COPY_BASE_ATTRIBUTES(Window);
+    CLOCKWORK_COPY_BASE_ATTRIBUTES(Window);
     // The texture format is API specific, so do not register it as a serializable attribute
-    URHO3D_ACCESSOR_ATTRIBUTE("Auto Update", GetAutoUpdate, SetAutoUpdate, bool, true, AM_FILE);
-    URHO3D_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Clip Children", true);
-    URHO3D_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Is Enabled", true);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Auto Update", GetAutoUpdate, SetAutoUpdate, bool, true, AM_FILE);
+    CLOCKWORK_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Clip Children", true);
+    CLOCKWORK_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Is Enabled", true);
 }
 
 void View3D::OnResize()

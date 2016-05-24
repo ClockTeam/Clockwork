@@ -29,9 +29,9 @@ namespace Urho3D
 {
 
 /// Tooltip %UI element.
-class URHO3D_API ToolTip : public UIElement
+class CLOCKWORK_API ToolTip : public UIElement
 {
-    URHO3D_OBJECT(ToolTip, UIElement)
+    CLOCKWORK_OBJECT(ToolTip, UIElement)
 
 public:
     /// Construct.

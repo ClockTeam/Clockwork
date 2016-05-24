@@ -32,9 +32,9 @@ class Texture;
 class Texture2D;
 
 /// %Image %UI element with optional border.
-class URHO3D_API BorderImage : public UIElement
+class CLOCKWORK_API BorderImage : public UIElement
 {
-    URHO3D_OBJECT(BorderImage, UIElement);
+    CLOCKWORK_OBJECT(BorderImage, UIElement);
 
 public:
     /// Construct.

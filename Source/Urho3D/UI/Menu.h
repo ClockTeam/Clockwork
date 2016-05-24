@@ -28,9 +28,9 @@ namespace Urho3D
 {
 
 /// %Menu %UI element that optionally shows a popup.
-class URHO3D_API Menu : public Button
+class CLOCKWORK_API Menu : public Button
 {
-    URHO3D_OBJECT(Menu, Button);
+    CLOCKWORK_OBJECT(Menu, Button);
 
     using UIElement::LoadXML;
 

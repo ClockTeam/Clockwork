@@ -43,9 +43,9 @@ enum FONT_TYPE
 };
 
 /// %Font resource.
-class URHO3D_API Font : public Resource
+class CLOCKWORK_API Font : public Resource
 {
-    URHO3D_OBJECT(Font, Resource);
+    CLOCKWORK_OBJECT(Font, Resource);
 
 public:
     /// Construct.

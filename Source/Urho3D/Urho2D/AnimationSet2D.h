@@ -25,7 +25,7 @@
 #include "../Container/ArrayPtr.h"
 #include "../Resource/Resource.h"
 
-#ifdef URHO3D_SPINE
+#ifdef CLOCKWORK_SPINE
 struct spAtlas;
 struct spSkeletonData;
 struct spAnimationStateData;
@@ -43,9 +43,9 @@ class Sprite2D;
 class SpriteSheet2D;
 
 /// Spriter animation set, it includes one or more animations, for more information please refer to http://www.esotericsoftware.com and http://www.brashmonkey.com/spriter.htm.
-class URHO3D_API AnimationSet2D : public Resource
+class CLOCKWORK_API AnimationSet2D : public Resource
 {
-    URHO3D_OBJECT(AnimationSet2D, Resource);
+    CLOCKWORK_OBJECT(AnimationSet2D, Resource);
 
 public:
     /// Construct.
@@ -70,7 +70,7 @@ public:
     /// Return sprite.
     Sprite2D* GetSprite() const;
 
-#ifdef URHO3D_SPINE
+#ifdef CLOCKWORK_SPINE
     /// Return spine skeleton data.
     spSkeletonData* GetSkeletonData() const { return skeletonData_; }
 #endif
@@ -83,7 +83,7 @@ public:
 private:
     /// Return sprite by hash.
     Sprite2D* GetSpriterFileSprite(const StringHash& hash) const;
-#ifdef URHO3D_SPINE
+#ifdef CLOCKWORK_SPINE
     /// Begin load spine.
     bool BeginLoadSpine(Deserializer& source);
     /// Finish load spine.
@@ -99,7 +99,7 @@ private:
     /// Spine sprite.
     SharedPtr<Sprite2D> sprite_;
     
-#ifdef URHO3D_SPINE
+#ifdef CLOCKWORK_SPINE
     /// Spine json data.
     SharedArrayPtr<char> jsonData_;
     /// Spine skeleton data.

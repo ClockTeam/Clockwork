@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -31,13 +31,13 @@
 #include <SDL/SDL_rwops.h>
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Named pipe for interprocess communication.
-class URHO3D_API NamedPipe : public Object, public Deserializer, public Serializer
+class CLOCKWORK_API NamedPipe : public Object, public Deserializer, public Serializer
 {
-    URHO3D_OBJECT(NamedPipe, Object);
+    CLOCKWORK_OBJECT(NamedPipe, Object);
 
 public:
     /// Construct.

@@ -47,9 +47,9 @@ enum CollisionEventMode
 };
 
 /// Physics rigid body component.
-class URHO3D_API RigidBody : public Component, public btMotionState
+class CLOCKWORK_API RigidBody : public Component, public btMotionState
 {
-    URHO3D_OBJECT(RigidBody, Component);
+    CLOCKWORK_OBJECT(RigidBody, Component);
 
 public:
     /// Construct.

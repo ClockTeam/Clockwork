@@ -28,7 +28,7 @@ namespace Urho3D
 {
 
 /// Four-dimensional vector.
-class URHO3D_API Vector4
+class CLOCKWORK_API Vector4
 {
 public:
     /// Construct a zero vector.

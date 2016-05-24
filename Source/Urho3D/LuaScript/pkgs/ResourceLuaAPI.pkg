@@ -7,5 +7,5 @@ $pfile "Resource/XMLFile.pkg"
 $pfile "Resource/ResourceCache.pkg"
 $pfile "Resource/Localization.pkg"
 
-$using namespace Urho3D;
+$using namespace Clockwork;
 $#pragma warning(disable:4800)

@@ -38,9 +38,9 @@ namespace Urho3D
 {
 
 /// XML document resource.
-class URHO3D_API XMLFile : public Resource
+class CLOCKWORK_API XMLFile : public Resource
 {
-    URHO3D_OBJECT(XMLFile, Resource);
+    CLOCKWORK_OBJECT(XMLFile, Resource);
 
 public:
     /// Construct.

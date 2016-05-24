@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,7 @@
 #include "../IO/Log.h"
 #include "../IO/PackageFile.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 PackageFile::PackageFile(Context* context) :
@@ -55,9 +55,9 @@ PackageFile::~PackageFile()
 bool PackageFile::Open(const String& fileName, unsigned startOffset)
 {
 #ifdef ANDROID
-    if (URHO3D_IS_ASSET(fileName))
+    if (CLOCKWORK_IS_ASSET(fileName))
     {
-        URHO3D_LOGERROR("Package files within the apk are not supported on Android");
+        CLOCKWORK_LOGERROR("Package files within the apk are not supported on Android");
         return false;
     }
 #endif
@@ -88,7 +88,7 @@ bool PackageFile::Open(const String& fileName, unsigned startOffset)
 
         if (id != "UPAK" && id != "ULZ4")
         {
-            URHO3D_LOGERROR(fileName + " is not a valid package file");
+            CLOCKWORK_LOGERROR(fileName + " is not a valid package file");
             return false;
         }
     }
@@ -110,7 +110,7 @@ bool PackageFile::Open(const String& fileName, unsigned startOffset)
         newEntry.checksum_ = file->ReadUInt();
         if (!compressed_ && newEntry.offset_ + newEntry.size_ > totalSize_)
         {
-            URHO3D_LOGERROR("File entry " + entryName + " outside package file");
+            CLOCKWORK_LOGERROR("File entry " + entryName + " outside package file");
             return false;
         }
         else

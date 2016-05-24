@@ -3,5 +3,5 @@ $pfile "Network/HttpRequest.pkg"
 $pfile "Network/Network.pkg"
 $pfile "Network/NetworkPriority.pkg"
 
-$using namespace Urho3D;
+$using namespace Clockwork;
 $#pragma warning(disable:4800)

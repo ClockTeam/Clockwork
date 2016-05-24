@@ -7,5 +7,5 @@ $pfile "Scene/Node.pkg"
 $pfile "Scene/Scene.pkg"
 $pfile "Scene/SplinePath.pkg"
 
-$using namespace Urho3D;
+$using namespace Clockwork;
 $#pragma warning(disable:4800)

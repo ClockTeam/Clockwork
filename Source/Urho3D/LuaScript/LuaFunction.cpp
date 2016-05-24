@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 LuaFunction::LuaFunction(lua_State* L, int index) :
@@ -91,7 +91,7 @@ bool LuaFunction::EndCall(int numReturns)
     if (lua_pcall(luaState_, numArguments, numReturns, 0) != 0)
     {
         const char* message = lua_tostring(luaState_, -1);
-        URHO3D_LOGERRORF("Execute Lua function failed: %s", message);
+        CLOCKWORK_LOGERRORF("Execute Lua function failed: %s", message);
         lua_pop(luaState_, 1);
         return false;
     }
@@ -154,7 +154,7 @@ void LuaFunction::PushLuaTable(const char* tableName)
     ++numArguments_;
     lua_getglobal(luaState_, tableName);
     if (!lua_istable(luaState_, -1))
-        URHO3D_LOGERRORF("Could not find lua table %s", tableName);      // nil is pushed instead
+        CLOCKWORK_LOGERRORF("Could not find lua table %s", tableName);      // nil is pushed instead
 }
 
 }

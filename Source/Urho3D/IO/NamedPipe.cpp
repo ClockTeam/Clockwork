@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const unsigned PIPE_BUFFER_SIZE = 65536;
@@ -83,7 +83,7 @@ static const String pipePath("\\\\.\\pipe\\");
 
 bool NamedPipe::Open(const String& pipeName, bool isServer)
 {
-    URHO3D_PROFILE(OpenNamedPipe);
+    CLOCKWORK_PROFILE(OpenNamedPipe);
 
     Close();
 
@@ -103,12 +103,12 @@ bool NamedPipe::Open(const String& pipeName, bool isServer)
 
         if (handle_ == INVALID_HANDLE_VALUE)
         {
-            URHO3D_LOGERROR("Failed to create named pipe " + pipeName);
+            CLOCKWORK_LOGERROR("Failed to create named pipe " + pipeName);
             return false;
         }
         else
         {
-            URHO3D_LOGDEBUG("Created named pipe " + pipeName);
+            CLOCKWORK_LOGDEBUG("Created named pipe " + pipeName);
             pipeName_ = pipeName;
             isServer_ = true;
             return true;
@@ -128,12 +128,12 @@ bool NamedPipe::Open(const String& pipeName, bool isServer)
 
         if (handle_ == INVALID_HANDLE_VALUE)
         {
-            URHO3D_LOGERROR("Failed to connect to named pipe " + pipeName);
+            CLOCKWORK_LOGERROR("Failed to connect to named pipe " + pipeName);
             return false;
         }
         else
         {
-            URHO3D_LOGDEBUG("Connected to named pipe " + pipeName);
+            CLOCKWORK_LOGDEBUG("Connected to named pipe " + pipeName);
             pipeName_ = pipeName;
             return true;
         }
@@ -168,7 +168,7 @@ void NamedPipe::Close()
 {
     if (handle_ != INVALID_HANDLE_VALUE)
     {
-        URHO3D_PROFILE(CloseNamedPipe);
+        CLOCKWORK_PROFILE(CloseNamedPipe);
 
         if (isServer_)
         {
@@ -180,7 +180,7 @@ void NamedPipe::Close()
         handle_ = INVALID_HANDLE_VALUE;
         pipeName_.Clear();
 
-        URHO3D_LOGDEBUG("Closed named pipe " + pipeName_);
+        CLOCKWORK_LOGDEBUG("Closed named pipe " + pipeName_);
     }
 }
 
@@ -209,7 +209,7 @@ static const String pipePath("/tmp/");
 
 bool NamedPipe::Open(const String& pipeName, bool isServer)
 {
-    URHO3D_PROFILE(OpenNamedPipe);
+    CLOCKWORK_PROFILE(OpenNamedPipe);
 
     Close();
 
@@ -231,7 +231,7 @@ bool NamedPipe::Open(const String& pipeName, bool isServer)
 
         if (readHandle_ == -1 && writeHandle_ == -1)
         {
-            URHO3D_LOGERROR("Failed to create named pipe " + pipeName);
+            CLOCKWORK_LOGERROR("Failed to create named pipe " + pipeName);
             SAFE_CLOSE(readHandle_);
             SAFE_CLOSE(writeHandle_);
             unlink(serverReadName.CString());
@@ -240,7 +240,7 @@ bool NamedPipe::Open(const String& pipeName, bool isServer)
         }
         else
         {
-            URHO3D_LOGDEBUG("Created named pipe " + pipeName);
+            CLOCKWORK_LOGDEBUG("Created named pipe " + pipeName);
             pipeName_ = pipeName;
             isServer_ = true;
             return true;
@@ -252,14 +252,14 @@ bool NamedPipe::Open(const String& pipeName, bool isServer)
         writeHandle_ = open(serverReadName.CString(), O_WRONLY | O_NDELAY);
         if (readHandle_ == -1 && writeHandle_ == -1)
         {
-            URHO3D_LOGERROR("Failed to connect to named pipe " + pipeName);
+            CLOCKWORK_LOGERROR("Failed to connect to named pipe " + pipeName);
             SAFE_CLOSE(readHandle_);
             SAFE_CLOSE(writeHandle_);
             return false;
         }
         else
         {
-            URHO3D_LOGDEBUG("Connected to named pipe " + pipeName);
+            CLOCKWORK_LOGDEBUG("Connected to named pipe " + pipeName);
             pipeName_ = pipeName;
             return true;
         }
@@ -319,7 +319,7 @@ void NamedPipe::Close()
 {
     if (readHandle_ != -1 || writeHandle_ != -1)
     {
-        URHO3D_PROFILE(CloseNamedPipe);
+        CLOCKWORK_PROFILE(CloseNamedPipe);
         SAFE_CLOSE(readHandle_);
         SAFE_CLOSE(writeHandle_);
 

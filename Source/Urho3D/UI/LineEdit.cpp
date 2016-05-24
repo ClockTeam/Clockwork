@@ -62,9 +62,9 @@ LineEdit::LineEdit(Context* context) :
     cursor_->SetInternal(true);
     cursor_->SetPriority(1); // Show over text
 
-    SubscribeToEvent(this, E_FOCUSED, URHO3D_HANDLER(LineEdit, HandleFocused));
-    SubscribeToEvent(this, E_DEFOCUSED, URHO3D_HANDLER(LineEdit, HandleDefocused));
-    SubscribeToEvent(this, E_LAYOUTUPDATED, URHO3D_HANDLER(LineEdit, HandleLayoutUpdated));
+    SubscribeToEvent(this, E_FOCUSED, CLOCKWORK_HANDLER(LineEdit, HandleFocused));
+    SubscribeToEvent(this, E_DEFOCUSED, CLOCKWORK_HANDLER(LineEdit, HandleDefocused));
+    SubscribeToEvent(this, E_LAYOUTUPDATED, CLOCKWORK_HANDLER(LineEdit, HandleLayoutUpdated));
 }
 
 LineEdit::~LineEdit()
@@ -75,16 +75,16 @@ void LineEdit::RegisterObject(Context* context)
 {
     context->RegisterFactory<LineEdit>(UI_CATEGORY);
 
-    URHO3D_COPY_BASE_ATTRIBUTES(BorderImage);
-    URHO3D_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Clip Children", true);
-    URHO3D_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Is Enabled", true);
-    URHO3D_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Focus Mode", FM_FOCUSABLE_DEFOCUSABLE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Max Length", GetMaxLength, SetMaxLength, unsigned, 0, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Cursor Movable", IsCursorMovable, SetCursorMovable, bool, true, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Text Selectable", IsTextSelectable, SetTextSelectable, bool, true, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Text Copyable", IsTextCopyable, SetTextCopyable, bool, true, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Cursor Blink Rate", GetCursorBlinkRate, SetCursorBlinkRate, float, 1.0f, AM_FILE);
-    URHO3D_ATTRIBUTE("Echo Character", int, echoCharacter_, 0, AM_FILE);
+    CLOCKWORK_COPY_BASE_ATTRIBUTES(BorderImage);
+    CLOCKWORK_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Clip Children", true);
+    CLOCKWORK_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Is Enabled", true);
+    CLOCKWORK_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Focus Mode", FM_FOCUSABLE_DEFOCUSABLE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Max Length", GetMaxLength, SetMaxLength, unsigned, 0, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Cursor Movable", IsCursorMovable, SetCursorMovable, bool, true, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Text Selectable", IsTextSelectable, SetTextSelectable, bool, true, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Text Copyable", IsTextCopyable, SetTextCopyable, bool, true, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Cursor Blink Rate", GetCursorBlinkRate, SetCursorBlinkRate, float, 1.0f, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Echo Character", int, echoCharacter_, 0, AM_FILE);
 }
 
 void LineEdit::ApplyAttributes()

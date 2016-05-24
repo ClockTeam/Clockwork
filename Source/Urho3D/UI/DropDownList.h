@@ -30,9 +30,9 @@ namespace Urho3D
 class ListView;
 
 /// %Menu %UI element that displays a popup list view.
-class URHO3D_API DropDownList : public Menu
+class CLOCKWORK_API DropDownList : public Menu
 {
-    URHO3D_OBJECT(DropDownList, Menu)
+    CLOCKWORK_OBJECT(DropDownList, Menu)
 
 public:
     /// Construct.

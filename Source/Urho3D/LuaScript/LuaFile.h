@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,13 +27,13 @@
 
 struct lua_State;
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Lua file.
-class URHO3D_API LuaFile : public Resource
+class CLOCKWORK_API LuaFile : public Resource
 {
-    URHO3D_OBJECT(LuaFile, Resource);
+    CLOCKWORK_OBJECT(LuaFile, Resource);
 
 public:
     /// Construct.

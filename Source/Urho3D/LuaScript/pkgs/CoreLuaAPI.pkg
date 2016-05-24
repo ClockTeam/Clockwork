@@ -6,5 +6,5 @@ $pfile "Core/Variant.pkg"
 $pfile "Core/Spline.pkg"
 $pfile "Core/Timer.pkg"
 
-$using namespace Urho3D;
+$using namespace Clockwork;
 $#pragma warning(disable:4800)

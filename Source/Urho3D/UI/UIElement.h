@@ -109,9 +109,9 @@ class Cursor;
 class ResourceCache;
 
 /// Base class for %UI elements.
-class URHO3D_API UIElement : public Animatable
+class CLOCKWORK_API UIElement : public Animatable
 {
-    URHO3D_OBJECT(UIElement, Animatable);
+    CLOCKWORK_OBJECT(UIElement, Animatable);
 
 public:
     /// Construct.

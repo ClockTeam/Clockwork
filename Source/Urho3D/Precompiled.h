@@ -22,8 +22,8 @@
 
 #ifdef __cplusplus
 
-#ifndef URHO3D_PCH_INCLUDED
-#define URHO3D_PCH_INCLUDED
+#ifndef CLOCKWORK_PCH_INCLUDED
+#define CLOCKWORK_PCH_INCLUDED
 
 #include "Container/HashMap.h"
 #include "Container/HashSet.h"

@@ -28,9 +28,9 @@ namespace Urho3D
 {
 
 /// %Network interest management settings component.
-class URHO3D_API NetworkPriority : public Component
+class CLOCKWORK_API NetworkPriority : public Component
 {
-    URHO3D_OBJECT(NetworkPriority, Component);
+    CLOCKWORK_OBJECT(NetworkPriority, Component);
 
 public:
     /// Construct.

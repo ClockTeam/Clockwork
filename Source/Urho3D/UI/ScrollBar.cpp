@@ -65,10 +65,10 @@ ScrollBar::ScrollBar(Context* context) :
     // For backward compatibility
     SetColor(Color(0.0f, 0.0f, 0.0f, 0.0f));
 
-    SubscribeToEvent(backButton_, E_PRESSED, URHO3D_HANDLER(ScrollBar, HandleBackButtonPressed));
-    SubscribeToEvent(forwardButton_, E_PRESSED, URHO3D_HANDLER(ScrollBar, HandleForwardButtonPressed));
-    SubscribeToEvent(slider_, E_SLIDERCHANGED, URHO3D_HANDLER(ScrollBar, HandleSliderChanged));
-    SubscribeToEvent(slider_, E_SLIDERPAGED, URHO3D_HANDLER(ScrollBar, HandleSliderPaged));
+    SubscribeToEvent(backButton_, E_PRESSED, CLOCKWORK_HANDLER(ScrollBar, HandleBackButtonPressed));
+    SubscribeToEvent(forwardButton_, E_PRESSED, CLOCKWORK_HANDLER(ScrollBar, HandleForwardButtonPressed));
+    SubscribeToEvent(slider_, E_SLIDERCHANGED, CLOCKWORK_HANDLER(ScrollBar, HandleSliderChanged));
+    SubscribeToEvent(slider_, E_SLIDERPAGED, CLOCKWORK_HANDLER(ScrollBar, HandleSliderPaged));
 
     // Set default orientation
     SetOrientation(O_HORIZONTAL);
@@ -82,17 +82,17 @@ void ScrollBar::RegisterObject(Context* context)
 {
     context->RegisterFactory<ScrollBar>(UI_CATEGORY);
 
-    URHO3D_COPY_BASE_ATTRIBUTES(BorderImage);
-    URHO3D_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Is Enabled", true);
-    URHO3D_ENUM_ACCESSOR_ATTRIBUTE("Orientation", GetOrientation, SetOrientation, Orientation, orientations, O_HORIZONTAL, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Range", GetRange, SetRange, float, 1.0f, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Value", GetValue, SetValue, float, 0.0f, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Scroll Step", GetScrollStep, SetScrollStep, float, DEFAULT_SCROLL_STEP, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Step Factor", GetStepFactor, SetStepFactor, float, 1.0f, AM_FILE);
-    URHO3D_ATTRIBUTE("Left Image Rect", IntRect, leftRect_, IntRect::ZERO, AM_FILE);
-    URHO3D_ATTRIBUTE("Right Image Rect", IntRect, rightRect_, IntRect::ZERO, AM_FILE);
-    URHO3D_ATTRIBUTE("Up Image Rect", IntRect, upRect_, IntRect::ZERO, AM_FILE);
-    URHO3D_ATTRIBUTE("Down Image Rect", IntRect, downRect_, IntRect::ZERO, AM_FILE);
+    CLOCKWORK_COPY_BASE_ATTRIBUTES(BorderImage);
+    CLOCKWORK_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Is Enabled", true);
+    CLOCKWORK_ENUM_ACCESSOR_ATTRIBUTE("Orientation", GetOrientation, SetOrientation, Orientation, orientations, O_HORIZONTAL, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Range", GetRange, SetRange, float, 1.0f, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Value", GetValue, SetValue, float, 0.0f, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Scroll Step", GetScrollStep, SetScrollStep, float, DEFAULT_SCROLL_STEP, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Step Factor", GetStepFactor, SetStepFactor, float, 1.0f, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Left Image Rect", IntRect, leftRect_, IntRect::ZERO, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Right Image Rect", IntRect, rightRect_, IntRect::ZERO, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Up Image Rect", IntRect, upRect_, IntRect::ZERO, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Down Image Rect", IntRect, downRect_, IntRect::ZERO, AM_FILE);
 }
 
 void ScrollBar::ApplyAttributes()

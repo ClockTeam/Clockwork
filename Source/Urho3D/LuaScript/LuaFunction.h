@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@
 struct lua_State;
 typedef int (*lua_CFunction) (lua_State *L);
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class LuaScript;
@@ -35,7 +35,7 @@ class LuaScriptInstance;
 class Variant;
 
 /// C++ representation of Lua function object.
-class URHO3D_API LuaFunction : public RefCounted
+class CLOCKWORK_API LuaFunction : public RefCounted
 {
 public:
     /// Construct from a Lua function object at the specified stack index.

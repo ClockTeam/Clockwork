@@ -70,9 +70,9 @@ struct GlyphLocation
 };
 
 /// %Text %UI element.
-class URHO3D_API Text : public UIElement
+class CLOCKWORK_API Text : public UIElement
 {
-    URHO3D_OBJECT(Text, UIElement);
+    CLOCKWORK_OBJECT(Text, UIElement);
 
     friend class Text3D;
 

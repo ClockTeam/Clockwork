@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,11 @@
 
 #include "../Core/Variant.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// %Controls sent over the network.
-class URHO3D_API Controls
+class CLOCKWORK_API Controls
 {
 public:
     /// Construct.

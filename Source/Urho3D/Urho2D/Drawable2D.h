@@ -63,12 +63,12 @@ struct SourceBatch2D
 };
 
 /// Pixel size (equal 0.01f).
-extern URHO3D_API const float PIXEL_SIZE;
+extern CLOCKWORK_API const float PIXEL_SIZE;
 
 /// Base class for 2D visible components.
-class URHO3D_API Drawable2D : public Drawable
+class CLOCKWORK_API Drawable2D : public Drawable
 {
-    URHO3D_OBJECT(Drawable2D, Drawable);
+    CLOCKWORK_OBJECT(Drawable2D, Drawable);
 
 public:
     /// Construct.

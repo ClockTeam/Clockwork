@@ -1,5 +1,5 @@
 --
--- Copyright (c) 2008-2016 the Urho3D project.
+-- Copyright (c) 2008-2016 the Clockwork project.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -621,7 +621,7 @@ function classPackage:print()
   local filename = flags.o
   local file = io.open(filename, "wt")
 
-  file:write("namespace Urho3D\n")
+  file:write("namespace Clockwork\n")
   file:write("{\n")
   file:write("\n")
   file:write("/**\n")

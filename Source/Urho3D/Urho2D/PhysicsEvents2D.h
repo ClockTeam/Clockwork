@@ -32,23 +32,23 @@ namespace Urho3D
 {
 
 /// Physics begin contact.
-URHO3D_EVENT(E_PHYSICSBEGINCONTACT2D, PhysicsBeginContact2D)
+CLOCKWORK_EVENT(E_PHYSICSBEGINCONTACT2D, PhysicsBeginContact2D)
 {
-    URHO3D_PARAM(P_WORLD, World);                  // PhysicsWorld2D pointer
-    URHO3D_PARAM(P_BODYA, BodyA);                  // RigidBody2D pointer
-    URHO3D_PARAM(P_BODYB, BodyB);                  // RigidBody2D pointer
-    URHO3D_PARAM(P_NODEA, NodeA);                  // Node pointer
-    URHO3D_PARAM(P_NODEB, NodeB);                  // Node pointer
+    CLOCKWORK_PARAM(P_WORLD, World);                  // PhysicsWorld2D pointer
+    CLOCKWORK_PARAM(P_BODYA, BodyA);                  // RigidBody2D pointer
+    CLOCKWORK_PARAM(P_BODYB, BodyB);                  // RigidBody2D pointer
+    CLOCKWORK_PARAM(P_NODEA, NodeA);                  // Node pointer
+    CLOCKWORK_PARAM(P_NODEB, NodeB);                  // Node pointer
 }
 
 /// Physics end contact.
-URHO3D_EVENT(E_PHYSICSENDCONTACT2D, PhysicsEndContact2D)
+CLOCKWORK_EVENT(E_PHYSICSENDCONTACT2D, PhysicsEndContact2D)
 {
-    URHO3D_PARAM(P_WORLD, World);                  // PhysicsWorld2D pointer
-    URHO3D_PARAM(P_BODYA, BodyA);                  // RigidBody2D pointer
-    URHO3D_PARAM(P_BODYB, BodyB);                  // RigidBody2D pointer
-    URHO3D_PARAM(P_NODEA, NodeA);                  // Node pointer
-    URHO3D_PARAM(P_NODEB, NodeB);                  // Node pointer
+    CLOCKWORK_PARAM(P_WORLD, World);                  // PhysicsWorld2D pointer
+    CLOCKWORK_PARAM(P_BODYA, BodyA);                  // RigidBody2D pointer
+    CLOCKWORK_PARAM(P_BODYB, BodyB);                  // RigidBody2D pointer
+    CLOCKWORK_PARAM(P_NODEA, NodeA);                  // Node pointer
+    CLOCKWORK_PARAM(P_NODEB, NodeB);                  // Node pointer
 }
 
 }

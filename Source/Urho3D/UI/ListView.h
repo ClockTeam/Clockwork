@@ -39,9 +39,9 @@ enum HighlightMode
 };
 
 /// Scrollable list %UI element.
-class URHO3D_API ListView : public ScrollView
+class CLOCKWORK_API ListView : public ScrollView
 {
-    URHO3D_OBJECT(ListView, ScrollView);
+    CLOCKWORK_OBJECT(ListView, ScrollView);
 
 public:
     /// Construct.

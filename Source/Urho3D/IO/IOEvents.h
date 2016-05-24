@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,21 @@
 
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Log message event.
-URHO3D_EVENT(E_LOGMESSAGE, LogMessage)
+CLOCKWORK_EVENT(E_LOGMESSAGE, LogMessage)
 {
-    URHO3D_PARAM(P_MESSAGE, Message);              // String
-    URHO3D_PARAM(P_LEVEL, Level);                  // int
+    CLOCKWORK_PARAM(P_MESSAGE, Message);              // String
+    CLOCKWORK_PARAM(P_LEVEL, Level);                  // int
 }
 
 /// Async system command execution finished.
-URHO3D_EVENT(E_ASYNCEXECFINISHED, AsyncExecFinished)
+CLOCKWORK_EVENT(E_ASYNCEXECFINISHED, AsyncExecFinished)
 {
-    URHO3D_PARAM(P_REQUESTID, RequestID);          // unsigned
-    URHO3D_PARAM(P_EXITCODE, ExitCode);            // int
+    CLOCKWORK_PARAM(P_REQUESTID, RequestID);          // unsigned
+    CLOCKWORK_PARAM(P_EXITCODE, ExitCode);            // int
 }
 
 }

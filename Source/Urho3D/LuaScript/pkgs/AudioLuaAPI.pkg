@@ -4,5 +4,5 @@ $pfile "Audio/SoundListener.pkg"
 $pfile "Audio/SoundSource.pkg"
 $pfile "Audio/SoundSource3D.pkg"
 
-$using namespace Urho3D;
+$using namespace Clockwork;
 $#pragma warning(disable:4800)

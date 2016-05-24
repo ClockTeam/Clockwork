@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,19 @@
 
 #pragma once
 
-#ifdef URHO3D_IS_BUILDING
-#include "Urho3D.h"
+#ifdef CLOCKWORK_IS_BUILDING
+#include "Clockwork.h"
 #else
-#include <Urho3D/Urho3D.h>
+#include <Clockwork/Clockwork.h>
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Return git description of the HEAD when building the library.
-URHO3D_API const char* GetRevision();
+CLOCKWORK_API const char* GetRevision();
 
 /// Return baked-in compiler defines used when building the library.
-URHO3D_API const char* GetCompilerDefines();
+CLOCKWORK_API const char* GetCompilerDefines();
 
 }

@@ -28,9 +28,9 @@ namespace Urho3D
 {
 
 /// 2D gear constraint component.
-class URHO3D_API ConstraintGear2D : public Constraint2D
+class CLOCKWORK_API ConstraintGear2D : public Constraint2D
 {
-    URHO3D_OBJECT(ConstraintGear2D, Constraint2D);
+    CLOCKWORK_OBJECT(ConstraintGear2D, Constraint2D);
 
 public:
     /// Construct.

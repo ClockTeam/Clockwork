@@ -2,5 +2,5 @@ $pfile "Engine/Console.pkg"
 $pfile "Engine/DebugHud.pkg"
 $pfile "Engine/Engine.pkg"
 
-$using namespace Urho3D;
+$using namespace Clockwork;
 $#pragma warning(disable:4800)

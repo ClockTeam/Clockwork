@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ extern "C" int SDL_AddTouch(SDL_TouchID touchID, const char* name);
 #define REQUIRE_CLICK_TO_FOCUS
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 const int SCREEN_JOYSTICK_START_ID = 0x40000000;
@@ -82,7 +82,7 @@ UIElement* TouchState::GetTouchedElement()
 #define EM_FALSE 0
 
 /// Glue between Urho Input and Emscripten HTML5
-/** HTML5 (Emscripten) is limited in the way it handles input. The EmscriptenInput class attempts to provide the glue between Urho3D Input behavior and HTML5, where SDL currently fails to do so.
+/** HTML5 (Emscripten) is limited in the way it handles input. The EmscriptenInput class attempts to provide the glue between Clockwork Input behavior and HTML5, where SDL currently fails to do so.
  *
  * Mouse Input:
  * - The OS mouse cursor position can't be set.
@@ -188,7 +188,7 @@ bool EmscriptenInput::IsVisible()
         return visibilityStatus.hidden >= EM_TRUE ? false : true;
 
     // Assume visible
-    URHO3D_LOGWARNING("Could not determine visibility status.");
+    CLOCKWORK_LOGWARNING("Could not determine visibility status.");
     return true;
 }
 
@@ -350,7 +350,7 @@ Input::Input(Context* context) :
     for (int i = 0; i < TOUCHID_MAX; i++)
         availableTouchIDs_.Push(i);
 
-    SubscribeToEvent(E_SCREENMODE, URHO3D_HANDLER(Input, HandleScreenMode));
+    SubscribeToEvent(E_SCREENMODE, CLOCKWORK_HANDLER(Input, HandleScreenMode));
 
 #if defined(ANDROID)
     SDL_SetHint(SDL_HINT_ANDROID_SEPARATE_MOUSE_AND_TOUCH, "1");
@@ -374,7 +374,7 @@ void Input::Update()
 {
     assert(initialized_);
 
-    URHO3D_PROFILE(UpdateInput);
+    CLOCKWORK_PROFILE(UpdateInput);
 
 #ifndef __EMSCRIPTEN__
     bool mouseMoved = false;
@@ -940,7 +940,7 @@ SDL_JoystickID Input::AddScreenJoystick(XMLFile* layoutFile, XMLFile* styleFile)
 
     if (!graphics_)
     {
-        URHO3D_LOGWARNING("Cannot add screen joystick in headless mode");
+        CLOCKWORK_LOGWARNING("Cannot add screen joystick in headless mode");
         return -1;
     }
 
@@ -1002,7 +1002,7 @@ SDL_JoystickID Input::AddScreenJoystick(XMLFile* layoutFile, XMLFile* styleFile)
                         keyBinding = i->second_;
                     else
                     {
-                        URHO3D_LOGERRORF("Unsupported key binding: %s", key.CString());
+                        CLOCKWORK_LOGERRORF("Unsupported key binding: %s", key.CString());
                         keyBinding = M_MAX_INT;
                     }
                 }
@@ -1023,7 +1023,7 @@ SDL_JoystickID Input::AddScreenJoystick(XMLFile* layoutFile, XMLFile* styleFile)
                 if (i != mouseButtonBindingMap.End())
                     element->SetVar(VAR_BUTTON_MOUSE_BUTTON_BINDING, i->second_);
                 else
-                    URHO3D_LOGERRORF("Unsupported mouse button binding: %s", mouseButton.CString());
+                    CLOCKWORK_LOGERRORF("Unsupported mouse button binding: %s", mouseButton.CString());
             }
         }
         else if (name.StartsWith("Axis"))
@@ -1031,7 +1031,7 @@ SDL_JoystickID Input::AddScreenJoystick(XMLFile* layoutFile, XMLFile* styleFile)
             ++numAxes;
 
             ///\todo Axis emulation for screen joystick is not fully supported yet.
-            URHO3D_LOGWARNING("Axis emulation for screen joystick is not fully supported yet");
+            CLOCKWORK_LOGWARNING("Axis emulation for screen joystick is not fully supported yet");
         }
         else if (name.StartsWith("Hat"))
         {
@@ -1066,13 +1066,13 @@ SDL_JoystickID Input::AddScreenJoystick(XMLFile* layoutFile, XMLFile* styleFile)
                             if (i != keyBindingMap.End())
                                 mappedKeyBinding[j] = i->second_;
                             else
-                                URHO3D_LOGERRORF("%s - %s cannot be mapped, fallback to '%c'", name.CString(), keyBindings[j].CString(),
+                                CLOCKWORK_LOGERRORF("%s - %s cannot be mapped, fallback to '%c'", name.CString(), keyBindings[j].CString(),
                                     mappedKeyBinding[j]);
                         }
                     }
                 }
                 else
-                    URHO3D_LOGERRORF("%s has invalid key binding %s, fallback to WSAD", name.CString(), keyBinding.CString());
+                    CLOCKWORK_LOGERRORF("%s has invalid key binding %s, fallback to WSAD", name.CString(), keyBinding.CString());
                 element->SetVar(VAR_BUTTON_KEY_BINDING, IntRect(mappedKeyBinding));
             }
         }
@@ -1090,9 +1090,9 @@ SDL_JoystickID Input::AddScreenJoystick(XMLFile* layoutFile, XMLFile* styleFile)
 
     // There could be potentially more than one screen joystick, however they all will be handled by a same handler method
     // So there is no harm to replace the old handler with the new handler in each call to SubscribeToEvent()
-    SubscribeToEvent(E_TOUCHBEGIN, URHO3D_HANDLER(Input, HandleScreenJoystickTouch));
-    SubscribeToEvent(E_TOUCHMOVE, URHO3D_HANDLER(Input, HandleScreenJoystickTouch));
-    SubscribeToEvent(E_TOUCHEND, URHO3D_HANDLER(Input, HandleScreenJoystickTouch));
+    SubscribeToEvent(E_TOUCHBEGIN, CLOCKWORK_HANDLER(Input, HandleScreenJoystickTouch));
+    SubscribeToEvent(E_TOUCHMOVE, CLOCKWORK_HANDLER(Input, HandleScreenJoystickTouch));
+    SubscribeToEvent(E_TOUCHEND, CLOCKWORK_HANDLER(Input, HandleScreenJoystickTouch));
 
     return joystickID;
 }
@@ -1101,14 +1101,14 @@ bool Input::RemoveScreenJoystick(SDL_JoystickID id)
 {
     if (!joysticks_.Contains(id))
     {
-        URHO3D_LOGERRORF("Failed to remove non-existing screen joystick ID #%d", id);
+        CLOCKWORK_LOGERRORF("Failed to remove non-existing screen joystick ID #%d", id);
         return false;
     }
 
     JoystickState& state = joysticks_[id];
     if (!state.screenJoystick_)
     {
-        URHO3D_LOGERRORF("Failed to remove joystick with ID #%d which is not a screen joystick", id);
+        CLOCKWORK_LOGERRORF("Failed to remove joystick with ID #%d which is not a screen joystick", id);
         return false;
     }
 
@@ -1171,7 +1171,7 @@ bool Input::RecordGesture()
     // If have no touch devices, fail
     if (!SDL_GetNumTouchDevices())
     {
-        URHO3D_LOGERROR("Can not record gesture: no touch devices");
+        CLOCKWORK_LOGERROR("Can not record gesture: no touch devices");
         return false;
     }
 
@@ -1195,7 +1195,7 @@ unsigned Input::LoadGestures(Deserializer& source)
     // If have no touch devices, fail
     if (!SDL_GetNumTouchDevices())
     {
-        URHO3D_LOGERROR("Can not load gestures: no touch devices");
+        CLOCKWORK_LOGERROR("Can not load gestures: no touch devices");
         return 0;
     }
 
@@ -1225,7 +1225,7 @@ SDL_JoystickID Input::OpenJoystick(unsigned index)
     SDL_Joystick* joystick = SDL_JoystickOpen(index);
     if (!joystick)
     {
-        URHO3D_LOGERRORF("Cannot open joystick #%d", index);
+        CLOCKWORK_LOGERRORF("Cannot open joystick #%d", index);
         return -1;
     }
 
@@ -1497,12 +1497,12 @@ void Input::Initialize()
     ResetJoysticks();
     ResetState();
 
-    SubscribeToEvent(E_BEGINFRAME, URHO3D_HANDLER(Input, HandleBeginFrame));
+    SubscribeToEvent(E_BEGINFRAME, CLOCKWORK_HANDLER(Input, HandleBeginFrame));
 #ifdef __EMSCRIPTEN__
-    SubscribeToEvent(E_ENDFRAME, URHO3D_HANDLER(Input, HandleEndFrame));
+    SubscribeToEvent(E_ENDFRAME, CLOCKWORK_HANDLER(Input, HandleEndFrame));
 #endif
 
-    URHO3D_LOGINFO("Initialized input");
+    CLOCKWORK_LOGINFO("Initialized input");
 }
 
 void Input::ResetJoysticks()
@@ -2513,7 +2513,7 @@ void Input::HandleScreenJoystickTouch(StringHash eventType, VariantMap& eventDat
     else
         return;
 
-    // Handle the fake SDL event to turn it into Urho3D genuine event
+    // Handle the fake SDL event to turn it into Clockwork genuine event
     HandleSDLEvent(&evt);
 }
 

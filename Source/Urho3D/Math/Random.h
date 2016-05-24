@@ -22,7 +22,7 @@
 
 #pragma once
 
-#ifdef URHO3D_IS_BUILDING
+#ifdef CLOCKWORK_IS_BUILDING
 #include "Urho3D.h"
 #else
 #include <Urho3D/Urho3D.h>
@@ -32,12 +32,12 @@ namespace Urho3D
 {
 
 /// Set the random seed. The default seed is 1.
-URHO3D_API void SetRandomSeed(unsigned seed);
+CLOCKWORK_API void SetRandomSeed(unsigned seed);
 /// Return the current random seed.
-URHO3D_API unsigned GetRandomSeed();
+CLOCKWORK_API unsigned GetRandomSeed();
 /// Return a random number between 0-32767. Should operate similarly to MSVC rand().
-URHO3D_API int Rand();
+CLOCKWORK_API int Rand();
 /// Return a standard normal distributed number.
-URHO3D_API float RandStandardNormal();
+CLOCKWORK_API float RandStandardNormal();
 
 }

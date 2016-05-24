@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 
 struct lua_State;
 
-namespace Urho3D
+namespace Clockwork
 {
 
 extern const char* LOGIC_CATEGORY;
@@ -38,9 +38,9 @@ class LuaScriptEventInvoker;
 class Scene;
 
 /// Lua script subsystem.
-class URHO3D_API LuaScript : public Object, public LuaScriptEventListener
+class CLOCKWORK_API LuaScript : public Object, public LuaScriptEventListener
 {
-    URHO3D_OBJECT(LuaScript, Object);
+    CLOCKWORK_OBJECT(LuaScript, Object);
 
 public:
     /// Construct.
@@ -130,6 +130,6 @@ private:
 };
 
 /// Register Lua script library objects.
-void URHO3D_API RegisterLuaScriptLibrary(Context* context);
+void CLOCKWORK_API RegisterLuaScriptLibrary(Context* context);
 
 }

@@ -28,9 +28,9 @@
 namespace Urho3D
 {
 
-class URHO3D_API NavArea : public Component
+class CLOCKWORK_API NavArea : public Component
 {
-    URHO3D_OBJECT(NavArea, Component);
+    CLOCKWORK_OBJECT(NavArea, Component);
 
 public:
     /// Construct.

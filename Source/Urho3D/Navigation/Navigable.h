@@ -28,9 +28,9 @@ namespace Urho3D
 {
 
 /// Component which tags geometry for inclusion in the navigation mesh. Optionally auto-includes geometry from child nodes.
-class URHO3D_API Navigable : public Component
+class CLOCKWORK_API Navigable : public Component
 {
-    URHO3D_OBJECT(Navigable, Component);
+    CLOCKWORK_OBJECT(Navigable, Component);
 
 public:
     /// Construct.

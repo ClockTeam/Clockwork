@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -54,27 +54,27 @@ extern int tolua_GraphicsLuaAPI_open(lua_State*);
 extern int tolua_InputLuaAPI_open(lua_State*);
 extern int tolua_IOLuaAPI_open(lua_State*);
 extern int tolua_MathLuaAPI_open(lua_State*);
-#ifdef URHO3D_NAVIGATION
+#ifdef CLOCKWORK_NAVIGATION
 extern int tolua_NavigationLuaAPI_open(lua_State*);
 #endif
-#ifdef URHO3D_NETWORK
+#ifdef CLOCKWORK_NETWORK
 extern int tolua_NetworkLuaAPI_open(lua_State*);
 #endif
-#ifdef URHO3D_DATABASE
+#ifdef CLOCKWORK_DATABASE
 extern int tolua_DatabaseLuaAPI_open(lua_State*);
 #endif
-#ifdef URHO3D_PHYSICS
+#ifdef CLOCKWORK_PHYSICS
 extern int tolua_PhysicsLuaAPI_open(lua_State*);
 #endif
 extern int tolua_ResourceLuaAPI_open(lua_State*);
 extern int tolua_SceneLuaAPI_open(lua_State*);
 extern int tolua_UILuaAPI_open(lua_State*);
-#ifdef URHO3D_URHO2D
+#ifdef CLOCKWORK_URHO2D
 extern int tolua_Urho2DLuaAPI_open(lua_State*);
 #endif
 extern int tolua_LuaScriptLuaAPI_open(lua_State*);
 
-namespace Urho3D
+namespace Clockwork
 {
 
 LuaScript::LuaScript(Context* context) :
@@ -87,7 +87,7 @@ LuaScript::LuaScript(Context* context) :
     luaState_ = luaL_newstate();
     if (!luaState_)
     {
-        URHO3D_LOGERROR("Could not create Lua state");
+        CLOCKWORK_LOGERROR("Could not create Lua state");
         return;
     }
 
@@ -106,20 +106,20 @@ LuaScript::LuaScript(Context* context) :
     tolua_EngineLuaAPI_open(luaState_);
     tolua_GraphicsLuaAPI_open(luaState_);
     tolua_InputLuaAPI_open(luaState_);
-#ifdef URHO3D_NAVIGATION
+#ifdef CLOCKWORK_NAVIGATION
     tolua_NavigationLuaAPI_open(luaState_);
 #endif
-#ifdef URHO3D_NETWORK
+#ifdef CLOCKWORK_NETWORK
     tolua_NetworkLuaAPI_open(luaState_);
 #endif
-#ifdef URHO3D_DATABASE
+#ifdef CLOCKWORK_DATABASE
     tolua_DatabaseLuaAPI_open(luaState_);
 #endif
-#ifdef URHO3D_PHYSICS
+#ifdef CLOCKWORK_PHYSICS
     tolua_PhysicsLuaAPI_open(luaState_);
 #endif
     tolua_UILuaAPI_open(luaState_);
-#ifdef URHO3D_URHO2D
+#ifdef CLOCKWORK_URHO2D
     tolua_Urho2DLuaAPI_open(luaState_);
 #endif
     tolua_LuaScriptLuaAPI_open(luaState_);
@@ -130,7 +130,7 @@ LuaScript::LuaScript(Context* context) :
     coroutineUpdate_ = GetFunction("coroutine.update");
 
     // Subscribe to post update
-    SubscribeToEvent(E_POSTUPDATE, URHO3D_HANDLER(LuaScript, HandlePostUpdate));
+    SubscribeToEvent(E_POSTUPDATE, CLOCKWORK_HANDLER(LuaScript, HandlePostUpdate));
 
     // Subscribe to console commands
     SetExecuteConsoleCommands(true);
@@ -230,9 +230,9 @@ bool LuaScript::HasEventHandler(Object* sender, const String& eventName) const
 
 bool LuaScript::ExecuteFile(const String& fileName)
 {
-    URHO3D_PROFILE(ExecuteFile);
+    CLOCKWORK_PROFILE(ExecuteFile);
 
-#ifdef URHO3D_LUA_RAW_SCRIPT_LOADER
+#ifdef CLOCKWORK_LUA_RAW_SCRIPT_LOADER
     if (ExecuteRawFile(fileName))
         return true;
 #endif
@@ -244,12 +244,12 @@ bool LuaScript::ExecuteFile(const String& fileName)
 
 bool LuaScript::ExecuteString(const String& string)
 {
-    URHO3D_PROFILE(ExecuteString);
+    CLOCKWORK_PROFILE(ExecuteString);
 
     if (luaL_dostring(luaState_, string.CString()))
     {
         const char* message = lua_tostring(luaState_, -1);
-        URHO3D_LOGERRORF("Execute Lua string failed: %s", message);
+        CLOCKWORK_LOGERRORF("Execute Lua string failed: %s", message);
         lua_pop(luaState_, 1);
         return false;
     }
@@ -259,39 +259,39 @@ bool LuaScript::ExecuteString(const String& string)
 
 bool LuaScript::LoadRawFile(const String& fileName)
 {
-    URHO3D_PROFILE(LoadRawFile);
+    CLOCKWORK_PROFILE(LoadRawFile);
 
-    URHO3D_LOGINFO("Finding Lua file on file system: " + fileName);
+    CLOCKWORK_LOGINFO("Finding Lua file on file system: " + fileName);
 
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     String filePath = cache->GetResourceFileName(fileName);
 
     if (filePath.Empty())
     {
-        URHO3D_LOGINFO("Lua file not found: " + fileName);
+        CLOCKWORK_LOGINFO("Lua file not found: " + fileName);
         return false;
     }
 
     filePath = GetNativePath(filePath);
 
-    URHO3D_LOGINFO("Loading Lua file from file system: " + filePath);
+    CLOCKWORK_LOGINFO("Loading Lua file from file system: " + filePath);
 
     if (luaL_loadfile(luaState_, filePath.CString()))
     {
         const char* message = lua_tostring(luaState_, -1);
-        URHO3D_LOGERRORF("Load Lua file failed: %s", message);
+        CLOCKWORK_LOGERRORF("Load Lua file failed: %s", message);
         lua_pop(luaState_, 1);
         return false;
     }
 
-    URHO3D_LOGINFO("Lua file loaded: " + filePath);
+    CLOCKWORK_LOGINFO("Lua file loaded: " + filePath);
 
     return true;
 }
 
 bool LuaScript::ExecuteRawFile(const String& fileName)
 {
-    URHO3D_PROFILE(ExecuteRawFile);
+    CLOCKWORK_PROFILE(ExecuteRawFile);
 
     if (!LoadRawFile(fileName))
         return false;
@@ -299,7 +299,7 @@ bool LuaScript::ExecuteRawFile(const String& fileName)
     if (lua_pcall(luaState_, 0, 0, 0))
     {
         const char* message = lua_tostring(luaState_, -1);
-        URHO3D_LOGERRORF("Execute Lua file failed: %s", message);
+        CLOCKWORK_LOGERRORF("Execute Lua file failed: %s", message);
         lua_pop(luaState_, 1);
         return false;
     }
@@ -320,7 +320,7 @@ void LuaScript::SetExecuteConsoleCommands(bool enable)
 
     executeConsoleCommands_ = enable;
     if (enable)
-        SubscribeToEvent(E_CONSOLECOMMAND, URHO3D_HANDLER(LuaScript, HandleConsoleCommand));
+        SubscribeToEvent(E_CONSOLECOMMAND, CLOCKWORK_HANDLER(LuaScript, HandleConsoleCommand));
     else
         UnsubscribeFromEvent(E_CONSOLECOMMAND);
 }
@@ -341,7 +341,7 @@ void LuaScript::RegisterLoader()
 int LuaScript::AtPanic(lua_State* L)
 {
     String errorMessage = luaL_checkstring(L, -1);
-    URHO3D_LOGERROR("Lua error: Error message = '" + errorMessage + "'");
+    CLOCKWORK_LOGERROR("Lua error: Error message = '" + errorMessage + "'");
     lua_pop(L, 1);
     return 0;
 }
@@ -351,7 +351,7 @@ int LuaScript::Loader(lua_State* L)
     // Get module name
     String fileName(luaL_checkstring(L, 1));
 
-#ifdef URHO3D_LUA_RAW_SCRIPT_LOADER
+#ifdef CLOCKWORK_LUA_RAW_SCRIPT_LOADER
     // First attempt to load lua script file from the file system
     // Attempt to load .luc file first, then fall back to .lua
     LuaScript* lua = ::GetContext(L)->GetSubsystem<LuaScript>();
@@ -412,7 +412,7 @@ int LuaScript::Print(lua_State* L)
     }
     lua_pop(L, 1);
 
-    URHO3D_LOGRAWF("%s\n", String::Joined(strings, "    ").CString());
+    CLOCKWORK_LOGRAWF("%s\n", String::Joined(strings, "    ").CString());
     return 0;
 }
 
@@ -451,7 +451,7 @@ LuaFunction* LuaScript::GetFunction(const String& functionName, bool silentIfNot
         functionNameToFunctionMap_[functionName] = function;
     }
     else if (!silentIfNotFound)
-        URHO3D_LOGERRORF("%s", lua_tostring(luaState_, -1));
+        CLOCKWORK_LOGERRORF("%s", lua_tostring(luaState_, -1));
     lua_pop(luaState_, 1);
 
     return function;
@@ -469,7 +469,7 @@ void LuaScript::HandlePostUpdate(StringHash eventType, VariantMap& eventData)
 
     // Collect garbage
     {
-        URHO3D_PROFILE(LuaCollectGarbage);
+        CLOCKWORK_PROFILE(LuaCollectGarbage);
         lua_gc(luaState_, LUA_GCCOLLECT, 0);
     }
 }

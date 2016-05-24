@@ -3,5 +3,5 @@ $pfile "Physics/Constraint.pkg"
 $pfile "Physics/PhysicsWorld.pkg"
 $pfile "Physics/RigidBody.pkg"
 
-$using namespace Urho3D;
+$using namespace Clockwork;
 $#pragma warning(disable:4800)

@@ -30,9 +30,9 @@ namespace Urho3D
 class Sprite2D;
 
 /// Static sprite component.
-class URHO3D_API StaticSprite2D : public Drawable2D
+class CLOCKWORK_API StaticSprite2D : public Drawable2D
 {
-    URHO3D_OBJECT(StaticSprite2D, Drawable2D);
+    CLOCKWORK_OBJECT(StaticSprite2D, Drawable2D);
 
 public:
     /// Construct.

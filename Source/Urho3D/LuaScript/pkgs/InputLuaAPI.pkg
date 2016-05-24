@@ -2,5 +2,5 @@ $pfile "Input/Controls.pkg"
 $pfile "Input/Input.pkg"
 $pfile "Input/InputEvents.pkg"
 
-$using namespace Urho3D;
+$using namespace Clockwork;
 $#pragma warning(disable:4800)

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@
 #include "../LuaScript/LuaScript.h"
 #include "../LuaScript/LuaScriptEventInvoker.h"
 #include "../LuaScript/LuaScriptInstance.h"
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
 #include "../Physics/PhysicsEvents.h"
 #endif
 #include "../Resource/ResourceCache.h"
@@ -44,7 +44,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const char* scriptObjectMethodNames[] = {
@@ -86,13 +86,13 @@ void LuaScriptInstance::RegisterObject(Context* context)
 {
     context->RegisterFactory<LuaScriptInstance>(LOGIC_CATEGORY);
 
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Enabled", IsEnabled, SetEnabled, bool, true, AM_DEFAULT);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Script File", GetScriptFileAttr, SetScriptFileAttr, ResourceRef,
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Enabled", IsEnabled, SetEnabled, bool, true, AM_DEFAULT);
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Script File", GetScriptFileAttr, SetScriptFileAttr, ResourceRef,
         ResourceRef(LuaFile::GetTypeStatic()), AM_DEFAULT);
-    URHO3D_ACCESSOR_ATTRIBUTE("Script Object Type", GetScriptObjectType, SetScriptObjectType, String, String::EMPTY, AM_DEFAULT);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Script Data", GetScriptDataAttr, SetScriptDataAttr, PODVector<unsigned char>, Variant::emptyBuffer,
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Script Object Type", GetScriptObjectType, SetScriptObjectType, String, String::EMPTY, AM_DEFAULT);
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Script Data", GetScriptDataAttr, SetScriptDataAttr, PODVector<unsigned char>, Variant::emptyBuffer,
         AM_FILE | AM_NOEDIT);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Script Network Data", GetScriptNetworkDataAttr, SetScriptNetworkDataAttr, PODVector<unsigned char>,
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Script Network Data", GetScriptNetworkDataAttr, SetScriptNetworkDataAttr, PODVector<unsigned char>,
         Variant::emptyBuffer, AM_NET | AM_NOEDIT);
 }
 
@@ -191,7 +191,7 @@ void LuaScriptInstance::OnSetAttribute(const AttributeInfo& attr, const Variant&
             }
             break;
         default:
-            URHO3D_LOGERROR("Unsupported data type");
+            CLOCKWORK_LOGERROR("Unsupported data type");
             lua_settop(luaState_, top);
             return;
         }
@@ -268,7 +268,7 @@ void LuaScriptInstance::OnGetAttribute(const AttributeInfo& attr, Variant& dest)
         dest = *((IntVector2*)tolua_tousertype(luaState_, -1, 0));
         break;
     default:
-        URHO3D_LOGERROR("Unsupported data type");
+        CLOCKWORK_LOGERROR("Unsupported data type");
         return;
     }
 
@@ -396,7 +396,7 @@ void LuaScriptInstance::SetScriptFile(LuaFile* scriptFile)
         return;
 
     if (!scriptFile_->LoadAndExecute(luaState_))
-        URHO3D_LOGERROR("Execute Lua file failed: " + scriptFile_->GetName());
+        CLOCKWORK_LOGERROR("Execute Lua file failed: " + scriptFile_->GetName());
 }
 
 void LuaScriptInstance::SetScriptObjectType(const String& scriptObjectType)
@@ -612,19 +612,19 @@ void LuaScriptInstance::SubscribeToScriptMethodEvents()
     Scene* scene = GetScene();
 
     if (scene && (scriptObjectMethods_[LSOM_UPDATE] || scriptObjectMethods_[LSOM_DELAYEDSTART]))
-        SubscribeToEvent(scene, E_SCENEUPDATE, URHO3D_HANDLER(LuaScriptInstance, HandleUpdate));
+        SubscribeToEvent(scene, E_SCENEUPDATE, CLOCKWORK_HANDLER(LuaScriptInstance, HandleUpdate));
 
     if (scene && scriptObjectMethods_[LSOM_POSTUPDATE])
-        SubscribeToEvent(scene, E_SCENEPOSTUPDATE, URHO3D_HANDLER(LuaScriptInstance, HandlePostUpdate));
+        SubscribeToEvent(scene, E_SCENEPOSTUPDATE, CLOCKWORK_HANDLER(LuaScriptInstance, HandlePostUpdate));
 
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
     Component* world = GetFixedUpdateSource();
 
     if (world && scriptObjectMethods_[LSOM_FIXEDUPDATE])
-        SubscribeToEvent(world, E_PHYSICSPRESTEP, URHO3D_HANDLER(LuaScriptInstance, HandleFixedUpdate));
+        SubscribeToEvent(world, E_PHYSICSPRESTEP, CLOCKWORK_HANDLER(LuaScriptInstance, HandleFixedUpdate));
 
     if (world && scriptObjectMethods_[LSOM_FIXEDPOSTUPDATE])
-        SubscribeToEvent(world, E_PHYSICSPOSTSTEP, URHO3D_HANDLER(LuaScriptInstance, HandlePostFixedUpdate));
+        SubscribeToEvent(world, E_PHYSICSPOSTSTEP, CLOCKWORK_HANDLER(LuaScriptInstance, HandlePostFixedUpdate));
 #endif
 
     if (node_ && scriptObjectMethods_[LSOM_TRANSFORMCHANGED])
@@ -636,7 +636,7 @@ void LuaScriptInstance::UnsubscribeFromScriptMethodEvents()
     UnsubscribeFromEvent(E_SCENEUPDATE);
     UnsubscribeFromEvent(E_SCENEPOSTUPDATE);
 
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
     UnsubscribeFromEvent(E_PHYSICSPRESTEP);
     UnsubscribeFromEvent(E_PHYSICSPOSTSTEP);
 #endif
@@ -679,7 +679,7 @@ void LuaScriptInstance::HandlePostUpdate(StringHash eventType, VariantMap& event
     }
 }
 
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
 
 void LuaScriptInstance::HandleFixedUpdate(StringHash eventType, VariantMap& eventData)
 {

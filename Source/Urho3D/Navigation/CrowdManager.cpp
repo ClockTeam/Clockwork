@@ -77,12 +77,12 @@ void CrowdManager::RegisterObject(Context* context)
 {
     context->RegisterFactory<CrowdManager>(NAVIGATION_CATEGORY);
 
-    URHO3D_ATTRIBUTE("Max Agents", unsigned, maxAgents_, DEFAULT_MAX_AGENTS, AM_DEFAULT);
-    URHO3D_ATTRIBUTE("Max Agent Radius", float, maxAgentRadius_, DEFAULT_MAX_AGENT_RADIUS, AM_DEFAULT);
-    URHO3D_ATTRIBUTE("Navigation Mesh", unsigned, navigationMeshId_, 0, AM_DEFAULT | AM_COMPONENTID);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Filter Types", GetQueryFilterTypesAttr, SetQueryFilterTypesAttr, VariantVector,
+    CLOCKWORK_ATTRIBUTE("Max Agents", unsigned, maxAgents_, DEFAULT_MAX_AGENTS, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("Max Agent Radius", float, maxAgentRadius_, DEFAULT_MAX_AGENT_RADIUS, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("Navigation Mesh", unsigned, navigationMeshId_, 0, AM_DEFAULT | AM_COMPONENTID);
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Filter Types", GetQueryFilterTypesAttr, SetQueryFilterTypesAttr, VariantVector,
         Variant::emptyVariantVector, AM_DEFAULT);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Obstacle Avoidance Types", GetObstacleAvoidanceTypesAttr, SetObstacleAvoidanceTypesAttr,
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Obstacle Avoidance Types", GetObstacleAvoidanceTypesAttr, SetObstacleAvoidanceTypesAttr,
         VariantVector, Variant::emptyVariantVector, AM_DEFAULT);
 }
 
@@ -450,7 +450,7 @@ VariantVector CrowdManager::GetQueryFilterTypesAttr() const
 unsigned short CrowdManager::GetIncludeFlags(unsigned queryFilterType) const
 {
     if (queryFilterType >= numQueryFilterTypes_)
-        URHO3D_LOGWARNINGF("Query filter type %d is not configured yet, returning the default include flags initialized by dtCrowd",
+        CLOCKWORK_LOGWARNINGF("Query filter type %d is not configured yet, returning the default include flags initialized by dtCrowd",
             queryFilterType);
     const dtQueryFilter* filter = GetDetourQueryFilter(queryFilterType);
     return (unsigned short)(filter ? filter->getIncludeFlags() : 0xffff);
@@ -459,7 +459,7 @@ unsigned short CrowdManager::GetIncludeFlags(unsigned queryFilterType) const
 unsigned short CrowdManager::GetExcludeFlags(unsigned queryFilterType) const
 {
     if (queryFilterType >= numQueryFilterTypes_)
-        URHO3D_LOGWARNINGF("Query filter type %d is not configured yet, returning the default exclude flags initialized by dtCrowd",
+        CLOCKWORK_LOGWARNINGF("Query filter type %d is not configured yet, returning the default exclude flags initialized by dtCrowd",
             queryFilterType);
     const dtQueryFilter* filter = GetDetourQueryFilter(queryFilterType);
     return (unsigned short)(filter ? filter->getExcludeFlags() : 0);
@@ -468,7 +468,7 @@ unsigned short CrowdManager::GetExcludeFlags(unsigned queryFilterType) const
 float CrowdManager::GetAreaCost(unsigned queryFilterType, unsigned areaID) const
 {
     if (queryFilterType >= numQueryFilterTypes_ || areaID >= numAreas_[queryFilterType])
-        URHO3D_LOGWARNINGF(
+        CLOCKWORK_LOGWARNINGF(
             "Query filter type %d and/or area id %d are not configured yet, returning the default area cost initialized by dtCrowd",
             queryFilterType, areaID);
     const dtQueryFilter* filter = GetDetourQueryFilter(queryFilterType);
@@ -553,7 +553,7 @@ bool CrowdManager::CreateCrowd()
         maxAgentRadius_ = navigationMesh_->GetAgentRadius();
     if (!crowd_->init(maxAgents_, maxAgentRadius_, navigationMesh_->navMesh_, CrowdAgentUpdateCallback))
     {
-        URHO3D_LOGERROR("Could not initialize DetourCrowd");
+        CLOCKWORK_LOGERROR("Could not initialize DetourCrowd");
         return false;
     }
 
@@ -570,7 +570,7 @@ bool CrowdManager::CreateCrowd()
             // Keep adding until the crowd cannot take it anymore
             if (agents[i]->AddAgentToCrowd(true) == -1)
             {
-                URHO3D_LOGWARNINGF("CrowdManager: %d crowd agents orphaned", agents.Size() - i);
+                CLOCKWORK_LOGWARNINGF("CrowdManager: %d crowd agents orphaned", agents.Size() - i);
                 break;
             }
         }
@@ -612,11 +612,11 @@ void CrowdManager::OnSceneSet(Scene* scene)
     {
         if (scene != node_)
         {
-            URHO3D_LOGERROR("CrowdManager is a scene component and should only be attached to the scene node");
+            CLOCKWORK_LOGERROR("CrowdManager is a scene component and should only be attached to the scene node");
             return;
         }
 
-        SubscribeToEvent(scene, E_SCENESUBSYSTEMUPDATE, URHO3D_HANDLER(CrowdManager, HandleSceneSubsystemUpdate));
+        SubscribeToEvent(scene, E_SCENESUBSYSTEMUPDATE, CLOCKWORK_HANDLER(CrowdManager, HandleSceneSubsystemUpdate));
 
         // Attempt to auto discover a NavigationMesh component (or its derivative) under the scene node
         NavigationMesh* navMesh = scene->GetDerivedComponent<NavigationMesh>(true);
@@ -626,8 +626,8 @@ void CrowdManager::OnSceneSet(Scene* scene)
             navigationMeshId_ = navMesh->GetID();
             CreateCrowd();
 
-            SubscribeToEvent(navMesh->GetNode(), E_NAVIGATION_MESH_REBUILT, URHO3D_HANDLER(CrowdManager, HandleNavMeshChanged));
-            SubscribeToEvent(navMesh->GetNode(), E_COMPONENTREMOVED, URHO3D_HANDLER(CrowdManager, HandleNavMeshChanged));
+            SubscribeToEvent(navMesh->GetNode(), E_NAVIGATION_MESH_REBUILT, CLOCKWORK_HANDLER(CrowdManager, HandleNavMeshChanged));
+            SubscribeToEvent(navMesh->GetNode(), E_COMPONENTREMOVED, CLOCKWORK_HANDLER(CrowdManager, HandleNavMeshChanged));
         }
     }
     else
@@ -643,7 +643,7 @@ void CrowdManager::OnSceneSet(Scene* scene)
 void CrowdManager::Update(float delta)
 {
     assert(crowd_ && navigationMesh_);
-    URHO3D_PROFILE(UpdateCrowd);
+    CLOCKWORK_PROFILE(UpdateCrowd);
     crowd_->update(delta, 0);
 }
 

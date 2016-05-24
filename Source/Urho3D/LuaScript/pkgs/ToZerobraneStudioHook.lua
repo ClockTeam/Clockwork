@@ -1,5 +1,5 @@
 --
--- Copyright (c) 2008-2016 the Urho3D project.
+-- Copyright (c) 2008-2016 the Clockwork project.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -387,7 +387,7 @@ function classPackage:print()
   local filename = flags.o
   local file = io.open(filename, "wt")
  
-  file:write("-- Urho3D API generated on "..os.date('%Y-%m-%d'))
+  file:write("-- Clockwork API generated on "..os.date('%Y-%m-%d'))
   file:write("\n\nlocal api = {")
  
   local i = 1

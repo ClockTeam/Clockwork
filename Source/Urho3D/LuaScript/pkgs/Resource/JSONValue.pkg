@@ -14,7 +14,7 @@ class JSONValue
 {
     JSONValue();
     JSONValue(bool value);
-    JSONValue(const char* value);           // This works for Lua string and Urho3D:String
+    JSONValue(const char* value);           // This works for Lua string and Clockwork:String
     JSONValue(double value);                // This works for all number types, must be declared after string overload
     JSONValue(const JSONArray& value);
     JSONValue(const JSONObject& value);

@@ -28,7 +28,7 @@ namespace Urho3D
 {
 
 /// Two-dimensional bounding rectangle.
-class URHO3D_API Rect
+class CLOCKWORK_API Rect
 {
 public:
     /// Construct an undefined rect.
@@ -193,7 +193,7 @@ public:
 };
 
 /// Two-dimensional bounding rectangle with integer values.
-class URHO3D_API IntRect
+class CLOCKWORK_API IntRect
 {
 public:
     /// Construct a zero rect.

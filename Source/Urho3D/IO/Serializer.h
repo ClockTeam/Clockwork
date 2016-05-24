@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@
 #include "../Math/BoundingBox.h"
 #include "../Math/StringHash.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Color;
@@ -40,7 +40,7 @@ class Vector3;
 class Vector4;
 
 /// Abstract stream for writing.
-class URHO3D_API Serializer
+class CLOCKWORK_API Serializer
 {
 public:
     /// Destruct.

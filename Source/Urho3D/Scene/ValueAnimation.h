@@ -63,9 +63,9 @@ struct VAnimEventFrame
 };
 
 /// Value animation class.
-class URHO3D_API ValueAnimation : public Resource
+class CLOCKWORK_API ValueAnimation : public Resource
 {
-    URHO3D_OBJECT(ValueAnimation, Resource);
+    CLOCKWORK_OBJECT(ValueAnimation, Resource);
 
 public:
     /// Construct.

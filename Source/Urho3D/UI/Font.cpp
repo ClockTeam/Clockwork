@@ -108,7 +108,7 @@ bool Font::SaveXML(Serializer& dest, int pointSize, bool usedGlyphs, const Strin
     if (!fontFace)
         return false;
 
-    URHO3D_PROFILE(FontSaveXML);
+    CLOCKWORK_PROFILE(FontSaveXML);
 
     SharedPtr<FontFaceBitmap> packedFontFace(new FontFaceBitmap(this));
     if (!packedFontFace->Load(fontFace, usedGlyphs))
@@ -152,7 +152,7 @@ FontFace* Font::GetFace(int pointSize)
         }
     }
 
-    URHO3D_PROFILE(GetFontFace);
+    CLOCKWORK_PROFILE(GetFontFace);
 
     switch (fontType_)
     {

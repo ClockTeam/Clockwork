@@ -126,9 +126,9 @@ struct HeightfieldData : public CollisionGeometryData
 };
 
 /// Physics collision shape component.
-class URHO3D_API CollisionShape : public Component
+class CLOCKWORK_API CollisionShape : public Component
 {
-    URHO3D_OBJECT(CollisionShape, Component);
+    CLOCKWORK_OBJECT(CollisionShape, Component);
 
 public:
     /// Construct.

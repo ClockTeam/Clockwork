@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// %File entry within the package file.
@@ -39,9 +39,9 @@ struct PackageEntry
 };
 
 /// Stores files of a directory tree sequentially for convenient access.
-class URHO3D_API PackageFile : public Object
+class CLOCKWORK_API PackageFile : public Object
 {
-    URHO3D_OBJECT(PackageFile, Object);
+    CLOCKWORK_OBJECT(PackageFile, Object);
 
 public:
     /// Construct.

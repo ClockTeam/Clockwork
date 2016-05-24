@@ -29,9 +29,9 @@ namespace Urho3D
 {
 
 /// JSON document resource.
-class URHO3D_API JSONFile : public Resource
+class CLOCKWORK_API JSONFile : public Resource
 {
-    URHO3D_OBJECT(JSONFile, Resource);
+    CLOCKWORK_OBJECT(JSONFile, Resource);
 
 public:
     /// Construct.

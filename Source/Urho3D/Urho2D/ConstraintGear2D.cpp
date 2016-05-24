@@ -47,9 +47,9 @@ void ConstraintGear2D::RegisterObject(Context* context)
 {
     context->RegisterFactory<ConstraintGear2D>(URHO2D_CATEGORY);
 
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Enabled", IsEnabled, SetEnabled, bool, true, AM_DEFAULT);
-    URHO3D_ACCESSOR_ATTRIBUTE("Ratio", GetRatio, SetRatio, float, 0.0f, AM_DEFAULT);
-    URHO3D_COPY_BASE_ATTRIBUTES(Constraint2D);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Enabled", IsEnabled, SetEnabled, bool, true, AM_DEFAULT);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Ratio", GetRatio, SetRatio, float, 0.0f, AM_DEFAULT);
+    CLOCKWORK_COPY_BASE_ATTRIBUTES(Constraint2D);
 }
 
 void ConstraintGear2D::SetOwnerConstraint(Constraint2D* constraint)

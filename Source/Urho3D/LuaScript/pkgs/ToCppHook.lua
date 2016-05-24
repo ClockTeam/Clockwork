@@ -1,5 +1,5 @@
 --
--- Copyright (c) 2008-2016 the Urho3D project.
+-- Copyright (c) 2008-2016 the Clockwork project.
 --
 -- Permission is hereby granted, free of charge, to any person obtaining a copy
 -- of this software and associated documentation files (the "Software"), to deal
@@ -66,7 +66,7 @@ function post_output_hook(package)
 #include "string.h"
 
 #include "tolua++.h"]], [[//
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -96,8 +96,8 @@ function post_output_hook(package)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-function"
 #endif]])
-    if not _extra_parameters["Urho3D"] then
-        replace([[#include "LuaScript/ToluaUtils.h"]], [[#include <Urho3D/LuaScript/ToluaUtils.h>]])
+    if not _extra_parameters["Clockwork"] then
+        replace([[#include "LuaScript/ToluaUtils.h"]], [[#include <Clockwork/LuaScript/ToluaUtils.h>]])
     end
 
     -- Special handling for vector to table conversion which would simplify the implementation of the template functions
@@ -117,12 +117,12 @@ _push_functions['Component'] = "ToluaPushObject"
 _push_functions['Resource'] = "ToluaPushObject"
 _push_functions['UIElement'] = "ToluaPushObject"
 
--- Is Urho3D Vector type.
+-- Is Clockwork Vector type.
 function clockwork_is_vector(t)
     return t:find("Vector<") ~= nil
 end
 
--- Is Urho3D PODVector type.
+-- Is Clockwork PODVector type.
 function clockwork_is_podvector(t)
     return t:find("PODVector<") ~= nil
 end

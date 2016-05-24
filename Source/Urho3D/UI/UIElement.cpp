@@ -151,41 +151,41 @@ void UIElement::RegisterObject(Context* context)
 {
     context->RegisterFactory<UIElement>(UI_CATEGORY);
 
-    URHO3D_ACCESSOR_ATTRIBUTE("Name", GetName, SetName, String, String::EMPTY, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Position", GetPosition, SetPosition, IntVector2, IntVector2::ZERO, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Size", GetSize, SetSize, IntVector2, IntVector2::ZERO, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Min Size", GetMinSize, SetMinSize, IntVector2, IntVector2::ZERO, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Max Size", GetMaxSize, SetMaxSize, IntVector2, IntVector2(M_MAX_INT, M_MAX_INT), AM_FILE);
-    URHO3D_ENUM_ACCESSOR_ATTRIBUTE("Horiz Alignment", GetHorizontalAlignment, SetHorizontalAlignment, HorizontalAlignment,
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Name", GetName, SetName, String, String::EMPTY, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Position", GetPosition, SetPosition, IntVector2, IntVector2::ZERO, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Size", GetSize, SetSize, IntVector2, IntVector2::ZERO, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Min Size", GetMinSize, SetMinSize, IntVector2, IntVector2::ZERO, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Max Size", GetMaxSize, SetMaxSize, IntVector2, IntVector2(M_MAX_INT, M_MAX_INT), AM_FILE);
+    CLOCKWORK_ENUM_ACCESSOR_ATTRIBUTE("Horiz Alignment", GetHorizontalAlignment, SetHorizontalAlignment, HorizontalAlignment,
         horizontalAlignments, HA_LEFT, AM_FILE);
-    URHO3D_ENUM_ACCESSOR_ATTRIBUTE("Vert Alignment", GetVerticalAlignment, SetVerticalAlignment, VerticalAlignment, verticalAlignments,
+    CLOCKWORK_ENUM_ACCESSOR_ATTRIBUTE("Vert Alignment", GetVerticalAlignment, SetVerticalAlignment, VerticalAlignment, verticalAlignments,
         VA_TOP, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Clip Border", GetClipBorder, SetClipBorder, IntRect, IntRect::ZERO, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Priority", GetPriority, SetPriority, int, 0, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Opacity", GetOpacity, SetOpacity, float, 1.0f, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Color", GetColorAttr, SetColor, Color, Color::WHITE, AM_FILE);
-    URHO3D_ATTRIBUTE("Top Left Color", Color, color_[0], Color::WHITE, AM_FILE);
-    URHO3D_ATTRIBUTE("Top Right Color", Color, color_[1], Color::WHITE, AM_FILE);
-    URHO3D_ATTRIBUTE("Bottom Left Color", Color, color_[2], Color::WHITE, AM_FILE);
-    URHO3D_ATTRIBUTE("Bottom Right Color", Color, color_[3], Color::WHITE, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Enabled", IsEnabled, SetEnabled, bool, false, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Editable", IsEditable, SetEditable, bool, true, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Selected", IsSelected, SetSelected, bool, false, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Visible", IsVisible, SetVisible, bool, true, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Bring To Front", GetBringToFront, SetBringToFront, bool, false, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Bring To Back", GetBringToBack, SetBringToBack, bool, true, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Clip Children", GetClipChildren, SetClipChildren, bool, false, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Use Derived Opacity", GetUseDerivedOpacity, SetUseDerivedOpacity, bool, true, AM_FILE);
-    URHO3D_ENUM_ACCESSOR_ATTRIBUTE("Focus Mode", GetFocusMode, SetFocusMode, FocusMode, focusModes, FM_NOTFOCUSABLE, AM_FILE);
-    URHO3D_ENUM_ACCESSOR_ATTRIBUTE("Drag And Drop Mode", GetDragDropMode, SetDragDropMode, unsigned, dragDropModes, DD_DISABLED, AM_FILE);
-    URHO3D_ENUM_ACCESSOR_ATTRIBUTE("Layout Mode", GetLayoutMode, SetLayoutMode, LayoutMode, layoutModes, LM_FREE, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Layout Spacing", GetLayoutSpacing, SetLayoutSpacing, int, 0, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Layout Border", GetLayoutBorder, SetLayoutBorder, IntRect, IntRect::ZERO, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Layout Flex Scale", GetLayoutFlexScale, SetLayoutFlexScale, Vector2, Vector2::ONE, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Indent", GetIndent, SetIndent, int, 0, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Indent Spacing", GetIndentSpacing, SetIndentSpacing, int, 16, AM_FILE);
-    URHO3D_ATTRIBUTE("Variables", VariantMap, vars_, Variant::emptyVariantMap, AM_FILE);
-    URHO3D_ATTRIBUTE("Tags", StringVector, tags_, Variant::emptyStringVector, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Clip Border", GetClipBorder, SetClipBorder, IntRect, IntRect::ZERO, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Priority", GetPriority, SetPriority, int, 0, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Opacity", GetOpacity, SetOpacity, float, 1.0f, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Color", GetColorAttr, SetColor, Color, Color::WHITE, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Top Left Color", Color, color_[0], Color::WHITE, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Top Right Color", Color, color_[1], Color::WHITE, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Bottom Left Color", Color, color_[2], Color::WHITE, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Bottom Right Color", Color, color_[3], Color::WHITE, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Enabled", IsEnabled, SetEnabled, bool, false, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Editable", IsEditable, SetEditable, bool, true, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Selected", IsSelected, SetSelected, bool, false, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Visible", IsVisible, SetVisible, bool, true, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Bring To Front", GetBringToFront, SetBringToFront, bool, false, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Bring To Back", GetBringToBack, SetBringToBack, bool, true, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Clip Children", GetClipChildren, SetClipChildren, bool, false, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Use Derived Opacity", GetUseDerivedOpacity, SetUseDerivedOpacity, bool, true, AM_FILE);
+    CLOCKWORK_ENUM_ACCESSOR_ATTRIBUTE("Focus Mode", GetFocusMode, SetFocusMode, FocusMode, focusModes, FM_NOTFOCUSABLE, AM_FILE);
+    CLOCKWORK_ENUM_ACCESSOR_ATTRIBUTE("Drag And Drop Mode", GetDragDropMode, SetDragDropMode, unsigned, dragDropModes, DD_DISABLED, AM_FILE);
+    CLOCKWORK_ENUM_ACCESSOR_ATTRIBUTE("Layout Mode", GetLayoutMode, SetLayoutMode, LayoutMode, layoutModes, LM_FREE, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Layout Spacing", GetLayoutSpacing, SetLayoutSpacing, int, 0, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Layout Border", GetLayoutBorder, SetLayoutBorder, IntRect, IntRect::ZERO, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Layout Flex Scale", GetLayoutFlexScale, SetLayoutFlexScale, Vector2, Vector2::ONE, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Indent", GetIndent, SetIndent, int, 0, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Indent Spacing", GetIndentSpacing, SetIndentSpacing, int, 16, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Variables", VariantMap, vars_, Variant::emptyVariantMap, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Tags", StringVector, tags_, Variant::emptyStringVector, AM_FILE);
 }
 
 void UIElement::ApplyAttributes()
@@ -269,7 +269,7 @@ bool UIElement::LoadXML(const XMLElement& source, XMLFile* styleFile, bool setIn
             }
 
             if (!child)
-                URHO3D_LOGWARNING("Could not find matching internal child element of type " + typeName + " in " + GetTypeName());
+                CLOCKWORK_LOGWARNING("Could not find matching internal child element of type " + typeName + " in " + GetTypeName());
         }
 
         if (child)
@@ -296,7 +296,7 @@ bool UIElement::LoadChildXML(const XMLElement& childElem, XMLFile* styleFile, bo
     bool internalElem = childElem.GetBool("internal");
     if (internalElem)
     {
-        URHO3D_LOGERROR("Loading internal child element is not supported");
+        CLOCKWORK_LOGERROR("Loading internal child element is not supported");
         return false;
     }
 
@@ -556,7 +556,7 @@ bool UIElement::FilterAttributes(XMLElement& dest) const
     // Filter implicit attributes
     if (!FilterImplicitAttributes(dest))
     {
-        URHO3D_LOGERROR("Could not remove implicit attributes");
+        CLOCKWORK_LOGERROR("Could not remove implicit attributes");
         return false;
     }
 
@@ -726,7 +726,7 @@ void UIElement::SetHorizontalAlignment(HorizontalAlignment align)
 {
     if (align != HA_LEFT && parent_ && parent_->GetLayoutMode() == LM_HORIZONTAL)
     {
-        URHO3D_LOGWARNING("Forcing left alignment because parent element has horizontal layout");
+        CLOCKWORK_LOGWARNING("Forcing left alignment because parent element has horizontal layout");
         align = HA_LEFT;
     }
 
@@ -741,7 +741,7 @@ void UIElement::SetVerticalAlignment(VerticalAlignment align)
 {
     if (align != VA_TOP && parent_ && parent_->GetLayoutMode() == LM_VERTICAL)
     {
-        URHO3D_LOGWARNING("Forcing top alignment because parent element has vertical layout");
+        CLOCKWORK_LOGWARNING("Forcing top alignment because parent element has vertical layout");
         align = VA_TOP;
     }
 
@@ -1204,7 +1204,7 @@ UIElement* UIElement::CreateChild(StringHash type, const String& name, unsigned 
     SharedPtr<UIElement> newElement = DynamicCast<UIElement>(context_->CreateObject(type));
     if (!newElement)
     {
-        URHO3D_LOGERROR("Could not create unknown UI element type " + type.ToString());
+        CLOCKWORK_LOGERROR("Could not create unknown UI element type " + type.ToString());
         return 0;
     }
 
@@ -1758,7 +1758,7 @@ IntVector2 UIElement::GetEffectiveMinSize() const
 void UIElement::OnAttributeAnimationAdded()
 {
     if (attributeAnimationInfos_.Size() == 1)
-        SubscribeToEvent(E_POSTUPDATE, URHO3D_HANDLER(UIElement, HandlePostUpdate));
+        SubscribeToEvent(E_POSTUPDATE, CLOCKWORK_HANDLER(UIElement, HandlePostUpdate));
 }
 
 void UIElement::OnAttributeAnimationRemoved()
@@ -1784,7 +1784,7 @@ Animatable* UIElement::FindAttributeAnimationTarget(const String& name, String& 
         {
             if (names[i].Front() != '#')
             {
-                URHO3D_LOGERROR("Invalid name " + name);
+                CLOCKWORK_LOGERROR("Invalid name " + name);
                 return 0;
             }
 
@@ -1792,7 +1792,7 @@ Animatable* UIElement::FindAttributeAnimationTarget(const String& name, String& 
             element = element->GetChild(index);
             if (!element)
             {
-                URHO3D_LOGERROR("Could not find element by name " + name);
+                CLOCKWORK_LOGERROR("Could not find element by name " + name);
                 return 0;
             }
         }
@@ -1847,7 +1847,7 @@ bool UIElement::FilterUIStyleAttributes(XMLElement& dest, const XMLElement& styl
         {
             if (!dest.RemoveAttribute("style"))
             {
-                URHO3D_LOGWARNING("Could not remove style attribute");
+                CLOCKWORK_LOGWARNING("Could not remove style attribute");
                 return false;
             }
         }
@@ -1860,7 +1860,7 @@ bool UIElement::FilterUIStyleAttributes(XMLElement& dest, const XMLElement& styl
     {
         if (!childElem.GetBool("internal"))
         {
-            URHO3D_LOGERROR("Invalid style file, style element can only contain internal child elements");
+            CLOCKWORK_LOGERROR("Invalid style file, style element can only contain internal child elements");
             return false;
         }
         if (!FilterUIStyleAttributes(childDest, childElem))

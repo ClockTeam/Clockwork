@@ -28,9 +28,9 @@ namespace Urho3D
 {
 
 /// 2D weld constraint component.
-class URHO3D_API ConstraintWeld2D : public Constraint2D
+class CLOCKWORK_API ConstraintWeld2D : public Constraint2D
 {
-    URHO3D_OBJECT(ConstraintWeld2D, Constraint2D);
+    CLOCKWORK_OBJECT(ConstraintWeld2D, Constraint2D);
 
 public:
     /// Construct.

@@ -151,9 +151,9 @@ private:
 };
 
 /// Tile map file.
-class URHO3D_API TmxFile2D : public Resource
+class CLOCKWORK_API TmxFile2D : public Resource
 {
-    URHO3D_OBJECT(TmxFile2D, Resource);
+    CLOCKWORK_OBJECT(TmxFile2D, Resource);
 
 public:
     /// Construct.

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 #include "../Input/InputEvents.h"
 #include "../UI/Cursor.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// %Input Mouse Modes.
@@ -133,9 +133,9 @@ class EmscriptenInput;
 #endif
 
 /// %Input subsystem. Converts operating system window messages to input state and events.
-class URHO3D_API Input : public Object
+class CLOCKWORK_API Input : public Object
 {
-    URHO3D_OBJECT(Input, Object);
+    CLOCKWORK_OBJECT(Input, Object);
 
 #ifdef __EMSCRIPTEN__
     friend class EmscriptenInput;

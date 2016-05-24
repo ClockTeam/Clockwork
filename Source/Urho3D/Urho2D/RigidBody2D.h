@@ -42,9 +42,9 @@ enum BodyType2D
 };
 
 /// 2D rigid body component.
-class URHO3D_API RigidBody2D : public Component
+class CLOCKWORK_API RigidBody2D : public Component
 {
-    URHO3D_OBJECT(RigidBody2D, Component);
+    CLOCKWORK_OBJECT(RigidBody2D, Component);
 
 public:
     /// Construct.

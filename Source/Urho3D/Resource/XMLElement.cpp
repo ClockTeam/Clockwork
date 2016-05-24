@@ -968,7 +968,7 @@ XPathResultSet& XPathResultSet::operator =(const XPathResultSet& rhs)
 XMLElement XPathResultSet::operator [](unsigned index) const
 {
     if (!resultSet_)
-        URHO3D_LOGERRORF(
+        CLOCKWORK_LOGERRORF(
             "Could not return result at index: %u. Most probably this is caused by the XPathResultSet not being stored in a lhs variable.",
             index);
 

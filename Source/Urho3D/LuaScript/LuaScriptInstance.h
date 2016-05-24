@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@
 
 struct lua_State;
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class LuaFile;
@@ -55,9 +55,9 @@ enum LuaScriptObjectMethod
 };
 
 /// Lua script object component.
-class URHO3D_API LuaScriptInstance : public Component, public LuaScriptEventListener
+class CLOCKWORK_API LuaScriptInstance : public Component, public LuaScriptEventListener
 {
-    URHO3D_OBJECT(LuaScriptInstance, Component);
+    CLOCKWORK_OBJECT(LuaScriptInstance, Component);
 
 public:
     /// Construct.
@@ -156,7 +156,7 @@ private:
     void HandleUpdate(StringHash eventType, VariantMap& eventData);
     /// Handle the logic post update event.
     void HandlePostUpdate(StringHash eventType, VariantMap& eventData);
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
     /// Handle the physics update event.
     void HandleFixedUpdate(StringHash eventType, VariantMap& eventData);
     /// Handle the physics post update event.

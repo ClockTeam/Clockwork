@@ -80,19 +80,19 @@ void Text::RegisterObject(Context* context)
 {
     context->RegisterFactory<Text>(UI_CATEGORY);
 
-    URHO3D_COPY_BASE_ATTRIBUTES(UIElement);
-    URHO3D_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Use Derived Opacity", false);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Font", GetFontAttr, SetFontAttr, ResourceRef, ResourceRef(Font::GetTypeStatic()), AM_FILE);
-    URHO3D_ATTRIBUTE("Font Size", int, fontSize_, DEFAULT_FONT_SIZE, AM_FILE);
-    URHO3D_ATTRIBUTE("Text", String, text_, String::EMPTY, AM_FILE);
-    URHO3D_ENUM_ATTRIBUTE("Text Alignment", textAlignment_, horizontalAlignments, HA_LEFT, AM_FILE);
-    URHO3D_ATTRIBUTE("Row Spacing", float, rowSpacing_, 1.0f, AM_FILE);
-    URHO3D_ATTRIBUTE("Word Wrap", bool, wordWrap_, false, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Auto Localizable", GetAutoLocalizable, SetAutoLocalizable, bool, false, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Selection Color", GetSelectionColor, SetSelectionColor, Color, Color::TRANSPARENT, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Hover Color", GetHoverColor, SetHoverColor, Color, Color::TRANSPARENT, AM_FILE);
-    URHO3D_ENUM_ATTRIBUTE("Text Effect", textEffect_, textEffects, TE_NONE, AM_FILE);
-    URHO3D_ACCESSOR_ATTRIBUTE("Effect Color", GetEffectColor, SetEffectColor, Color, Color::BLACK, AM_FILE);
+    CLOCKWORK_COPY_BASE_ATTRIBUTES(UIElement);
+    CLOCKWORK_UPDATE_ATTRIBUTE_DEFAULT_VALUE("Use Derived Opacity", false);
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Font", GetFontAttr, SetFontAttr, ResourceRef, ResourceRef(Font::GetTypeStatic()), AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Font Size", int, fontSize_, DEFAULT_FONT_SIZE, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Text", String, text_, String::EMPTY, AM_FILE);
+    CLOCKWORK_ENUM_ATTRIBUTE("Text Alignment", textAlignment_, horizontalAlignments, HA_LEFT, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Row Spacing", float, rowSpacing_, 1.0f, AM_FILE);
+    CLOCKWORK_ATTRIBUTE("Word Wrap", bool, wordWrap_, false, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Auto Localizable", GetAutoLocalizable, SetAutoLocalizable, bool, false, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Selection Color", GetSelectionColor, SetSelectionColor, Color, Color::TRANSPARENT, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Hover Color", GetHoverColor, SetHoverColor, Color, Color::TRANSPARENT, AM_FILE);
+    CLOCKWORK_ENUM_ATTRIBUTE("Text Effect", textEffect_, textEffects, TE_NONE, AM_FILE);
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Effect Color", GetEffectColor, SetEffectColor, Color, Color::BLACK, AM_FILE);
 
     // Change the default value for UseDerivedOpacity
     context->GetAttribute<Text>("Use Derived Opacity")->defaultValue_ = false;
@@ -238,7 +238,7 @@ bool Text::SetFont(Font* font, int size)
 {
     if (!font)
     {
-        URHO3D_LOGERROR("Null font for Text");
+        CLOCKWORK_LOGERROR("Null font for Text");
         return false;
     }
 
@@ -314,7 +314,7 @@ void Text::SetAutoLocalizable(bool enable)
             stringId_ = text_;
             Localization* l10n = GetSubsystem<Localization>();
             text_ = l10n->Get(stringId_);
-            SubscribeToEvent(E_CHANGELANGUAGE, URHO3D_HANDLER(Text, HandleChangeLanguage));
+            SubscribeToEvent(E_CHANGELANGUAGE, CLOCKWORK_HANDLER(Text, HandleChangeLanguage));
         }
         else
         {

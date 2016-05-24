@@ -29,9 +29,9 @@ namespace Urho3D
 {
 
 /// %Localization subsystem. Stores all the strings in all languages.
-class URHO3D_API Localization : public Object
+class CLOCKWORK_API Localization : public Object
 {
-    URHO3D_OBJECT(Localization, Object);
+    CLOCKWORK_OBJECT(Localization, Object);
 
 public:
     /// Construct.

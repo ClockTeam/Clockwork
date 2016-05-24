@@ -28,9 +28,9 @@ namespace Urho3D
 {
 
 /// Push button %UI element.
-class URHO3D_API Button : public BorderImage
+class CLOCKWORK_API Button : public BorderImage
 {
-    URHO3D_OBJECT(Button, BorderImage);
+    CLOCKWORK_OBJECT(Button, BorderImage);
 
 public:
     /// Construct.

@@ -31,9 +31,9 @@ class SpriteSheet2D;
 class Texture2D;
 
 /// Sprite.
-class URHO3D_API Sprite2D : public Resource
+class CLOCKWORK_API Sprite2D : public Resource
 {
-    URHO3D_OBJECT(Sprite2D, Resource);
+    CLOCKWORK_OBJECT(Sprite2D, Resource);
 
 public:
     /// Construct.

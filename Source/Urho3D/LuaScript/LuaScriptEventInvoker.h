@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class LuaFunction;
@@ -33,7 +33,7 @@ class LuaScriptInstance;
 /// Lua script event invoker.
 class LuaScriptEventInvoker : public Object
 {
-    URHO3D_OBJECT(LuaScriptEventInvoker, Object);
+    CLOCKWORK_OBJECT(LuaScriptEventInvoker, Object);
 
 public:
     /// Construct.

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #include "LibraryInfo.h"
 #include "librevision.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 const char* GetRevision()
@@ -36,24 +36,24 @@ const char* GetRevision()
 const char* GetCompilerDefines()
 {
     return ""
-#ifdef URHO3D_OPENGL
-    "#define URHO3D_OPENGL\n"
-#elif defined(URHO3D_D3D11)
-    "#define URHO3D_D3D11\n"
+#ifdef CLOCKWORK_OPENGL
+    "#define CLOCKWORK_OPENGL\n"
+#elif defined(CLOCKWORK_D3D11)
+    "#define CLOCKWORK_D3D11\n"
 #endif
-#ifdef URHO3D_SSE
-    "#define URHO3D_SSE\n"
+#ifdef CLOCKWORK_SSE
+    "#define CLOCKWORK_SSE\n"
 #endif
-#ifdef URHO3D_DATABASE_ODBC
-    "#define URHO3D_DATABASE_ODBC\n"
-#elif defined(URHO3D_DATABASE_SQLITE)
-    "#define URHO3D_DATABASE_SQLITE\n"
+#ifdef CLOCKWORK_DATABASE_ODBC
+    "#define CLOCKWORK_DATABASE_ODBC\n"
+#elif defined(CLOCKWORK_DATABASE_SQLITE)
+    "#define CLOCKWORK_DATABASE_SQLITE\n"
 #endif
-#ifdef URHO3D_LUAJIT
-    "#define URHO3D_LUAJIT\n"
+#ifdef CLOCKWORK_LUAJIT
+    "#define CLOCKWORK_LUAJIT\n"
 #endif
-#ifdef URHO3D_TESTING
-    "#define URHO3D_TESTING\n"
+#ifdef CLOCKWORK_TESTING
+    "#define CLOCKWORK_TESTING\n"
 #endif
     ;
 }

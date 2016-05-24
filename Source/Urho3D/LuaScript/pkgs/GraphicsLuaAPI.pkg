@@ -38,5 +38,5 @@ $pfile "Graphics/TextureCube.pkg"
 $pfile "Graphics/Viewport.pkg"
 $pfile "Graphics/Zone.pkg"
 
-$using namespace Urho3D;
+$using namespace Clockwork;
 $#pragma warning(disable:4800)
