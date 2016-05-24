@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #include "../Core/Profiler.h"
 #include "../Database/Database.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 Database::Database(Context* context_) :
@@ -40,7 +40,7 @@ Database::Database(Context* context_) :
 
 DBAPI Database::GetAPI()
 {
-#ifdef URHO3D_DATABASE_ODBC
+#ifdef CLOCKWORK_DATABASE_ODBC
     return DBAPI_ODBC;
 #else
     return DBAPI_SQLITE;
@@ -49,7 +49,7 @@ DBAPI Database::GetAPI()
 
 DbConnection* Database::Connect(const String& connectionString)
 {
-    URHO3D_PROFILE(DatabaseConnect);
+    CLOCKWORK_PROFILE(DatabaseConnect);
 
     SharedPtr<DbConnection> connection;
     if (IsPooling())
@@ -80,7 +80,7 @@ void Database::Disconnect(DbConnection* connection)
     if (!connection)
         return;
 
-    URHO3D_PROFILE(DatabaseDisconnect);
+    CLOCKWORK_PROFILE(DatabaseDisconnect);
 
     SharedPtr<DbConnection> dbConnection(connection);
     connections_.Remove(dbConnection);

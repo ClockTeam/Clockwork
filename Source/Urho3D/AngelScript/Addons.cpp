@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 #include <stdio.h>
 
 // Adapted from Angelscript's scriptarray & scriptstdstring add-ons, but with garbage collection disabled
-namespace Urho3D
+namespace Clockwork
 {
 
 using namespace std;
@@ -353,7 +353,7 @@ CScriptArray::CScriptArray(asIObjectType *ot, void *buf)
         }
     }
 
-    // Urho3D: garbage collection disabled
+    // Clockwork: garbage collection disabled
     // Notify the GC of the successful creation
     /*
     if( objType->GetFlags() & asOBJ_GC )
@@ -386,7 +386,7 @@ CScriptArray::CScriptArray(asUINT length, asIObjectType *ot)
 
     CreateBuffer(&buffer, length);
 
-    // Urho3D: garbage collection disabled
+    // Clockwork: garbage collection disabled
     /*
     // Notify the GC of the successful creation
     if( objType->GetFlags() & asOBJ_GC )
@@ -406,7 +406,7 @@ CScriptArray::CScriptArray(const CScriptArray &other)
 
     elementSize = other.elementSize;
 
-    // Urho3D: garbage collection disabled
+    // Clockwork: garbage collection disabled
     /*
     if( objType->GetFlags() & asOBJ_GC )
         objType->GetEngine()->NotifyGarbageCollectorOfNewObject(this, objType);
@@ -443,7 +443,7 @@ CScriptArray::CScriptArray(asUINT length, void *defVal, asIObjectType *ot)
 
     CreateBuffer(&buffer, length);
 
-    // Urho3D: garbage collection disabled
+    // Clockwork: garbage collection disabled
     /*
     // Notify the GC of the successful creation
     if( objType->GetFlags() & asOBJ_GC )
@@ -1646,7 +1646,7 @@ CScriptDictionary::CScriptDictionary(asIScriptEngine *engine)
     // engine will hold a pointer to the object.
     this->engine = engine;
 
-    // Urho3D: garbage collection disabled
+    // Clockwork: garbage collection disabled
     /*
     // Notify the garbage collector of this object
     // TODO: The object type should be cached
@@ -1665,7 +1665,7 @@ CScriptDictionary::CScriptDictionary(asBYTE *buffer)
     asIScriptContext *ctx = asGetActiveContext();
     engine = ctx->GetEngine();
 
-    // Urho3D: garbage collection disabled
+    // Clockwork: garbage collection disabled
     /*
     // Notify the garbage collector of this object
     // TODO: The type id should be cached

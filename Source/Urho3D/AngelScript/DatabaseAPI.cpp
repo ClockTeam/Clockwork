@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,14 +20,14 @@
 // THE SOFTWARE.
 //
 
-#ifdef URHO3D_DATABASE
+#ifdef CLOCKWORK_DATABASE
 
 #include "../Precompiled.h"
 
 #include "../AngelScript/APITemplates.h"
 #include "../Database/Database.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static void ConstructDbResult(DbResult* ptr)

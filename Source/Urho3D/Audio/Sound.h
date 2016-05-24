@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,15 +25,15 @@
 #include "../Container/ArrayPtr.h"
 #include "../Resource/Resource.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class SoundStream;
 
 /// %Sound resource.
-class URHO3D_API Sound : public Resource
+class CLOCKWORK_API Sound : public Resource
 {
-    URHO3D_OBJECT(Sound, Resource);
+    CLOCKWORK_OBJECT(Sound, Resource);
 
 public:
     /// Construct.

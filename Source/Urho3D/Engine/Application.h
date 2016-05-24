@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,15 +26,15 @@
 #include "../Core/Main.h"
 #include "../Engine/Engine.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Engine;
 
-/// Base class for creating applications which initialize the Urho3D engine and run a main loop until exited.
-class URHO3D_API Application : public Object
+/// Base class for creating applications which initialize the Clockwork engine and run a main loop until exited.
+class CLOCKWORK_API Application : public Object
 {
-    URHO3D_OBJECT(Application, Object);
+    CLOCKWORK_OBJECT(Application, Object);
 
 public:
     /// Construct. Parse default engine parameters from the command line, and create the engine in an uninitialized state.
@@ -58,7 +58,7 @@ protected:
     /// Handle log message.
     void HandleLogMessage(StringHash eventType, VariantMap& eventData);
 
-    /// Urho3D engine.
+    /// Clockwork engine.
     SharedPtr<Engine> engine_;
     /// Engine parameters map.
     VariantMap engineParameters_;
@@ -70,24 +70,24 @@ protected:
 
 // Macro for defining a main function which creates a Context and the application, then runs it
 #ifndef IOS
-#define URHO3D_DEFINE_APPLICATION_MAIN(className) \
+#define CLOCKWORK_DEFINE_APPLICATION_MAIN(className) \
 int RunApplication() \
 { \
-    Urho3D::SharedPtr<Urho3D::Context> context(new Urho3D::Context()); \
-    Urho3D::SharedPtr<className> application(new className(context)); \
+    Clockwork::SharedPtr<Clockwork::Context> context(new Clockwork::Context()); \
+    Clockwork::SharedPtr<className> application(new className(context)); \
     return application->Run(); \
 } \
-URHO3D_DEFINE_MAIN(RunApplication());
+CLOCKWORK_DEFINE_MAIN(RunApplication());
 #else
 // On iOS we will let this function exit, so do not hold the context and application in SharedPtr's
-#define URHO3D_DEFINE_APPLICATION_MAIN(className) \
+#define CLOCKWORK_DEFINE_APPLICATION_MAIN(className) \
 int RunApplication() \
 { \
-    Urho3D::Context* context = new Urho3D::Context(); \
+    Clockwork::Context* context = new Clockwork::Context(); \
     className* application = new className(context); \
     return application->Run(); \
 } \
-URHO3D_DEFINE_MAIN(RunApplication());
+CLOCKWORK_DEFINE_MAIN(RunApplication());
 #endif
 
 }

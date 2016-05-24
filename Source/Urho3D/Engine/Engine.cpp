@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,16 +38,16 @@
 #include "../Input/Input.h"
 #include "../IO/Log.h"
 #include "../IO/PackageFile.h"
-#ifdef URHO3D_NAVIGATION
+#ifdef CLOCKWORK_NAVIGATION
 #include "../Navigation/NavigationMesh.h"
 #endif
-#ifdef URHO3D_NETWORK
+#ifdef CLOCKWORK_NETWORK
 #include "../Network/Network.h"
 #endif
-#ifdef URHO3D_DATABASE
+#ifdef CLOCKWORK_DATABASE
 #include "../Database/Database.h"
 #endif
-#ifdef URHO3D_PHYSICS
+#ifdef CLOCKWORK_PHYSICS
 #include "../Physics/PhysicsWorld.h"
 #endif
 #include "../Resource/ResourceCache.h"
@@ -55,11 +55,11 @@
 #include "../Scene/Scene.h"
 #include "../Scene/SceneEvents.h"
 #include "../UI/UI.h"
-#ifdef URHO3D_URHO2D
+#ifdef CLOCKWORK_URHO2D
 #include "../Urho2D/Urho2D.h"
 #endif
 
-#if defined(__EMSCRIPTEN__) && defined(URHO3D_TESTING)
+#if defined(__EMSCRIPTEN__) && defined(CLOCKWORK_TESTING)
 #include <emscripten/emscripten.h>
 #endif
 
@@ -83,7 +83,7 @@ typedef struct _CrtMemBlockHeader
 } _CrtMemBlockHeader;
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 extern const char* logLevelPrefixes[];
@@ -102,7 +102,7 @@ Engine::Engine(Context* context) :
     maxInactiveFps_(60),
     pauseMinimized_(false),
 #endif
-#ifdef URHO3D_TESTING
+#ifdef CLOCKWORK_TESTING
     timeOut_(0),
 #endif
     autoExit_(true),
@@ -117,19 +117,19 @@ Engine::Engine(Context* context) :
     // Create subsystems which do not depend on engine initialization or startup parameters
     context_->RegisterSubsystem(new Time(context_));
     context_->RegisterSubsystem(new WorkQueue(context_));
-#ifdef URHO3D_PROFILING
+#ifdef CLOCKWORK_PROFILING
     context_->RegisterSubsystem(new Profiler(context_));
 #endif
     context_->RegisterSubsystem(new FileSystem(context_));
-#ifdef URHO3D_LOGGING
+#ifdef CLOCKWORK_LOGGING
     context_->RegisterSubsystem(new Log(context_));
 #endif
     context_->RegisterSubsystem(new ResourceCache(context_));
     context_->RegisterSubsystem(new Localization(context_));
-#ifdef URHO3D_NETWORK
+#ifdef CLOCKWORK_NETWORK
     context_->RegisterSubsystem(new Network(context_));
 #endif
-#ifdef URHO3D_DATABASE
+#ifdef CLOCKWORK_DATABASE
     context_->RegisterSubsystem(new Database(context_));
 #endif
     context_->RegisterSubsystem(new Input(context_));
@@ -139,15 +139,15 @@ Engine::Engine(Context* context) :
     // Register object factories for libraries which are not automatically registered along with subsystem creation
     RegisterSceneLibrary(context_);
 
-#ifdef URHO3D_PHYSICS
+#ifdef CLOCKWORK_PHYSICS
     RegisterPhysicsLibrary(context_);
 #endif
 
-#ifdef URHO3D_NAVIGATION
+#ifdef CLOCKWORK_NAVIGATION
     RegisterNavigationLibrary(context_);
 #endif
 
-    SubscribeToEvent(E_EXITREQUESTED, URHO3D_HANDLER(Engine, HandleExitRequested));
+    SubscribeToEvent(E_EXITREQUESTED, CLOCKWORK_HANDLER(Engine, HandleExitRequested));
 }
 
 Engine::~Engine()
@@ -159,7 +159,7 @@ bool Engine::Initialize(const VariantMap& parameters)
     if (initialized_)
         return true;
 
-    URHO3D_PROFILE(InitEngine);
+    CLOCKWORK_PROFILE(InitEngine);
 
     // Set headless mode
     headless_ = GetParameter(parameters, "Headless", false).GetBool();
@@ -176,7 +176,7 @@ bool Engine::Initialize(const VariantMap& parameters)
         RegisterGraphicsLibrary(context_);
     }
 
-#ifdef URHO3D_URHO2D
+#ifdef CLOCKWORK_URHO2D
     // 2D graphics library is dependent on 3D graphics library
     RegisterUrho2DLibrary(context_);
 #endif
@@ -188,7 +188,7 @@ bool Engine::Initialize(const VariantMap& parameters)
         if (HasParameter(parameters, "LogLevel"))
             log->SetLevel(GetParameter(parameters, "LogLevel").GetInt());
         log->SetQuiet(GetParameter(parameters, "LogQuiet", false).GetBool());
-        log->Open(GetParameter(parameters, "LogName", "Urho3D.log").GetString());
+        log->Open(GetParameter(parameters, "LogName", "Clockwork.log").GetString());
     }
 
     // Set maximally accurate low res timer
@@ -200,13 +200,13 @@ bool Engine::Initialize(const VariantMap& parameters)
 
     // Set amount of worker threads according to the available physical CPU cores. Using also hyperthreaded cores results in
     // unpredictable extra synchronization overhead. Also reserve one core for the main thread
-#ifdef URHO3D_THREADING
+#ifdef CLOCKWORK_THREADING
     unsigned numThreads = GetParameter(parameters, "WorkerThreads", true).GetBool() ? GetNumPhysicalCPUs() - 1 : 0;
     if (numThreads)
     {
         GetSubsystem<WorkQueue>()->CreateThreads(numThreads);
 
-        URHO3D_LOGINFOF("Created %u worker thread%s", numThreads, numThreads > 1 ? "s" : "");
+        CLOCKWORK_LOGINFOF("Created %u worker thread%s", numThreads, numThreads > 1 ? "s" : "");
     }
 #endif
 
@@ -249,7 +249,7 @@ bool Engine::Initialize(const VariantMap& parameters)
             }
             if (j == resourcePrefixPaths.Size())
             {
-                URHO3D_LOGERRORF(
+                CLOCKWORK_LOGERRORF(
                     "Failed to add resource path '%s', check the documentation on how to set the 'resource prefix path'",
                     resourcePaths[i].CString());
                 return false;
@@ -281,7 +281,7 @@ bool Engine::Initialize(const VariantMap& parameters)
         }
         if (j == resourcePrefixPaths.Size())
         {
-            URHO3D_LOGERRORF(
+            CLOCKWORK_LOGERRORF(
                 "Failed to add resource package '%s', check the documentation on how to set the 'resource prefix path'",
                 resourcePackages[i].CString());
             return false;
@@ -339,7 +339,7 @@ bool Engine::Initialize(const VariantMap& parameters)
         // The cleaner approach is to not enable the autoload by default, i.e. do not use 'Autoload' as default value for 'AutoloadPaths' engine parameter
         // However, doing so will break the existing applications that rely on this
         if (!autoLoadPathExist && (autoLoadPaths.Size() > 1 || autoLoadPaths[0] != "Autoload"))
-            URHO3D_LOGDEBUGF(
+            CLOCKWORK_LOGDEBUGF(
                 "Skipped autoload path '%s' as it does not exist, check the documentation on how to set the 'resource prefix path'",
                 autoLoadPaths[i].CString());
     }
@@ -352,7 +352,7 @@ bool Engine::Initialize(const VariantMap& parameters)
 
         if (HasParameter(parameters, "ExternalWindow"))
             graphics->SetExternalWindow(GetParameter(parameters, "ExternalWindow").GetVoidPtr());
-        graphics->SetWindowTitle(GetParameter(parameters, "WindowTitle", "Urho3D").GetString());
+        graphics->SetWindowTitle(GetParameter(parameters, "WindowTitle", "Clockwork").GetString());
         graphics->SetWindowIcon(cache->GetResource<Image>(GetParameter(parameters, "WindowIcon", String::EMPTY).GetString()));
         graphics->SetFlushGPU(GetParameter(parameters, "FlushGPU", false).GetBool());
         graphics->SetOrientations(GetParameter(parameters, "Orientations", "LandscapeLeft LandscapeRight").GetString());
@@ -361,7 +361,7 @@ bool Engine::Initialize(const VariantMap& parameters)
             graphics->SetWindowPosition(GetParameter(parameters, "WindowPositionX").GetInt(),
                 GetParameter(parameters, "WindowPositionY").GetInt());
 
-#ifdef URHO3D_OPENGL
+#ifdef CLOCKWORK_OPENGL
         if (HasParameter(parameters, "ForceGL2"))
             graphics->SetForceGL2(GetParameter(parameters, "ForceGL2").GetBool());
 #endif
@@ -410,7 +410,7 @@ bool Engine::Initialize(const VariantMap& parameters)
     if (HasParameter(parameters, "TouchEmulation"))
         GetSubsystem<Input>()->SetTouchEmulation(GetParameter(parameters, "TouchEmulation").GetBool());
 
-#ifdef URHO3D_TESTING
+#ifdef CLOCKWORK_TESTING
     if (HasParameter(parameters, "TimeOut"))
         timeOut_ = GetParameter(parameters, "TimeOut", 0).GetInt() * 1000000LL;
 #endif
@@ -424,7 +424,7 @@ bool Engine::Initialize(const VariantMap& parameters)
             SharedPtr<Object> object = i->second_->CreateObject();
     }
 #endif
-#ifdef URHO3D_PROFILING
+#ifdef CLOCKWORK_PROFILING
     if (GetParameter(parameters, "EventProfiler", true).GetBool())
     {
         context_->RegisterSubsystem(new EventProfiler(context_));
@@ -433,7 +433,7 @@ bool Engine::Initialize(const VariantMap& parameters)
 #endif
     frameTimer_.Reset();
 
-    URHO3D_LOGINFO("Initialized engine");
+    CLOCKWORK_LOGINFO("Initialized engine");
     initialized_ = true;
     return true;
 }
@@ -455,7 +455,7 @@ void Engine::RunFrame()
     Input* input = GetSubsystem<Input>();
     Audio* audio = GetSubsystem<Audio>();
 
-#ifdef URHO3D_PROFILING
+#ifdef CLOCKWORK_PROFILING
     if (EventProfiler::IsActive())
     {
         EventProfiler* eventProfiler = GetSubsystem<EventProfiler>();
@@ -577,19 +577,19 @@ void Engine::DumpProfiler()
 {
     Profiler* profiler = GetSubsystem<Profiler>();
     if (profiler)
-        URHO3D_LOGRAW(profiler->PrintData(true, true) + "\n");
+        CLOCKWORK_LOGRAW(profiler->PrintData(true, true) + "\n");
 }
 
 void Engine::DumpResources(bool dumpFileName)
 {
-#ifdef URHO3D_LOGGING
+#ifdef CLOCKWORK_LOGGING
     ResourceCache* cache = GetSubsystem<ResourceCache>();
     const HashMap<StringHash, ResourceGroup>& resourceGroups = cache->GetAllResources();
-    URHO3D_LOGRAW("\n");
+    CLOCKWORK_LOGRAW("\n");
 
     if (dumpFileName)
     {
-        URHO3D_LOGRAW("Used resources:\n");
+        CLOCKWORK_LOGRAW("Used resources:\n");
         for (HashMap<StringHash, ResourceGroup>::ConstIterator i = resourceGroups.Begin();
             i != resourceGroups.End(); ++i)
         {
@@ -598,18 +598,18 @@ void Engine::DumpResources(bool dumpFileName)
             {
                 for (HashMap<StringHash, SharedPtr<Resource> >::ConstIterator j = resources.Begin();
                     j != resources.End(); ++j)
-                    URHO3D_LOGRAW(j->second_->GetName() + "\n");
+                    CLOCKWORK_LOGRAW(j->second_->GetName() + "\n");
             }
         }
     }
     else
-        URHO3D_LOGRAW(cache->PrintMemoryUsage());
+        CLOCKWORK_LOGRAW(cache->PrintMemoryUsage());
 #endif
 }
 
 void Engine::DumpMemory()
 {
-#ifdef URHO3D_LOGGING
+#ifdef CLOCKWORK_LOGGING
 #if defined(_MSC_VER) && defined(_DEBUG)
     _CrtMemState state;
     _CrtMemCheckpoint(&state);
@@ -630,9 +630,9 @@ void Engine::DumpMemory()
         if (block->nBlockUse > 0)
         {
             if (block->szFileName)
-                URHO3D_LOGRAW("Block " + String((int)block->lRequest) + ": " + String(block->nDataSize) + " bytes, file " + String(block->szFileName) + " line " + String(block->nLine) + "\n");
+                CLOCKWORK_LOGRAW("Block " + String((int)block->lRequest) + ": " + String(block->nDataSize) + " bytes, file " + String(block->szFileName) + " line " + String(block->nLine) + "\n");
             else
-                URHO3D_LOGRAW("Block " + String((int)block->lRequest) + ": " + String(block->nDataSize) + " bytes\n");
+                CLOCKWORK_LOGRAW("Block " + String((int)block->lRequest) + ": " + String(block->nDataSize) + " bytes\n");
 
             total += block->nDataSize;
             ++blocks;
@@ -640,16 +640,16 @@ void Engine::DumpMemory()
         block = block->pBlockHeaderPrev;
     }
 
-    URHO3D_LOGRAW("Total allocated memory " + String(total) + " bytes in " + String(blocks) + " blocks\n\n");
+    CLOCKWORK_LOGRAW("Total allocated memory " + String(total) + " bytes in " + String(blocks) + " blocks\n\n");
 #else
-    URHO3D_LOGRAW("DumpMemory() supported on MSVC debug mode only\n\n");
+    CLOCKWORK_LOGRAW("DumpMemory() supported on MSVC debug mode only\n\n");
 #endif
 #endif
 }
 
 void Engine::Update()
 {
-    URHO3D_PROFILE(Update);
+    CLOCKWORK_PROFILE(Update);
 
     // Logic update event
     using namespace Update;
@@ -673,7 +673,7 @@ void Engine::Render()
     if (headless_)
         return;
 
-    URHO3D_PROFILE(Render);
+    CLOCKWORK_PROFILE(Render);
 
     // If device is lost, BeginFrame will fail and we skip rendering
     Graphics* graphics = GetSubsystem<Graphics>();
@@ -701,7 +701,7 @@ void Engine::ApplyFrameLimit()
     // Perform waiting loop if maximum FPS set
     if (maxFps)
     {
-        URHO3D_PROFILE(ApplyFrameLimit);
+        CLOCKWORK_PROFILE(ApplyFrameLimit);
 
         long long targetMax = 1000000LL / maxFps;
 
@@ -722,7 +722,7 @@ void Engine::ApplyFrameLimit()
 #endif
 
     elapsed = frameTimer_.GetUSec(true);
-#ifdef URHO3D_TESTING
+#ifdef CLOCKWORK_TESTING
     if (timeOut_ > 0)
     {
         timeOut_ -= elapsed;
@@ -759,7 +759,7 @@ VariantMap Engine::ParseParameters(const Vector<String>& arguments)
     VariantMap ret;
 
     // Pre-initialize the parameters with environment variable values when they are set
-    if (const char* paths = getenv("URHO3D_PREFIX_PATH"))
+    if (const char* paths = getenv("CLOCKWORK_PREFIX_PATH"))
         ret["ResourcePrefixPaths"] = paths;
 
     for (unsigned i = 0; i < arguments.Size(); ++i)
@@ -898,7 +898,7 @@ VariantMap Engine::ParseParameters(const Vector<String>& arguments)
             }
             else if (argument == "touch")
                 ret["TouchEmulation"] = true;
-#ifdef URHO3D_TESTING
+#ifdef CLOCKWORK_TESTING
             else if (argument == "timeout" && !value.Empty())
             {
                 ret["TimeOut"] = ToInt(value);
@@ -941,7 +941,7 @@ void Engine::DoExit()
         graphics->Close();
 
     exiting_ = true;
-#if defined(__EMSCRIPTEN__) && defined(URHO3D_TESTING)
+#if defined(__EMSCRIPTEN__) && defined(CLOCKWORK_TESTING)
     emscripten_force_exit(EXIT_SUCCESS);    // Some how this is required to signal emrun to stop
 #endif
 }

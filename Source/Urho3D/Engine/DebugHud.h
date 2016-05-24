@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #include "../Core/Object.h"
 #include "../Core/Timer.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Engine;
@@ -43,9 +43,9 @@ static const unsigned DEBUGHUD_SHOW_ALL_MEMORY = 0xB;
 static const unsigned DEBUGHUD_SHOW_EVENTPROFILER = 0x10;
 
 /// Displays rendering stats and profiling information.
-class URHO3D_API DebugHud : public Object
+class CLOCKWORK_API DebugHud : public Object
 {
-    URHO3D_OBJECT(DebugHud, Object);
+    CLOCKWORK_OBJECT(DebugHud, Object);
 
 public:
     /// Construct.

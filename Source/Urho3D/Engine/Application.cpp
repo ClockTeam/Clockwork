@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 #if defined(IOS) || defined(__EMSCRIPTEN__)
@@ -57,13 +57,13 @@ Application::Application(Context* context) :
     engine_ = new Engine(context);
 
     // Subscribe to log messages so that can show errors if ErrorExit() is called with empty message
-    SubscribeToEvent(E_LOGMESSAGE, URHO3D_HANDLER(Application, HandleLogMessage));
+    SubscribeToEvent(E_LOGMESSAGE, CLOCKWORK_HANDLER(Application, HandleLogMessage));
 }
 
 int Application::Run()
 {
     // Emscripten-specific: C++ exceptions are turned off by default in -O1 (and above), unless '-s DISABLE_EXCEPTION_CATCHING=0' flag is set
-    // Urho3D build configuration uses -O3 (Release), -O2 (RelWithDebInfo), and -O0 (Debug)
+    // Clockwork build configuration uses -O3 (Release), -O2 (RelWithDebInfo), and -O0 (Debug)
     // Thus, the try-catch block below should be optimised out except in Debug build configuration
     try
     {

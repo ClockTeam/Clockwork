@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,15 +24,15 @@
 
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Sound playback finished. Sent through the SoundSource's Node.
-URHO3D_EVENT(E_SOUNDFINISHED, SoundFinished)
+CLOCKWORK_EVENT(E_SOUNDFINISHED, SoundFinished)
 {
-    URHO3D_PARAM(P_NODE, Node);                     // Node pointer
-    URHO3D_PARAM(P_SOUNDSOURCE, SoundSource);       // SoundSource pointer
-    URHO3D_PARAM(P_SOUND, Sound);                   // Sound pointer
+    CLOCKWORK_PARAM(P_NODE, Node);                     // Node pointer
+    CLOCKWORK_PARAM(P_SOUNDSOURCE, SoundSource);       // SoundSource pointer
+    CLOCKWORK_PARAM(P_SOUND, Sound);                   // Sound pointer
 }
 
 }

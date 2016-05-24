@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,12 +36,12 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class ScriptResourceRouter : public ResourceRouter
 {
-    URHO3D_OBJECT(ScriptResourceRouter, ResourceRouter);
+    CLOCKWORK_OBJECT(ScriptResourceRouter, ResourceRouter);
 
     /// Construct.
     ScriptResourceRouter(Context* context) :
@@ -76,7 +76,7 @@ Script::Script(Context* context) :
     scriptEngine_ = asCreateScriptEngine(ANGELSCRIPT_VERSION);
     if (!scriptEngine_)
     {
-        URHO3D_LOGERROR("Could not create AngelScript engine");
+        CLOCKWORK_LOGERROR("Could not create AngelScript engine");
         return;
     }
 
@@ -110,19 +110,19 @@ Script::Script(Context* context) :
     RegisterInputAPI(scriptEngine_);
     RegisterAudioAPI(scriptEngine_);
     RegisterUIAPI(scriptEngine_);
-#ifdef URHO3D_NETWORK
+#ifdef CLOCKWORK_NETWORK
     RegisterNetworkAPI(scriptEngine_);
 #endif
-#ifdef URHO3D_DATABASE
+#ifdef CLOCKWORK_DATABASE
     RegisterDatabaseAPI(scriptEngine_);
 #endif
-#ifdef URHO3D_PHYSICS
+#ifdef CLOCKWORK_PHYSICS
     RegisterPhysicsAPI(scriptEngine_);
 #endif
-#ifdef URHO3D_NAVIGATION
+#ifdef CLOCKWORK_NAVIGATION
     RegisterNavigationAPI(scriptEngine_);
 #endif
-#ifdef URHO3D_URHO2D
+#ifdef CLOCKWORK_URHO2D
     RegisterUrho2DAPI(scriptEngine_);
 #endif
     RegisterScriptAPI(scriptEngine_);
@@ -165,7 +165,7 @@ Script::~Script()
 bool Script::Execute(const String& line)
 {
     // Note: compiling code each time is slow. Not to be used for performance-critical or repeating activity
-    URHO3D_PROFILE(ExecuteImmediate);
+    CLOCKWORK_PROFILE(ExecuteImmediate);
 
     ClearObjectTypeCache();
 
@@ -214,7 +214,7 @@ void Script::SetExecuteConsoleCommands(bool enable)
 
     executeConsoleCommands_ = enable;
     if (enable)
-        SubscribeToEvent(E_CONSOLECOMMAND, URHO3D_HANDLER(Script, HandleConsoleCommand));
+        SubscribeToEvent(E_CONSOLECOMMAND, CLOCKWORK_HANDLER(Script, HandleConsoleCommand));
     else
         UnsubscribeFromEvent(E_CONSOLECOMMAND);
 }
@@ -227,15 +227,15 @@ void Script::MessageCallback(const asSMessageInfo* msg)
     switch (msg->type)
     {
     case asMSGTYPE_ERROR:
-        URHO3D_LOGERROR(message);
+        CLOCKWORK_LOGERROR(message);
         break;
 
     case asMSGTYPE_WARNING:
-        URHO3D_LOGWARNING(message);
+        CLOCKWORK_LOGWARNING(message);
         break;
 
     default:
-        URHO3D_LOGINFO(message);
+        CLOCKWORK_LOGINFO(message);
         break;
     }
 }

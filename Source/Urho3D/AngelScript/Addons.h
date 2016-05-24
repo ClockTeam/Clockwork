@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,10 @@
 
 #pragma once
 
-#ifdef URHO3D_IS_BUILDING
-#include "Urho3D.h"
+#ifdef CLOCKWORK_IS_BUILDING
+#include "Clockwork.h"
 #else
-#include <Urho3D/Urho3D.h>
+#include <Clockwork/Clockwork.h>
 #endif
 
 #include "../Container/HashMap.h"
@@ -35,14 +35,14 @@
 
 // Adapted from Angelscript's scriptarray, scriptdictionary & scriptstdstring add-ons, but with garbage collection disabled
 
-namespace Urho3D
+namespace Clockwork
 {
 
 struct SArrayBuffer;
 struct SArrayCache;
 
 /// %Script array class.
-class URHO3D_API CScriptArray
+class CLOCKWORK_API CScriptArray
 {
 public:
     // Set the memory functions that should be used by all CScriptArrays
@@ -147,7 +147,7 @@ protected:
 class CScriptDictionary;
 
 /// %Script dictionary value.
-class URHO3D_API CScriptDictValue
+class CLOCKWORK_API CScriptDictValue
 {
 public:
     // This class must not be declared as local variable in C++, because it needs 
@@ -188,7 +188,7 @@ protected:
 };
 
 /// %Script dictionary class.
-class URHO3D_API CScriptDictionary
+class CLOCKWORK_API CScriptDictionary
 {
 public:
     // Factory functions

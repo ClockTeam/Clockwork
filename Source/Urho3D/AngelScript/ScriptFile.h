@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,7 @@ class asIScriptFunction;
 class asIScriptModule;
 class asIScriptObject;
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Script;
@@ -43,9 +43,9 @@ class ScriptInstance;
 class Variant;
 
 /// %Script file resource.
-class URHO3D_API ScriptFile : public Resource, public ScriptEventListener
+class CLOCKWORK_API ScriptFile : public Resource, public ScriptEventListener
 {
-    URHO3D_OBJECT(ScriptFile, Resource);
+    CLOCKWORK_OBJECT(ScriptFile, Resource);
 
 public:
     /// Construct.
@@ -152,9 +152,9 @@ private:
 };
 
 /// Helper class for forwarding events to script objects that are not part of a scene.
-class URHO3D_API ScriptEventInvoker : public Object
+class CLOCKWORK_API ScriptEventInvoker : public Object
 {
-    URHO3D_OBJECT(ScriptEventInvoker, Object);
+    CLOCKWORK_OBJECT(ScriptEventInvoker, Object);
 
 public:
     /// Constructor, will create the asILockableSharedBool if a ScriptObject is passed in.
@@ -180,6 +180,6 @@ private:
 };
 
 /// Get currently executing script file.
-URHO3D_API ScriptFile* GetScriptContextFile();
+CLOCKWORK_API ScriptFile* GetScriptContextFile();
 
 }

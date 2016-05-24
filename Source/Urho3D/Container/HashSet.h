@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +26,11 @@
 #include "../Container/Sort.h"
 
 #include <cassert>
-#if URHO3D_CXX11
+#if CLOCKWORK_CXX11
 #include <initializer_list>
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Hash set template class.
@@ -195,7 +195,7 @@ public:
         head_ = tail_ = ReserveNode();
         *this = set;
     }
-#if URHO3D_CXX11
+#if CLOCKWORK_CXX11
     /// Aggregate initialization constructor.
     HashSet(const std::initializer_list<T>& list) : HashSet()
     {
@@ -411,7 +411,7 @@ public:
             ptr = ptr->Next();
         }
 
-        Urho3D::Sort(RandomAccessIterator<Node*>(ptrs), RandomAccessIterator<Node*>(ptrs + numKeys), CompareNodes);
+        Clockwork::Sort(RandomAccessIterator<Node*>(ptrs), RandomAccessIterator<Node*>(ptrs + numKeys), CompareNodes);
 
         head_ = ptrs[0];
         ptrs[0]->prev_ = 0;
@@ -628,12 +628,12 @@ private:
     unsigned Hash(const T& key) const { return MakeHash(key) & (NumBuckets() - 1); }
 };
 
-template <class T> typename Urho3D::HashSet<T>::ConstIterator begin(const Urho3D::HashSet<T>& v) { return v.Begin(); }
+template <class T> typename Clockwork::HashSet<T>::ConstIterator begin(const Clockwork::HashSet<T>& v) { return v.Begin(); }
 
-template <class T> typename Urho3D::HashSet<T>::ConstIterator end(const Urho3D::HashSet<T>& v) { return v.End(); }
+template <class T> typename Clockwork::HashSet<T>::ConstIterator end(const Clockwork::HashSet<T>& v) { return v.End(); }
 
-template <class T> typename Urho3D::HashSet<T>::Iterator begin(Urho3D::HashSet<T>& v) { return v.Begin(); }
+template <class T> typename Clockwork::HashSet<T>::Iterator begin(Clockwork::HashSet<T>& v) { return v.Begin(); }
 
-template <class T> typename Urho3D::HashSet<T>::Iterator end(Urho3D::HashSet<T>& v) { return v.End(); }
+template <class T> typename Clockwork::HashSet<T>::Iterator end(Clockwork::HashSet<T>& v) { return v.End(); }
 
 }

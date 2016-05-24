@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Button;
@@ -39,9 +39,9 @@ class UIElement;
 class XMLFile;
 
 /// %Console window with log history and command line prompt.
-class URHO3D_API Console : public Object
+class CLOCKWORK_API Console : public Object
 {
-    URHO3D_OBJECT(Console, Object);
+    CLOCKWORK_OBJECT(Console, Object);
 
 public:
     /// Construct.

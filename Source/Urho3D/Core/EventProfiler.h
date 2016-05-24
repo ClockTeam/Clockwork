@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,10 +29,10 @@
 #include "../Core/Profiler.h"
 
 
-namespace Urho3D
+namespace Clockwork
 {
 /// Event profiling data for one block in the event profiling tree.
-class URHO3D_API EventProfilerBlock
+class CLOCKWORK_API EventProfilerBlock
 {
 public:
     /// Construct with the specified parent block and event id.
@@ -164,9 +164,9 @@ public:
 };
 
 /// Hierarchical performance event profiler subsystem.
-class URHO3D_API EventProfiler : public Object
+class CLOCKWORK_API EventProfiler : public Object
 {
-    URHO3D_OBJECT(EventProfiler, Object);
+    CLOCKWORK_OBJECT(EventProfiler, Object);
 
 public:
     /// Construct.

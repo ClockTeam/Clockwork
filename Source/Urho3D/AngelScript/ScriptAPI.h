@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
 class asIScriptEngine;
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Context;
@@ -47,23 +47,23 @@ void RegisterInputAPI(asIScriptEngine* engine);
 void RegisterAudioAPI(asIScriptEngine* engine);
 /// Register the UI library to script.
 void RegisterUIAPI(asIScriptEngine* engine);
-#ifdef URHO3D_NETWORK
+#ifdef CLOCKWORK_NETWORK
 /// Register the Network library to script.
 void RegisterNetworkAPI(asIScriptEngine* engine);
 #endif
-#ifdef URHO3D_DATABASE
+#ifdef CLOCKWORK_DATABASE
 /// Register the Database library to script.
 void RegisterDatabaseAPI(asIScriptEngine* engine);
 #endif
-#ifdef URHO3D_PHYSICS
+#ifdef CLOCKWORK_PHYSICS
 /// Register the Physics library to script.
 void RegisterPhysicsAPI(asIScriptEngine* engine);
 #endif
-#ifdef URHO3D_NAVIGATION
+#ifdef CLOCKWORK_NAVIGATION
 /// Register the Navigation library to script.
 void RegisterNavigationAPI(asIScriptEngine* engine);
 #endif
-#ifdef URHO3D_URHO2D
+#ifdef CLOCKWORK_URHO2D
 /// Register the Urho2D library to script.
 void RegisterUrho2DAPI(asIScriptEngine* engine);
 #endif

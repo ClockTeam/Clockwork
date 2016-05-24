@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,11 +28,11 @@
 #include "../Container/Vector.h"
 
 #include <cassert>
-#if URHO3D_CXX11
+#if CLOCKWORK_CXX11
 #include <initializer_list>
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Hash map template class.
@@ -240,7 +240,7 @@ public:
         head_ = tail_ = ReserveNode();
         *this = map;
     }
-#if URHO3D_CXX11
+#if CLOCKWORK_CXX11
     /// Aggregate initialization constructor.
     HashMap(const std::initializer_list<Pair<T, U>>& list) : HashMap()
     {
@@ -341,7 +341,7 @@ public:
         return node ? &node->pair_.second_ : 0;
     }
 
-#if URHO3D_CXX11
+#if CLOCKWORK_CXX11
     /// Populate the map using variadic template. This handles the base case.
     HashMap& Populate(const T& key, const U& value)
     {
@@ -481,7 +481,7 @@ public:
             ptr = ptr->Next();
         }
 
-        Urho3D::Sort(RandomAccessIterator<Node*>(ptrs), RandomAccessIterator<Node*>(ptrs + numKeys), CompareNodes);
+        Clockwork::Sort(RandomAccessIterator<Node*>(ptrs), RandomAccessIterator<Node*>(ptrs + numKeys), CompareNodes);
 
         head_ = ptrs[0];
         ptrs[0]->prev_ = 0;
@@ -771,12 +771,12 @@ private:
     unsigned Hash(const T& key) const { return MakeHash(key) & (NumBuckets() - 1); }
 };
 
-template <class T, class U> typename Urho3D::HashMap<T, U>::ConstIterator begin(const Urho3D::HashMap<T, U>& v) { return v.Begin(); }
+template <class T, class U> typename Clockwork::HashMap<T, U>::ConstIterator begin(const Clockwork::HashMap<T, U>& v) { return v.Begin(); }
 
-template <class T, class U> typename Urho3D::HashMap<T, U>::ConstIterator end(const Urho3D::HashMap<T, U>& v) { return v.End(); }
+template <class T, class U> typename Clockwork::HashMap<T, U>::ConstIterator end(const Clockwork::HashMap<T, U>& v) { return v.End(); }
 
-template <class T, class U> typename Urho3D::HashMap<T, U>::Iterator begin(Urho3D::HashMap<T, U>& v) { return v.Begin(); }
+template <class T, class U> typename Clockwork::HashMap<T, U>::Iterator begin(Clockwork::HashMap<T, U>& v) { return v.Begin(); }
 
-template <class T, class U> typename Urho3D::HashMap<T, U>::Iterator end(Urho3D::HashMap<T, U>& v) { return v.End(); }
+template <class T, class U> typename Clockwork::HashMap<T, U>::Iterator end(Clockwork::HashMap<T, U>& v) { return v.End(); }
 
 }

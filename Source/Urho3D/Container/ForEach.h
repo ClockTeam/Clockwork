@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,10 +34,10 @@
 #if !defined(_MSC_VER) || _MSC_VER > 1600
 #define foreach(VAL, VALS) for (VAL : VALS)
 // Fallback solution for VS2010. Will have problem with break statement.
-// See https://github.com/urho3d/Urho3D/issues/561
+// See https://github.com/urho3d/Clockwork/issues/561
 #else
 
-namespace Urho3D
+namespace Clockwork
 {
 
 template<typename T>
@@ -55,84 +55,84 @@ false_wrapper<T> make_false_wrapper(const T& value) {
 // vector support functions
 
 template <class T>
-Urho3D::RandomAccessIterator<T> Begin(Urho3D::Vector<T> &v) {
+Clockwork::RandomAccessIterator<T> Begin(Clockwork::Vector<T> &v) {
     return v.Begin();
 }
 template <class T>
-Urho3D::RandomAccessIterator<T> Begin(Urho3D::Vector<T> *v) {
+Clockwork::RandomAccessIterator<T> Begin(Clockwork::Vector<T> *v) {
     return v->Begin();
 }
 
 template <class T>
-Urho3D::RandomAccessConstIterator<T> Begin(const Urho3D::Vector<T> &v) {
+Clockwork::RandomAccessConstIterator<T> Begin(const Clockwork::Vector<T> &v) {
     return v.Begin();
 }
 template <class T>
-Urho3D::RandomAccessConstIterator<T> Begin(const Urho3D::Vector<T> *v) {
+Clockwork::RandomAccessConstIterator<T> Begin(const Clockwork::Vector<T> *v) {
     return v->Begin();
 }
 
 template <class T>
-Urho3D::RandomAccessIterator<T> End(Urho3D::Vector<T> &v) {
+Clockwork::RandomAccessIterator<T> End(Clockwork::Vector<T> &v) {
     return v.End();
 }
 template <class T>
-Urho3D::RandomAccessIterator<T> End(Urho3D::Vector<T> *v) {
+Clockwork::RandomAccessIterator<T> End(Clockwork::Vector<T> *v) {
     return v->End();
 }
 
 template <class T>
-Urho3D::RandomAccessConstIterator<T> End(const Urho3D::Vector<T> &v) {
+Clockwork::RandomAccessConstIterator<T> End(const Clockwork::Vector<T> &v) {
     return v.End();
 }
 template <class T>
-Urho3D::RandomAccessConstIterator<T> End(const Urho3D::Vector<T> *v) {
+Clockwork::RandomAccessConstIterator<T> End(const Clockwork::Vector<T> *v) {
     return v->End();
 }
 
 // podvector support functions
 
 template <class T>
-Urho3D::RandomAccessIterator<T> Begin(Urho3D::PODVector<T> &v) {
+Clockwork::RandomAccessIterator<T> Begin(Clockwork::PODVector<T> &v) {
     return v.Begin();
 }
 template <class T>
-Urho3D::RandomAccessIterator<T> Begin(Urho3D::PODVector<T> *v) {
+Clockwork::RandomAccessIterator<T> Begin(Clockwork::PODVector<T> *v) {
     return v->Begin();
 }
 
 template <class T>
-Urho3D::RandomAccessConstIterator<T> Begin(const Urho3D::PODVector<T> &v) {
+Clockwork::RandomAccessConstIterator<T> Begin(const Clockwork::PODVector<T> &v) {
     return v.Begin();
 }
 template <class T>
-Urho3D::RandomAccessConstIterator<T> Begin(const Urho3D::PODVector<T> *v) {
+Clockwork::RandomAccessConstIterator<T> Begin(const Clockwork::PODVector<T> *v) {
     return v->Begin();
 }
 
 template <class T>
-Urho3D::RandomAccessIterator<T> End(Urho3D::PODVector<T> &v) {
+Clockwork::RandomAccessIterator<T> End(Clockwork::PODVector<T> &v) {
     return v.End();
 }
 template <class T>
-Urho3D::RandomAccessIterator<T> End(Urho3D::PODVector<T> *v) {
+Clockwork::RandomAccessIterator<T> End(Clockwork::PODVector<T> *v) {
     return v->End();
 }
 
 template <class T>
-Urho3D::RandomAccessConstIterator<T> End(const Urho3D::PODVector<T> &v) {
+Clockwork::RandomAccessConstIterator<T> End(const Clockwork::PODVector<T> &v) {
     return v.End();
 }
 template <class T>
-Urho3D::RandomAccessConstIterator<T> End(const Urho3D::PODVector<T> *v) {
+Clockwork::RandomAccessConstIterator<T> End(const Clockwork::PODVector<T> *v) {
     return v->End();
 }
 
 }
 
 #define foreach(VAL, VALS) \
-    if (const auto& _foreach_begin = Urho3D::make_false_wrapper(Urho3D::Begin(VALS))) { } else \
-    if (const auto& _foreach_end = Urho3D::make_false_wrapper(Urho3D::End(VALS))) { } else \
+    if (const auto& _foreach_begin = Clockwork::make_false_wrapper(Clockwork::Begin(VALS))) { } else \
+    if (const auto& _foreach_end = Clockwork::make_false_wrapper(Clockwork::End(VALS))) { } else \
     for (auto it = _foreach_begin.value; it != _foreach_end.value; ++it) \
     if (bool _foreach_flag = false) { } else \
     for (VAL = *it; !_foreach_flag; _foreach_flag = true)

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const int DEFAULT_CONSOLE_ROWS = 16;
@@ -88,13 +88,13 @@ Console::Console(Context* context) :
 
     SetNumRows(DEFAULT_CONSOLE_ROWS);
 
-    SubscribeToEvent(interpreters_, E_ITEMSELECTED, URHO3D_HANDLER(Console, HandleInterpreterSelected));
-    SubscribeToEvent(lineEdit_, E_TEXTFINISHED, URHO3D_HANDLER(Console, HandleTextFinished));
-    SubscribeToEvent(lineEdit_, E_UNHANDLEDKEY, URHO3D_HANDLER(Console, HandleLineEditKey));
-    SubscribeToEvent(closeButton_, E_RELEASED, URHO3D_HANDLER(Console, HandleCloseButtonPressed));
-    SubscribeToEvent(uiRoot, E_RESIZED, URHO3D_HANDLER(Console, HandleRootElementResized));
-    SubscribeToEvent(E_LOGMESSAGE, URHO3D_HANDLER(Console, HandleLogMessage));
-    SubscribeToEvent(E_POSTUPDATE, URHO3D_HANDLER(Console, HandlePostUpdate));
+    SubscribeToEvent(interpreters_, E_ITEMSELECTED, CLOCKWORK_HANDLER(Console, HandleInterpreterSelected));
+    SubscribeToEvent(lineEdit_, E_TEXTFINISHED, CLOCKWORK_HANDLER(Console, HandleTextFinished));
+    SubscribeToEvent(lineEdit_, E_UNHANDLEDKEY, CLOCKWORK_HANDLER(Console, HandleLineEditKey));
+    SubscribeToEvent(closeButton_, E_RELEASED, CLOCKWORK_HANDLER(Console, HandleCloseButtonPressed));
+    SubscribeToEvent(uiRoot, E_RESIZED, CLOCKWORK_HANDLER(Console, HandleRootElementResized));
+    SubscribeToEvent(E_LOGMESSAGE, CLOCKWORK_HANDLER(Console, HandleLogMessage));
+    SubscribeToEvent(E_POSTUPDATE, CLOCKWORK_HANDLER(Console, HandlePostUpdate));
 }
 
 Console::~Console()
@@ -331,7 +331,7 @@ void Console::HandleTextFinished(StringHash eventType, VariantMap& eventData)
         // Send the command as an event for script subsystem
         using namespace ConsoleCommand;
 
-#if URHO3D_CXX11
+#if CLOCKWORK_CXX11
         SendEvent(E_CONSOLECOMMAND, P_COMMAND, line, P_ID, static_cast<Text*>(interpreters_->GetSelectedItem())->GetText());
 #else
         VariantMap& newEventData = GetEventDataMap();

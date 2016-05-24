@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,20 +22,20 @@
 
 #pragma once
 
-#ifdef URHO3D_IS_BUILDING
-#include "Urho3D.h"
+#ifdef CLOCKWORK_IS_BUILDING
+#include "Clockwork.h"
 #else
-#include <Urho3D/Urho3D.h>
+#include <Clockwork/Clockwork.h>
 #endif
-#if URHO3D_CXX11
+#if CLOCKWORK_CXX11
 #include <initializer_list>
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Singly-linked list node base class.
-struct URHO3D_API LinkedListNode
+struct CLOCKWORK_API LinkedListNode
 {
     /// Construct.
     LinkedListNode() :
@@ -56,7 +56,7 @@ public:
         head_(0)
     {
     }
-#if URHO3D_CXX11
+#if CLOCKWORK_CXX11
     /// Aggregate initialization constructor.
     LinkedList(const std::initializer_list<T>& list) : LinkedList()
     {

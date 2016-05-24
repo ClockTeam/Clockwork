@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 //
 
-#ifdef URHO3D_URHO2D
+#ifdef CLOCKWORK_URHO2D
 
 #include "../Precompiled.h"
 
@@ -59,7 +59,7 @@
 #pragma warning(disable:4345)
 #endif
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static void RegisterSprite2D(asIScriptEngine* engine)

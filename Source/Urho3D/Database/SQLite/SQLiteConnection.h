@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,13 +27,13 @@
 
 #include <SQLite/sqlite3.h>
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// %Database connection.
-class URHO3D_API DbConnection : public Object
+class CLOCKWORK_API DbConnection : public Object
 {
-    URHO3D_OBJECT(DbConnection, Object);
+    CLOCKWORK_OBJECT(DbConnection, Object);
 
 public:
     /// Construct.

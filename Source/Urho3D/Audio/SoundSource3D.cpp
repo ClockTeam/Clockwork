@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,7 @@
 #include "../Graphics/DebugRenderer.h"
 #include "../Scene/Node.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const float DEFAULT_NEARDISTANCE = 0.0f;
@@ -116,15 +116,15 @@ void SoundSource3D::RegisterObject(Context* context)
 {
     context->RegisterFactory<SoundSource3D>(AUDIO_CATEGORY);
 
-    URHO3D_COPY_BASE_ATTRIBUTES(SoundSource);
+    CLOCKWORK_COPY_BASE_ATTRIBUTES(SoundSource);
     // Remove Attenuation and Panning as attribute as they are constantly being updated
-    URHO3D_REMOVE_ATTRIBUTE("Attenuation");
-    URHO3D_REMOVE_ATTRIBUTE("Panning");
-    URHO3D_ATTRIBUTE("Near Distance", float, nearDistance_, DEFAULT_NEARDISTANCE, AM_DEFAULT);
-    URHO3D_ATTRIBUTE("Far Distance", float, farDistance_, DEFAULT_FARDISTANCE, AM_DEFAULT);
-    URHO3D_ATTRIBUTE("Inner Angle", float, innerAngle_, DEFAULT_ANGLE, AM_DEFAULT);
-    URHO3D_ATTRIBUTE("Outer Angle", float, outerAngle_, DEFAULT_ANGLE, AM_DEFAULT);
-    URHO3D_ATTRIBUTE("Rolloff Factor", float, rolloffFactor_, DEFAULT_ROLLOFF, AM_DEFAULT);
+    CLOCKWORK_REMOVE_ATTRIBUTE("Attenuation");
+    CLOCKWORK_REMOVE_ATTRIBUTE("Panning");
+    CLOCKWORK_ATTRIBUTE("Near Distance", float, nearDistance_, DEFAULT_NEARDISTANCE, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("Far Distance", float, farDistance_, DEFAULT_FARDISTANCE, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("Inner Angle", float, innerAngle_, DEFAULT_ANGLE, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("Outer Angle", float, outerAngle_, DEFAULT_ANGLE, AM_DEFAULT);
+    CLOCKWORK_ATTRIBUTE("Rolloff Factor", float, rolloffFactor_, DEFAULT_ROLLOFF, AM_DEFAULT);
 }
 
 void SoundSource3D::DrawDebugGeometry(DebugRenderer* debug, bool depthTest)

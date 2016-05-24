@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ class asILockableSharedBool;
 class asIScriptFunction;
 class asIScriptObject;
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Object;
@@ -49,7 +49,7 @@ struct DelayedCall
 };
 
 /// Interface class for allowing script objects or functions to subscribe to events.
-class URHO3D_API ScriptEventListener
+class CLOCKWORK_API ScriptEventListener
 {
 public:
     /// Destruct

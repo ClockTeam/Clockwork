@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,15 +22,15 @@
 
 #pragma once
 
-#ifdef URHO3D_IS_BUILDING
-#include "Urho3D.h"
+#ifdef CLOCKWORK_IS_BUILDING
+#include "Clockwork.h"
 #else
-#include <Urho3D/Urho3D.h>
+#include <Clockwork/Clockwork.h>
 #endif
 
 #include <stddef.h>
 
-namespace Urho3D
+namespace Clockwork
 {
 
 struct AllocatorBlock;
@@ -59,13 +59,13 @@ struct AllocatorNode
 };
 
 /// Initialize a fixed-size allocator with the node size and initial capacity.
-URHO3D_API AllocatorBlock* AllocatorInitialize(unsigned nodeSize, unsigned initialCapacity = 1);
+CLOCKWORK_API AllocatorBlock* AllocatorInitialize(unsigned nodeSize, unsigned initialCapacity = 1);
 /// Uninitialize a fixed-size allocator. Frees all blocks in the chain.
-URHO3D_API void AllocatorUninitialize(AllocatorBlock* allocator);
+CLOCKWORK_API void AllocatorUninitialize(AllocatorBlock* allocator);
 /// Reserve a node. Creates a new block if necessary.
-URHO3D_API void* AllocatorReserve(AllocatorBlock* allocator);
+CLOCKWORK_API void* AllocatorReserve(AllocatorBlock* allocator);
 /// Free a node. Does not free any blocks.
-URHO3D_API void AllocatorFree(AllocatorBlock* allocator, void* ptr);
+CLOCKWORK_API void AllocatorFree(AllocatorBlock* allocator, void* ptr);
 
 /// %Allocator template class. Allocates objects of a specific class.
 template <class T> class Allocator

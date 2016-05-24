@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 class asIScriptFunction;
 class asIScriptObject;
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Script;
@@ -54,9 +54,9 @@ enum ScriptInstanceMethod
 };
 
 /// %Script object component.
-class URHO3D_API ScriptInstance : public Component, public ScriptEventListener
+class CLOCKWORK_API ScriptInstance : public Component, public ScriptEventListener
 {
-    URHO3D_OBJECT(ScriptInstance, Component);
+    CLOCKWORK_OBJECT(ScriptInstance, Component);
 
 public:
     /// Construct.
@@ -174,7 +174,7 @@ private:
     void HandleSceneUpdate(StringHash eventType, VariantMap& eventData);
     /// Handle scene post-update event.
     void HandleScenePostUpdate(StringHash eventType, VariantMap& eventData);
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
     /// Handle physics pre-step event.
     void HandlePhysicsPreStep(StringHash eventType, VariantMap& eventData);
     /// Handle physics post-step event.
@@ -209,17 +209,17 @@ private:
     bool subscribedPostFixed_;
 };
 
-/// Return the Urho3D context of the active script context.
-URHO3D_API Context* GetScriptContext();
+/// Return the Clockwork context of the active script context.
+CLOCKWORK_API Context* GetScriptContext();
 /// Return the ScriptInstance of the active script context.
-URHO3D_API ScriptInstance* GetScriptContextInstance();
+CLOCKWORK_API ScriptInstance* GetScriptContextInstance();
 /// Return the scene node of the active script context.
-URHO3D_API Node* GetScriptContextNode();
+CLOCKWORK_API Node* GetScriptContextNode();
 /// Return the scene of the active script context.
-URHO3D_API Scene* GetScriptContextScene();
+CLOCKWORK_API Scene* GetScriptContextScene();
 /// Return the event listener of the active script context.
-URHO3D_API ScriptEventListener* GetScriptContextEventListener();
+CLOCKWORK_API ScriptEventListener* GetScriptContextEventListener();
 /// Return the event listener of the active script context as an Object pointer.
-URHO3D_API Object* GetScriptContextEventListenerObject();
+CLOCKWORK_API Object* GetScriptContextEventListenerObject();
 
 }

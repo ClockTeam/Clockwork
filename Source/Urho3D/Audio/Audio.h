@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 #include "../Core/Mutex.h"
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class AudioImpl;
@@ -37,9 +37,9 @@ class SoundListener;
 class SoundSource;
 
 /// %Audio subsystem.
-class URHO3D_API Audio : public Object
+class CLOCKWORK_API Audio : public Object
 {
-    URHO3D_OBJECT(Audio, Object);
+    CLOCKWORK_OBJECT(Audio, Object);
 
 public:
     /// Construct.
@@ -158,6 +158,6 @@ private:
 };
 
 /// Register Audio library objects.
-void URHO3D_API RegisterAudioLibrary(Context* context);
+void CLOCKWORK_API RegisterAudioLibrary(Context* context);
 
 }

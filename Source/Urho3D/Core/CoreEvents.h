@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,42 +24,42 @@
 
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Frame begin event.
-URHO3D_EVENT(E_BEGINFRAME, BeginFrame)
+CLOCKWORK_EVENT(E_BEGINFRAME, BeginFrame)
 {
-    URHO3D_PARAM(P_FRAMENUMBER, FrameNumber);      // unsigned
-    URHO3D_PARAM(P_TIMESTEP, TimeStep);            // float
+    CLOCKWORK_PARAM(P_FRAMENUMBER, FrameNumber);      // unsigned
+    CLOCKWORK_PARAM(P_TIMESTEP, TimeStep);            // float
 }
 
 /// Application-wide logic update event.
-URHO3D_EVENT(E_UPDATE, Update)
+CLOCKWORK_EVENT(E_UPDATE, Update)
 {
-    URHO3D_PARAM(P_TIMESTEP, TimeStep);            // float
+    CLOCKWORK_PARAM(P_TIMESTEP, TimeStep);            // float
 }
 
 /// Application-wide logic post-update event.
-URHO3D_EVENT(E_POSTUPDATE, PostUpdate)
+CLOCKWORK_EVENT(E_POSTUPDATE, PostUpdate)
 {
-    URHO3D_PARAM(P_TIMESTEP, TimeStep);            // float
+    CLOCKWORK_PARAM(P_TIMESTEP, TimeStep);            // float
 }
 
 /// Render update event.
-URHO3D_EVENT(E_RENDERUPDATE, RenderUpdate)
+CLOCKWORK_EVENT(E_RENDERUPDATE, RenderUpdate)
 {
-    URHO3D_PARAM(P_TIMESTEP, TimeStep);            // float
+    CLOCKWORK_PARAM(P_TIMESTEP, TimeStep);            // float
 }
 
 /// Post-render update event.
-URHO3D_EVENT(E_POSTRENDERUPDATE, PostRenderUpdate)
+CLOCKWORK_EVENT(E_POSTRENDERUPDATE, PostRenderUpdate)
 {
-    URHO3D_PARAM(P_TIMESTEP, TimeStep);            // float
+    CLOCKWORK_PARAM(P_TIMESTEP, TimeStep);            // float
 }
 
 /// Frame end event.
-URHO3D_EVENT(E_ENDFRAME, EndFrame)
+CLOCKWORK_EVENT(E_ENDFRAME, EndFrame)
 {
 }
 

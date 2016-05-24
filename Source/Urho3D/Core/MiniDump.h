@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +22,12 @@
 
 #pragma once
 
-namespace Urho3D
+namespace Clockwork
 {
 
-#if defined(_MSC_VER) && defined(URHO3D_MINIDUMPS)
+#if defined(_MSC_VER) && defined(CLOCKWORK_MINIDUMPS)
 /// Write a minidump. Needs to be called from within a structured exception handler.
-URHO3D_API int WriteMiniDump(const char* applicationName, void* exceptionPointers);
+CLOCKWORK_API int WriteMiniDump(const char* applicationName, void* exceptionPointers);
 #endif
 
 }

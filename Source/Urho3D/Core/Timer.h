@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,11 @@
 
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Low-resolution operating system timer.
-class URHO3D_API Timer
+class CLOCKWORK_API Timer
 {
 public:
     /// Construct. Get the starting clock value.
@@ -45,7 +45,7 @@ private:
 };
 
 /// High-resolution operating system timer used in profiling.
-class URHO3D_API HiresTimer
+class CLOCKWORK_API HiresTimer
 {
     friend class Time;
 
@@ -75,9 +75,9 @@ private:
 };
 
 /// %Time and frame counter subsystem.
-class URHO3D_API Time : public Object
+class CLOCKWORK_API Time : public Object
 {
-    URHO3D_OBJECT(Time, Object);
+    CLOCKWORK_OBJECT(Time, Object);
 
 public:
     /// Construct.

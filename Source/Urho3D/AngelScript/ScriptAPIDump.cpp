@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// %Object property info for scripting API dump.
@@ -192,7 +192,7 @@ void Script::OutputAPIRow(DumpMode mode, const String& row, bool removeReference
 
 void Script::DumpAPI(DumpMode mode, const String& sourceTree)
 {
-    // Does not use URHO3D_LOGRAW macro here to ensure the messages are always dumped regardless of URHO3D_LOGGING compiler directive
+    // Does not use CLOCKWORK_LOGRAW macro here to ensure the messages are always dumped regardless of CLOCKWORK_LOGGING compiler directive
     // and of Log subsystem availability
 
     // Dump event descriptions and attribute definitions in Doxygen mode. For events, this means going through the header files,
@@ -201,13 +201,13 @@ void Script::DumpAPI(DumpMode mode, const String& sourceTree)
     // Doxygen parsing and the following page definition(s) may not be properly recognized
     if (mode == DOXYGEN)
     {
-        Log::WriteRaw("namespace Urho3D\n{\n\n/**\n");
+        Log::WriteRaw("namespace Clockwork\n{\n\n/**\n");
 
         FileSystem* fileSystem = GetSubsystem<FileSystem>();
         Vector<String> headerFileNames;
         String path = AddTrailingSlash(sourceTree);
         if (!path.Empty())
-            path.Append("Source/Urho3D/");
+            path.Append("Source/Clockwork/");
 
         fileSystem->ScanDir(headerFileNames, path, "*.h", SCAN_FILES, true);
 
@@ -241,13 +241,13 @@ void Script::DumpAPI(DumpMode mode, const String& sourceTree)
                 while (!file->IsEof())
                 {
                     String line = file->ReadLine();
-                    if (line.StartsWith("URHO3D_EVENT"))
+                    if (line.StartsWith("CLOCKWORK_EVENT"))
                     {
                         Vector<String> parts = line.Split(',');
                         if (parts.Size() == 2)
                             Log::WriteRaw("\n### " + parts[1].Substring(0, parts[1].Length() - 1).Trimmed() + "\n");
                     }
-                    if (line.Contains("URHO3D_PARAM"))
+                    if (line.Contains("CLOCKWORK_PARAM"))
                     {
                         Vector<String> parts = line.Split(',');
                         if (parts.Size() == 2)

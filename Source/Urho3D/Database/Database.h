@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #include "../Core/Object.h"
 #include "../Database/DbConnection.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Supported database API.
@@ -38,9 +38,9 @@ enum DBAPI
 class DbConnection;
 
 /// %Database subsystem. Manage database connections.
-class URHO3D_API Database : public Object
+class CLOCKWORK_API Database : public Object
 {
-    URHO3D_OBJECT(Database, Object);
+    CLOCKWORK_OBJECT(Database, Object);
 
 public:
     /// Construct.

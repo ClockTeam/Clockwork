@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,7 @@
 // THE SOFTWARE.
 //
 
-#ifdef URHO3D_PHYSICS
+#ifdef CLOCKWORK_PHYSICS
 
 #include "../Precompiled.h"
 
@@ -31,7 +31,7 @@
 #include "../Physics/RigidBody.h"
 #include "../Scene/Scene.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static PhysicsWorld* SceneGetPhysicsWorld(Scene* ptr)

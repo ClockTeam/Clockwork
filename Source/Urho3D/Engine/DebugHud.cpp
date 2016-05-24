@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const char* qualityTexts[] =
@@ -98,7 +98,7 @@ DebugHud::DebugHud(Context* context) :
     eventProfilerText_->SetVisible(false);
     uiRoot->AddChild(eventProfilerText_);
 
-    SubscribeToEvent(E_POSTUPDATE, URHO3D_HANDLER(DebugHud, HandlePostUpdate));
+    SubscribeToEvent(E_POSTUPDATE, CLOCKWORK_HANDLER(DebugHud, HandlePostUpdate));
 }
 
 DebugHud::~DebugHud()
@@ -237,7 +237,7 @@ void DebugHud::SetMode(unsigned mode)
     profilerText_->SetVisible((mode & DEBUGHUD_SHOW_PROFILER) != 0);
     memoryText_->SetVisible((mode & DEBUGHUD_SHOW_MEMORY) != 0);
     eventProfilerText_->SetVisible((mode & DEBUGHUD_SHOW_EVENTPROFILER) != 0);
-#ifdef URHO3D_PROFILING
+#ifdef CLOCKWORK_PROFILING
     // Event profiler is created on engine initialization if "EventProfiler" parameter is set
     EventProfiler* eventProfiler = GetSubsystem<EventProfiler>();
     if (eventProfiler)

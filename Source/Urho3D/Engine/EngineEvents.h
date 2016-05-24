@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,14 +24,14 @@
 
 #include "../Core/Object.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// A command has been entered on the console.
-URHO3D_EVENT(E_CONSOLECOMMAND, ConsoleCommand)
+CLOCKWORK_EVENT(E_CONSOLECOMMAND, ConsoleCommand)
 {
-    URHO3D_PARAM(P_COMMAND, Command);              // String
-    URHO3D_PARAM(P_ID, Id);                        // String
+    CLOCKWORK_PARAM(P_COMMAND, Command);              // String
+    CLOCKWORK_PARAM(P_ID, Id);                        // String
 }
 
 }

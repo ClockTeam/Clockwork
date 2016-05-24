@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const int LINE_MAX_LENGTH = 256;
@@ -98,7 +98,7 @@ void EventProfiler::Clear()
     current_->name_ = "Root";
 }
 
-Urho3D::String EventProfiler::PrintData(bool showUnused /*= false*/, bool showTotal /*= false*/, unsigned maxDepth /*= M_MAX_UNSIGNED*/) const
+Clockwork::String EventProfiler::PrintData(bool showUnused /*= false*/, bool showTotal /*= false*/, unsigned maxDepth /*= M_MAX_UNSIGNED*/) const
 {
     String output;
 

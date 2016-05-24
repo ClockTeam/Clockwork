@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,13 @@
 
 #include "../Scene/Component.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// %Sound listener component
-class URHO3D_API SoundListener : public Component
+class CLOCKWORK_API SoundListener : public Component
 {
-    URHO3D_OBJECT(SoundListener, Component);
+    CLOCKWORK_OBJECT(SoundListener, Component);
 
 public:
     /// Construct.

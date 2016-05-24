@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,20 +25,20 @@
 #include "../Core/Object.h"
 #include "../Database/DbConnection.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// %Database cursor. Event handler could set P_FILTER to true to filter out a row from resultset and P_ABORT to true to stop further cursor events.
-URHO3D_EVENT(E_DBCURSOR, DbCursor)
+CLOCKWORK_EVENT(E_DBCURSOR, DbCursor)
 {
-    URHO3D_PARAM(P_DBCONNECTION, DbConnection);    // DbConnection pointer
-    URHO3D_PARAM(P_RESULTIMPL, ResultImpl);        // Underlying result object pointer (cannot be used in scripting)
-    URHO3D_PARAM(P_SQL, SQL);                      // String
-    URHO3D_PARAM(P_NUMCOLS, NumCols);              // unsigned
-    URHO3D_PARAM(P_COLVALUES, ColValues);          // VariantVector
-    URHO3D_PARAM(P_COLHEADERS, ColHeaders);        // StringVector
-    URHO3D_PARAM(P_FILTER, Filter);                // bool [in]
-    URHO3D_PARAM(P_ABORT, Abort);                  // bool [in]
+    CLOCKWORK_PARAM(P_DBCONNECTION, DbConnection);    // DbConnection pointer
+    CLOCKWORK_PARAM(P_RESULTIMPL, ResultImpl);        // Underlying result object pointer (cannot be used in scripting)
+    CLOCKWORK_PARAM(P_SQL, SQL);                      // String
+    CLOCKWORK_PARAM(P_NUMCOLS, NumCols);              // unsigned
+    CLOCKWORK_PARAM(P_COLVALUES, ColValues);          // VariantVector
+    CLOCKWORK_PARAM(P_COLHEADERS, ColHeaders);        // StringVector
+    CLOCKWORK_PARAM(P_FILTER, Filter);                // bool [in]
+    CLOCKWORK_PARAM(P_ABORT, Abort);                  // bool [in]
 }
 
 }

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@
 #include "../Audio/AudioDefs.h"
 #include "../Scene/Component.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 class Audio;
@@ -36,9 +36,9 @@ class SoundStream;
 static const int STREAM_BUFFER_LENGTH = 100;
 
 /// %Sound source component with stereo position.
-class URHO3D_API SoundSource : public Component
+class CLOCKWORK_API SoundSource : public Component
 {
-    URHO3D_OBJECT(SoundSource, Component);
+    CLOCKWORK_OBJECT(SoundSource, Component);
 
 public:
     /// Construct.
@@ -71,7 +71,7 @@ public:
     /// Set stereo panning. -1.0 is full left and 1.0 is full right.
     void SetPanning(float panning);
     /// Set whether sound source will be automatically removed from the scene node when playback stops. Note: this is deprecated, consider subscribing to the SoundFinished event instead.
-    URHO3D_DEPRECATED void SetAutoRemove(bool enable);
+    CLOCKWORK_DEPRECATED void SetAutoRemove(bool enable);
     /// Set new playback position.
     void SetPlayPosition(signed char* pos);
 
@@ -100,7 +100,7 @@ public:
     float GetPanning() const { return panning_; }
 
     /// Return autoremove mode.
-    URHO3D_DEPRECATED bool GetAutoRemove() const { return autoRemove_; }
+    CLOCKWORK_DEPRECATED bool GetAutoRemove() const { return autoRemove_; }
 
     /// Return whether is playing.
     bool IsPlaying() const;

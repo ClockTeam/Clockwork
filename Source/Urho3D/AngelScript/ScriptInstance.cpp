@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
 #include "../Core/Profiler.h"
 #include "../IO/Log.h"
 #include "../IO/MemoryBuffer.h"
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
 #include "../Physics/PhysicsEvents.h"
 #endif
 #include "../Resource/ResourceCache.h"
@@ -41,7 +41,7 @@
 
 #include "../DebugNew.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 static const char* methodDeclarations[] = {
@@ -79,15 +79,15 @@ void ScriptInstance::RegisterObject(Context* context)
 {
     context->RegisterFactory<ScriptInstance>(LOGIC_CATEGORY);
 
-    URHO3D_ACCESSOR_ATTRIBUTE("Is Enabled", IsEnabled, SetEnabled, bool, true, AM_DEFAULT);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Delayed Method Calls", GetDelayedCallsAttr, SetDelayedCallsAttr, PODVector<unsigned char>,
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Is Enabled", IsEnabled, SetEnabled, bool, true, AM_DEFAULT);
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Delayed Method Calls", GetDelayedCallsAttr, SetDelayedCallsAttr, PODVector<unsigned char>,
         Variant::emptyBuffer, AM_FILE | AM_NOEDIT);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Script File", GetScriptFileAttr, SetScriptFileAttr, ResourceRef,
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Script File", GetScriptFileAttr, SetScriptFileAttr, ResourceRef,
         ResourceRef(ScriptFile::GetTypeStatic()), AM_DEFAULT);
-    URHO3D_ACCESSOR_ATTRIBUTE("Class Name", GetClassName, SetClassName, String, String::EMPTY, AM_DEFAULT);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Script Data", GetScriptDataAttr, SetScriptDataAttr, PODVector<unsigned char>, Variant::emptyBuffer,
+    CLOCKWORK_ACCESSOR_ATTRIBUTE("Class Name", GetClassName, SetClassName, String, String::EMPTY, AM_DEFAULT);
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Script Data", GetScriptDataAttr, SetScriptDataAttr, PODVector<unsigned char>, Variant::emptyBuffer,
         AM_FILE | AM_NOEDIT);
-    URHO3D_MIXED_ACCESSOR_ATTRIBUTE("Script Network Data", GetScriptNetworkDataAttr, SetScriptNetworkDataAttr, PODVector<unsigned char>,
+    CLOCKWORK_MIXED_ACCESSOR_ATTRIBUTE("Script Network Data", GetScriptNetworkDataAttr, SetScriptNetworkDataAttr, PODVector<unsigned char>,
         Variant::emptyBuffer, AM_NET | AM_NOEDIT);
 }
 
@@ -219,8 +219,8 @@ void ScriptInstance::SetScriptFile(ScriptFile* scriptFile)
     }
     if (scriptFile)
     {
-        SubscribeToEvent(scriptFile, E_RELOADSTARTED, URHO3D_HANDLER(ScriptInstance, HandleScriptFileReload));
-        SubscribeToEvent(scriptFile, E_RELOADFINISHED, URHO3D_HANDLER(ScriptInstance, HandleScriptFileReloadFinished));
+        SubscribeToEvent(scriptFile, E_RELOADSTARTED, CLOCKWORK_HANDLER(ScriptInstance, HandleScriptFileReload));
+        SubscribeToEvent(scriptFile, E_RELOADFINISHED, CLOCKWORK_HANDLER(ScriptInstance, HandleScriptFileReloadFinished));
     }
 
     scriptFile_ = scriptFile;
@@ -249,7 +249,7 @@ bool ScriptInstance::Execute(const String& declaration, const VariantVector& par
     asIScriptFunction* method = scriptFile_->GetMethod(scriptObject_, declaration);
     if (!method)
     {
-        URHO3D_LOGERROR("Method " + declaration + " not found in class " + className_);
+        CLOCKWORK_LOGERROR("Method " + declaration + " not found in class " + className_);
         return false;
     }
 
@@ -310,12 +310,12 @@ void ScriptInstance::AddEventHandler(StringHash eventType, const String& handler
         method = scriptFile_->GetMethod(scriptObject_, handlerName);
         if (!method)
         {
-            URHO3D_LOGERROR("Event handler method " + handlerName + " not found in " + scriptFile_->GetName());
+            CLOCKWORK_LOGERROR("Event handler method " + handlerName + " not found in " + scriptFile_->GetName());
             return;
         }
     }
 
-    SubscribeToEvent(eventType, URHO3D_HANDLER_USERDATA(ScriptInstance, HandleScriptEvent, (void*)method));
+    SubscribeToEvent(eventType, CLOCKWORK_HANDLER_USERDATA(ScriptInstance, HandleScriptEvent, (void*)method));
 }
 
 void ScriptInstance::AddEventHandler(Object* sender, StringHash eventType, const String& handlerName)
@@ -325,7 +325,7 @@ void ScriptInstance::AddEventHandler(Object* sender, StringHash eventType, const
 
     if (!sender)
     {
-        URHO3D_LOGERROR("Null event sender for event " + String(eventType) + ", handler " + handlerName);
+        CLOCKWORK_LOGERROR("Null event sender for event " + String(eventType) + ", handler " + handlerName);
         return;
     }
 
@@ -337,12 +337,12 @@ void ScriptInstance::AddEventHandler(Object* sender, StringHash eventType, const
         method = scriptFile_->GetMethod(scriptObject_, handlerName);
         if (!method)
         {
-            URHO3D_LOGERROR("Event handler method " + handlerName + " not found in " + scriptFile_->GetName());
+            CLOCKWORK_LOGERROR("Event handler method " + handlerName + " not found in " + scriptFile_->GetName());
             return;
         }
     }
 
-    SubscribeToEvent(sender, eventType, URHO3D_HANDLER_USERDATA(ScriptInstance, HandleScriptEvent, (void*)method));
+    SubscribeToEvent(sender, eventType, CLOCKWORK_HANDLER_USERDATA(ScriptInstance, HandleScriptEvent, (void*)method));
 }
 
 void ScriptInstance::RemoveEventHandler(StringHash eventType)
@@ -508,7 +508,7 @@ void ScriptInstance::OnSceneSet(Scene* scene)
     {
         UnsubscribeFromEvent(E_SCENEUPDATE);
         UnsubscribeFromEvent(E_SCENEPOSTUPDATE);
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
         UnsubscribeFromEvent(E_PHYSICSPRESTEP);
         UnsubscribeFromEvent(E_PHYSICSPOSTSTEP);
 #endif
@@ -536,7 +536,7 @@ void ScriptInstance::CreateObject()
     if (!scriptFile_ || className_.Empty())
         return;
 
-    URHO3D_PROFILE(CreateScriptObject);
+    CLOCKWORK_PROFILE(CreateScriptObject);
 
     scriptObject_ = scriptFile_->CreateObject(className_);
     if (scriptObject_)
@@ -552,7 +552,7 @@ void ScriptInstance::CreateObject()
             scriptFile_->Execute(scriptObject_, methods_[METHOD_START]);
     }
     else
-        URHO3D_LOGERROR("Failed to create object of class " + className_ + " from " + scriptFile_->GetName());
+        CLOCKWORK_LOGERROR("Failed to create object of class " + className_ + " from " + scriptFile_->GetName());
 }
 
 void ScriptInstance::ReleaseObject()
@@ -723,7 +723,7 @@ void ScriptInstance::UpdateEventSubscription()
     Scene* scene = GetScene();
     if (!scene)
     {
-        URHO3D_LOGWARNING("Node is detached from scene, can not subscribe script object to update events");
+        CLOCKWORK_LOGWARNING("Node is detached from scene, can not subscribe script object to update events");
         return;
     }
 
@@ -733,16 +733,16 @@ void ScriptInstance::UpdateEventSubscription()
     {
         if (!subscribed_ && (methods_[METHOD_UPDATE] || methods_[METHOD_DELAYEDSTART] || delayedCalls_.Size()))
         {
-            SubscribeToEvent(scene, E_SCENEUPDATE, URHO3D_HANDLER(ScriptInstance, HandleSceneUpdate));
+            SubscribeToEvent(scene, E_SCENEUPDATE, CLOCKWORK_HANDLER(ScriptInstance, HandleSceneUpdate));
             subscribed_ = true;
         }
 
         if (!subscribedPostFixed_)
         {
             if (methods_[METHOD_POSTUPDATE])
-                SubscribeToEvent(scene, E_SCENEPOSTUPDATE, URHO3D_HANDLER(ScriptInstance, HandleScenePostUpdate));
+                SubscribeToEvent(scene, E_SCENEPOSTUPDATE, CLOCKWORK_HANDLER(ScriptInstance, HandleScenePostUpdate));
 
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
             if (methods_[METHOD_FIXEDUPDATE] || methods_[METHOD_FIXEDPOSTUPDATE])
             {
                 Component* world = GetFixedUpdateSource();
@@ -750,12 +750,12 @@ void ScriptInstance::UpdateEventSubscription()
                 if (world)
                 {
                     if (methods_[METHOD_FIXEDUPDATE])
-                        SubscribeToEvent(world, E_PHYSICSPRESTEP, URHO3D_HANDLER(ScriptInstance, HandlePhysicsPreStep));
+                        SubscribeToEvent(world, E_PHYSICSPRESTEP, CLOCKWORK_HANDLER(ScriptInstance, HandlePhysicsPreStep));
                     if (methods_[METHOD_FIXEDPOSTUPDATE])
-                        SubscribeToEvent(world, E_PHYSICSPOSTSTEP, URHO3D_HANDLER(ScriptInstance, HandlePhysicsPostStep));
+                        SubscribeToEvent(world, E_PHYSICSPOSTSTEP, CLOCKWORK_HANDLER(ScriptInstance, HandlePhysicsPostStep));
                 }
                 else
-                    URHO3D_LOGERROR("No physics world, can not subscribe script object to fixed update events");
+                    CLOCKWORK_LOGERROR("No physics world, can not subscribe script object to fixed update events");
             }
 #endif
             subscribedPostFixed_ = true;
@@ -776,7 +776,7 @@ void ScriptInstance::UpdateEventSubscription()
         {
             UnsubscribeFromEvent(scene, E_SCENEPOSTUPDATE);
 
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
             Component* world = GetFixedUpdateSource();
             if (world)
             {
@@ -852,7 +852,7 @@ void ScriptInstance::HandleScenePostUpdate(StringHash eventType, VariantMap& eve
     scriptFile_->Execute(scriptObject_, methods_[METHOD_POSTUPDATE], parameters);
 }
 
-#if defined(URHO3D_PHYSICS) || defined(URHO3D_URHO2D)
+#if defined(CLOCKWORK_PHYSICS) || defined(CLOCKWORK_URHO2D)
 
 void ScriptInstance::HandlePhysicsPreStep(StringHash eventType, VariantMap& eventData)
 {

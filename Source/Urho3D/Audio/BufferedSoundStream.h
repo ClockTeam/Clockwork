@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,11 +28,11 @@
 #include "../Core/Mutex.h"
 #include "../Container/Pair.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// %Sound stream that supports manual buffering of data from the main thread.
-class URHO3D_API BufferedSoundStream : public SoundStream
+class CLOCKWORK_API BufferedSoundStream : public SoundStream
 {
 public:
     /// Construct.

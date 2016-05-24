@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2008-2016 the Urho3D project.
+# Copyright (c) 2008-2016 the Clockwork project.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -21,10 +21,10 @@
 #
 
 # Define target name
-set (TARGET_NAME Urho3D)
+set (TARGET_NAME Clockwork)
 
 # Generate JSON compilation database format specification
-if (URHO3D_CLANG_TOOLS OR URHO3D_BINDINGS)
+if (CLOCKWORK_CLANG_TOOLS OR CLOCKWORK_BINDINGS)
     set (CMAKE_EXPORT_COMPILE_COMMANDS 1)
     # Clang assumes all their tools to be installed in a relative path to their libs but this is not the case for our own Clang-tools
     # Clang has a hard-coded way to search for their headers (see http://clang.llvm.org/docs/LibTooling.html#builtin-includes)
@@ -55,7 +55,7 @@ else ()
     endif ()
 endif ()
 
-add_definitions (-DURHO3D_IS_BUILDING)
+add_definitions (-DCLOCKWORK_IS_BUILDING)
 if (ODBC_VERSION AND NOT ODBC_VERSION VERSION_LESS 3)
     add_definitions (-DODBC_3_OR_LATER)
 endif ()
@@ -69,19 +69,19 @@ endif ()
 
 # Define source files
 foreach (DIR Navigation Network Physics Urho2D)
-    string (TOUPPER URHO3D_${DIR} OPT)
+    string (TOUPPER CLOCKWORK_${DIR} OPT)
     if (NOT ${OPT})
         list (APPEND EXCLUDED_SOURCE_DIRS ${DIR})
     endif ()
 endforeach ()
-if (NOT URHO3D_ANGELSCRIPT)
+if (NOT CLOCKWORK_ANGELSCRIPT)
     list (APPEND EXCLUDED_SOURCE_DIRS AngelScript)
 endif ()
-if (NOT URHO3D_LUA)
+if (NOT CLOCKWORK_LUA)
     list (APPEND EXCLUDED_SOURCE_DIRS LuaScript)
 endif ()
-if (URHO3D_DATABASE)
-    if (URHO3D_DATABASE_ODBC)
+if (CLOCKWORK_DATABASE)
+    if (CLOCKWORK_DATABASE_ODBC)
         list (APPEND EXCLUDED_SOURCE_DIRS Database/SQLite)
     else ()
         list (APPEND EXCLUDED_SOURCE_DIRS Database/ODBC)
@@ -89,12 +89,12 @@ if (URHO3D_DATABASE)
 else ()
     list (APPEND EXCLUDED_SOURCE_DIRS Database)
 endif ()
-if (URHO3D_OPENGL)
+if (CLOCKWORK_OPENGL)
     # Exclude the opposite source directory
     list (APPEND EXCLUDED_SOURCE_DIRS Graphics/Direct3D9 Graphics/Direct3D11)
 else ()
     list (APPEND EXCLUDED_SOURCE_DIRS Graphics/OpenGL)
-    if (URHO3D_D3D11)
+    if (CLOCKWORK_D3D11)
         list (APPEND EXCLUDED_SOURCE_DIRS Graphics/Direct3D9)
     else ()
         list (APPEND EXCLUDED_SOURCE_DIRS Graphics/Direct3D11)
@@ -108,12 +108,12 @@ define_source_files (EXCLUDE_PATTERNS ${EXCLUDE_PATTERNS} GLOB_CPP_PATTERNS *.cp
 
 # Define generated source files
 if (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/librevision.h)
-    execute_process (COMMAND ${CMAKE_COMMAND} -DFILENAME=${CMAKE_CURRENT_BINARY_DIR}/librevision.h -P CMake/Modules/GetUrho3DRevision.cmake
+    execute_process (COMMAND ${CMAKE_COMMAND} -DFILENAME=${CMAKE_CURRENT_BINARY_DIR}/librevision.h -P CMake/Modules/GetClockworkRevision.cmake
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} OUTPUT_QUIET ERROR_QUIET)
 endif ()
-set (URHO3D_DEPS ${STATIC_LIBRARY_TARGETS})
+set (CLOCKWORK_DEPS ${STATIC_LIBRARY_TARGETS})
 if (TARGET LuaJIT_universal)
-    list (REMOVE_ITEM URHO3D_DEPS LuaJIT)
+    list (REMOVE_ITEM CLOCKWORK_DEPS LuaJIT)
     set (LuaJIT_universal_symbolic LuaJIT_universal_symbolic)
     add_custom_command (OUTPUT ${LuaJIT_universal_symbolic}
         COMMAND xcodebuild ARCHS="$(ARCHS)" -target LuaJIT_universal -configuration $(CONFIGURATION)
@@ -121,8 +121,8 @@ if (TARGET LuaJIT_universal)
     list (APPEND SYMBOLIC_SOURCES ${LuaJIT_universal_symbolic})
 endif ()
 add_custom_command (OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/librevision.h
-    COMMAND ${CMAKE_COMMAND} -DFILENAME=${CMAKE_CURRENT_BINARY_DIR}/librevision.h -P CMake/Modules/GetUrho3DRevision.cmake
-    DEPENDS ${URHO3D_DEPS} ${CMAKE_SOURCE_DIR}/CMake/Modules/GetUrho3DRevision.cmake
+    COMMAND ${CMAKE_COMMAND} -DFILENAME=${CMAKE_CURRENT_BINARY_DIR}/librevision.h -P CMake/Modules/GetClockworkRevision.cmake
+    DEPENDS ${CLOCKWORK_DEPS} ${CMAKE_SOURCE_DIR}/CMake/Modules/GetClockworkRevision.cmake
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     COMMENT "Generating GIT revision number (tag + last commit SHA-1)")
 if (EMSCRIPTEN)
@@ -138,7 +138,7 @@ endif ()
 set_source_files_properties (${SYMBOLIC_SOURCES} PROPERTIES SYMBOLIC TRUE)
 
 # Use the AutoBinder tool to generate source files for binding script subsystems
-if (URHO3D_BINDINGS)
+if (CLOCKWORK_BINDINGS)
     # Build the Clang-tools as external project (even when we are not cross-compiling because it needs C++11 standard on) for auto-binding generation
     include (ExternalProject)
     if (IOS)
@@ -147,10 +147,10 @@ if (URHO3D_BINDINGS)
     endif ()
     ExternalProject_Add (AutoBinder
             SOURCE_DIR ${CMAKE_SOURCE_DIR}/Source/Clang-Tools
-            CMAKE_ARGS -DURHO3D_CLANG_TOOLS=AutoBinder -DDEST_RUNTIME_DIR=${CMAKE_BINARY_DIR}/bin/tool/clang -DDEST_INCLUDE_DIR=${DEST_INCLUDE_DIR} -DBAKED_CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR} ${IOS_FIX})
+            CMAKE_ARGS -DCLOCKWORK_CLANG_TOOLS=AutoBinder -DDEST_RUNTIME_DIR=${CMAKE_BINARY_DIR}/bin/tool/clang -DDEST_INCLUDE_DIR=${DEST_INCLUDE_DIR} -DBAKED_CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR} ${IOS_FIX})
     file (MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/generated/generated)
     foreach (SCRIPT AngelScript LuaScript JavaScript)
-        string (TOUPPER URHO3D_${SCRIPT} OPT)
+        string (TOUPPER CLOCKWORK_${SCRIPT} OPT)
         if (${OPT})
             list (APPEND SCRIPT_SUBSYSTEMS -s ${SCRIPT})
             list (APPEND GEN_CPP_FILES ${CMAKE_CURRENT_BINARY_DIR}/generated/${SCRIPT}API.cpp)
@@ -164,9 +164,9 @@ if (URHO3D_BINDINGS)
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         COMMENT "Generating source files for binding script subsystems")
 endif ()
-if (URHO3D_LUA)
+if (CLOCKWORK_LUA)
     # The host tool must be built natively
-    if (CMAKE_CROSSCOMPILING OR URHO3D_LUAJIT)
+    if (CMAKE_CROSSCOMPILING OR CLOCKWORK_LUAJIT)
         # When cross-compiling or using LuaJIT, build the tolua++ host tool as external project using normal Lua (there is not much point using LuaJIT for the tool building even when technically it can)
         include (ExternalProject)
         if (IOS)
@@ -174,7 +174,7 @@ if (URHO3D_LUA)
         endif ()
         ExternalProject_Add (tolua++
             SOURCE_DIR ${CMAKE_SOURCE_DIR}/Source/ThirdParty/toluapp/src/bin
-            CMAKE_ARGS -DDEST_RUNTIME_DIR=${CMAKE_BINARY_DIR}/bin/tool -DBAKED_CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR} -DURHO3D_UPDATE_SOURCE_TREE=${URHO3D_UPDATE_SOURCE_TREE} ${IOS_FIX})
+            CMAKE_ARGS -DDEST_RUNTIME_DIR=${CMAKE_BINARY_DIR}/bin/tool -DBAKED_CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR} -DCLOCKWORK_UPDATE_SOURCE_TREE=${CLOCKWORK_UPDATE_SOURCE_TREE} ${IOS_FIX})
     else ()
         # Otherwise, build it internally as per normal
         add_subdirectory (../ThirdParty/toluapp/src/bin ../ThirdParty/toluapp/src/bin)
@@ -183,7 +183,7 @@ if (URHO3D_LUA)
     file (MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/LuaScript/generated)
     file (GLOB API_PKG_FILES LuaScript/pkgs/*.pkg)
     foreach (DIR Navigation Network Database Physics Urho2D)
-        string (TOUPPER URHO3D_${DIR} OPT)
+        string (TOUPPER CLOCKWORK_${DIR} OPT)
         if (NOT ${OPT})
             list (REMOVE_ITEM API_PKG_FILES ${CMAKE_CURRENT_SOURCE_DIR}/LuaScript/pkgs/${DIR}LuaAPI.pkg)
         endif ()
@@ -206,16 +206,16 @@ endif ()
 if (MSVC)
     set (PRE_EXPORT_HEADER "\n#pragma warning(disable: 4251)\n#pragma warning(disable: 4275)\n")
 endif ()
-if (URHO3D_CLANG_TOOLS)
+if (CLOCKWORK_CLANG_TOOLS)
     set (ANNOTATE_NONSCRIPTABLE "__attribute__((annotate(\"nonscriptable\")))")
 endif ()
-generate_export_header (${TARGET_NAME} ${URHO3D_LIB_TYPE} EXPORT_MACRO_NAME URHO3D_API EXPORT_FILE_NAME Urho3D.h.new)
-execute_process (COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_BINARY_DIR}/Urho3D.h.new ${CMAKE_CURRENT_BINARY_DIR}/Urho3D.h)
-file (REMOVE ${CMAKE_CURRENT_BINARY_DIR}/Urho3D.h.new)
+generate_export_header (${TARGET_NAME} ${CLOCKWORK_LIB_TYPE} EXPORT_MACRO_NAME CLOCKWORK_API EXPORT_FILE_NAME Clockwork.h.new)
+execute_process (COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_CURRENT_BINARY_DIR}/Clockwork.h.new ${CMAKE_CURRENT_BINARY_DIR}/Clockwork.h)
+file (REMOVE ${CMAKE_CURRENT_BINARY_DIR}/Clockwork.h.new)
 
 # Define generated object files
 # This is a hack as it relies on internal working of CMake
-if (MSVC AND URHO3D_LIB_TYPE STREQUAL SHARED)   # MSVC linker does not have force_load/whole_archive equivalent
+if (MSVC AND CLOCKWORK_LIB_TYPE STREQUAL SHARED)   # MSVC linker does not have force_load/whole_archive equivalent
     foreach (TARGET ${STATIC_LIBRARY_TARGETS})
         get_target_property (SOURCES ${TARGET} SOURCES)
         get_target_property (INT_DIR ${TARGET} LOCATION)
@@ -249,21 +249,21 @@ if (MSVC AND URHO3D_LIB_TYPE STREQUAL SHARED)   # MSVC linker does not have forc
 endif ()
 
 # Aggregate all source files
-list (APPEND SOURCE_FILES ${GEN_CPP_FILES} ${ALL_OBJ_FILES} librevision.h Urho3D.h ${SYMBOLIC_SOURCES})
+list (APPEND SOURCE_FILES ${GEN_CPP_FILES} ${ALL_OBJ_FILES} librevision.h Clockwork.h ${SYMBOLIC_SOURCES})
 
 # Define dependency libs
 # Add include directories to find the precompiled header, export header, and installed headers from thirdparty libs
 set (INCLUDE_DIRS ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_BINARY_DIR}/${DEST_INCLUDE_DIR}/ThirdParty)
-if (URHO3D_PHYSICS)
+if (CLOCKWORK_PHYSICS)
     # Bullet library depends on its own include dir to be added in the header search path
     # This is more practical than patching its header files in many places to make them work with relative path
     list (APPEND INCLUDE_DIRS ${CMAKE_BINARY_DIR}/${DEST_INCLUDE_DIR}/ThirdParty/Bullet)
 endif ()
-if (URHO3D_NAVIGATION)
+if (CLOCKWORK_NAVIGATION)
     # DetourTileCache and DetourCrowd libraries depend on Detour's include dir to be added in the header search path
     list (APPEND INCLUDE_DIRS ${CMAKE_BINARY_DIR}/${DEST_INCLUDE_DIR}/ThirdParty/Detour)
 endif ()
-if (URHO3D_LUA)
+if (CLOCKWORK_LUA)
     # Lua/LuaJIT library depends on its own include dir to be added in the header search path
     # This is more practical than patching its header files in many places to make them work with relative path
     list (APPEND INCLUDE_DIRS ${CMAKE_BINARY_DIR}/${DEST_INCLUDE_DIR}/ThirdParty/Lua${JIT})
@@ -281,7 +281,7 @@ set_output_directories (${OUTPUT_PATH} ARCHIVE LIBRARY)
 if (IOS)
     set (EXCLUDE_FROM_ALL EXCLUDE_FROM_ALL)
 endif ()
-setup_library (${URHO3D_LIB_TYPE} ${EXCLUDE_FROM_ALL})
+setup_library (${CLOCKWORK_LIB_TYPE} ${EXCLUDE_FROM_ALL})
 if (NOT ANDROID AND NOT WEB)
     file (READ .soversion SOVERSION)
     string (STRIP ${SOVERSION} SOVERSION)
@@ -306,8 +306,8 @@ if (IOS)
 else ()
     install (TARGETS ${TARGET_NAME} RUNTIME DESTINATION ${DEST_RUNTIME_DIR} LIBRARY DESTINATION ${DEST_LIBRARY_DIR} ARCHIVE DESTINATION ${DEST_LIBRARY_DIR})
 endif ()
-if (WIN32 AND URHO3D_LIB_TYPE STREQUAL SHARED)
-    set (URHO3D_DLL_INSTALLED TRUE)
+if (WIN32 AND CLOCKWORK_LIB_TYPE STREQUAL SHARED)
+    set (CLOCKWORK_DLL_INSTALLED TRUE)
 endif ()
 
 # Setup dependency frameworks and libraries
@@ -319,7 +319,7 @@ if (APPLE)
     set (FORCE_LOAD -force_load)
 elseif (NOT MSVC)
     set_property (TARGET ${TARGET_NAME} APPEND PROPERTY LINK_LIBRARIES -Wl,--whole-archive)
-    if (WIN32 AND URHO3D_LIB_TYPE STREQUAL SHARED)
+    if (WIN32 AND CLOCKWORK_LIB_TYPE STREQUAL SHARED)
         set_target_properties (${TARGET_NAME} PROPERTIES PREFIX "")
     endif ()
 endif ()
@@ -345,7 +345,7 @@ if (NOT XCODE AND NOT MSVC)
     if (NOT APPLE)
         set_property (TARGET ${TARGET_NAME} APPEND PROPERTY LINK_LIBRARIES -Wl,--no-whole-archive)
     endif ()
-    if (NOT URHO3D_LIB_TYPE STREQUAL SHARED)
+    if (NOT CLOCKWORK_LIB_TYPE STREQUAL SHARED)
         if (APPLE)
             # Apple libtool takes archives directly as input
             add_custom_command (TARGET ${TARGET_NAME} POST_BUILD
@@ -406,7 +406,7 @@ endif ()
 # todo This is a deprecated property in CMake version 2.8.12 - Remove below commands when CMake minimum version is 2.8.12
 if (CMAKE_VERSION VERSION_LESS 2.8.12)
     set_target_properties (${TARGET_NAME} PROPERTIES LINK_INTERFACE_LIBRARIES "")
-    if (URHO3D_LIB_TYPE STREQUAL SHARED)
+    if (CLOCKWORK_LIB_TYPE STREQUAL SHARED)
         if (NOT MSVC AND CMAKE_VERSION VERSION_LESS 2.8.11)
             get_target_property (LINK_LIBRARIES ${TARGET_NAME} LINK_LIBRARIES)
             target_link_libraries (${TARGET_NAME} LINK_PRIVATE ${LINK_LIBRARIES})
@@ -417,29 +417,29 @@ if (CMAKE_VERSION VERSION_LESS 2.8.12)
 endif ()
 # end todo
 # Use PIC on platforms that support it (shared library type has this property set to true by default, so we only have to deal with those static ones that the shared library links against)
-if (URHO3D_LIB_TYPE STREQUAL SHARED)
+if (CLOCKWORK_LIB_TYPE STREQUAL SHARED)
     set_target_properties (${STATIC_LIBRARY_TARGETS} PROPERTIES POSITION_INDEPENDENT_CODE true)
     if (NOT MSVC AND NOT (MINGW AND CMAKE_CROSSCOMPILING) AND CMAKE_VERSION VERSION_LESS 2.8.9)  # todo: Remove this when CMake minimum version is 2.8.9
         set_property (TARGET ${STATIC_LIBRARY_TARGETS} APPEND PROPERTY COMPILE_FLAGS -fPIC)
     endif ()
 endif ()
 
-# Install headers for using the Urho3D library
+# Install headers for using the Clockwork library
 install_header_files (DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ DESTINATION ${DEST_INCLUDE_DIR} FILES_MATCHING PATTERN *.h USE_FILE_SYMLINK)    # Note: the trailing slash is significant
-install_header_files (FILES ${CMAKE_CURRENT_BINARY_DIR}/librevision.h ${CMAKE_CURRENT_BINARY_DIR}/Urho3D.h DESTINATION ${DEST_INCLUDE_DIR})
+install_header_files (FILES ${CMAKE_CURRENT_BINARY_DIR}/librevision.h ${CMAKE_CURRENT_BINARY_DIR}/Clockwork.h DESTINATION ${DEST_INCLUDE_DIR})
 
-# Generate platform specific pkg-config file for the benefit of Urho3D library users via SDK without CMake
-get_directory_property (URHO3D_COMPILE_DEFINITIONS DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} COMPILE_DEFINITIONS)
+# Generate platform specific pkg-config file for the benefit of Clockwork library users via SDK without CMake
+get_directory_property (CLOCKWORK_COMPILE_DEFINITIONS DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} COMPILE_DEFINITIONS)
 # Remove those defines that are only used for building the library and not needed by library user
-list (REMOVE_ITEM URHO3D_COMPILE_DEFINITIONS HAVE_STDINT_H GLEW_STATIC GLEW_NO_GLU HAVE_SINCOSF HAVE_UNDERSCORE_SINCOSF URHO3D_IS_BUILDING ODBC_3_OR_LATER ASSET_DIR_INDICATOR)
+list (REMOVE_ITEM CLOCKWORK_COMPILE_DEFINITIONS HAVE_STDINT_H GLEW_STATIC GLEW_NO_GLU HAVE_SINCOSF HAVE_UNDERSCORE_SINCOSF CLOCKWORK_IS_BUILDING ODBC_3_OR_LATER ASSET_DIR_INDICATOR)
 if (ABSOLUTE_PATH_LIBS)
-    string (REPLACE ";" "\" \"" URHO3D_ABS_PATH_LIBS "\"${ABSOLUTE_PATH_LIBS}\"")   # Note: need to always "stringify" a variable in list context for replace to work correctly, besides the list could be empty
-    string (REPLACE "${SYSROOT}" "\${pc_sysrootdir}" URHO3D_ABS_PATH_LIBS "${URHO3D_ABS_PATH_LIBS}")
+    string (REPLACE ";" "\" \"" CLOCKWORK_ABS_PATH_LIBS "\"${ABSOLUTE_PATH_LIBS}\"")   # Note: need to always "stringify" a variable in list context for replace to work correctly, besides the list could be empty
+    string (REPLACE "${SYSROOT}" "\${pc_sysrootdir}" CLOCKWORK_ABS_PATH_LIBS "${CLOCKWORK_ABS_PATH_LIBS}")
 endif ()
 if (MSVC)
     set (DASH /)
     set (LIB_DIR "/LIBPATH:\"\${libdir}\"")
-    string (REPLACE ";" ".lib\" \"" URHO3D_LIBS "\"@LIB_NAME@\" \"${LIBS}.lib\"")
+    string (REPLACE ";" ".lib\" \"" CLOCKWORK_LIBS "\"@LIB_NAME@\" \"${LIBS}.lib\"")
     set (PC_SUFFIX .msvc)
 else ()
     set (LIB_NAME ${TARGET_NAME})
@@ -447,54 +447,54 @@ else ()
         if (CMAKE_BUILD_TYPE STREQUAL Debug)
             set (LIB_NAME ${LIB_NAME}_d)
         endif ()
-        if (URHO3D_LIB_TYPE STREQUAL SHARED)
+        if (CLOCKWORK_LIB_TYPE STREQUAL SHARED)
             set (LIB_NAME ${LIB_NAME}.dll)
         endif ()
     endif ()
     set (DASH -)
     set (LIB_DIR "-L\"\${libdir}\"")
-    string (REPLACE ";" " -l" URHO3D_LIBS "-l${LIB_NAME};${LIBS}")
+    string (REPLACE ";" " -l" CLOCKWORK_LIBS "-l${LIB_NAME};${LIBS}")
 endif ()
-string (REPLACE ";" " ${DASH}D" URHO3D_COMPILE_DEFINITIONS "${DASH}D${URHO3D_COMPILE_DEFINITIONS}")
+string (REPLACE ";" " ${DASH}D" CLOCKWORK_COMPILE_DEFINITIONS "${DASH}D${CLOCKWORK_COMPILE_DEFINITIONS}")
 get_directory_property (GLOBAL_INCLUDE_DIRS DIRECTORY ${CMAKE_SOURCE_DIR} INCLUDE_DIRECTORIES)
 if (GLOBAL_INCLUDE_DIRS)
     string (REPLACE ";" "\" ${DASH}I\"" GLOBAL_INCLUDE_DIRS "${DASH}I\"${GLOBAL_INCLUDE_DIRS}\"")
     string (REPLACE "${SYSROOT}" "" GLOBAL_INCLUDE_DIRS ${GLOBAL_INCLUDE_DIRS})
 endif ()
-set (ENGINE_INCLUDE_DIRS "${DASH}I\"\${includedir}\" ${DASH}I\"\${includedir}/Urho3D/ThirdParty\"")
-if (URHO3D_PHYSICS)
+set (ENGINE_INCLUDE_DIRS "${DASH}I\"\${includedir}\" ${DASH}I\"\${includedir}/Clockwork/ThirdParty\"")
+if (CLOCKWORK_PHYSICS)
     # Bullet library depends on its own include dir to be added in the header search path
     # This is more practical than patching its header files in many places to make them work with relative path
-    set (ENGINE_INCLUDE_DIRS "${ENGINE_INCLUDE_DIRS} ${DASH}I\"\${includedir}/Urho3D/ThirdParty/Bullet\"")
+    set (ENGINE_INCLUDE_DIRS "${ENGINE_INCLUDE_DIRS} ${DASH}I\"\${includedir}/Clockwork/ThirdParty/Bullet\"")
 endif ()
-if (URHO3D_LUA)
+if (CLOCKWORK_LUA)
     # ditto for Lua/LuaJIT
-    set (ENGINE_INCLUDE_DIRS "${ENGINE_INCLUDE_DIRS} ${DASH}I\"\${includedir}/Urho3D/ThirdParty/Lua${JIT}\"")
+    set (ENGINE_INCLUDE_DIRS "${ENGINE_INCLUDE_DIRS} ${DASH}I\"\${includedir}/Clockwork/ThirdParty/Lua${JIT}\"")
 endif ()
 # todo: Reevaluate the command below when the CMake minimum required version is set to 2.8.12 (and remove only when the deprecated add_compiler_export_flags() is not used anymore)
 string (REGEX REPLACE " -fvisibility[^ ]+" "" CLEANED_CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS})   # Remove visibility compiler options that are only used for building the library
-configure_file (${CMAKE_CURRENT_SOURCE_DIR}/Urho3D.pc.in ${CMAKE_CURRENT_BINARY_DIR}/Urho3D.pc${PC_SUFFIX} @ONLY)
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/Clockwork.pc.in ${CMAKE_CURRENT_BINARY_DIR}/Clockwork.pc${PC_SUFFIX} @ONLY)
 if (MSVC)
     add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -DLIB_NAME=$<TARGET_LINKER_FILE_NAME:${TARGET_NAME}> -P ${CMAKE_SOURCE_DIR}/CMake/Modules/AdjustPkgConfigForMSVC.cmake)
 endif ()
 if (ANDROID)
-    set (RENAME RENAME Urho3D-${ANDROID_NDK_ABI_NAME}.pc)
+    set (RENAME RENAME Clockwork-${ANDROID_NDK_ABI_NAME}.pc)
 endif ()
-install (FILES ${CMAKE_CURRENT_BINARY_DIR}/Urho3D.pc DESTINATION ${DEST_PKGCONFIG_DIR} ${RENAME})
+install (FILES ${CMAKE_CURRENT_BINARY_DIR}/Clockwork.pc DESTINATION ${DEST_PKGCONFIG_DIR} ${RENAME})
 
 # Define post build steps
 if (ANDROID_NDK_GDB)
     # Copy the library while it still has debug symbols for ndk-gdb
     add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different $<TARGET_FILE:${TARGET_NAME}> ${NDK_GDB_SOLIB_PATH}
-        COMMENT "Copying Urho3D library with debug symbols to ${NDK_GDB_SOLIB_PATH} directory")
+        COMMENT "Copying Clockwork library with debug symbols to ${NDK_GDB_SOLIB_PATH} directory")
 endif ()
-if (URHO3D_LIB_TYPE STREQUAL SHARED AND (ANDROID OR RPI OR IOS))
+if (CLOCKWORK_LIB_TYPE STREQUAL SHARED AND (ANDROID OR RPI OR IOS))
     # Strip the output shared library for embedded devices
     add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_STRIP} $<TARGET_FILE:${TARGET_NAME}>
-        COMMENT "Stripping Urho3D shared library")
+        COMMENT "Stripping Clockwork shared library")
 endif ()
-if (URHO3D_SCP_TO_TARGET)
+if (CLOCKWORK_SCP_TO_TARGET)
     # Ensure SCP is the last command
-    add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND scp $<TARGET_FILE:${TARGET_NAME}> ${URHO3D_SCP_TO_TARGET} || exit 0
-        COMMENT "Scp-ing Urho3D library to target system")
+    add_custom_command (TARGET ${TARGET_NAME} POST_BUILD COMMAND scp $<TARGET_FILE:${TARGET_NAME}> ${CLOCKWORK_SCP_TO_TARGET} || exit 0
+        COMMENT "Scp-ing Clockwork library to target system")
 endif ()

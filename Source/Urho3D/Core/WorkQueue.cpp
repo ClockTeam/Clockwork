@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2008-2016 the Urho3D project.
+// Copyright (c) 2008-2016 the Clockwork project.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@
 #include "../Core/WorkQueue.h"
 #include "../IO/Log.h"
 
-namespace Urho3D
+namespace Clockwork
 {
 
 /// Worker thread managed by the work queue.
@@ -70,7 +70,7 @@ WorkQueue::WorkQueue(Context* context) :
     lastSize_(0),
     maxNonThreadedWorkMs_(5)
 {
-    SubscribeToEvent(E_BEGINFRAME, URHO3D_HANDLER(WorkQueue, HandleBeginFrame));
+    SubscribeToEvent(E_BEGINFRAME, CLOCKWORK_HANDLER(WorkQueue, HandleBeginFrame));
 }
 
 WorkQueue::~WorkQueue()
@@ -85,7 +85,7 @@ WorkQueue::~WorkQueue()
 
 void WorkQueue::CreateThreads(unsigned numThreads)
 {
-#ifdef URHO3D_THREADING
+#ifdef CLOCKWORK_THREADING
     // Other subsystems may initialize themselves according to the number of threads.
     // Therefore allow creating the threads only once, after which the amount is fixed
     if (!threads_.Empty())
@@ -101,7 +101,7 @@ void WorkQueue::CreateThreads(unsigned numThreads)
         threads_.Push(thread);
     }
 #else
-    URHO3D_LOGERROR("Can not create worker threads as threading is disabled");
+    CLOCKWORK_LOGERROR("Can not create worker threads as threading is disabled");
 #endif
 }
 
@@ -126,7 +126,7 @@ void WorkQueue::AddWorkItem(SharedPtr<WorkItem> item)
 {
     if (!item)
     {
-        URHO3D_LOGERROR("Null work item submitted to the work queue");
+        CLOCKWORK_LOGERROR("Null work item submitted to the work queue");
         return;
     }
 
@@ -397,7 +397,7 @@ void WorkQueue::HandleBeginFrame(StringHash eventType, VariantMap& eventData)
     // If no worker threads, complete low-priority work here
     if (threads_.Empty() && !queue_.Empty())
     {
-        URHO3D_PROFILE(CompleteWorkNonthreaded);
+        CLOCKWORK_PROFILE(CompleteWorkNonthreaded);
 
         HiresTimer timer;
 
